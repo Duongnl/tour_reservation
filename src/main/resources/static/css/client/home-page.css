@@ -1,0 +1,50 @@
+
+.header{
+    background-color: #F8F9FA;
+}
+.navbar-collapse{
+    display: flex;
+    margin-left: 130px;
+}
+.footer{
+    font-size: 15px;
+    color: #2D4271;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F8F9FA;
+    padding: 30px 0;
+}
+.menu-item a{
+    text-decoration: none;
+    color: #2D4271;
+}
+
+.menu-item{
+    margin-bottom: 10px;
+}
+ul{
+    list-style-type:none ;
+}
+.copy-right{
+    margin-top: 50px;
+}
+.menu{
+    margin: 0;
+    padding: 0;
+}
+.call-action a{
+    color: #2D4271;
+}
+.time{
+    margin-top: 10px;
+}
+.securi-payment{
+    padding-top: 50px;
+}
+.socials{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.social{
+    margin-right: 15px;
+}

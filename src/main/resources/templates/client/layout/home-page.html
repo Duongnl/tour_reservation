@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/client/home-page.css">
+  <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/releases/v6.6.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+   <!-- Header -->
+ <div class="header">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Tralve</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Tour</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Combo</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Du Lịch
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Liên Hệ</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Bắt đầu tìm kiếm" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</div>
+
+  <!-- Content -->
+  <div class="content">
+    Content
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-6 block">
+            <h4>Liên hệ</h4>
+            <div class="contact-info">
+              <div class="menu-item"><a href="/du-divch/cao-cap">Số 147 Mai Dịch, Cầu Giấy, Hà Nội</a></div>
+              <div class="menu-item"><a href="/du-divch/tieu-chuan">0242 2420 777</a></div>
+              <div class="menu-item"><a href="/du-divch/tiet-kiem">0987654321</a></div>
+              <div class="menu-item"><a href="/du-divch/gia-tot">info@webtravel.vn</a></div> 
+            </div>
+          </div>
+          <div class="col-md-3 col-6 block">
+            <h4>Dòng tour</h4>
+            <ul class="menu">
+              <li class="menu-item"><a href="/du-lich/cao-cap">Cao cấp</a></li>
+              <li class="menu-item"><a href="/du-lich/tieu-chuan">Tiêu chuẩn</a></li>
+              <li class="menu-item"><a href="/du-lich/tiet-kiem">Tiết kiệm</a></li>
+              <li class="menu-item"><a href="/du-lich/gia-tot">Giá tốt</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-6 block">
+            <h4>Thông tin</h4>
+            <ul class="menu">
+              <li class="menu-item"><a href="/phuong-thuc-thanh-toan">Phương thức thanh toán</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-6 block contact-block">
+
+            <h4>Mạng xã hội</h4>
+            <ul class="socials">
+              <li class="social">
+                <a target="_blank" rel="nofollow noreferrer"><i class="fab fa-facebook-f"></i></a>
+              </li>
+              <li class="social">
+                <a target="_blank" rel="nofollow noreferrer"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li class="social">
+                <a target="_blank" rel="nofollow noreferrer"><i class="fab fa-viber"></i></a>
+              </li>
+              <li class="social">
+                <a target="_blank" rel="nofollow noreferrer"><i class="fab fa-youtube"></i></a>
+              </li>
+            </ul>
+            <div class="call-action">
+              <a href="tel:0242 2420 777"><i class="fa-light fa-phone"></i>0242 2420 777</a>
+            </div>
+            <p class="time">Từ 8:00 - 22:00 hàng ngày</p>
+
+          </div>
+
+          <div class="col-md-12 col-12 block">
+            <div class="securi-payment row">
+              <div class="securi col-md-5">
+                <h4>Newsletter</h4>
+                <div class="newsletter form">
+                  <form action="Subscribe/Send" method="post" id="email-marketing" novalidate="novalidate">
+                    <input type="text" name="Email" placeholder="Email của Quý khách">
+                    <input type="submit" class="sm" value="">
+                    <i class="fa-light fa-envelope"></i>
+                  </form>
+                </div>
+
+
+              </div>
+              <div class="payment col-md-7">
+                <h4>Chấp nhận thanh toán</h4>
+                <img src="/assets/images/image41.png" alt="image">
+                <img src="/assets/images/vnpay_qr1.png" alt="image">
+                <img src="/assets/images/vs.png" alt="image">
+                <img src="/assets/images/mtc.png" alt="image">
+                <img src="/assets/images/jcb.png" alt="image">
+                <img src="/assets/images/vrvs.png" alt="image">
+                <img src="/assets/images/shopeepay.png" alt="ShopeePay">
+                <img src="/assets/images/msb.png" alt="MSB">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-12">
+            <div class="copy-right text-center">
+              <p>
+                Copyright © Tiger Travel. 2022 All Rights Reserved <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
