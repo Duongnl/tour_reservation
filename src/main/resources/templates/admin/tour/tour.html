@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" th:href="@{/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script type="text/javascript" th:src="@{/js/plugin/webfont/webfont.min.js}"></script>
+    <link th:href="@{/css/fonts.min.css}" rel="stylesheet" />
+
+    <!-- CSS Files -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/plugins.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/kaiadmin.min.css}" rel="stylesheet" />
+
+
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link th:href="@{/css/demo.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- start sidebar -->
+        <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
+        <!-- end sidebar -->
+
+        <div class="main-panel">
+            <!-- header  -->
+            <div th:replace="/admin/layout/header.html :: header"></div>
+
+            <!-- content-->
+            <div class="container">
+                <div class="page-inner">
+                    <h4>Quản lý tour</h4>
+                        <!--*
+                        *
+                        *
+                        *
+                        *
+                        *
+                        *
+                        *
+                        *-->
+                </div>
+            </div>
+
+            <!-- start footer -->
+            <div th:replace="/admin/layout/footer.html :: footer"></div>
+            <!-- end footer -->
+        </div>
+    </div>
+    <!--   Core JS Files   -->
+    <script type="text/javascript" th:src="@{/js/core/jquery-3.7.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/core/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/core/bootstrap.min.js}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script type="text/javascript" th:src="@{/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+    <!-- Chart JS -->
+    <script type="text/javascript" th:src="@{/js/plugin/chart.js/chart.min.js}"></script>
+
+    <!-- jQuery Sparkline -->
+    <script type="text/javascript" th:src="@{/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
+
+    <!-- Chart Circle -->
+    <script type="text/javascript" th:src="@{/js/plugin/chart-circle/circles.min.js}"></script>
+
+    <!-- Datatables -->
+    <script type="text/javascript" th:src="@{/js/plugin/datatables/datatables.min.js}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script type="text/javascript" th:src="@{/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script type="text/javascript" th:src="@{/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/plugin/jsvectormap/world.js}"></script>
+
+    <!-- Sweet Alert -->
+    <script type="text/javascript" th:src="@{/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script type="text/javascript" th:src="@{/js/kaiadmin.min.js}"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script type="text/javascript" th:src="@{/js/setting-demo.js}"></script>
+    <script type="text/javascript" th:src="@{/js/demo.js}"></script>
+</body>
+
+</html>

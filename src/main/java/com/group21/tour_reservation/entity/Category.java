@@ -1,7 +1,10 @@
 package com.group21.tour_reservation.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "category")
@@ -10,7 +13,7 @@ public class Category {
     @Id
     @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int categoryID;
+    private Integer categoryId;
 
     @Column(name = "category_name")
     String categoryName;
@@ -21,49 +24,8 @@ public class Category {
     @Column(name = "status")
     int status;
 
-    public Category(int categoryID, String categoryName, String categoryDetail, int status) {
-        this.categoryID = categoryID;
-        this.categoryName = categoryName;
-        this.categoryDetail = categoryDetail;
-        this.status = status;
-    }
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Tour> tours;
 
-    public Category() {
-        this.categoryID = 0;
-        this.categoryName = null;
-        this.categoryDetail = null;
-        this.status = 0;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public int getCategoryID() {
-        return categoryID;
-    }
-
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getCategoryDetail() {
-        return categoryDetail;
-    }
-
-    public void setCategoryDetail(String categoryDetail) {
-        this.categoryDetail = categoryDetail;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
 }
