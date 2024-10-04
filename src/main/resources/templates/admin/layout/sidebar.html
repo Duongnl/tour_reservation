@@ -1,0 +1,103 @@
+
+  <!-- Sidebar -->
+  <div class="sidebar" data-background-color="dark"  th:fragment="sidebar">
+    <div class="sidebar-logo">
+      <!-- Logo Header -->
+      <div class="logo-header" data-background-color="dark">
+        <a href="index.html" class="logo">
+          <img  th:src="@{/img/logo_light.svg}" alt="navbar brand" class="navbar-brand" height="20" />
+        </a>
+        <div class="nav-toggle">
+          <button class="btn btn-toggle toggle-sidebar">
+            <i class="gg-menu-right"></i>
+          </button>
+          <button class="btn btn-toggle sidenav-toggler">
+            <i class="gg-menu-left"></i>
+          </button>
+        </div>
+        <button class="topbar-toggler more">
+          <i class="gg-more-vertical-alt"></i>
+        </button>
+      </div>
+      <!-- End Logo Header -->
+    </div>
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+      <div class="sidebar-content">
+        <ul class="nav nav-secondary">
+
+          <!-- thống kê -->
+          <li class="nav-item active">
+            <a th:href="@{/admin}" class="collapsed" aria-expanded="false">
+              <i class="fas fa-home"></i>
+              <p>Thống kê</p>
+            </a>
+          </li>
+
+          <li class="nav-section">
+            <span class="sidebar-mini-icon">
+              <i class="fa fa-ellipsis-h"></i>
+            </span>
+            <h4 class="text-section">Quản lý</h4>
+          </li>
+
+          <!-- Quản lý tour -->
+          <li class="nav-item">
+            <a  th:href="@{/admin/tour}">
+              <i class="fas fa-layer-group"></i>
+              <p>Quản lý tour</p>
+            </a>
+          </li>
+
+          <!-- Quản lý danh mục -->
+          <li class="nav-item">
+            <a  th:href="@{/admin/category}">
+              <i class="fas fa-th-list"></i>
+              <p>Quản lý danh mục</p>
+            </a>
+          </li>
+
+          <!-- Quản lý khuyến mãi -->
+          <li class="nav-item">
+            <a  th:href="@{/admin/promotion}">
+              <i class="fas fa-pen-square"></i>
+              <p>Quản lý khuyến mãi</p>
+            </a>
+          </li>
+
+          <!-- Quản lý phương tiện di chuyển -->
+          <li class="nav-item">
+            <a  th:href="@{/admin/transport}">
+              <i class="fas fa-paper-plane"></i>
+              <p>Quản lý phương tiện</p>
+            </a>
+          </li>
+
+          <!-- Quản lý đặt chổ -->
+          <li class="nav-item">
+            <a th:href="@{/admin/reserve}">
+              <i class="fas fa-map-marker-alt"></i>
+              <p>Quản lý đặt chổ</p>
+            </a>
+          </li>
+
+          <!-- Quản lý nhân viên -->
+          <li class="nav-item">
+            <a  th:href="@{/admin/employee}">
+              <i class="fas fa-user"></i>
+              <p>Quản lý nhân viên</p>
+            </a>
+          </li>
+
+          <!-- Quản lý khách hàng -->
+          <li class="nav-item">
+            <a  th:href="@{/admin/customer}">
+              <i class="fa fa-users"></i>
+              <p>Quản lý khách hàng</p>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- End Sidebar -->
