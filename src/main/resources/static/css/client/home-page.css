@@ -65,12 +65,16 @@ ul{
 }
 .logo_image{
     width: 50px;
-    height: 45px;
+    height: 50px;
     margin-right: 10px;
-    border-radius: 20%;
+    border-radius: 50%;
 }
 .nav-link{
-    margin-left: 50px;
+    /* margin-left: 50px; */
+}
+.navbar-nav{
+    display: flex;
+    justify-content: space-between;
 }
 .pay_image-paypal{
     height: 40px;
@@ -98,4 +102,12 @@ ul{
     margin: 0;
     border: 1px solid #2D4271;
     border-radius: 10px;
+}
+.login-home{
+    margin-left: 30px;
+    text-decoration: none;
+    color: #2D4271;
+}
+.admin_logo{
+    color: #2D4271;
 }
