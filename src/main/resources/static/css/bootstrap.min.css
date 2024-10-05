@@ -8293,6 +8293,7 @@ fieldset:disabled .btn {
 }
 
 .d-block {
+    height: 60%;
     display: block !important
 }
 
