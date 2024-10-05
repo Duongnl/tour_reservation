@@ -34,4 +34,71 @@ public class Promotion {
     @JsonBackReference
     private Set<TourSchedule> tourSchedules;
 
+    public Promotion() {}
+
+    public Promotion(Integer promotionId, String promotionName, double percentage, LocalDateTime startTime, LocalDateTime endTime, int status, Set<TourSchedule> tourSchedules) {
+        this.promotionId = promotionId;
+        this.promotionName = promotionName;
+        this.percentage = percentage;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.status = status;
+        this.tourSchedules = tourSchedules;
+    }
+
+    public Integer getPromotionId() {
+        return promotionId;
+    }
+
+    public void setPromotionId(Integer promotionId) {
+        this.promotionId = promotionId;
+    }
+
+    public String getPromotionName() {
+        return promotionName;
+    }
+
+    public void setPromotionName(String promotionName) {
+        this.promotionName = promotionName;
+    }
+
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Set<TourSchedule> getTourSchedules() {
+        return tourSchedules;
+    }
+
+    public void setTourSchedules(Set<TourSchedule> tourSchedules) {
+        this.tourSchedules = tourSchedules;
+    }
 }

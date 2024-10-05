@@ -33,4 +33,62 @@ public class Employee {
     @JsonManagedReference
     private Account account;
 
+    public Employee() {}
+
+    public Employee(Integer employeeId, String employeeName, LocalDate birthday, String phoneNumber, Set<Reserve> reserves, Account account) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+        this.reserves = reserves;
+        this.account = account;
+    }
+
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Set<Reserve> getReserves() {
+        return reserves;
+    }
+
+    public void setReserves(Set<Reserve> reserves) {
+        this.reserves = reserves;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

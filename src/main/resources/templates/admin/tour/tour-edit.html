@@ -23,33 +23,37 @@
 
 <body>
 <div class="wrapper">
-    <!-- sidebar -->
+    <!-- start sidebar -->
     <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
 
     <div class="main-panel">
-        <!-- header  -->
+        <!-- start header  -->
         <div th:replace="/admin/layout/header.html :: header"></div>
 
-        <!--Content-->
+        <!-- content -->
         <div class="container">
             <div class="page-inner">
-               <h4>Cập nhật thông tin tour</h4>
-                    <!--*
-                         *
-                         *
-                         *
-                         *
-                         *
-                         *
-                         *
-                         *-->
+                <!--* your code is here
+                      *
+                      *
+                      *
+                      *
+                      *
+                      *
+                      *
+                      *-->
             </div>
         </div>
 
-        <!-- footer -->
+        <!-- start footer -->
         <div th:replace="/admin/layout/footer.html :: footer"></div>
     </div>
+
+    <!-- Thông báo, chỉ để trong trang view, không cần để trong trang add, update -->
+    <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;"></div>
 </div>
+<!--my js thông báo chỉ để trong trang view, không cần để trong trang add, update-->
+<script type="module" th:src="@{/js/notify.js}"></script>
 
 <!--   Core JS Files   -->
 <script type="text/javascript" th:src="@{/js/core/jquery-3.7.1.min.js}"></script>
@@ -70,6 +74,7 @@
 
 <!-- Datatables -->
 <script type="text/javascript" th:src="@{/js/plugin/datatables/datatables.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/datatables.js}"></script>
 
 <!-- Bootstrap Notify -->
 <script type="text/javascript" th:src="@{/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
@@ -84,9 +89,6 @@
 <!-- Kaiadmin JS -->
 <script type="text/javascript" th:src="@{/js/kaiadmin.min.js}"></script>
 
-<!-- Kaiadmin DEMO methods, don't include it in your project! -->
-<script type="text/javascript" th:src="@{/js/setting-demo.js}"></script>
-<script type="text/javascript" th:src="@{/js/demo.js}"></script>
 </body>
 
 </html>
