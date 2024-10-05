@@ -50,7 +50,12 @@
     </div>
 
     <!-- Thông báo, chỉ để trong trang view, không cần để trong trang add, update -->
-    <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;"></div>
+    <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;">
+        <span th:text="${successMessage}"></span>
+    </div>
+    <div th:if="${errorMessage}" class="alert alert-success" id="error-message" style="display: none;">
+        <span th:text="${errorMessage}"></span>
+    </div>
     <!--modal delete chỉ để trong trang view, không cần để trong trang add, update-->
     <div th:replace="/admin/modal.html :: modal"></div>
 

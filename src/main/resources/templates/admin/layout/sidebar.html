@@ -26,7 +26,7 @@
         <ul class="nav nav-secondary">
 
           <!-- thống kê -->
-          <li class="nav-item active">
+          <li class="nav-item" id="li-dashboard">
             <a th:href="@{/admin}" class="collapsed" aria-expanded="false">
               <i class="fas fa-home"></i>
               <p>Thống kê</p>
@@ -41,7 +41,7 @@
           </li>
 
           <!-- Quản lý tour -->
-          <li class="nav-item">
+          <li class="nav-item" id="li-tour">
             <a  th:href="@{/admin/tour}">
               <i class="fas fa-layer-group"></i>
               <p>Quản lý tour</p>
@@ -49,7 +49,7 @@
           </li>
 
           <!-- Quản lý danh mục -->
-          <li class="nav-item">
+          <li class="nav-item" id="li-category">
             <a  th:href="@{/admin/category}">
               <i class="fas fa-th-list"></i>
               <p>Quản lý danh mục</p>
@@ -57,7 +57,7 @@
           </li>
 
           <!-- Quản lý khuyến mãi -->
-          <li class="nav-item">
+          <li class="nav-item" id="li-promotion">
             <a  th:href="@{/admin/promotion}">
               <i class="fas fa-pen-square"></i>
               <p>Quản lý khuyến mãi</p>
@@ -65,7 +65,7 @@
           </li>
 
           <!-- Quản lý phương tiện di chuyển -->
-          <li class="nav-item">
+          <li class="nav-item" id="li-transport">
             <a  th:href="@{/admin/transport}">
               <i class="fas fa-paper-plane"></i>
               <p>Quản lý phương tiện</p>
@@ -73,7 +73,7 @@
           </li>
 
           <!-- Quản lý đặt chổ -->
-          <li class="nav-item">
+          <li class="nav-item" id="li-reserve">
             <a th:href="@{/admin/reserve}">
               <i class="fas fa-map-marker-alt"></i>
               <p>Quản lý đặt chổ</p>
@@ -81,7 +81,7 @@
           </li>
 
           <!-- Quản lý nhân viên -->
-          <li class="nav-item">
+          <li class="nav-item" id="li-employee">
             <a  th:href="@{/admin/employee}">
               <i class="fas fa-user"></i>
               <p>Quản lý nhân viên</p>
@@ -89,7 +89,7 @@
           </li>
 
           <!-- Quản lý khách hàng -->
-          <li class="nav-item">
+          <li class="nav-item" id="li-customer">
             <a  th:href="@{/admin/customer}">
               <i class="fa fa-users"></i>
               <p>Quản lý khách hàng</p>
@@ -99,5 +99,40 @@
         </ul>
       </div>
     </div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const liDashboard = document.getElementById('li-dashboard');
+    const liTour = document.getElementById('li-tour');
+    const liCategory= document.getElementById('li-category');
+    const liPromotion= document.getElementById('li-promotion');
+    const liTransport= document.getElementById('li-transport');
+    const liEmployee= document.getElementById('li-employee');
+    const liCustomer= document.getElementById('li-customer');
+
+
+    // Lấy đường dẫn hiện tại
+    const path = window.location.pathname;
+   if (path==="/admin") {
+     liDashboard.classList.add("active");
+   } else if (path.includes("tour")) {
+     liTour.classList.add("active");
+     console.log("Có vào tour")
+   } else if (path.includes("category")) {
+     liCategory.classList.add("active");
+   } else if (path.includes("promotion")) {
+     liPromotion.classList.add("active");
+   } else if (path.includes("transport")) {
+     liTransport.classList.add("active");
+   } else if (path.includes("employee")) {
+     liEmployee.classList.add("active");
+   } else if (path.includes("customer")) {
+     liCustomer.classList.add("active");
+   }
+
+
+
+  })
+</script>
   </div>
   <!-- End Sidebar -->
+

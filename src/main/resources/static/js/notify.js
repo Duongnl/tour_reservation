@@ -32,9 +32,13 @@ export function errorNotify (message) {
 
 document.addEventListener("DOMContentLoaded", function () {
     const successMessage = document.getElementById("success-message")
+    const errorMessage = document.getElementById("error-message")
 
     if (successMessage) {
-
         successNotify(successMessage.textContent); // Gọi hàm thông báo
     }
+    if(errorMessage) {
+        errorNotify(errorMessage.textContent);
+    }
+
 });
