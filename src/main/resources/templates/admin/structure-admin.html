@@ -51,9 +51,13 @@
 
     <!-- Thông báo, chỉ để trong trang view, không cần để trong trang add, update -->
     <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;"></div>
+    <!--modal delete chỉ để trong trang view, không cần để trong trang add, update-->
+    <div th:replace="/admin/modal.html :: modal"></div>
+
 </div>
 <!--my js thông báo chỉ để trong trang view, không cần để trong trang add, update-->
 <script type="module" th:src="@{/js/notify.js}"></script>
+<script type="module" th:src="@{/js/create-slug.js}"></script>
 
 <!--   Core JS Files   -->
 <script type="text/javascript" th:src="@{/js/core/jquery-3.7.1.min.js}"></script>

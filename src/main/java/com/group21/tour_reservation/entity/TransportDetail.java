@@ -33,5 +33,62 @@ public class TransportDetail {
     @JsonBackReference
     private TourSchedule tourSchedule;
 
+    public TransportDetail() {}
 
+    public TransportDetail(Integer transportDetailId, LocalDateTime departureTime, LocalDateTime arrivalTime, int status, Transport transport, TourSchedule tourSchedule) {
+        this.transportDetailId = transportDetailId;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.status = status;
+        this.transport = transport;
+        this.tourSchedule = tourSchedule;
+    }
+
+    public Integer getTransportDetailId() {
+        return transportDetailId;
+    }
+
+    public void setTransportDetailId(Integer transportDetailId) {
+        this.transportDetailId = transportDetailId;
+    }
+
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public LocalDateTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(LocalDateTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Transport getTransport() {
+        return transport;
+    }
+
+    public void setTransport(Transport transport) {
+        this.transport = transport;
+    }
+
+    public TourSchedule getTourSchedule() {
+        return tourSchedule;
+    }
+
+    public void setTourSchedule(TourSchedule tourSchedule) {
+        this.tourSchedule = tourSchedule;
+    }
 }

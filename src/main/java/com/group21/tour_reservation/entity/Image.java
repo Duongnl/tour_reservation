@@ -24,4 +24,44 @@ public class Image {
     @JsonBackReference
     private Tour tour;
 
+    public Image() {}
+
+    public Image(Integer imageId, String url, int status, Tour tour) {
+        this.imageId = imageId;
+        this.url = url;
+        this.status = status;
+        this.tour = tour;
+    }
+
+    public Integer getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Tour getTour() {
+        return tour;
+    }
+
+    public void setTour(Tour tour) {
+        this.tour = tour;
+    }
 }

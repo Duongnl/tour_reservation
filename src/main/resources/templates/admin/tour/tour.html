@@ -17,79 +17,78 @@
     <link th:href="@{/css/plugins.min.css}" rel="stylesheet" />
     <link th:href="@{/css/kaiadmin.min.css}" rel="stylesheet" />
 
-
-
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link th:href="@{/css/demo.css}" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="wrapper">
-        <!-- start sidebar -->
-        <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
-        <!-- end sidebar -->
+<div class="wrapper">
+    <!-- start sidebar -->
+    <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
 
-        <div class="main-panel">
-            <!-- header  -->
-            <div th:replace="/admin/layout/header.html :: header"></div>
+    <div class="main-panel">
+        <!-- start header  -->
+        <div th:replace="/admin/layout/header.html :: header"></div>
 
-            <!-- content-->
-            <div class="container">
-                <div class="page-inner">
-                    <h4>Quản lý tour</h4>
-                        <!--*
-                        *
-                        *
-                        *
-                        *
-                        *
-                        *
-                        *
-                        *-->
-                </div>
+        <!-- content -->
+        <div class="container">
+            <div class="page-inner">
+                <!--* your code is here
+                      *
+                      *
+                      *
+                      *
+                      *
+                      *
+                      *
+                      *-->
             </div>
-
-            <!-- start footer -->
-            <div th:replace="/admin/layout/footer.html :: footer"></div>
-            <!-- end footer -->
         </div>
+
+        <!-- start footer -->
+        <div th:replace="/admin/layout/footer.html :: footer"></div>
     </div>
-    <!--   Core JS Files   -->
-    <script type="text/javascript" th:src="@{/js/core/jquery-3.7.1.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/core/popper.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/core/bootstrap.min.js}"></script>
 
-    <!-- jQuery Scrollbar -->
-    <script type="text/javascript" th:src="@{/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+    <!-- Thông báo, chỉ để trong trang view, không cần để trong trang add, update -->
+    <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;"></div>
+</div>
+<!--my js thông báo chỉ để trong trang view, không cần để trong trang add, update-->
+<script type="module" th:src="@{/js/notify.js}"></script>
 
-    <!-- Chart JS -->
-    <script type="text/javascript" th:src="@{/js/plugin/chart.js/chart.min.js}"></script>
+<!--   Core JS Files   -->
+<script type="text/javascript" th:src="@{/js/core/jquery-3.7.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/core/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/core/bootstrap.min.js}"></script>
 
-    <!-- jQuery Sparkline -->
-    <script type="text/javascript" th:src="@{/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
+<!-- jQuery Scrollbar -->
+<script type="text/javascript" th:src="@{/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
 
-    <!-- Chart Circle -->
-    <script type="text/javascript" th:src="@{/js/plugin/chart-circle/circles.min.js}"></script>
+<!-- Chart JS -->
+<script type="text/javascript" th:src="@{/js/plugin/chart.js/chart.min.js}"></script>
 
-    <!-- Datatables -->
-    <script type="text/javascript" th:src="@{/js/plugin/datatables/datatables.min.js}"></script>
+<!-- jQuery Sparkline -->
+<script type="text/javascript" th:src="@{/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
 
-    <!-- Bootstrap Notify -->
-    <script type="text/javascript" th:src="@{/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+<!-- Chart Circle -->
+<script type="text/javascript" th:src="@{/js/plugin/chart-circle/circles.min.js}"></script>
 
-    <!-- jQuery Vector Maps -->
-    <script type="text/javascript" th:src="@{/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/plugin/jsvectormap/world.js}"></script>
+<!-- Datatables -->
+<script type="text/javascript" th:src="@{/js/plugin/datatables/datatables.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/datatables.js}"></script>
 
-    <!-- Sweet Alert -->
-    <script type="text/javascript" th:src="@{/js/plugin/sweetalert/sweetalert.min.js}"></script>
+<!-- Bootstrap Notify -->
+<script type="text/javascript" th:src="@{/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
 
-    <!-- Kaiadmin JS -->
-    <script type="text/javascript" th:src="@{/js/kaiadmin.min.js}"></script>
+<!-- jQuery Vector Maps -->
+<script type="text/javascript" th:src="@{/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugin/jsvectormap/world.js}"></script>
 
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script type="text/javascript" th:src="@{/js/setting-demo.js}"></script>
-    <script type="text/javascript" th:src="@{/js/demo.js}"></script>
+<!-- Sweet Alert -->
+<script type="text/javascript" th:src="@{/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+<!-- Kaiadmin JS -->
+<script type="text/javascript" th:src="@{/js/kaiadmin.min.js}"></script>
+
 </body>
 
 </html>
