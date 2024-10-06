@@ -100,6 +100,7 @@
     font-size: 15px;
     text-transform: none;
     font-weight: 400;
+    text-decoration: none;
   }
 
   .navbar .dropdown ul a i {
@@ -109,12 +110,15 @@
   .navbar .dropdown ul a:hover,
   .navbar .dropdown ul .active:hover,
   .navbar .dropdown ul li:hover>a {
-    color: var(--color-primary);
+    color: #F8F9FA;
+    background-color: #2D4271 ;
   }
 
   .navbar .dropdown:hover>ul {
     opacity: 1;
+    text-decoration:none;
     top: 100%;
+    background-color: #F8F9FA;
     visibility: visible;
   }
 
@@ -122,6 +126,7 @@
     top: 0;
     left: calc(100% - 30px);
     visibility: hidden;
+    background-color: #F8F9FA;
   }
 
   .navbar .dropdown .dropdown:hover>ul {
