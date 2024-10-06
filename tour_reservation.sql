@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 26, 2024 lúc 11:04 AM
+-- Thời gian đã tạo: Th10 04, 2024 lúc 12:48 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -32,7 +32,6 @@ CREATE TABLE `account` (
   `user_name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `phone_number` int(11) DEFAULT NULL,
   `time` datetime NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -82,7 +81,8 @@ CREATE TABLE `employee` (
   `employee_id` int(11) NOT NULL,
   `account_id` int(11) NOT NULL,
   `employee_name` varchar(255) NOT NULL,
-  `birthday` date DEFAULT NULL
+  `birthday` date DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -107,7 +107,7 @@ CREATE TABLE `image` (
 CREATE TABLE `promotion` (
   `promotion_id` int(11) NOT NULL,
   `promotion_name` varchar(255) NOT NULL,
-  `percentage` int(11) NOT NULL,
+  `percentage` double NOT NULL,
   `start_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   `status` int(11) NOT NULL
@@ -138,7 +138,7 @@ CREATE TABLE `reserve` (
   `reserve_detail` varchar(255) DEFAULT NULL,
   `adult_count` int(11) NOT NULL,
   `child_count` int(11) NOT NULL,
-  `price` int(11) DEFAULT NULL,
+  `price` int(11) NOT NULL,
   `time` datetime NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -150,6 +150,7 @@ CREATE TABLE `reserve` (
 --
 
 CREATE TABLE `reserve_detail` (
+  `reserve_detail_id` int(11) NOT NULL,
   `reserve_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
@@ -182,10 +183,9 @@ CREATE TABLE `tour` (
 CREATE TABLE `tour_schedule` (
   `schedule_id` int(11) NOT NULL,
   `tour_id` int(11) NOT NULL,
-  `promotion_id` int(11) DEFAULT NULL,
   `schedule_name` varchar(255) NOT NULL,
-  `departure_time` datetime DEFAULT NULL,
-  `return_time` datetime DEFAULT NULL,
+  `departure_date` date DEFAULT NULL,
+  `return_date` date DEFAULT NULL,
   `quantity` int(11) NOT NULL,
   `price_adult` int(11) DEFAULT NULL,
   `price_child` int(11) DEFAULT NULL,
@@ -203,7 +203,6 @@ CREATE TABLE `transport` (
   `transport_id` int(11) NOT NULL,
   `transport_name` varchar(255) NOT NULL,
   `transport_detail` varchar(255) DEFAULT NULL,
-  `departure_time` datetime DEFAULT NULL,
   `departure_location` varchar(255) DEFAULT NULL,
   `destination_location` varchar(255) DEFAULT NULL,
   `status` int(11) NOT NULL
@@ -216,9 +215,12 @@ CREATE TABLE `transport` (
 --
 
 CREATE TABLE `transport_detail` (
+  `transport_detail_id` int(11) NOT NULL,
   `schedule_id` int(11) NOT NULL,
   `transport_id` int(11) NOT NULL,
-  `direction` varchar(255) NOT NULL
+  `departure_time` datetime NOT NULL,
+  `arrival_time` datetime NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -246,7 +248,6 @@ ALTER TABLE `category`
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`customer_id`),
   ADD UNIQUE KEY `customer_id` (`customer_id`),
-  ADD UNIQUE KEY `phone_number` (`phone_number`),
   ADD KEY `customer_fk1` (`account_id`),
   ADD KEY `customer_fk2` (`relationship_id`);
 
@@ -295,7 +296,7 @@ ALTER TABLE `reserve`
 -- Chỉ mục cho bảng `reserve_detail`
 --
 ALTER TABLE `reserve_detail`
-  ADD PRIMARY KEY (`reserve_id`,`customer_id`),
+  ADD PRIMARY KEY (`reserve_detail_id`),
   ADD KEY `reserve_detail_fk1` (`customer_id`),
   ADD KEY `reserve_detail_fk0` (`reserve_id`);
 
@@ -326,7 +327,7 @@ ALTER TABLE `transport`
 -- Chỉ mục cho bảng `transport_detail`
 --
 ALTER TABLE `transport_detail`
-  ADD PRIMARY KEY (`schedule_id`,`transport_id`),
+  ADD PRIMARY KEY (`transport_detail_id`),
   ADD KEY `transport_detail_fk1` (`transport_id`),
   ADD KEY `transport_detail_fk0` (`schedule_id`);
 
@@ -365,6 +366,12 @@ ALTER TABLE `promotion`
   MODIFY `promotion_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `reserve_detail`
+--
+ALTER TABLE `reserve_detail`
+  MODIFY `reserve_detail_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `tour`
 --
 ALTER TABLE `tour`
@@ -381,6 +388,12 @@ ALTER TABLE `tour_schedule`
 --
 ALTER TABLE `transport`
   MODIFY `transport_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `transport_detail`
+--
+ALTER TABLE `transport_detail`
+  MODIFY `transport_detail_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

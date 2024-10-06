@@ -1,92 +1,61 @@
 package com.group21.tour_reservation.entity;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "account")
 public class Account {
+
     @Id
     @Column(name = "account_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int accountID;
-
-    @OneToOne(mappedBy = "account")
-    @JsonBackReference
-    Employee employee;
-
-    @OneToOne(mappedBy = "account")
-    @JsonBackReference
-    Customer customer;
+    private Integer accountId;
 
     @Column(name = "user_name")
-    String userName;
+    private String userName;
 
     @Column(name = "password")
-    String password;
+    private String password;
 
     @Column(name = "email")
-    String email;
-
-    @Column(name = "phone_number")
-    String phoneNumber;
+    private String email;
 
     @Column(name = "time")
-    Date time;
+    private LocalDateTime time;
 
     @Column(name = "status")
-    int status;
+    private int status;
 
-    public Account() {
-        this.accountID = 0;
-        this.employee = null;
-        this.customer = null;
-        this.userName = null;
-        this.password = null;
-        this.email = null;
-        this.phoneNumber = null;
-        this.time = null;
-        this.status = 0;
-    }
+    @OneToOne(mappedBy = "account")
+    @JsonBackReference
+    private Employee employee;
 
-    public Account(int accountID, Employee employee, Customer customer, String userName, String password, String email,
-            String phoneNumber, Date time, int status) {
-        this.accountID = accountID;
-        this.employee = employee;
-        this.customer = customer;
+    @OneToOne(mappedBy = "account")
+    @JsonBackReference
+    private Customer customer;
+
+    public Account() {}
+
+    public Account(Integer accountId, String userName, String password, String email, LocalDateTime time, int status, Employee employee, Customer customer) {
+        this.accountId = accountId;
         this.userName = userName;
         this.password = password;
         this.email = email;
-        this.phoneNumber = phoneNumber;
         this.time = time;
         this.status = status;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
         this.employee = employee;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public int getAccountID() {
-        return accountID;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     public String getUserName() {
@@ -113,19 +82,11 @@ public class Account {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Date getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
@@ -137,5 +98,19 @@ public class Account {
         this.status = status;
     }
 
-    
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

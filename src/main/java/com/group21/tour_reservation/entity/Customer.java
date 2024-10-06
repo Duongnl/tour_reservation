@@ -1,19 +1,11 @@
 package com.group21.tour_reservation.entity;
 
-import java.time.LocalDate;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -22,103 +14,89 @@ public class Customer {
     @Id
     @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerID;
+    private Integer customerId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
-    Account account;
+    @Column(name = "relationship_name")
+    private String relationshipName;
 
+    @Column(name = "customer_name")
+    private String customerName;
+
+    @Column(name = "customer_type")
+    private int customerType;
+
+    @Column(name = "sex")
+    private int sex;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "birthday",columnDefinition  ="date")
+    private LocalDate birthday;
+
+    @Column(name = "visa_expire", columnDefinition = "date")
+    private LocalDate visaExpire;
+
+    @Column(name = "status")
+    private int status;
+
+    //    Người đại diện
     @ManyToOne
     @JoinColumn(name ="relationship_id" , nullable = true, referencedColumnName = "customer_id")
     @JsonBackReference
     Customer customer;
 
-    @Column(name = "relationship_name")
-    String relationshipName;
+    //    Người liên quan
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    Set<Customer> customers;
 
-    @Column(name = "customer_name")
-    String customerName;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
+    @JsonManagedReference
+    private Account account;
 
-    @Column(name = "customer_type")
-    String customerType;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Reserve> reserves;
 
-    @Column(name = "sex")
-    String sex;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<ReserveDetail> reserveDetails;
 
-    @Column(name = "phone_number")
-    String phoneNumber;
+    public Customer() {}
 
-    @Column(name = "email")
-    String emai;
-
-    @Column(name = "address")
-    String address;
-
-    @Column(name = "birthday")
-    LocalDate birthday;
-
-    @Column(name = "visa_expire")
-    LocalDate visaExpire;
-
-    @Column(name = "status")
-    int status;
-
-    public Customer() {
-        this.customerID = 0;
-        this.account = null;
-        this.customer = null;
-        this.relationshipName = null;
-        this.customerName = null;
-        this.customerType = null;
-        this.sex = null;
-        this.phoneNumber = null;
-        this.emai = null;
-        this.address = null;
-        this.birthday = null;
-        this.visaExpire = null;
-        this.status = 0;
-    }
-
-    public Customer(int customerID, Account account, Customer customer, String relationshipName, String customerName,
-            String customerType, String sex, String phoneNumber, String emai, String address, LocalDate birthday,
-            LocalDate visaExpire, int status) {
-        this.customerID = customerID;
-        this.account = account;
-        this.customer = customer;
+    public Customer(Integer customerId, String relationshipName, String customerName, int customerType, int sex, String phoneNumber, String email, String address, LocalDate birthday, LocalDate visaExpire, int status, Customer customer, Set<Customer> customers, Account account, Set<Reserve> reserves, Set<ReserveDetail> reserveDetails) {
+        this.customerId = customerId;
         this.relationshipName = relationshipName;
         this.customerName = customerName;
         this.customerType = customerType;
         this.sex = sex;
         this.phoneNumber = phoneNumber;
-        this.emai = emai;
+        this.email = email;
         this.address = address;
         this.birthday = birthday;
         this.visaExpire = visaExpire;
         this.status = status;
-    }
-
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
         this.customer = customer;
+        this.customers = customers;
+        this.account = account;
+        this.reserves = reserves;
+        this.reserveDetails = reserveDetails;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public String getRelationshipName() {
@@ -137,19 +115,19 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    public String getCustomerType() {
+    public int getCustomerType() {
         return customerType;
     }
 
-    public void setCustomerType(String customerType) {
+    public void setCustomerType(int customerType) {
         this.customerType = customerType;
     }
 
-    public String getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
@@ -161,12 +139,12 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmai() {
-        return emai;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmai(String emai) {
-        this.emai = emai;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -201,5 +179,43 @@ public class Customer {
         this.status = status;
     }
 
-    
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Set<Reserve> getReserves() {
+        return reserves;
+    }
+
+    public void setReserves(Set<Reserve> reserves) {
+        this.reserves = reserves;
+    }
+
+    public Set<ReserveDetail> getReserveDetails() {
+        return reserveDetails;
+    }
+
+    public void setReserveDetails(Set<ReserveDetail> reserveDetails) {
+        this.reserveDetails = reserveDetails;
+    }
 }

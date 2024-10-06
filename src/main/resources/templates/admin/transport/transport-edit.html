@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" th:href="@{/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script type="text/javascript" th:src="@{/js/plugin/webfont/webfont.min.js}"></script>
+    <link th:href="@{/css/fonts.min.css}" rel="stylesheet" />
+
+    <!-- CSS Files -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/plugins.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/kaiadmin.min.css}" rel="stylesheet" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link th:href="@{/css/demo.css}" rel="stylesheet" />
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- start sidebar -->
+    <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
+
+    <div class="main-panel">
+        <!-- start header  -->
+        <div th:replace="/admin/layout/header.html :: header"></div>
+
+        <!-- content -->
+        <div class="container">
+            <div class="page-inner">
+
+                <!--add form-->
+                <form method="POST" th:action="@{/admin/transport/edit-transport}" th:object="${transport}">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Chỉnh sửa thông tin phương tiện</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4">
+
+                                        <input id="txt-id" type="hidden" th:field="*{transportId}" />
+
+                                        <div class="form-group has-feedback">
+                                            <label for="transport-name">Tên phương tiện</label>
+                                            <input
+                                                    type="text"
+                                                    id="transport-name"
+                                                    value=""
+                                                    class="form-control"
+                                                    th:field="*{transportName}"
+                                            />
+                                            <small id="transport-name-error" class="form-text text-muted"
+                                            >Điền tên phương tiện di chuyển.</small>
+                                        </div>
+
+                                        <div class="form-group has-feedback">
+                                            <label for="departure-location">Điểm xuất phát</label>
+                                            <input
+                                                    type="text"
+                                                    id="departure-location"
+                                                    value=""
+                                                    class="form-control"
+                                                    th:field="*{departureLocation}"
+                                            />
+                                            <small id="departure-location-error" class="form-text text-muted"
+                                            >Điền địa điểm xuất phát.</small>
+                                        </div>
+
+                                        <div class="form-group has-feedback">
+                                            <label for="destination-location">Địa điểm đến </label>
+                                            <input
+                                                    type="text"
+                                                    id="destination-location"
+                                                    value=""
+                                                    class="form-control"
+                                                    th:field="*{destinationLocation}"
+                                            />
+                                            <small id="destination-location-error" class="form-text text-muted"
+                                            >Điền địa điểm đến.</small>
+                                        </div>
+
+
+                                        <div class="form-group has-feedback">
+                                            <label for="transport-detail">Chi tiết</label>
+                                            <textarea class="form-control" id="transport-detail" rows="5"
+                                                      th:field="*{transportDetail}"
+                                            ></textarea>
+                                            <small id="transport-detail-error" class="form-text text-muted"
+                                            >Điền thông tin thêm.</small>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action">
+                                <button class="btn btn-success" id="btn-transport-add" type="submit">Lưu</button>
+                                <a class="btn btn-danger"
+                                   th:href="@{/admin/transport}"
+                                >Quay lại</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!--end form-->
+            </div>
+        </div>
+
+        <!-- start footer -->
+        <div th:replace="/admin/layout/footer.html :: footer"></div>
+    </div>
+</div>
+<!-- My js -->
+<script type="module" th:src="@{/js/transport.js}"></script>
+
+<!--   Core JS Files   -->
+<script type="text/javascript" th:src="@{/js/core/jquery-3.7.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/core/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/core/bootstrap.min.js}"></script>
+
+<!-- jQuery Scrollbar -->
+<script type="text/javascript" th:src="@{/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+<!-- Chart JS -->
+<script type="text/javascript" th:src="@{/js/plugin/chart.js/chart.min.js}"></script>
+
+<!-- jQuery Sparkline -->
+<script type="text/javascript" th:src="@{/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
+
+<!-- Chart Circle -->
+<script type="text/javascript" th:src="@{/js/plugin/chart-circle/circles.min.js}"></script>
+
+<!-- Datatables -->
+<script type="text/javascript" th:src="@{/js/plugin/datatables/datatables.min.js}"></script>
+
+<!-- Bootstrap Notify -->
+<script type="text/javascript" th:src="@{/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+
+<!-- jQuery Vector Maps -->
+<script type="text/javascript" th:src="@{/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugin/jsvectormap/world.js}"></script>
+
+<!-- Sweet Alert -->
+<script type="text/javascript" th:src="@{/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+<!-- Kaiadmin JS -->
+<script type="text/javascript" th:src="@{/js/kaiadmin.min.js}"></script>
+
+</body>
+
+</html>

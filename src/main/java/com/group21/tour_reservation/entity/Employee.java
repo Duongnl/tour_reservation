@@ -1,64 +1,55 @@
 package com.group21.tour_reservation.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-
-
+import java.util.Set;
 
 @Entity
-@Table (name = "employee")
+@Table(name = "employee")
 public class Employee {
+
     @Id
     @Column(name = "employee_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employeeID;
+    private Integer employeeId;
+
+    @Column(name = "employee_name")
+    private String employeeName;
+
+    @Column(name = "birthday", columnDefinition = "date")
+    private LocalDate birthday;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Reserve> reserves;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
-    Account account;
+    @JsonManagedReference
+    private Account account;
 
-    @Column(name = "employee_name")
-    String employeeName;
+    public Employee() {}
 
-    @Column(name = "birthday", columnDefinition = "date")
-    LocalDate birthday;
-
-    public Employee() {
-        this.employeeID = 0;
-        this.account = null;
-        this.employeeName = null;
-        this.birthday = null;
-    }
-    
-    public Employee(int employeeID, Account account, String employeeName, LocalDate birthday) {
-        this.employeeID = employeeID;
-        this.account = account;
+    public Employee(Integer employeeId, String employeeName, LocalDate birthday, String phoneNumber, Set<Reserve> reserves, Account account) {
+        this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.birthday = birthday;
-    }
-
-    public int getEmployeeID() {
-        return employeeID;
-    }
-
-    public void setEmployeeID(int employeeID) {
-        this.employeeID = employeeID;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
+        this.phoneNumber = phoneNumber;
+        this.reserves = reserves;
         this.account = account;
+    }
+
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getEmployeeName() {
@@ -77,6 +68,27 @@ public class Employee {
         this.birthday = birthday;
     }
 
-    
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Set<Reserve> getReserves() {
+        return reserves;
+    }
+
+    public void setReserves(Set<Reserve> reserves) {
+        this.reserves = reserves;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

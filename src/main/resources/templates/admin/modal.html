@@ -1,0 +1,46 @@
+<!-- Modal -->
+<div  th:fragment="modal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
+                <a href="" class="btn btn-danger modal-delete">Xóa</a>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const modalElement = document.getElementById('exampleModal');
+            //  Nhận sự kiện khi modal mở
+            modalElement.addEventListener('show.bs.modal', function(event) {
+                // Nút mở modal đã được click
+                const buttonDelete = event.relatedTarget;
+                const pathname = window.location.pathname;
+
+                // Lấy dữ liệu từ các thuộc tính data-* từ nút mở modal đó
+                const dataId = buttonDelete.getAttribute('data-id');
+                const dataName = buttonDelete.getAttribute('data-name');
+                const dataControllerDelete = buttonDelete.getAttribute('data-controller-delete');
+
+
+                // Tìm và cập nhật nội dung modal với dữ liệu lấy được
+                const modalTitle = modalElement.querySelector('.modal-title');
+                const modalBody = modalElement.querySelector('.modal-body');
+                const modalDelete = modalElement.querySelector('.modal-delete');
+
+                modalTitle.textContent = `Cảnh báo`;
+                modalBody.textContent = `Bạn có chắc muốn xóa ${dataName} ?`;
+                modalDelete.href= `${dataControllerDelete}/${dataId}`;
+            });
+        });
+    </script>
+</div>
