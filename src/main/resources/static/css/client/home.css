@@ -1,7 +1,16 @@
 .header {
     background-color: #ffffff;
+    width: 100%;
+    margin: 0;
 }
-
+a {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--color-links-hover);
+    text-decoration: none;
+  }
 .navbar-collapse {
     color: #2D4271;
     display: flex;
@@ -52,18 +61,11 @@
         border: 1px solid #2D4271;
         border-radius: 10px;
     }
+    .nav-link ul {
+        display: block;
+      }
     
 }
-
-.nav-item.dropdown:hover .dropdown-menu {
-    display: block;
-    position: absolute;
-}
-
-.dropdown-menu {
-    display: none;
-}
-
 .footer {
     font-size: 15px;
     color: #2D4271;
