@@ -1,0 +1,88 @@
+<!-- Header -->
+<div th:fragment="header_nav" class="header">
+  
+  <div class="container_nav">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+
+      <div class="container-fluid">
+        <a class="navbar-brand" style="color: #2D4271;" href="#"><img class="logo_image" src="/images/logo_fix.jpg"
+            alt="">Tourio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar_link-itmes">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <div class="links">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#" style="color: #2D4271;">Tour</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#" style="color: #2D4271;">Combo</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="dropdown" style="color: #2D4271;" href="#" role="button"
+                    data-bs-toggle="dropdown">
+                    Du Lịch
+                  </a>
+                  <ul class="dropdown-menu" style="background-color: #F8F9FA;">
+                    <li class="dropdown" id="dropdown_list">
+                      <a id="trongnuoc" href="#"><span class="text">Du lịch trong nước</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                      <ul id="dropdown_item">
+                        <li><a href="#">Miền Bắc</a></li>
+                        <li><a href="#">Miền Trung</a></li>
+                        <li><a href="#">Đông Nam Bộ</a></li>
+                        <li><a href="#">Tây Nam Bộ</a></li>
+                        <li><a href="#">Nam Trung Bộ</a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown">
+                      <a id="ngoainuoc" href="#"><span class="text">Du lịch nước ngoài</span> </a>
+                      <ul id="dropdown_item">
+                        <li><a href="#">Châu Âu</a></li>
+                        <li><a href="#">Châu Á</a></li>
+                        <li><a href="#">Châu Mỹ</a></li>
+                        <li><a href="#">Châu Đại Dương</a></li>
+                      </ul>
+                    </li>
+                  </ul>                  
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="#" style="color: #2D4271;">Liên Hệ</a>
+                </li>
+              </div>
+            </ul>
+
+
+            <div class="search_logo">
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Bắt đầu tìm kiếm" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit"><i
+                    class="fa-solid fa-magnifying-glass"></i></button>
+              </form>
+              <!-- <a href="#" class="login-home">Đăng nhập</a> -->
+              <li class="nav-item dropdown" style="list-style-type: none; margin-left: 60px;">
+                <a class="nav-link " style="color: #2D4271;" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <i class="fa-solid fa-user-gear"></i>
+                </a>
+                <ul id="dropdown_admin" style="margin-left: -50px ;" class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Admin</a></li>
+                  <li><a class="dropdown-item" href="#">Quản lý tài khoản</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                </ul>
+              </li>
+            </div>
+
+            <!-- <a href="#" class="admin_logo"><i class="fa-solid fa-user-gear"></i></a> -->
+          </div>
+        </div>
+      </div>
+
+    </nav>
+  </div>
+</div>
