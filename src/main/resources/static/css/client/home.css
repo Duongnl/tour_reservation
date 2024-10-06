@@ -6,12 +6,20 @@
 a {
     text-decoration: none;
   }
-  
 .navbar-collapse {
     color: #2D4271;
     display: flex;
     margin-left: 130px;
     font-size: 17px;
+}
+#btn_search{
+    color: #2D4271;
+    background-color: #F8F9FA;
+    border: 1px solid #2D4271;
+}
+#btn_search:hover{
+    background-color: #2D4271;
+    color: #F8F9FA;
 }
 .container_nav{
     padding: 0 130px;
