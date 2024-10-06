@@ -24,16 +24,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Lặp qua tất cả các hàng trong bảng
     const rows = document.querySelectorAll('.row-data');
     const pathname = window.location.pathname;
-    console.log(pathname)
-    rows.forEach(row => {
-        const txtId = row.querySelector('.txt-id'); // Lấy phần tử txt-id trong hàng
-        const txtName = row.querySelector('.txt-name'); // Lấy phần tử txt-name trong hàng
-        const btnEdit = row.querySelector('.btn-edit'); // Lấy nút btn-edit trong hàng
+    if (rows) {
+        rows.forEach(row => {
+            const txtId = row.querySelector('.txt-id'); // Lấy phần tử txt-id trong hàng
+            const txtName = row.querySelector('.txt-name'); // Lấy phần tử txt-name trong hàng
+            const btnEdit = row.querySelector('.btn-edit'); // Lấy nút btn-edit trong hàng
 
-        if (btnEdit && txtId && txtName) {
-            const slug = CreateSlug(txtName.textContent); // Tạo slug từ tên
-            btnEdit.href = `${pathname}/${slug}-${txtId.textContent}`; // Gán giá trị href mới
+            if (btnEdit && txtId && txtName) {
+                const slug = CreateSlug(txtName.textContent); // Tạo slug từ tên
+                btnEdit.href = `${pathname}/${slug}-${txtId.textContent}`; // Gán giá trị href mới
 
-        }
-    });
+            }
+        });
+    }
+
 });
