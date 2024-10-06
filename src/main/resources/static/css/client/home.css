@@ -7,10 +7,6 @@ a {
     text-decoration: none;
   }
   
-  a:hover {
-    color: var(--color-links-hover);
-    text-decoration: none;
-  }
 .navbar-collapse {
     color: #2D4271;
     display: flex;

@@ -15,6 +15,9 @@
 :root {
   scroll-behavior: smooth;
 }
+a {
+  text-decoration: none;
+}
 @media (min-width: 1280px) {
   .navbar {
     padding: 0;
@@ -34,6 +37,7 @@
 
   .navbar a,
   .navbar a:focus {
+    text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -201,7 +205,8 @@
 
   .navbar .dropdown ul,
   .navbar .dropdown .dropdown ul {
-    z-index: 99;
+
+    z-index: 1;
     padding: 10px 0;
     margin: 10px 20px;
     background: var(--color-white);
@@ -212,10 +217,22 @@
   .navbar .dropdown>.dropdown-active,
   .navbar .dropdown .dropdown>.dropdown-active {
     display: block;
-  
   }
   .dropdown a{
     text-decoration: none;
+    color: #2D4271;
+    
+  }
+  .dropdown ul {
+    display: none;
+  }
+  #dropdown_admin{
+    display: none;
+  }
+  .dropdown a .text{
+    text-decoration: none;
+    color: #2D4271;
+    border-bottom: 1px solid #acacac;
   }
   .mobile-nav-toggle {
     display: inline-block;
