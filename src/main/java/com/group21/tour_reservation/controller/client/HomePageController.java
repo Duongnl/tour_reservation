@@ -10,7 +10,7 @@ public class HomePageController {
 
     @GetMapping("/")
     public String getHomePage(Model model) {
-        return "client/home-page.html";
+        return "client/home.html";
     }
 
     @GetMapping("/tour")

@@ -1,15 +1,15 @@
-package com.group21.tour_reservation.controller;
+package com.group21.tour_reservation.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class TourController {
+public class DashboardController {
 
-    @GetMapping("/admin/tour")
+    @GetMapping("/admin")
     public String getTours (Model model) {
-        return "/admin/tour/tour.html";
+        return "/admin/dashboard.html";
     }
 
 }

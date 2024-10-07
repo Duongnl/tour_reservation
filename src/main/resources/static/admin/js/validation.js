@@ -50,3 +50,25 @@ export function validateTextDetail(inputElement, errorElement,successText,errorT
 
 
 }
+
+export function validateTypeahead (inputElement, errorElement,successText,errorText ) {
+    let value = inputElement.value.trim();
+    const selectValue = document.querySelector('.tt-open')
+    let flag = false;
+    selectValue.addEventListener("click", function () {
+        console.log("Selected")
+        flag = true;
+        value = inputElement.value.trim();
+    })
+
+
+        if (states?.includes(value)) {
+            flag = true
+        }else {
+            flag =  false
+        }
+    return flag;
+
+}
+
+
