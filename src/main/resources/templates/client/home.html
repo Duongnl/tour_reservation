@@ -1,60 +1,136 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!-- /*
+* Template Name: Tour
+* Template Author: Untree.co
+* Tempalte URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="css/client/home.css">
-  <link rel="stylesheet" href="css/client/main.css">
-  <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-  <script src="https://use.fontawesome.com/releases/v6.6.0/js/all.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Untree.co">
+	<link rel="shortcut icon" href="favicon.png">
+
+	<meta name="description" content="" />
+	<meta name="keywords" content="bootstrap, bootstrap4" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Serif+Pro:wght@400;700&display=swap"
+		rel="stylesheet">
+
+	
+	<link th:href="@{/client/css/bootstrap.min.css}" rel="stylesheet" />
+<!-- <link rel="stylesheet" href="client/css/owl.carousel.min.css"> -->
+	<link th:href="@{/client/css/owl.carousel.min.css}" rel="stylesheet" />
+
+
+	<!-- <link rel="stylesheet" href="client/css/owl.theme.default.min.css"> -->
+	<link th:href="@{/client/css/owl.theme.default.min.css}" rel="stylesheet" />
+
+	<!-- <link rel="stylesheet" href="client/css/jquery.fancybox.min.css"> -->
+	<link th:href="@{/client/css/jquery.fancybox.min.css}" rel="stylesheet" />
+
+	<!-- <link rel="stylesheet" href="client/fonts/flaticon/font/flaticon.css"> -->
+	<link th:href="@{/client/fonts/flaticon/font/flaticon.css}" rel="stylesheet" />
+
+	<!-- <link rel="stylesheet" href="client/css/daterangepicker.css"> -->
+	<link th:href="@{/client/css/daterangepicker.css}" rel="stylesheet" />
+
+	<!-- <link rel="stylesheet" href="client/css/aos.css"> -->
+	<link th:href="@{/client/css/aos.css}" rel="stylesheet" />
+
+	<link rel="stylesheet" href="client/fonts/icomoon/style.css">
+	<link th:href="@{/client/fonts/icomoon/style.css}" rel="stylesheet" />
+
+	<!-- <link rel="stylesheet" href="client/css/style.css"> -->
+	<link th:href="@{/client/css/style.css}" rel="stylesheet" />
+	<link th:href="@{/client/css/home.css}" rel="stylesheet" />
+
+	   <!-- Fonts and icons -->
+	   <script type="text/javascript" th:src="@{/js/plugin/webfont/webfont.min.js}"></script>
+	   <link th:href="@{/css/fonts.min.css}" rel="stylesheet" />
+
+
+	<title>Tour Free Bootstrap Template for Travel Agency by Untree.co</title>
 </head>
 
 <body>
-    
 
-  <div th:replace="client/layout/header :: header_nav"></div>
-   <!-- Header -->
-  <!-- Content -->
-  <div class="content">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="/admin/images/hanoi.jpg" class="d-block w-100" style= "max-height: 400px" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="/admin/images/danang.jpg" class="d-block w-100" style= "max-height: 400px" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="/admin/images/halong.jpg" class="d-block w-100" style= "max-height: 400px" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="/admin/images/phuquoc.jpg" class="d-block w-100" style= "max-height: 400px" alt="...">
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </div>
+	<div th:replace="/client/layout/header.html :: header_nav"></div>
+	
+	
+
+	<div th:replace="/client/layout/footer.html :: footer_bottom"></div>
+
+	<!-- <script src="client/js/jquery-3.4.1.min.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/jquery-3.4.1.min.js}"></script>
+
+	<!-- <script src="client/js/popper.min.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/popper.min.js}"></script>
+
+	<!-- <script src="client/js/bootstrap.min.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/bootstrap.min.js}"></script>
+
+	<!-- <script src="client/js/owl.carousel.min.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/owl.carousel.min.js}"></script>
+
+	<!-- <script src="client/js/jquery.animateNumber.min.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/jquery.animateNumber.min.js}"></script>
+
+	<!-- <script src="client/js/jquery.waypoints.min.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/jquery.waypoints.min.js}"></script>
+
+	<!-- <script src="client/js/jquery.fancybox.min.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/jquery.fancybox.min.js}"></script>
+
+	<!-- <script src="client/js/aos.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/aos.js}"></script>
+
+	<!-- <script src="client/js/moment.min.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/moment.min.js}"></script>
+
+	<!-- <script src="client/js/daterangepicker.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/daterangepicker.js}"></script>
 
 
-  <!-- Có thể include thêm footer nếu cần -->
-  <div th:replace="client/layout/footer :: footer"></div>
-  <!-- Footer -->
+	<!-- <script src="client/js/typed.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/typed.js}"></script>
+
+	<script th:inline="javascript">
+		$(function () {
+			var slides = $('.slides'),
+				images = slides.find('img');
+
+			images.each(function (i) {
+				$(this).attr('data-id', i + 1);
+			})
+
+			var typed = new Typed('.typed-words', {
+				strings: ["San Francisco.", " Paris.", " New Zealand.", " Maui.", " London."],
+				typeSpeed: 80,
+				backSpeed: 80,
+				backDelay: 4000,
+				startDelay: 1000,
+				loop: true,
+				showCursor: true,
+				preStringTyped: (arrayPos, self) => {
+					arrayPos++;
+					console.log(arrayPos);
+					$('.slides img').removeClass('active');
+					$('.slides img[data-id="' + arrayPos + '"]').addClass('active');
+				}
+
+			});
+		})
+	</script>
+
+	<!-- <script src="client/js/custom.js"></script> -->
+	<script type="text/javascript" th:src="@{/client/js/custom.js}"></script>
+
 </body>
 
 </html>

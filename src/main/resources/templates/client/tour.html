@@ -5,18 +5,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="css/client/home-page.css">
+
+  <!-- Nhớ thêm mấy đường link  -->
+  <link rel="stylesheet" href="css/client/home.css">
+  <link rel="stylesheet" href="css/client/main.css">
   <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-    <script src="https://use.fontawesome.com/releases/v6.6.0/js/all.js" crossorigin="anonymous"></script>
+  <script src="https://use.fontawesome.com/releases/v6.6.0/js/all.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <!-- header -->
+    <!-- include header -->
   <div th:replace="client/layout/header :: header_nav"></div>
   <div class="content">
+
+
+     <!--Content ở đây nha  -->
+
     List tour
   </div>
-  <!--  footer -->
+  <!-- include  footer -->
   <div th:replace="client/layout/footer :: footer_bottom"></div>
 </body>
 
