@@ -1,4 +1,4 @@
-package com.group21.tour_reservation.controller;
+package com.group21.tour_reservation.controller.admin;
 
 import com.group21.tour_reservation.entity.Transport;
 import com.group21.tour_reservation.service.TransportService;
