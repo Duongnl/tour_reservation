@@ -1,16 +1,19 @@
-#login_icon{
-    margin-left: 10px ;
+#login_icon {
+    margin-left: 10px;
     color: aliceblue;
     cursor: pointer;
     font-size: 16px;
 }
-#login_icon:hover{
+
+#login_icon:hover {
     cursor: pointer;
 }
+
 @media (max-width: 991.98px) {
-    #login_icon{
-        margin-left: 0px ;
+    #login_icon {
+        margin-left: 0px;
         color: #000000;
         cursor: pointer;
         font-size: 16px;
-    } }
+    }
+}
