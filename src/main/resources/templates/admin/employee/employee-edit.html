@@ -35,15 +35,17 @@
             <div class="page-inner">
 
                 <!--add form-->
-                <form method="POST" th:action="@{/admin/employee/add-employee}" th:object="${employee}">
+                <form method="POST" th:action="@{/admin/employee/edit-employee}" th:object="${employee}">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title">Thêm mới nhân viên</div>
+                                <div class="card-title">Chỉnh sửa thông tin nhân viên</div>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 col-lg-4">
+
+                                        <input id="txt-id" type="hidden" th:field="*{employeeId}" />
 
                                         <div class="form-group has-feedback">
                                             <label for="employee-name">Tên nhân viên</label>
@@ -72,7 +74,7 @@
                                         </div>
 
                                         <div class="form-group has-feedback">
-                                            <label for="employeePhone">Số điện thoại </label>
+                                            <label for="employeePhone">Số điện thoại</label>
                                             <input
                                                     type="number"
                                                     id="employeePhone"
@@ -85,19 +87,10 @@
                                         </div>
 
 
-                                        <!-- <div class="form-group has-feedback">
-                                            <label for="transport-detail">Chi tiết</label>
-                                            <textarea class="form-control" id="transport-detail" rows="5"
-                                                      th:field="*{transportDetail}"
-                                            ></textarea>
-                                            <small id="transport-detail-error" class="form-text text-muted"
-                                            >Điền thông tin thêm.</small>
-                                        </div> -->
-
-
                                     </div>
                                     <div class="col-md-6 col-lg-4">
 
+                                        <input id="txt-id" type="hidden" th:field="*{account.accountId}" />
                                         <div class="form-group has-feedback">
                                             <label for="employee-username">Tên đăng nhập</label>
                                             <input
@@ -138,21 +131,11 @@
                                         </div>
 
 
-                                        <!-- <div class="form-group has-feedback">
-                                            <label for="transport-detail">Chi tiết</label>
-                                            <textarea class="form-control" id="transport-detail" rows="5"
-                                                      th:field="*{transportDetail}"
-                                            ></textarea>
-                                            <small id="transport-detail-error" class="form-text text-muted"
-                                            >Điền thông tin thêm.</small>
-                                        </div> -->
-
-
                                     </div>
                                 </div>
                             </div>
                             <div class="card-action">
-                                <button class="btn btn-success" id="btn-employee-add" type="submit">Thêm</button>
+                                <button class="btn btn-success" id="btn-employee-add" type="submit">Lưu</button>
                                 <a class="btn btn-danger"
                                    th:href="@{/admin/employee}"
                                 >Quay lại</a>

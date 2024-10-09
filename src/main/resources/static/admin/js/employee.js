@@ -1,4 +1,4 @@
-import { validateText,validateTextDetail, validateEmail, validatePhoneNumber, validateUsername } from './validation.js';
+import { validateText,validateTextDetail, validateEmail, validatePhoneNumber, validateUsername, validatePassword } from './validation.js';
 import {errorNotify, successNotify} from "./notify.js";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -45,16 +45,19 @@ document.addEventListener("DOMContentLoaded", function () {
         validation[1] =validatePhoneNumber(phoneNumber, phoneNumberError,successText,errorText);
     });
 
+
+    //tên đăng nhập
     employeeUsername.addEventListener("input", function () {
         const successText = "Tên đăng nhập hợp lệ"
         const errorText = "Tên đăng nhập không hợp lệ"
         validation[2] = validateUsername(employeeUsername, employeeUsernameError,successText,errorText);
     });
 
+    //Kiểm tra password
     employeePassword.addEventListener("input", function () {
-        const successText = "Chi tiết hợp lệ"
-        const errorText = "Chi tiết chỉ cho phép chứa chữ, số và , . -"
-        validation[3] = validateTextDetail(employeePassword, employeePasswordError,successText,errorText);
+        const successText = "mật khẩu hợp lệ"
+        const errorText = " Mật khẩu từ 8 đến 20 ký tự, chứa ít nhất một số, chữ thường, hoa,ký tự đặc biệt"
+        validation[3] = validatePassword(employeePassword, employeePasswordError,successText,errorText);
     });
 
     employeeEmail.addEventListener("input", function () {
