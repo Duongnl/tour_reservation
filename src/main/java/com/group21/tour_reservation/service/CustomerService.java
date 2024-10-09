@@ -6,44 +6,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.group21.tour_reservation.entity.Account;
-import com.group21.tour_reservation.entity.Employee;
-import com.group21.tour_reservation.entity.Transport;
+import com.group21.tour_reservation.entity.Customer;
 import com.group21.tour_reservation.repository.AccountRepository;
-import com.group21.tour_reservation.repository.EmployeeRepository;
+import com.group21.tour_reservation.repository.CustomerRepository;
 import com.group21.tour_reservation.utils.StringUtils;
 
 @Service
-public class EmployeeService {
+public class CustomerService {
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private CustomerRepository customerpository;
 
     @Autowired
     private AccountRepository accountRepository;
 
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAllByStatus(1);
+    public List<Customer> getAllCustomer() {
+        return customerpository.findAllByStatus(1);
     }
 
-    public Employee getEmployee(String slug) {
+    public Customer getCustomer(String slug) {
 
-        return employeeRepository.findById(StringUtils.getIdFromSlug(slug)).orElse(null);
+        return customerpository.findById(StringUtils.getIdFromSlug(slug)).orElse(null);
     }
 
-    public void createEmployee(Employee employee) {
+    public void createCustomer(Customer customer) {
 
         // if (accountRepository.existsByEmail(account.getEmail())) {
         // throw new IllegalArgumentException("Email đã tồn tại trong hệ thống.");
         // }
-        Account account = employee.getAccount();
+        Account account = customer.getAccount();
         account.setTime(LocalDateTime.now());
         account.setStatus(1);
         accountRepository.save(account);
-        employeeRepository.save(employee);
+        customerpository.save(customer);
 
     }
 
-    public Employee editEmployee(Employee employee) {
-        Account account = employee.getAccount();
+    public Customer editEmployee(Customer customer) {
+        Account account = customer.getAccount();
 
         if (account.getAccountId() != null) {
             // Đặt lại thời gian và trạng thái nếu cần thay đổi
@@ -55,21 +54,21 @@ public class EmployeeService {
         } else {
             return null;
         }
-        // account.setTime(LocalDateTime.now());
-        // account.setStatus(1);
-        // accountRepository.save(account);
-        return employeeRepository.save(employee);
+        account.setTime(LocalDateTime.now());
+        account.setStatus(1);
+        accountRepository.save(account);
+        return customerpository.save(customer);
     }
 
-    public Employee deleteEmployee(String employeeId) {
-        Employee employee = employeeRepository.findById(Integer.parseInt(employeeId)).orElseThrow(null);
-        Account account = employee.getAccount();
-        if (employee != null && account != null) {
+    public Customer deleteCustomer(String customerId) {
+        Customer customer = customerpository.findById(Integer.parseInt(customerId)).orElseThrow(null);
+        Account account = customer.getAccount();
+        if (customer != null && account != null) {
             account.setStatus(0);
             accountRepository.save(account);
         } else {
             return null;
         }
-        return employeeRepository.save(employee);
+        return customerpository.save(customer);
     }
 }
