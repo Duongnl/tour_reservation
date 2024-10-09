@@ -13,4 +13,14 @@ public class StringUtils {
         }
     }
 
+    public static Integer getIdFirstFromSlug (String slug) {
+        try {
+            String [] parts = slug.split("-");
+            Integer id  = Integer.parseInt(parts[0]);
+            return id;
+        } catch (NumberFormatException e)  {
+            return -1;
+        }
+    }
+
 }

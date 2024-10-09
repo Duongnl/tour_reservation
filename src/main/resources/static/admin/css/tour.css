@@ -1,0 +1,70 @@
+/*--img-main--*/
+.img-wrapper {
+    position: relative;
+    display: inline-block;
+}
+.div-main-img{
+    display: none;
+}
+
+.has-main-img{
+    display: block;
+}
+
+.btn-delete-main-img{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.has-main-img:hover  .btn-delete-main-img
+{
+        display: block;
+}
+
+/*----img1---*/
+
+.div-1-img{
+    display: none;
+}
+
+.has-1-img{
+    display: block;
+}
+
+.btn-delete-1-img{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.has-1-img:hover  .btn-delete-1-img
+{
+    display: block;
+}
+/*--img2---*/
+
+.div-2-img{
+    display: none;
+}
+
+.has-2-img{
+    display: block;
+}
+
+.btn-delete-2-img{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.has-2-img:hover  .btn-delete-2-img
+{
+    display: block;
+}

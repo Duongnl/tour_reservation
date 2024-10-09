@@ -3,26 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
-    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-    <link rel="icon" th:href="@{/admin/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+    <link rel="icon" th:href="@{/admin/img/kaiadmin/favicon.ico}" type="image/x-icon"/>
 
     <!-- Fonts and icons -->
     <script type="text/javascript" th:src="@{/admin/js/plugin/webfont/webfont.min.js}"></script>
-    <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet"/>
 
     <!-- CSS Files -->
-    <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/admin/css/plugins.min.css}" rel="stylesheet" />
-    <link th:href="@{/admin/css/kaiadmin.min.css}" rel="stylesheet" />
-
+    <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/admin/css/plugins.min.css}" rel="stylesheet"/>
+    <link th:href="@{/admin/css/kaiadmin.min.css}" rel="stylesheet"/>
 
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link th:href="@{/admin/css/demo.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/demo.css}" rel="stylesheet"/>
 
-    <link th:href="@{/admin/css/typeahead.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/typeahead.css}" rel="stylesheet"/>
+    <link th:href="@{/admin/css/tour.css}" rel="stylesheet" />
 </head>
 
 <body>
@@ -40,7 +40,7 @@
             <div class="page-inner">
 
                 <!--tour form-->
-                <form method="POST" th:action="@{/admin/tour/add-tour}" th:object="${tour}">
+                <form method="POST" th:action="@{/admin/tour/add-tour}" th:object="${tour}" enctype="multipart/form-data">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
@@ -107,7 +107,7 @@
                                                     id="category"
                                                     value=""
                                                     class="form-control typeahead"
-                                                    name="category"
+                                                    name="categoryslug"
                                             />
                                             <!--th:field="*{transportName}"-->
                                             <small id="category-error" class="form-text text-muted"
@@ -116,9 +116,71 @@
 
                                     </div>
                                 </div>
+                                <div class="row" >
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group has-feedback">
+                                            <label for="input-main-img">Ảnh chính</label> <br/>
+                                            <input
+                                                    type="file"
+                                                    id="input-main-img"
+                                                    value=""
+                                                    class="form-control"
+                                                    accept="image/*"
+                                                    name="imgmain"
+                                            />
+                                            <small id="input-main-img-error" class="form-text text-muted"
+                                            >Chọn ảnh chính.</small>
+                                            <div class="img-wrapper div-main-img">
+                                                <img src="..." id="img-main" class="img-thumbnail form-group" alt="Không có hình ảnh">
+                                                <button class="btn btn-danger btn-delete-main-img" type="button">Xóa</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group has-feedback">
+                                            <label for="input-1-img">Ảnh phụ 1</label> <br/>
+                                            <input
+                                                    type="file"
+                                                    id="input-1-img"
+                                                    value=""
+                                                    class="form-control"
+                                                    accept="image/*"
+                                                    name="img1"
+                                            />
+                                            <small class="form-text text-muted"
+                                            >Chọn ảnh phụ 1 (Không bắt buộc).</small>
+                                            <div class="img-wrapper div-1-img">
+                                                <img src="..." id="img-1" class="img-thumbnail form-group" alt="Không có hình ảnh">
+                                                <button class="btn btn-danger btn-delete-1-img" type="button">Xóa</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group has-feedback">
+                                            <label for="input-2-img">Ảnh phụ 2</label> <br/>
+                                            <input
+                                                    type="file"
+                                                    id="input-2-img"
+                                                    value=""
+                                                    class="form-control"
+                                                    accept="image/*"
+                                                    name="img2"
+                                            />
+                                            <small  class="form-text text-muted"
+                                            >Chọn ảnh phụ 2 (Không bắt buộc).</small>
+                                            <div class="img-wrapper div-2-img">
+                                                <img src="..." id="img-2" class="img-thumbnail form-group" alt="Không có hình ảnh">
+                                                <button class="btn btn-danger btn-delete-2-img" type="button">Xóa</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="card-action">
-                                <button class="btn btn-success">Thêm</button>
+                                <button class="btn btn-success" id="btn-tour-add" type="submit">Thêm</button>
                                 <button class="btn btn-danger">Quay lại</button>
                             </div>
                         </div>
