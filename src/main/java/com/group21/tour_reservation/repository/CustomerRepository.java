@@ -8,6 +8,5 @@ import com.group21.tour_reservation.entity.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer,Integer>{
-
     List<Customer> findAllByStatus(int status);
 }

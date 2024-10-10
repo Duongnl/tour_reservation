@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.group21.tour_reservation.entity.Account;
 import com.group21.tour_reservation.entity.Customer;
+import com.group21.tour_reservation.entity.Transport;
 import com.group21.tour_reservation.repository.AccountRepository;
 import com.group21.tour_reservation.repository.CustomerRepository;
 import com.group21.tour_reservation.utils.StringUtils;
@@ -33,39 +34,20 @@ public class CustomerService {
         // if (accountRepository.existsByEmail(account.getEmail())) {
         // throw new IllegalArgumentException("Email đã tồn tại trong hệ thống.");
         // }
-        Account account = customer.getAccount();
-        account.setTime(LocalDateTime.now());
-        account.setStatus(1);
-        accountRepository.save(account);
+        customer.setStatus(1);
         customerpository.save(customer);
 
     }
 
-    public Customer editEmployee(Customer customer) {
-        Account account = customer.getAccount();
-
-        if (account.getAccountId() != null) {
-            // Đặt lại thời gian và trạng thái nếu cần thay đổi
-            account.setTime(LocalDateTime.now());
-            account.setStatus(1);
-    
-            // Lưu lại Account hiện có (không thêm mới)
-            accountRepository.save(account);
-        } else {
-            return null;
-        }
-        account.setTime(LocalDateTime.now());
-        account.setStatus(1);
-        accountRepository.save(account);
+    public Customer editCustomer(Customer customer) {
+        customer.setStatus(1);
         return customerpository.save(customer);
     }
 
     public Customer deleteCustomer(String customerId) {
-        Customer customer = customerpository.findById(Integer.parseInt(customerId)).orElseThrow(null);
-        Account account = customer.getAccount();
-        if (customer != null && account != null) {
-            account.setStatus(0);
-            accountRepository.save(account);
+        Customer customer = customerpository.findById( Integer.parseInt(customerId)).orElseThrow(null);
+        if (customer != null) {
+            customer.setStatus(0);
         } else {
             return null;
         }

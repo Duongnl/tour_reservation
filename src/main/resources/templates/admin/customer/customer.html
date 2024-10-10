@@ -43,13 +43,13 @@
                         <!-- header table -->
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Danh sách Nhân viên</h4>
+                                <h4 class="card-title">Danh sách Khách hàng</h4>
                                 <a
-                                        th:href="@{/admin/employee/add}"
+                                        th:href="@{/admin/customer/add}"
                                         class="btn btn-primary btn-round ms-auto"
                                 >
                                     <i class="fa fa-plus"></i>
-                                    Thêm nhân viên
+                                    Thêm khách hàng
                                 </a>
                             </div>
                         </div>
@@ -65,12 +65,11 @@
                                     <!-- header -->
                                     <thead>
                                     <tr>
-                                        <th>STT</th>
-                                        <th>Mã tài khoản</th>
-                                        <th>Tên nhân viên</th>
-                                        
-                                        <th>Ngày sinh</th>
+                                        <th>ID</th>
+                                        <th>Tên khách hàng</th>
                                         <th>Số điện thoại</th>
+                                        <th>Email</th>
+                                        <th>Địa chỉ</th>
                                         <th style="width: 10%">Hành động</th>
                                     </tr>
                                     </thead>
@@ -79,12 +78,12 @@
                                     <!-- body -->
                                     <tbody>
 
-                                    <tr  class="row-data"  th:each="employee: ${employees}" >
-                                        <td class="txt-id" th:text="${employee.employeeId}" ></td>
-                                        <td class="txt-id" th:text="${employee.account.accountId}" ></td>
-                                        <td class="txt-name" th:text="${employee.employeeName}" ></td>
-                                        <td th:text="${employee.birthday}" ></td>
-                                        <td th:text="${employee.phoneNumber}" ></td>
+                                    <tr  class="row-data"  th:each="customer: ${customers}" >
+                                        <td class="txt-id" th:text="${customer.customerId}" ></td>
+                                        <td class="txt-name" th:text="${customer.customerName}" ></td>
+                                        <td th:text="${customer.phoneNumber}" ></td>
+                                        <td th:text="${customer.email}" ></td>
+                                        <td th:text="${customer.address}" ></td>
                                         
                                         <td>
                                             <div class="form-button-action">
@@ -103,9 +102,9 @@
                                                         class="btn btn-link btn-danger"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#exampleModal"
-                                                        th:attr="data-id=${employee.employeeId},
-                                                        data-name=${employee.employeeName},
-                                                        data-controller-delete='/admin/employee/delete-employee'">
+                                                        th:attr="data-id=${customer.customerId},
+                                                        data-name=${customer.customerName},
+                                                        data-controller-delete='/admin/customer/delete-customer'">
                                                     <i class="fa fa-times"></i>
                                                 </button>
 
