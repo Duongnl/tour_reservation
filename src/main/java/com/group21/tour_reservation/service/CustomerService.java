@@ -15,42 +15,61 @@ import com.group21.tour_reservation.utils.StringUtils;
 @Service
 public class CustomerService {
     @Autowired
-    private CustomerRepository customerpository;
-
-    @Autowired
-    private AccountRepository accountRepository;
+    private CustomerRepository customerRepository;
 
     public List<Customer> getAllCustomer() {
-        return customerpository.findAllByStatus(1);
+        return customerRepository.findAllByStatus(1);
     }
 
     public Customer getCustomer(String slug) {
 
-        return customerpository.findById(StringUtils.getIdFromSlug(slug)).orElse(null);
+        return customerRepository.findById(StringUtils.getIdFromSlug(slug)).orElse(null);
     }
 
-    public void createCustomer(Customer customer) {
+    public void createCustomer(Customer customer, int selectedCustomerId) {
 
         // if (accountRepository.existsByEmail(account.getEmail())) {
         // throw new IllegalArgumentException("Email đã tồn tại trong hệ thống.");
         // }
+        if (selectedCustomerId != 0) {
+            // Tìm người chủ hộ từ cơ sở dữ liệu theo customer_id
+            Customer representative = customerRepository.findById(selectedCustomerId)
+                    .orElseThrow(() -> new IllegalArgumentException("Người chủ hộ không tồn tại"));
+
+            // Gán relationship_id của customer với người chủ hộ đã chọn
+            customer.setCustomer(representative);
+        }
         customer.setStatus(1);
-        customerpository.save(customer);
+        customerRepository.save(customer);
 
     }
 
-    public Customer editCustomer(Customer customer) {
+    public List<Customer> findCustomersWithNullRelationshipId() {
+
+        return customerRepository.findByCustomerIsNullAndStatus(1);
+    }
+
+    public Customer editCustomer(Customer customer, int selectedCustomerId) {
+
+        if (selectedCustomerId != 0) {
+            // Tìm người chủ hộ từ cơ sở dữ liệu theo customer_id
+            Customer representative = customerRepository.findById(selectedCustomerId)
+                    .orElseThrow(() -> new IllegalArgumentException("Người chủ hộ không tồn tại"));
+
+            // Gán relationship_id của customer với người chủ hộ đã chọn
+            customer.setCustomer(representative);
+        }
         customer.setStatus(1);
-        return customerpository.save(customer);
+        return customerRepository.save(customer);
     }
 
     public Customer deleteCustomer(String customerId) {
-        Customer customer = customerpository.findById( Integer.parseInt(customerId)).orElseThrow(null);
+        Customer customer = customerRepository.findById(Integer.parseInt(customerId)).orElseThrow(null);
         if (customer != null) {
             customer.setStatus(0);
         } else {
             return null;
         }
-        return customerpository.save(customer);
+        return customerRepository.save(customer);
     }
 }

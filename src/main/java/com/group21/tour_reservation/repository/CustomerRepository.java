@@ -8,5 +8,9 @@ import com.group21.tour_reservation.entity.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer,Integer>{
+
+    
     List<Customer> findAllByStatus(int status);
+    // Truy vấn khách hàng có relationship_id là null và status bằng 0
+    List<Customer> findByCustomerIsNullAndStatus(int status);
 }

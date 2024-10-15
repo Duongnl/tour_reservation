@@ -55,16 +55,23 @@
 
                                             <div class="form-group has-feedback">
                                                 <label for="relationshipId">Người chủ hộ</label>
-                                                <input type="text" id="relationshipId" value="" class="form-control"
-                                                    th:field="*{customer}" />
-                                                <small id="relationshipId-error" class="form-text text-muted">Chọn chủ
-                                                    hộ.</small>
+                                                <select id="relationshipId" name="selectedCustomerId" class="form-control" >
+                                                    <option value="" disabled selected>Chọn chủ hộ</option>
+                                                    <!-- Duyệt qua danh sách khách hàng chưa có người đại diện và status bằng 1 -->
+                                                    <option th:each="customer : ${customers}" 
+                                                            th:value="${customer.customerId}" 
+                                                            th:text="${customer.customerName}"></option>
+                                                </select>
+                                                <small id="relationshipId-error" class="form-text text-muted">Chọn chủ hộ.</small>
                                             </div>
+                                            
+
+
 
                                             <div class="form-group has-feedback">
                                                 <label for="relationshipName">Mối quan hệ</label>
-                                                <input type="text" id="relationshipName" value=""
-                                                    class="form-control" th:field="*{relationshipName}" />
+                                                <input type="text" id="relationshipName" value="" class="form-control"
+                                                    th:field="*{relationshipName}" />
                                                 <small id="relationshipName-error" class="form-text text-muted">Điền
                                                     mối quan hệ.</small>
                                             </div>
@@ -72,7 +79,7 @@
                                                 <label for="customer-type">Loại khách hàng</label>
                                                 <select id="customer-type" class="form-control"
                                                     th:field="*{customerType}">
-                                                    <option value="" disabled selected>Chọn loại khách hàng</option>
+                                                    <option value="" selected disabled >Chọn loại khách hàng</option>
                                                     <!-- Giá trị mặc định -->
                                                     <option th:value="'Trẻ em'">Trẻ em (0-12 tuổi)</option>
                                                     <option th:value="'Thanh thiếu niên'">Thanh thiếu niên (13-17 tuổi)
