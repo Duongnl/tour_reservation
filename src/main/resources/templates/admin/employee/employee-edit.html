@@ -58,7 +58,7 @@
                                             <div class="form-group has-feedback">
                                                 <label for="employeeDate">Ngày sinh</label>
                                                 <input type="date" id="employeeDate" value="" class="form-control"
-                                                    th:field="*{birthday}" />
+                                                    th:value="*{birthday}" />
                                                 <small id="employeeDate-error" class="form-text text-muted">Điền ngày
                                                     sinh.</small>
                                             </div>
@@ -105,8 +105,8 @@
                                     </div>
                                 </div>
                                 <div class="card-action">
-                                    <button class="btn btn-success" id="btn-customer-add" type="submit">Lưu</button>
-                                    <a class="btn btn-danger" th:href="@{/admin/customer}">Quay lại</a>
+                                    <button class="btn btn-success" id="btn-employee-add" type="submit">Lưu</button>
+                                    <a class="btn btn-danger" th:href="@{/admin/employee}">Quay lại</a>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
         </div>
     </div>
     <!-- My js -->
-    <script type="module" th:src="@{/admin/js/customer.js}"></script>
+    <script type="module" th:src="@{/admin/js/employee.js}"></script>
 
     <!--   Core JS Files   -->
     <script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>

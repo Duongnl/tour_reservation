@@ -1,14 +1,10 @@
 package com.group21.tour_reservation.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.group21.tour_reservation.entity.Account;
 import com.group21.tour_reservation.entity.Customer;
-import com.group21.tour_reservation.entity.Transport;
-import com.group21.tour_reservation.repository.AccountRepository;
 import com.group21.tour_reservation.repository.CustomerRepository;
 import com.group21.tour_reservation.utils.StringUtils;
 
@@ -24,6 +20,13 @@ public class CustomerService {
     public Customer getCustomer(String slug) {
 
         return customerRepository.findById(StringUtils.getIdFromSlug(slug)).orElse(null);
+    }
+
+    // Hàm lấy Customer theo ID
+    public Customer getCustomerById(int customerId) {
+        // Sử dụng Optional để xử lý trường hợp không tìm thấy Customer
+        return customerRepository.findByCustomerId(customerId)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy khách hàng với ID: " + customerId));
     }
 
     public void createCustomer(Customer customer, int selectedCustomerId) {

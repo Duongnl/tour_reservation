@@ -36,14 +36,20 @@ public class CustomerController {
 
     @PostMapping("/admin/customer/add-customer")
     public String addCustomer(Model model, @ModelAttribute("customer") Customer customer,
-            @RequestParam(value = "selectedCustomerId", required = false) int selectedCustomerId,
+            @RequestParam(value = "selectedCustomerId", required = false) Integer selectedCustomerId, // Đổi thành Integer
             RedirectAttributes redirectAttributes) {
-        customerService.createCustomer(customer, selectedCustomerId);
-
-        // Thêm thông báo vào RedirectAttributes
+    
+        // Kiểm tra nếu selectedCustomerId không null
+        if (selectedCustomerId != null) {
+            customerService.createCustomer(customer, selectedCustomerId);
+        } else {
+            customerService.createCustomer(customer, 0); // Hoặc xử lý khác nếu không chọn chủ hộ
+        }
+    
         redirectAttributes.addFlashAttribute("successMessage", "Thêm mới khách hàng thành công!");
         return "redirect:/admin/customer";
     }
+    
 
     @GetMapping("/admin/customer/{slug}")
     public String customerEditView(Model model, @PathVariable("slug") String slug) {
@@ -59,15 +65,15 @@ public class CustomerController {
 
     @PostMapping("/admin/customer/edit-customer")
     public String editCustomer(Model model, @ModelAttribute("customer") Customer customer,
-    @RequestParam(value = "selectedCustomerId", required = false) int selectedCustomerId,
+            @RequestParam(value = "selectedCustomerId", required = false) int selectedCustomerId,
             RedirectAttributes redirectAttributes) {
-            customerService.editCustomer(customer, selectedCustomerId);
+        customerService.editCustomer(customer, selectedCustomerId);
 
         // Thêm thông báo vào RedirectAttributes
         redirectAttributes.addFlashAttribute("successMessage", "Chỉnh sửa khách hàng thành công!");
         return "redirect:/admin/customer";
     }
-    
+
     @GetMapping("/admin/customer/delete-customer/{id}")
     public String deleteCustomerID(Model model, @PathVariable("id") String customerId,
             RedirectAttributes redirectAttributes) {

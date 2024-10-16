@@ -48,7 +48,7 @@ public class EmployeeController {
 
 
     @GetMapping("/admin/employee/{slug}")
-    public String employeetEditView(Model model,@PathVariable("slug") String slug) {
+    public String employeeEditView(Model model,@PathVariable("slug") String slug) {
         Employee employee = employeeService.getEmployee(slug);
         if (employee == null) {
             return "admin/404.html";
