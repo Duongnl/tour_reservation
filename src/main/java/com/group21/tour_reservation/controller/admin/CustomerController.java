@@ -65,7 +65,7 @@ public class CustomerController {
 
     @PostMapping("/admin/customer/edit-customer")
     public String editCustomer(Model model, @ModelAttribute("customer") Customer customer,
-            @RequestParam(value = "selectedCustomerId", required = false) int selectedCustomerId,
+            @RequestParam(value = "selectedCustomerId", required = false) Integer selectedCustomerId,
             RedirectAttributes redirectAttributes) {
         customerService.editCustomer(customer, selectedCustomerId);
 

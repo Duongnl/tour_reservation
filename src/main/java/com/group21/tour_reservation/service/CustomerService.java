@@ -52,9 +52,9 @@ public class CustomerService {
         return customerRepository.findByCustomerIsNullAndStatus(1);
     }
 
-    public Customer editCustomer(Customer customer, int selectedCustomerId) {
+    public Customer editCustomer(Customer customer, Integer selectedCustomerId) {
 
-        if (selectedCustomerId != 0) {
+        if (selectedCustomerId != null && selectedCustomerId != 0) {
             // Tìm người chủ hộ từ cơ sở dữ liệu theo customer_id
             Customer representative = customerRepository.findById(selectedCustomerId)
                     .orElseThrow(() -> new IllegalArgumentException("Người chủ hộ không tồn tại"));
@@ -62,6 +62,10 @@ public class CustomerService {
             // Gán relationship_id của customer với người chủ hộ đã chọn
             customer.setCustomer(representative);
         }
+     else {
+        // Nếu không có người chủ hộ được chọn, thiết lập relationship_id là null
+        customer.setCustomer(null);
+    }
         customer.setStatus(1);
         return customerRepository.save(customer);
     }

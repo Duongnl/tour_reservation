@@ -44,7 +44,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6 col-lg-4">
-
+                                            <input id="txt-id" type="hidden" th:field="*{customerId}" />
                                             <div class="form-group has-feedback">
                                                 <label for="customer-name">Tên khách hàng</label>
                                                 <input type="text" id="customer-name" value="" class="form-control"
@@ -54,10 +54,10 @@
                                             </div>
 
                                             <div class="form-group has-feedback">
-                                                <label for="relationshipId">Người chủ hộ</label>
+                                                <label for="relationshipId">Người đại diện</label>
                                                 <select id="relationshipId" name="selectedCustomerId" class="form-control">
                                                     <!-- Hiển thị tùy chọn mặc định nếu không có chủ hộ hoặc đã có chủ hộ được chọn -->
-                                                    <option value="" disabled th:selected="${customer.customer == null}">Chọn chủ hộ</option>
+                                                    <option value=""  th:selected="${customer.customer == null}">Không có người đại diện</option>
                                                     
                                                     <!-- Hiển thị tên của chủ hộ hiện tại nếu đã có -->
                                                     <option th:if="${customer.customer != null}" 
