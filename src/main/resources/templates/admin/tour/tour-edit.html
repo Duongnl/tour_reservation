@@ -3,60 +3,233 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
-    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-    <link rel="icon" th:href="@{/admin/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+    <link rel="icon" th:href="@{/admin/img/kaiadmin/favicon.ico}" type="image/x-icon"/>
 
     <!-- Fonts and icons -->
     <script type="text/javascript" th:src="@{/admin/js/plugin/webfont/webfont.min.js}"></script>
-    <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet"/>
 
     <!-- CSS Files -->
-    <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/admin/css/plugins.min.css}" rel="stylesheet" />
-    <link th:href="@{/admin/css/kaiadmin.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/admin/css/plugins.min.css}" rel="stylesheet"/>
+    <link th:href="@{/admin/css/kaiadmin.min.css}" rel="stylesheet"/>
+
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link th:href="@{/admin/css/demo.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/demo.css}" rel="stylesheet"/>
+
+    <link th:href="@{/admin/css/typeahead.css}" rel="stylesheet"/>
+    <link th:href="@{/admin/css/tour.css}" rel="stylesheet" />
 </head>
 
 <body>
 <div class="wrapper">
     <!-- start sidebar -->
     <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
+    <!-- end sidebar -->
 
     <div class="main-panel">
-        <!-- start header  -->
+        <!-- header  -->
         <div th:replace="/admin/layout/header.html :: header"></div>
 
-        <!-- content -->
+        <!-- content-->
         <div class="container">
             <div class="page-inner">
-                <!--* your code is here
-                      *
-                      *
-                      *
-                      *
-                      *
-                      *
-                      *
-                      *-->
+
+                <!--tour form-->
+                <form method="POST" th:action="@{/admin/tour/edit-tour}" th:object="${tour}" enctype="multipart/form-data">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Chỉnh sửa thông tin tour</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4">
+                                        <input type="hidden" id="tour-id" th:field="*{tourId}"/>
+                                        <div class="form-group has-feedback">
+                                            <label for="tour-name">Tên tour</label>
+                                            <input
+                                                    type="text"
+                                                    id="tour-name"
+                                                    value=""
+                                                    class="form-control"
+                                                    th:field="*{tourName}"
+                                            />
+
+                                            <small id="tour-name-error" class="form-text text-muted"
+                                            >Điền tên tour.</small>
+                                        </div>
+
+                                        <div class="form-group has-feedback">
+                                            <label for="city">Tên Thành phố/ Tỉnh thành</label>
+                                            <input
+                                                    type="text"
+                                                    id="city"
+                                                    value=""
+                                                    class="form-control"
+                                                    th:field="*{city}"
+                                            />
+                                            <small id="city-error" class="form-text text-muted"
+                                            >Điền tên thành phố, tỉnh thành.</small>
+                                        </div>
+
+                                        <div class="form-group has-feedback">
+                                            <label for="country">Tên đất nước</label>
+                                            <input
+                                                    type="text"
+                                                    id="country"
+                                                    value=""
+                                                    class="form-control"
+                                                    th:field="*{country}"
+                                            />
+                                            <small id="country-error" class="form-text text-muted"
+                                            >Điền tên đất nước.</small>
+                                        </div>
+
+                                        <div class="form-group has-feedback">
+                                            <label for="tour-detail">Chi tiết</label>
+                                            <textarea class="form-control" id="tour-detail" rows="5"
+                                                      th:field="*{tourDetail}"
+                                            ></textarea>
+                                            <small id="tour-detail-error" class="form-text text-muted"
+                                            >Điền thông tin thêm.</small>
+                                        </div>
+
+                                        <div class="form-group has-feedback">
+                                            <label for="category">Tên danh mục</label>
+                                            <br/>
+                                            <input
+                                                    type="text"
+                                                    id="category"
+                                                    value=""
+                                                    class="form-control typeahead"
+                                                    name="categoryslug"
+                                            />
+                                            <!--th:field="*{transportName}"-->
+                                            <small id="category-error" class="form-text text-muted"
+                                            >Chọn danh mục.</small>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row" >
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group has-feedback">
+                                            <label for="input-main-img">Ảnh chính</label> <br/>
+                                            <input
+                                                    type="file"
+                                                    id="input-main-img"
+                                                    value=""
+                                                    class="form-control"
+                                                    accept="image/*"
+                                                    name="imgmain"
+
+                                            />
+                                            <small id="input-main-img-error" class="form-text text-muted"
+                                            >Chọn ảnh chính.</small>
+                                            <div class="img-wrapper div-main-img has-main-img">
+                                                <img th:src="@{${imgmain}}" id="img-main" class="img-thumbnail form-group" alt="Không có hình ảnh">
+                                                <button class="btn btn-danger btn-delete-main-img" type="button">Xóa</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group has-feedback">
+                                            <label for="input-1-img">Ảnh phụ 1</label> <br/>
+                                            <input
+                                                    type="file"
+                                                    id="input-1-img"
+                                                    value=""
+                                                    class="form-control"
+                                                    accept="image/*"
+                                                    name="img1"
+                                            />
+                                            <small class="form-text text-muted"
+                                            >Chọn ảnh phụ 1 (Không bắt buộc).</small>
+                                            <input type="hidden" id = "ipImg1" name="ipImg1" th:value="${img1}">
+                                            <div class="img-wrapper div-1-img" th:classappend="${img1 != ''} ? 'has-1-img' : ''">
+                                                <img  th:src="@{${img1}}" id="img-1" class="img-thumbnail form-group" alt="Không có hình ảnh">
+                                                <button class="btn btn-danger btn-delete-1-img" type="button">Xóa</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="form-group has-feedback">
+                                            <label for="input-2-img">Ảnh phụ 2</label> <br/>
+                                            <input
+                                                    type="file"
+                                                    id="input-2-img"
+                                                    value=""
+                                                    class="form-control"
+                                                    accept="image/*"
+                                                    name="img2"
+                                            />
+                                            <small  class="form-text text-muted"
+                                            >Chọn ảnh phụ 2 (Không bắt buộc).</small>
+                                            <input type="hidden" id = "ipImg2" name="ipImg2" th:value="${img2}">
+                                            <div class="img-wrapper div-2-img" th:classappend="${img2 != ''} ? 'has-2-img' : ''">
+                                            <img  th:src="@{${img2}}" id="img-2" class="img-thumbnail form-group" alt="Không có hình ảnh">
+                                                <button class="btn btn-danger btn-delete-2-img" type="button">Xóa</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-action">
+                                <button class="btn btn-success" id="btn-tour-add" type="submit">Lưu</button>
+                                <a class="btn btn-danger btn-back"
+                                  href="#"
+                                >Quay lại</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <script th:inline="javascript">
+                    var states = [[${states}]] || [];
+                    var selected = [[${selected}]]
+                </script>
             </div>
         </div>
 
         <!-- start footer -->
         <div th:replace="/admin/layout/footer.html :: footer"></div>
+        <!-- end footer -->
     </div>
 
-    <!-- Thông báo, chỉ để trong trang view, không cần để trong trang add, update -->
-    <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;"></div>
 </div>
-<!--my js thông báo chỉ để trong trang view, không cần để trong trang add, update-->
+
+<!--js tự viết thông báo và tạo slug, phần này chỉ để ở trang quản lý table, không  cần để trong trang edit, create-->
 <script type="module" th:src="@{/admin/js/notify.js}"></script>
+<script type="module" th:src="@{/admin/js/tour.js}"></script>
+
+<script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/typeahead.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/typeahead-data.js}"></script>
+<script th:inline="javascript" type="module">
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const btnBack = document.querySelector(".btn-back");
+        // Lấy URL hiện tại
+        var url = window.location.pathname;
+        // Tách URL thành các phần tử bằng dấu "/"
+        var parts = url.split('/');
+        var lastPart = parts.pop() || parts.pop();
+
+        btnBack.href = `/admin/tour/tour-overview/${lastPart}`
+    })
+</script>
+<!-- end js tự viết-->
 
 <!--   Core JS Files   -->
-<script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>
+
 <script type="text/javascript" th:src="@{/admin/js/core/popper.min.js}"></script>
 <script type="text/javascript" th:src="@{/admin/js/core/bootstrap.min.js}"></script>
 
@@ -88,6 +261,7 @@
 
 <!-- Kaiadmin JS -->
 <script type="text/javascript" th:src="@{/admin/js/kaiadmin.min.js}"></script>
+
 
 </body>
 
