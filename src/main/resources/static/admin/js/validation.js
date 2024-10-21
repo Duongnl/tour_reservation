@@ -67,5 +67,44 @@ export function validateTypeahead(inputElement, errorElement, successText, error
 }
 
 
+export function validateDate(inputElement, errorElement, successText, errorText) {
+    const value = inputElement.value.trim();
+    if (value === "") {
+        inputElement.classList.remove("is-valid");
+        inputElement.classList.add("is-invalid");
+        errorElement.textContent = errorText;
+        errorElement.classList.add("text-danger");
+        return false;
+    } else {
+        inputElement.classList.remove("is-invalid");
+        inputElement.classList.add("is-valid");
+        errorElement.textContent = successText;
+        errorElement.classList.remove("text-danger");
+        errorElement.classList.add("text-success");
+        return true
+    }
+}
+
+export function validateNumber(inputElement, errorElement, successText, errorText) {
+    const regex = /^\d+$/;
+    const value = inputElement.value.trim();
+    if (!regex.test(value)) {
+        inputElement.classList.remove("is-valid");
+        inputElement.classList.add("is-invalid");
+        errorElement.textContent = errorText;
+        errorElement.classList.add("text-danger");
+        return false
+    } else {
+        inputElement.classList.remove("is-invalid");
+        inputElement.classList.add("is-valid");
+        errorElement.textContent = successText;
+        errorElement.classList.remove("text-danger");
+        errorElement.classList.add("text-success");
+        return true
+    }
+}
+
+
+
 
 

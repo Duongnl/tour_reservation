@@ -34,6 +34,10 @@ document.addEventListener("DOMContentLoaded", function (){
             name: 'states',
             source: substringMatcher(states),
         });
+    if (selected != null){
+        $input.typeahead('val',selected)
+    }
+    console.log("departureTime typeahead >>>>>> ", selected)
 
 
 

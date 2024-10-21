@@ -1,5 +1,5 @@
 import { validateText, validateTextDetail, validateTypeahead} from './validation.js';
-import {errorNotify, successNotify} from "./notify.js";
+import {errorNotify} from "./notify.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     const tourName = document.getElementById('tour-name')
@@ -34,8 +34,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const input2ImgError = document.getElementById('input-2-img-error')
     const btnDelete2Img = document.querySelector('.btn-delete-2-img')
 
+    const ipImg1 = document.getElementById("ipImg1");
+    const ipImg2 = document.getElementById("ipImg2");
 
-    let validation = [...Array(5).fill(false),true]
+
+    const tourId = document.getElementById('tour-id');
+    // let validation= [...Array(5).fill(false),true];
+    let validation;
+
+    if (tourId) {
+         validation = [...Array(6).fill(true)]
+    } else {
+
+     validation = [...Array(5).fill(false),true]
+    }
 
     tourName.addEventListener("input", function () {
         const successText = "Tên tour hợp lệ"
@@ -108,7 +120,6 @@ document.addEventListener("DOMContentLoaded", function () {
             inputImgError.classList.remove("text-danger");
             inputImgError.classList.add("text-success");
         }
-        validation[4] =true
     }
 
     function deleteImg (img,inputImg, inputImgError,  divImg, hasImg) {
@@ -132,12 +143,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Optionally, remove the 'has-main-img' class if needed
         divImg.classList.remove(hasImg);
-        validation[4] =false
+
     }
 
 
     inputMainImg.addEventListener('change', function(event) {
         loadImg(imgMain, divMainImg, inputMainImg, inputMainImgError,event,'has-main-img')
+        validation[4] =true
     });
 
     input1Img.addEventListener('change', function(event) {
@@ -151,15 +163,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     btnDeleteMainImg.addEventListener('click', function (){
         deleteImg(imgMain, inputMainImg, inputMainImgError, divMainImg, 'has-main-img')
+        validation[4] =false
     });
 
     btnDelete1Img.addEventListener('click', function (){
         deleteImg(img1, input1Img, input1ImgError, div1Img, 'has-1-img')
+        ipImg1.value = "";
     });
 
     btnDelete2Img.addEventListener('click', function (){
         deleteImg(img2, input2Img, input2ImgError, div2Img, 'has-2-img')
+        ipImg2.value=''
     });
+
 
 
 
