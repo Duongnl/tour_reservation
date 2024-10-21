@@ -33,9 +33,11 @@ public class Employee {
     @JsonManagedReference
     private Account account;
 
-    public Employee() {}
+    public Employee() {
+    }
 
-    public Employee(Integer employeeId, String employeeName, LocalDate birthday, String phoneNumber, Set<Reserve> reserves, Account account) {
+    public Employee(Integer employeeId, String employeeName, LocalDate birthday, String phoneNumber,
+            Set<Reserve> reserves, Account account) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.birthday = birthday;

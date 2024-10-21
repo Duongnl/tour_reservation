@@ -23,7 +23,7 @@ public class Customer {
     private String customerName;
 
     @Column(name = "customer_type")
-    private int customerType;
+    private String customerType;
 
     @Column(name = "sex")
     private int sex;
@@ -37,7 +37,7 @@ public class Customer {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "birthday",columnDefinition  ="date")
+    @Column(name = "birthday", columnDefinition = "date")
     private LocalDate birthday;
 
     @Column(name = "visa_expire", columnDefinition = "date")
@@ -46,13 +46,13 @@ public class Customer {
     @Column(name = "status")
     private int status;
 
-    //    Người đại diện
+    // Người đại diện
     @ManyToOne
-    @JoinColumn(name ="relationship_id" , nullable = true, referencedColumnName = "customer_id")
+    @JoinColumn(name = "relationship_id", nullable = true, referencedColumnName = "customer_id")
     @JsonBackReference
     Customer customer;
 
-    //    Người liên quan
+    // Người liên quan
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonManagedReference
     Set<Customer> customers;
@@ -70,9 +70,13 @@ public class Customer {
     @JsonManagedReference
     private Set<ReserveDetail> reserveDetails;
 
-    public Customer() {}
+    public Customer() {
+    }
 
-    public Customer(Integer customerId, String relationshipName, String customerName, int customerType, int sex, String phoneNumber, String email, String address, LocalDate birthday, LocalDate visaExpire, int status, Customer customer, Set<Customer> customers, Account account, Set<Reserve> reserves, Set<ReserveDetail> reserveDetails) {
+    public Customer(Integer customerId, String relationshipName, String customerName, String customerType, int sex,
+            String phoneNumber, String email, String address, LocalDate birthday, LocalDate visaExpire, int status,
+            Customer customer, Set<Customer> customers, Account account, Set<Reserve> reserves,
+            Set<ReserveDetail> reserveDetails) {
         this.customerId = customerId;
         this.relationshipName = relationshipName;
         this.customerName = customerName;
@@ -115,11 +119,11 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    public int getCustomerType() {
+    public String getCustomerType() {
         return customerType;
     }
 
-    public void setCustomerType(int customerType) {
+    public void setCustomerType(String customerType) {
         this.customerType = customerType;
     }
 

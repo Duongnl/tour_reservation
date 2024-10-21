@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" th:href="@{/admin/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/webfont/webfont.min.js}"></script>
+    <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet" />
+
+    <!-- CSS Files -->
+    <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/plugins.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/kaiadmin.min.css}" rel="stylesheet" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link th:href="@{/admin/css/demo.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- start sidebar -->
+        <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
+
+        <div class="main-panel">
+            <!-- start header  -->
+            <div th:replace="/admin/layout/header.html :: header"></div>
+
+            <!-- content -->
+            <div class="container">
+                <div class="page-inner">
+
+                    <!--add form-->
+                    <form method="POST" th:action="@{/admin/customer/edit-customer}" th:object="${customer}">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">Chỉnh sửa thông tin khách hàng</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-4">
+                                            <input id="txt-id" type="hidden" th:field="*{customerId}" />
+                                            <div class="form-group has-feedback">
+                                                <label for="customer-name">Tên khách hàng</label>
+                                                <input type="text" id="customer-name" value="" class="form-control"
+                                                    th:field="*{customerName}" />
+                                                <small id="customer-name-error" class="form-text text-muted">Điền tên
+                                                    khách hàng.</small>
+                                            </div>
+
+                                            <div class="form-group has-feedback">
+                                                <label for="relationshipId">Người đại diện</label>
+                                                <select id="relationshipId" name="selectedCustomerId" class="form-control">
+                                                    <!-- Hiển thị tùy chọn mặc định nếu không có chủ hộ hoặc đã có chủ hộ được chọn -->
+                                                    <option value=""  th:selected="${customer.customer == null}">Không có người đại diện</option>
+                                                    
+                                                    <!-- Hiển thị tên của chủ hộ hiện tại nếu đã có -->
+                                                    <option th:if="${customer.customer != null}" 
+                                                            th:value="${customer.customer.customerId}" 
+                                                            th:text="${customer.customer.customerName}" 
+                                                            th:selected="true">
+                                                    </option>
+                                                    
+                                                    <!-- Duyệt qua danh sách khách hàng chưa có chủ hộ và status = 1 để thay đổi -->
+                                                    <option th:each="customerOption : ${customers}" 
+                                                            th:value="${customerOption.customerId}" 
+                                                            th:text="${customerOption.customerName}">
+                                                    </option>
+                                                </select>
+                                                <small id="relationshipId-error" class="form-text text-muted">Chọn chủ hộ.</small>
+                                            </div>
+                                            
+
+                                            <div class="form-group has-feedback">
+                                                <label for="relationshipName">Mối quan hệ</label>
+                                                <input type="text" id="relationshipName" value=""
+                                                    class="form-control" th:field="*{relationshipName}" />
+                                                <small id="relationshipName-error" class="form-text text-muted">Điền
+                                                    mối quan hệ.</small>
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <label for="customer-type">Loại khách hàng</label>
+                                                <select id="customer-type" class="form-control"
+                                                    th:field="*{customerType}">
+                                                    <option value="" disabled selected>Chọn loại khách hàng</option>
+                                                    <!-- Giá trị mặc định -->
+                                                    <option th:value="'Trẻ em'">Trẻ em (0-12 tuổi)</option>
+                                                    <option th:value="'Thanh thiếu niên'">Thanh thiếu niên (13-17 tuổi)
+                                                    </option>
+                                                    <option th:value="'Sinh viên và giới trẻ'">Sinh viên và giới trẻ
+                                                        (18-25 tuổi)</option>
+                                                    <option th:value="'Người trưởng thành'">Người trưởng thành (26-40
+                                                        tuổi)</option>
+                                                    <option th:value="'Người trung niên'">Người trung niên (41-60 tuổi)
+                                                    </option>
+                                                    <option th:value="'Người cao tuổi'">Người cao tuổi (60 tuổi trở lên)
+                                                    </option>
+                                                </select>
+                                                <small id="customer-type-error" class="form-text text-muted">Chọn loại
+                                                    khách hàng.</small>
+                                            </div>
+
+                                            <!-- <div class="form-group has-feedback">
+                                            <label for="customer-sex">Giới tính</label>
+                                            <input
+                                                    type="text"
+                                                    id="customer-sex"
+                                                    value=""
+                                                    class="form-control"
+                                                    th:field="*{sex}"
+                                            />
+                                            <small id="customer-sex-error" class="form-text text-muted"
+                                            >Chọn giới tính.</small>
+                                        </div> -->
+                                            <div class="form-group has-feedback">
+                                                <label for="customer-sex">Giới tính</label>
+                                                <select id="customer-sex" class="form-control" th:field="*{sex}">
+                                                    <option value="0" disabled selected>Chọn giới tính</option>
+                                                    <!-- 0 là giá trị mặc định không hợp lệ -->
+                                                    <option th:value="1">Nam</option>
+                                                    <option th:value="2">Nữ</option>
+                                                    <option th:value="3">Khác</option>
+                                                </select>
+                                                <small id="customer-sex-error" class="form-text text-muted">Chọn giới
+                                                    tính.</small>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+
+                                            <div class="form-group has-feedback">
+                                                <label for="customer-phoneNumber">Số điện thoại</label>
+                                                <input type="number" id="customer-phoneNumber" value=""
+                                                    class="form-control" th:field="*{phoneNumber}" />
+                                                <small id="customer-phoneNumber-error" class="form-text text-muted">Điền
+                                                    số điện thoại.</small>
+                                            </div>
+
+                                            <div class="form-group has-feedback">
+                                                <label for="customer-email">Email</label>
+                                                <input type="email" id="customer-email" value="" class="form-control"
+                                                    th:field="*{email}" />
+                                                <small id="customer-email-error" class="form-text text-muted">Điền
+                                                    email.</small>
+                                            </div>
+
+                                            <div class="form-group has-feedback">
+                                                <label for="customer-address">Địa chỉ</label>
+                                                <input type="text" id="customer-address" value="" class="form-control"
+                                                    th:field="*{address}" />
+                                                <small id="customer-address-error" class="form-text text-muted">Điền địa
+                                                    chỉ.</small>
+                                            </div>
+
+                                            <div class="form-group has-feedback">
+                                                <label for="customer-birtday">Ngày sinh</label>
+                                                <input type="date" id="customer-birtday" value="" class="form-control"
+                                                th:value="*{birthday}" />
+                                                <small id="customer-birtday-error" class="form-text text-muted">Điền
+                                                    ngày sinh.</small>
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <label for="customer-visaExpire">Ngày hết hạn Visa</label>
+                                                <input type="date" id="customer-visaExpire" value=""
+                                                    class="form-control" th:value="*{visaExpire}" />
+                                                <small id="customer-visaExpire-error" class="form-text text-muted">Điền
+                                                    ngày hết hạn visa.</small>
+                                            </div>
+
+
+                                            <!-- <div class="form-group has-feedback">
+                                            <label for="transport-detail">Chi tiết</label>
+                                            <textarea class="form-control" id="transport-detail" rows="5"
+                                                      th:field="*{transportDetail}"
+                                            ></textarea>
+                                            <small id="transport-detail-error" class="form-text text-muted"
+                                            >Điền thông tin thêm.</small>
+                                        </div> -->
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <button class="btn btn-success" id="btn-customer-add" type="submit">Lưu</button>
+                                    <a class="btn btn-danger" th:href="@{/admin/customer}">Quay lại</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!--end form-->
+                </div>
+            </div>
+
+            <!-- start footer -->
+            <div th:replace="/admin/layout/footer.html :: footer"></div>
+        </div>
+    </div>
+    <!-- My js -->
+    <script type="module" th:src="@{/admin/js/employee.js}"></script>
+
+    <!--   Core JS Files   -->
+    <script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/core/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/core/bootstrap.min.js}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+    <!-- Chart JS -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/chart.js/chart.min.js}"></script>
+
+    <!-- jQuery Sparkline -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
+
+    <!-- Chart Circle -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/chart-circle/circles.min.js}"></script>
+
+    <!-- Datatables -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/datatables/datatables.min.js}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/world.js}"></script>
+
+    <!-- Sweet Alert -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script type="text/javascript" th:src="@{/admin/js/kaiadmin.min.js}"></script>
+
+</body>
+
+</html>
