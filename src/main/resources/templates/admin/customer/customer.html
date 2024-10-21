@@ -24,160 +24,238 @@
 </head>
 
 <body>
-<div class="wrapper">
-    <!-- start sidebar -->
-    <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
-    <!-- end sidebar -->
+    <div class="wrapper">
+        <!-- start sidebar -->
+        <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
+        <!-- end sidebar -->
 
-    <div class="main-panel">
-        <!-- header  -->
-        <div th:replace="/admin/layout/header.html :: header"></div>
+        <div class="main-panel">
+            <!-- header  -->
+            <div th:replace="/admin/layout/header.html :: header"></div>
 
-        <!-- content-->
-        <div class="container">
-            <div class="page-inner">
-                <!--Table-->
-                <div class="col-md-12">
-                    <div class="card">
+            <!-- content-->
+            <div class="container">
+                <div class="page-inner">
+                    <!--Table-->
+                    <div class="col-md-12">
+                        <div class="card">
 
-                        <!-- header table -->
-                        <div class="card-header">
-                            <div class="d-flex align-items-center">
-                                <h4 class="card-title">Danh sách Khách hàng</h4>
-                                <a
-                                        th:href="@{/admin/customer/add}"
-                                        class="btn btn-primary btn-round ms-auto"
-                                >
-                                    <i class="fa fa-plus"></i>
-                                    Thêm khách hàng
-                                </a>
+                            <!-- header table -->
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <h4 class="card-title">Danh sách Khách hàng</h4>
+                                    <a th:href="@{/admin/customer/add}" class="btn btn-primary btn-round ms-auto">
+                                        <i class="fa fa-plus"></i>
+                                        Thêm khách hàng
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <!-- end header table -->
+                            <!-- end header table -->
 
-                        <!-- table -->
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table
-                                        id="add-row"
-                                        class="display table table-striped table-hover"
-                                >
-                                    <!-- header -->
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Tên khách hàng</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Email</th>
-                                        <th>Địa chỉ</th>
-                                        <th style="width: 10%">Hành động</th>
-                                    </tr>
-                                    </thead>
-                                    <!-- end header -->
+                            <!-- table -->
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="add-row" class="display table table-striped table-hover">
+                                        <!-- header -->
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Tên khách hàng</th>
+                                                <th>Số điện thoại</th>
+                                                <th>Email</th>
+                                                <th>Địa chỉ</th>
+                                                <th style="width: 10%">Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- end header -->
 
-                                    <!-- body -->
-                                    <tbody>
+                                        <!-- body -->
+                                        <tbody>
 
-                                    <tr  class="row-data"  th:each="customer: ${customers}" >
-                                        <td class="txt-id" th:text="${customer.customerId}" ></td>
-                                        <td class="txt-name" th:text="${customer.customerName}" ></td>
-                                        <td th:text="${customer.phoneNumber}" ></td>
-                                        <td th:text="${customer.email}" ></td>
-                                        <td th:text="${customer.address}" ></td>
-                                        
-                                        <td>
-                                            <div class="form-button-action">
-                                                <a
-                                                        type="button"
-                                                        data-bs-toggle="tooltip"
-                                                        title=""
-                                                        class="btn btn-link btn-primary btn-lg btn-edit"
-                                                        data-original-title="Edit Task"
-                                                        href="#"
-                                                >
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <!-- Button trigger modal -->
-                                                <button type="button"
-                                                        class="btn btn-link btn-danger"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal"
-                                                        th:attr="data-id=${customer.customerId},
+                                            <tr class="row-data" th:each="customer: ${customers}">
+                                                <td class="txt-id" th:text="${customer.customerId}"></td>
+                                                <td><a href="#" class="txt-name-customer"
+                                                        th:text="${customer.customerName}" data-bs-toggle="modal"
+                                                        data-bs-target="#staticBackdrop"
+                                                        th:attr="data-id=${customer.customerId}, data-name=${customer.customerName}">
+                                                    </a>
+
+                                                </td>
+                                                <td th:text="${customer.phoneNumber}"></td>
+                                                <td th:text="${customer.email}"></td>
+                                                <td th:text="${customer.address}"></td>
+
+                                                <td>
+                                                    <div class="form-button-action">
+                                                        <a type="button" data-bs-toggle="tooltip" title=""
+                                                            class="btn btn-link btn-primary btn-lg btn-edit"
+                                                            data-original-title="Edit Task" href="#">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button" class="btn btn-link btn-danger"
+                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                            th:attr="data-id=${customer.customerId},
                                                         data-name=${customer.customerName},
                                                         data-controller-delete='/admin/customer/delete-customer'">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+
+                                                    </div>
+                                                </td>
+                                                
+
+
+
+                                            </tr>
+                                        </tbody>
+                                        <!-- end body -->
+
+                                    </table>
+                                    <!-- Modal Customer and Relationship-->
+                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1"
+                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="staticBackdropLabel">Thông
+                                                    tin khách hàng</h3>
+                                                <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <span id="customerIdDisplay"></span>
+                                                <span> - </span>
+                                                <!-- Hiển thị mã khách hàng -->
+                                                <span id="customerNameDisplay"></span>
+                                                <!-- Hiển thị tên khách hàng -->
+                                            </div>
+                                            <div class="modal-header">
+                                                <h6 class="modal-title" id="customerrelationship">Các
+                                                    khách hàng liên quan: </h6>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul th:each="customer: ${customers}">
+                                                    <li>
+                                                        <span id="relationship_Id">1</span>
+                                                        <span> - </span>
+                                                        <span id="relationship_customerName">Loc</span>
+                                                    </li>
+                                                    <li>
+                                                        <span id="relationship_Id">2</span>
+                                                        <span> - </span>
+                                                        <span id="relationship_customerName">Abc</span>
+                                                    </li>
+                                                    
+                                                </ul>
 
                                             </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                    <!-- end body -->
-
-                                </table>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
                             </div>
-                        </div>
-                        <!-- end table -->
+                            <!-- end table -->
 
+                        </div>
                     </div>
+                    <!--End table-->
                 </div>
-                <!--End table-->
             </div>
+
+            <!-- Button trigger modal -->
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Launch static backdrop modal
+            </button> -->
+
+
+
+
+
+            <!-- start footer -->
+            <div th:replace="/admin/layout/footer.html :: footer"></div>
+            <!-- end footer -->
         </div>
 
-        <!-- start footer -->
-        <div th:replace="/admin/layout/footer.html :: footer"></div>
-        <!-- end footer -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const rows = document.querySelectorAll('.row-data');
+
+                if (rows) {
+                    rows.forEach(row => {
+                        const txtId = row.querySelector('.txt-id'); // Lấy mã khách hàng
+                        const txtName = row.querySelector('.txt-name-customer'); // Lấy tên khách hàng
+
+                        // Thêm sự kiện click cho thẻ a
+                        txtName.addEventListener('click', function () {
+                            const customerId = txtId.textContent; // Lấy ID khách hàng
+                            const customerName = txtName.textContent; // Lấy tên khách hàng
+
+                            // Cập nhật nội dung modal
+                            document.getElementById('customerIdDisplay').textContent = `${customerId}`;
+                            document.getElementById('customerNameDisplay').textContent = `${customerName}`;
+                        });
+                    });
+                }
+            });
+
+
+        </script>
+
+        <!-- Kiểm tra xem có thông báo thành công không, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
+        <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;">
+            <span th:text="${successMessage}"></span>
+        </div>
+        <div th:if="${errorMessage}" class="alert alert-success" id="error-message" style="display: none;">
+            <span th:text="${errorMessage}"></span>
+        </div>
+        <!--modal delete, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
+        <div th:replace="/admin/modal.html :: modal"></div>
     </div>
-    <!-- Kiểm tra xem có thông báo thành công không, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
-    <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;">
-        <span th:text="${successMessage}"></span>
-    </div>
-    <div th:if="${errorMessage}" class="alert alert-success" id="error-message" style="display: none;">
-        <span th:text="${errorMessage}"></span>
-    </div>
-    <!--modal delete, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
-    <div th:replace="/admin/modal.html :: modal"></div>
-</div>
 
-<!--js tự viết thông báo và tạo slug, phần này chỉ để ở trang quản lý table, không  cần để trong trang edit, create-->
-<script type="module" th:src="@{/admin/js/notify.js}"></script>
-<script type="module" th:src="@{/admin/js/create-slug.js}"></script>
-<!-- end js tự viết-->
+    <!--js tự viết thông báo và tạo slug, phần này chỉ để ở trang quản lý table, không  cần để trong trang edit, create-->
+    <script type="module" th:src="@{/admin/js/notify.js}"></script>
+    <script type="module" th:src="@{/admin/js/create-slug.js}"></script>
+    <!-- end js tự viết-->
 
-<!--   Core JS Files   -->
-<script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>
-<script type="text/javascript" th:src="@{/admin/js/core/popper.min.js}"></script>
-<script type="text/javascript" th:src="@{/admin/js/core/bootstrap.min.js}"></script>
+    <!--   Core JS Files   -->
+    <script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/core/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/core/bootstrap.min.js}"></script>
 
-<!-- jQuery Scrollbar -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+    <!-- jQuery Scrollbar -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
 
-<!-- Chart JS -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/chart.js/chart.min.js}"></script>
+    <!-- Chart JS -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/chart.js/chart.min.js}"></script>
 
-<!-- jQuery Sparkline -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
+    <!-- jQuery Sparkline -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
 
-<!-- Chart Circle -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/chart-circle/circles.min.js}"></script>
+    <!-- Chart Circle -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/chart-circle/circles.min.js}"></script>
 
-<!-- Datatables -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/datatables/datatables.min.js}"></script>
-<script type="text/javascript" th:src="@{/admin/js/datatables.js}"></script>
+    <!-- Datatables -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/datatables/datatables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/datatables.js}"></script>
 
-<!-- Bootstrap Notify -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+    <!-- Bootstrap Notify -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
 
-<!-- jQuery Vector Maps -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
-<script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/world.js}"></script>
+    <!-- jQuery Vector Maps -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/world.js}"></script>
 
-<!-- Sweet Alert -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/sweetalert/sweetalert.min.js}"></script>
+    <!-- Sweet Alert -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/sweetalert/sweetalert.min.js}"></script>
 
-<!-- Kaiadmin JS -->
-<script type="text/javascript" th:src="@{/admin/js/kaiadmin.min.js}"></script>
+    <!-- Kaiadmin JS -->
+    <script type="text/javascript" th:src="@{/admin/js/kaiadmin.min.js}"></script>
 
 
 </body>

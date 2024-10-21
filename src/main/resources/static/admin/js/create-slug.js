@@ -35,7 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 btnEdit.href = `${pathname}/${slug}-${txtId.textContent}`; // Gán giá trị href mới
 
             }
+
+
         });
     }
-
 });
+

@@ -85,4 +85,19 @@ public class CustomerController {
         return "redirect:/admin/customer";
     }
 
+    @GetMapping("/admin/customer/info/{id}")
+    public String getCustomerInfo(@PathVariable("id") Integer customerId, Model model) {
+        // Lấy thông tin khách hàng đã chọn
+        Customer selectedCustomer = customerService.getCustomerById(customerId);
+        
+        // Lấy danh sách khách hàng có relationship_id giống với customerId
+        List<Customer> relatedCustomers = customerService.getCustomersByRelationshipId(selectedCustomer.getCustomerId());
+
+        // Thêm dữ liệu vào model
+        model.addAttribute("selectedCustomer", selectedCustomer);
+        model.addAttribute("relatedCustomers", relatedCustomers);
+        
+        return "redirect:/admin/customer"; // Tên view hiển thị thông tin
+    }
+
 }

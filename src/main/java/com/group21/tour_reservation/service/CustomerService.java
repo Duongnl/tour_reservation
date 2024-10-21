@@ -79,4 +79,9 @@ public class CustomerService {
         }
         return customerRepository.save(customer);
     }
+
+     // Phương thức tìm khách hàng theo relationship_id
+     public List<Customer> getCustomersByRelationshipId(Integer customerId) {
+        return customerRepository.findByCustomer_RelationshipId(customerId);
+    }
 }
