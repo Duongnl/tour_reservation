@@ -61,10 +61,15 @@ public class TransportController {
 
     @GetMapping("/admin/transport/delete-transport/{id}")
     public String deleteTransport(Model model,@PathVariable("id") String transportId, RedirectAttributes redirectAttributes) {
-        if (transportService.deleteTransport(transportId) != null) {
-            redirectAttributes.addFlashAttribute("successMessage", "Xóa thành công!");
-        } else {
+        Transport transport = transportService.deleteTransport(transportId);
+        if (transport == null) {
             return "admin/404.html";
+        }
+        else
+        if (transport.getStatus() == 1) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Phương tiện này đang được sử dụng không thể xóa!");
+        } else if (transport.getStatus() == 0) {
+            redirectAttributes.addFlashAttribute("successMessage", "Xóa thành công!");
         }
         return "redirect:/admin/transport";
     }

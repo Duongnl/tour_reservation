@@ -1,6 +1,5 @@
-
 // hàm này chỉ cho phép chứa chữ, số và , . - và không cho phép chỉ chứa khoảng trắng
-export function validateText(inputElement, errorElement,successText,errorText ) {
+export function validateText(inputElement, errorElement, successText, errorText) {
 
     const regex = /^(?!\s*$)[\p{L}0-9 ,.\-]{0,255}$/u;
 
@@ -132,7 +131,7 @@ export function validatePassword(inputElement, errorElement, successText, errorT
 
 
 // hàm này chỉ cho phép chứa chữ, số và , . - và cho phép chỉ chứa khoảng trắng (để trống)
-export function validateTextDetail(inputElement, errorElement,successText,errorText ) {
+export function validateTextDetail(inputElement, errorElement, successText, errorText) {
 
     const regex = /^[\p{L}0-9 ,.\-]{0,255}$/u;
 
@@ -155,28 +154,65 @@ export function validateTextDetail(inputElement, errorElement,successText,errorT
     }
 
 
-
-
 }
 
-export function validateTypeahead (inputElement, errorElement,successText,errorText ) {
+export function validateTypeahead(inputElement, errorElement, successText, errorText) {
     let value = inputElement.value.trim();
-    const selectValue = document.querySelector('.tt-open')
-    let flag = false;
-    selectValue.addEventListener("click", function () {
-        console.log("Selected")
-        flag = true;
-        value = inputElement.value.trim();
-    })
-
-
-        if (states?.includes(value)) {
-            flag = true
-        }else {
-            flag =  false
-        }
-    return flag;
-
+    if (states?.includes(value)) {
+        inputElement.classList.remove("is-invalid");
+        inputElement.classList.add("is-valid");
+        errorElement.textContent = successText;
+        errorElement.classList.remove("text-danger");
+        errorElement.classList.add("text-success");
+        return true
+    } else {
+        inputElement.classList.remove("is-valid");
+        inputElement.classList.add("is-invalid");
+        errorElement.textContent = errorText;
+        errorElement.classList.add("text-danger");
+        return false
+    }
 }
+
+
+export function validateDate(inputElement, errorElement, successText, errorText) {
+    const value = inputElement.value.trim();
+    if (value === "") {
+        inputElement.classList.remove("is-valid");
+        inputElement.classList.add("is-invalid");
+        errorElement.textContent = errorText;
+        errorElement.classList.add("text-danger");
+        return false;
+    } else {
+        inputElement.classList.remove("is-invalid");
+        inputElement.classList.add("is-valid");
+        errorElement.textContent = successText;
+        errorElement.classList.remove("text-danger");
+        errorElement.classList.add("text-success");
+        return true
+    }
+}
+
+export function validateNumber(inputElement, errorElement, successText, errorText) {
+    const regex = /^\d+$/;
+    const value = inputElement.value.trim();
+    if (!regex.test(value)) {
+        inputElement.classList.remove("is-valid");
+        inputElement.classList.add("is-invalid");
+        errorElement.textContent = errorText;
+        errorElement.classList.add("text-danger");
+        return false
+    } else {
+        inputElement.classList.remove("is-invalid");
+        inputElement.classList.add("is-valid");
+        errorElement.textContent = successText;
+        errorElement.classList.remove("text-danger");
+        errorElement.classList.add("text-success");
+        return true
+    }
+}
+
+
+
 
 

@@ -141,7 +141,27 @@
 
 <!--js tự viết thông báo và tạo slug, phần này chỉ để ở trang quản lý table, không  cần để trong trang edit, create-->
 <script type="module" th:src="@{/admin/js/notify.js}"></script>
-<script type="module" th:src="@{/admin/js/create-slug.js}"></script>
+<script th:inline="javascript" type="module">
+    import {CreateSlug} from /*[[@{/admin/js/create-slug.js}]]*/'';
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lặp qua tất cả các hàng trong bảng
+        const rows = document.querySelectorAll('.row-data');
+        const pathname = window.location.pathname;
+        if (rows) {
+            rows.forEach(row => {
+                const txtId = row.querySelector('.txt-id'); // Lấy phần tử txt-id trong hàng
+                const txtName = row.querySelector('.txt-name'); // Lấy phần tử txt-name trong hàng
+                const btnEdit = row.querySelector('.btn-edit'); // Lấy nút btn-edit trong hàng
+
+                if (btnEdit && txtId && txtName) {
+                    const slug = CreateSlug(txtName.textContent); // Tạo slug từ tên
+                    btnEdit.href = `${pathname}/tour-overview/${slug}-${txtId.textContent}`; // Gán giá trị href mới
+
+                }
+            });
+        }
+    })
+</script>
 <!-- end js tự viết-->
 
 <!--   Core JS Files   -->
