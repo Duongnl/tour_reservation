@@ -1,0 +1,62 @@
+<form method="POST"
+      th:action="@{/admin/category/edit}"
+      th:object="${category}">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Cập nhật Danh Mục</div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+
+                        <div class="form-group has-feedback">
+                            <label for="categoryName">Tên danh mục </label>
+                            <input
+                                    type="text"
+                                    id="categoryName"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{categoryName}"
+                            />
+                            <small id="transport-name-error" class="form-text text-muted"
+                            >Điền tên danh mục</small>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="categoryDetail">Chi tiết danh mục</label>
+                            <input
+                                    type="text"
+                                    id="categoryDetail"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{categoryDetail}"
+                            />
+                            <small id="departure-location-error" class="form-text text-muted"
+                            >Điền Chi tiết danh mục</small>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="status">Trạng thái</label>
+                            <input
+                                    type="text"
+                                    id="status"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{status}"
+                            />
+                            <small id="destination-location-error" class="form-text text-muted"
+                            >Điền trạng thái</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success" id="btn-transport-add" type="submit">Cập nhật</button>
+                <a class="btn btn-danger"
+                   th:href="@{/admin/category}"
+                >Quay lại</a>
+            </div>
+        </div>
+    </div>
+</form>
