@@ -58,7 +58,11 @@ public class CustomerController {
             return "admin/404.html";
         }
         List<Customer> customersWithoutRep = customerService.findCustomersWithNullRelationshipId();
+
+         // Lấy danh sách khách hàng có relationship_id trùng với customerId của khách hàng hiện tại
+         List<Customer> relatedCustomers = customerService.getCustomersByRelationshipId(customer.getCustomerId());
         model.addAttribute("customers", customersWithoutRep);
+        model.addAttribute("relatedCustomers", relatedCustomers); // Khách hàng liên quan
         model.addAttribute("customer", customer); // Thêm đối tượng vào mô hình
         return "admin/customer/customer-edit.html";
     }
@@ -83,21 +87,6 @@ public class CustomerController {
             return "admin/404.html";
         }
         return "redirect:/admin/customer";
-    }
-
-    @GetMapping("/admin/customer/info/{id}")
-    public String getCustomerInfo(@PathVariable("id") Integer customerId, Model model) {
-        // Lấy thông tin khách hàng đã chọn
-        Customer selectedCustomer = customerService.getCustomerById(customerId);
-        
-        // Lấy danh sách khách hàng có relationship_id giống với customerId
-        List<Customer> relatedCustomers = customerService.getCustomersByRelationshipId(selectedCustomer.getCustomerId());
-
-        // Thêm dữ liệu vào model
-        model.addAttribute("selectedCustomer", selectedCustomer);
-        model.addAttribute("relatedCustomers", relatedCustomers);
-        
-        return "redirect:/admin/customer"; // Tên view hiển thị thông tin
     }
 
 }

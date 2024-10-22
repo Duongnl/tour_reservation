@@ -74,17 +74,11 @@
 
                                             <tr class="row-data" th:each="customer: ${customers}">
                                                 <td class="txt-id" th:text="${customer.customerId}"></td>
-                                                <td><a href="#" class="txt-name-customer"
-                                                        th:text="${customer.customerName}" data-bs-toggle="modal"
-                                                        data-bs-target="#staticBackdrop"
-                                                        th:attr="data-id=${customer.customerId}, data-name=${customer.customerName}">
-                                                    </a>
-
+                                                <td class="txt-name" th:text="${customer.customerName}">
                                                 </td>
                                                 <td th:text="${customer.phoneNumber}"></td>
                                                 <td th:text="${customer.email}"></td>
                                                 <td th:text="${customer.address}"></td>
-
                                                 <td>
                                                     <div class="form-button-action">
                                                         <a type="button" data-bs-toggle="tooltip" title=""
@@ -103,8 +97,6 @@
 
                                                     </div>
                                                 </td>
-                                                
-
 
 
                                             </tr>
@@ -112,52 +104,9 @@
                                         <!-- end body -->
 
                                     </table>
-                                    <!-- Modal Customer and Relationship-->
-                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1"
-                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3 class="modal-title" id="staticBackdropLabel">Thông
-                                                    tin khách hàng</h3>
-                                                <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <span id="customerIdDisplay"></span>
-                                                <span> - </span>
-                                                <!-- Hiển thị mã khách hàng -->
-                                                <span id="customerNameDisplay"></span>
-                                                <!-- Hiển thị tên khách hàng -->
-                                            </div>
-                                            <div class="modal-header">
-                                                <h6 class="modal-title" id="customerrelationship">Các
-                                                    khách hàng liên quan: </h6>
-                                            </div>
-                                            <div class="modal-body">
-                                                <ul th:each="customer: ${customers}">
-                                                    <li>
-                                                        <span id="relationship_Id">1</span>
-                                                        <span> - </span>
-                                                        <span id="relationship_customerName">Loc</span>
-                                                    </li>
-                                                    <li>
-                                                        <span id="relationship_Id">2</span>
-                                                        <span> - </span>
-                                                        <span id="relationship_customerName">Abc</span>
-                                                    </li>
-                                                    
-                                                </ul>
 
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    
+                                
                                 </div>
                             </div>
                             <!-- end table -->
@@ -168,21 +117,12 @@
                 </div>
             </div>
 
-            <!-- Button trigger modal -->
-            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Launch static backdrop modal
-            </button> -->
-
-
-
-
-
             <!-- start footer -->
             <div th:replace="/admin/layout/footer.html :: footer"></div>
             <!-- end footer -->
         </div>
 
-        <script>
+        <!-- <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const rows = document.querySelectorAll('.row-data');
 
@@ -205,8 +145,7 @@
             });
 
 
-        </script>
-
+        </script> -->
         <!-- Kiểm tra xem có thông báo thành công không, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
         <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;">
             <span th:text="${successMessage}"></span>

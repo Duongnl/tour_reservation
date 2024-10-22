@@ -1,5 +1,5 @@
 
-export function CreateSlug (string) {
+export function CreateSlug(string) {
     const a = 'àáäâãåăæąçćčđďèéěėëêęğǵḧìíïîįłḿǹńňñòóöôœøṕŕřßşśšșťțùúüûǘůűūųẃẍÿýźžż·/_,:;'
     const b = 'aaaaaaaaacccddeeeeeeegghiiiiilmnnnnooooooprrsssssttuuuuuuuuuwxyyzzz------'
     const p = new RegExp(a.split('').join('|'), 'g')
@@ -35,9 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 btnEdit.href = `${pathname}/${slug}-${txtId.textContent}`; // Gán giá trị href mới
 
             }
-
-
         });
     }
-});
 
+});
