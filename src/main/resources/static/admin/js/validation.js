@@ -74,11 +74,37 @@ export function validatePhoneNumber(inputElement, errorElement, successText, err
     }
 }
 
+//hàm kiểm tra phần trăm khuyến mãi
+export function validatePercentage(inputElement, errorElement, successText, errorText) {
+    // Lấy giá trị từ input và loại bỏ khoảng trắng ở đầu và cuối
+    const value = inputElement.value.trim();
+
+    // Chuyển giá trị sang dạng số
+    const percentage = parseFloat(value);
+
+    // Kiểm tra xem giá trị có phải là số và nằm trong khoảng từ 0 đến 100 hay không
+    if (isNaN(percentage) || percentage < 0 || percentage > 100) {
+        inputElement.classList.remove("is-valid");
+        inputElement.classList.add("is-invalid");
+        errorElement.textContent = errorText;
+        errorElement.classList.add("text-danger");
+        return false;
+    } else {
+        inputElement.classList.remove("is-invalid");
+        inputElement.classList.add("is-valid");
+        errorElement.textContent = successText;
+        errorElement.classList.remove("text-danger");
+        errorElement.classList.add("text-success");
+        return true;
+    }
+}
+
+
 //hàm kiểm tra tên đăng nhập
 export function validateUsername(inputElement, errorElement, successText, errorText) {
 
     // Tài khoản phải từ 5 đến 20 ký tự, chỉ chứa số, chữ, dấu . _ -
-    const regex= /^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$/; 
+    const regex = /^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$/;
 
 
     // Lấy giá trị từ input và loại bỏ khoảng trắng ở đầu và cuối
@@ -105,7 +131,7 @@ export function validateUsername(inputElement, errorElement, successText, errorT
 export function validatePassword(inputElement, errorElement, successText, errorText) {
 
     // Mật khẩu từ 8 đến 20 ký tự, chứa ít nhất một số, chữ thường, hoa,ký tự đặc biệt
-    const regex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,20}$/;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,20}$/;
 
 
 

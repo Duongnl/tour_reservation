@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" th:href="@{/admin/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/webfont/webfont.min.js}"></script>
+    <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet" />
+
+    <!-- CSS Files -->
+    <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/plugins.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/kaiadmin.min.css}" rel="stylesheet" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link th:href="@{/admin/css/demo.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- start sidebar -->
+        <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
+
+        <div class="main-panel">
+            <!-- start header  -->
+            <div th:replace="/admin/layout/header.html :: header"></div>
+
+            <!-- content -->
+            <div class="container">
+                <div class="page-inner">
+
+                    <!--add form-->
+                    <form method="POST" th:action="@{/admin/promotion/add-promotion}" th:object="${promotion}">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">Thêm mới nhân viên</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-4">
+
+                                            <div class="form-group has-feedback">
+                                                <label for="promotionName">Tên khuyến mãi</label>
+                                                <input type="text" id="promotionName" value="" class="form-control"
+                                                    th:field="*{promotionName}" />
+                                                <small id="promotion-error" class="form-text text-muted">Điền tên khuyến
+                                                    mãi.</small>
+                                            </div>
+
+                                            <div class="form-group has-feedback">
+                                                <label for="percentage">Phần trăm khuyến mãi</label>
+                                                <input type="number" id="percentage" value="" min="0" max="100"
+                                                    step="0.1" class="form-control" th:field="*{percentage}" />
+                                                <small id="percentage-error" class="form-text text-muted">Điền Phần trăm
+                                                    khuyến mãi.</small>
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <label for="startTime">Ngày bắt đầu</label>
+                                                <input type="datetime-local" id="startTime" value="" class="form-control"
+                                                    th:field="*{startTime}" />
+                                                <small id="startTime-error" class="form-text text-muted">Chọn ngày bắt đầu.</small>
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <label for="endTime">Ngày ngày kết thúc</label>
+                                                <input type="datetime-local" id="endTime" value=""
+                                                    class="form-control" th:field="*{endTime}" />
+                                                <small id="endTime-error" class="form-text text-muted">Điền
+                                                    ngày kết thúc.</small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <button class="btn btn-success" id="btn-promotion-add" type="submit">Thêm</button>
+                                    <a class="btn btn-danger" th:href="@{/admin/promotion}">Quay lại</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!--end form-->
+                </div>
+            </div>
+
+            <!-- start footer -->
+            <div th:replace="/admin/layout/footer.html :: footer"></div>
+        </div>
+    </div>
+    <!-- My js -->
+    <script type="module" th:src="@{/admin/js/promotion.js}"></script>
+
+    <!--   Core JS Files   -->
+    <script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/core/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/core/bootstrap.min.js}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+    <!-- Chart JS -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/chart.js/chart.min.js}"></script>
+
+    <!-- jQuery Sparkline -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
+
+    <!-- Chart Circle -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/chart-circle/circles.min.js}"></script>
+
+    <!-- Datatables -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/datatables/datatables.min.js}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/world.js}"></script>
+
+    <!-- Sweet Alert -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script type="text/javascript" th:src="@{/admin/js/kaiadmin.min.js}"></script>
+
+</body>
+
+</html>

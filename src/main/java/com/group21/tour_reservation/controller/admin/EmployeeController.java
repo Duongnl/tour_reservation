@@ -23,7 +23,7 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @GetMapping("/admin/employee")
-    public String transport(Model model) {
+    public String employee(Model model) {
         model.addAttribute("employees", employeeService.getAllEmployees());
         return "admin/employee/employee.html";
     }
