@@ -61,8 +61,8 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Tên khuyến mãi</th>
-                                                <th>Phần trăm khuyễn mãi</th>
-
+                                                <th>Khuyến mãi cho người lớn</th>
+                                                <th>Khuyến mãi cho trẻ em</th>
                                                 <th>Ngày bắt đầu</th>
                                                 <th>Ngày kết thúc</th>
                                                 <th style="width: 10%">Hành động</th>
@@ -76,7 +76,8 @@
                                             <tr class="row-data" th:each="promotion: ${promotions}">
                                                 <td class="txt-id" th:text="${promotion.promotionId}"></td>
                                                 <td class="txt-id" th:text="${promotion.promotionName}"></td>
-                                                <td class="txt-name" th:text="${promotion.percentage}"></td>
+                                                <td class="txt-name" th:text="${promotion.percentageAdult}"></td>
+                                                <td class="txt-name" th:text="${promotion.percentageChild}"></td>
                                                 <td th:text="${promotion.startTime}"></td>
                                                 <td th:text="${promotion.endTime}"></td>
 

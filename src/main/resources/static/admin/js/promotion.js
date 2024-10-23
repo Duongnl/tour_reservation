@@ -5,8 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const promotionName = document.getElementById("promotionName");
     const promotionNameError = document.getElementById("promotion-error");
 
-    const percentage = document.getElementById("percentage");
-    const percentageError = document.getElementById("percentage-error");
+    const percentageAdult = document.getElementById("percentageAdult");
+    const percentageAdultError = document.getElementById("percentageAdult-error");
+
+    const percentageChild = document.getElementById("percentageChild");
+    const percentageChildError = document.getElementById("percentageChild-error");
 
     const startdate = document.getElementById("startTime");
     const startdateError = document.getElementById("startTime-error");
@@ -36,22 +39,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // phần trăm khuyễn mãi
-    percentage.addEventListener("input", function () {
+    percentageAdult.addEventListener("input", function () {
         const successText = "Phần trăm khuyến mãi hợp lệ"
         const errorText = "Phần trăm khuyến mãi không hợp lệ !!"
-        validation[1] = validatePercentage(percentage, percentageError, successText, errorText);
+        validation[1] = validatePercentage(percentageAdult, percentageAdultError, successText, errorText);
+    });
+
+    // phần trăm khuyễn mãi
+    percentageChild.addEventListener("input", function () {
+        const successText = "Phần trăm khuyến mãi hợp lệ"
+        const errorText = "Phần trăm khuyến mãi không hợp lệ !!"
+        validation[2] = validatePercentage(percentageChild, percentageChildError, successText, errorText);
     });
 
     startdate.addEventListener("input", function () {
         const successText = "Ngày hợp lệ"
         const errorText = "Ngày không hợp lệ"
-        validation[2] = validateDate(startdate, startdateError, successText, errorText);
+        validation[3] = validateDate(startdate, startdateError, successText, errorText);
     });
 
     enddate.addEventListener("input", function () {
         const successText = "Ngày hợp lệ"
         const errorText = "Ngày không hợp lệ"
-        validation[3] = validateDate(enddate, enddateError, successText, errorText);
+        validation[4] = validateDate(enddate, enddateError, successText, errorText);
     });
 
 

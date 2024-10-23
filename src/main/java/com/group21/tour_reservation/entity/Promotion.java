@@ -18,8 +18,12 @@ public class Promotion {
     @Column(name = "promotion_name")
     private String promotionName;
 
-    @Column(name = "percentage")
-    private double percentage;
+    @Column(name = "percentage_adult")
+    private double percentageAdult;
+
+
+    @Column(name = "percentage_child")
+    private double percentageChild;
 
     @Column(name = "start_time")
     private LocalDateTime startTime;
@@ -36,10 +40,11 @@ public class Promotion {
 
     public Promotion() {}
 
-    public Promotion(Integer promotionId, String promotionName, double percentage, LocalDateTime startTime, LocalDateTime endTime, int status, Set<TourSchedule> tourSchedules) {
+    public Promotion(Integer promotionId, String promotionName, double percentageAdult,double percentageChild, LocalDateTime startTime, LocalDateTime endTime, int status, Set<TourSchedule> tourSchedules) {
         this.promotionId = promotionId;
         this.promotionName = promotionName;
-        this.percentage = percentage;
+        this.percentageAdult = percentageAdult;
+        this.percentageChild = percentageChild;
         this.startTime = startTime;
         this.endTime = endTime;
         this.status = status;
@@ -62,13 +67,15 @@ public class Promotion {
         this.promotionName = promotionName;
     }
 
-    public double getPercentage() {
-        return percentage;
+    public double getPercentageAdult() {
+        return percentageAdult;
     }
 
-    public void setPercentage(double percentage) {
-        this.percentage = percentage;
+    public void setPercentageAdult(double percentageAdult) {
+        this.percentageAdult = percentageAdult;
     }
+
+    
 
     public LocalDateTime getStartTime() {
         return startTime;
@@ -100,5 +107,13 @@ public class Promotion {
 
     public void setTourSchedules(Set<TourSchedule> tourSchedules) {
         this.tourSchedules = tourSchedules;
+    }
+
+    public double getPercentageChild() {
+        return percentageChild;
+    }
+
+    public void setPercentageChild(double percentageChild) {
+        this.percentageChild = percentageChild;
     }
 }
