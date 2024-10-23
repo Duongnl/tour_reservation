@@ -3,12 +3,18 @@ package com.group21.tour_reservation.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
 @Table(name = "reserve")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Reserve {
 
     @Id
@@ -48,98 +54,9 @@ public class Reserve {
     @JsonManagedReference
     private Set<ReserveDetail> reserveDetails;
 
-    public Reserve() {}
+    @ManyToOne
+    @JoinColumn(name = "schedule_id", nullable = false, referencedColumnName = "schedule_id")
+    @JsonBackReference
+    private TourSchedule tourSchedule;
 
-    public Reserve(Integer reserveId, String reserveDetail, int adultCount, int childCount, int price, LocalDateTime time, int status, Employee employee, Customer customer, Set<ReserveDetail> reserveDetails) {
-        this.reserveId = reserveId;
-        this.reserveDetail = reserveDetail;
-        this.adultCount = adultCount;
-        this.childCount = childCount;
-        this.price = price;
-        this.time = time;
-        this.status = status;
-        this.employee = employee;
-        this.customer = customer;
-        this.reserveDetails = reserveDetails;
-    }
-
-    public Integer getReserveId() {
-        return reserveId;
-    }
-
-    public void setReserveId(Integer reserveId) {
-        this.reserveId = reserveId;
-    }
-
-    public String getReserveDetail() {
-        return reserveDetail;
-    }
-
-    public void setReserveDetail(String reserveDetail) {
-        this.reserveDetail = reserveDetail;
-    }
-
-    public int getAdultCount() {
-        return adultCount;
-    }
-
-    public void setAdultCount(int adultCount) {
-        this.adultCount = adultCount;
-    }
-
-    public int getChildCount() {
-        return childCount;
-    }
-
-    public void setChildCount(int childCount) {
-        this.childCount = childCount;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public LocalDateTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalDateTime time) {
-        this.time = time;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Set<ReserveDetail> getReserveDetails() {
-        return reserveDetails;
-    }
-
-    public void setReserveDetails(Set<ReserveDetail> reserveDetails) {
-        this.reserveDetails = reserveDetails;
-    }
 }

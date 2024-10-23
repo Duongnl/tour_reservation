@@ -1,10 +1,9 @@
 package com.group21.tour_reservation.service;
 
 
-import com.group21.tour_reservation.entity.Category;
-import com.group21.tour_reservation.entity.Image;
-import com.group21.tour_reservation.entity.Tour;
-import com.group21.tour_reservation.entity.Transport;
+import com.group21.tour_reservation.dto.response.TourScheduleAdResponse;
+import com.group21.tour_reservation.entity.*;
+import com.group21.tour_reservation.mapper.TourScheduleMapper;
 import com.group21.tour_reservation.repository.CategoryRepository;
 import com.group21.tour_reservation.repository.ImgRepository;
 import com.group21.tour_reservation.repository.TourRepository;
@@ -27,6 +26,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,6 +45,9 @@ public class TourService {
 
     @Autowired
     private ImgRepository imgRepository;
+
+    @Autowired
+    private TourScheduleMapper tourScheduleMapper;
 
     public List<Tour> getAllTours() {
         return tourRepository.findAllByStatus(1);
@@ -205,6 +209,72 @@ public class TourService {
             return null;
         }
         return tourRepository.save(tour);
+    }
+
+    public List<TourScheduleAdResponse> tourOverView (Tour tour) {
+        List<TourScheduleAdResponse> tourScheduleAdResponses = new ArrayList<>();
+        tour.getTourSchedules().forEach(tourSchedule -> {
+            if (tourSchedule.getStatus() == 1) {
+
+
+                TourScheduleAdResponse tourScheduleAdResponse =
+                        tourScheduleMapper.tourScheduleAdResponse(tourSchedule);
+
+                int quantityReserved = 0;
+                for(Reserve reserve : tourSchedule.getReserves()) {
+                    quantityReserved += reserve.getReserveDetails().size();
+                }
+
+                tourScheduleAdResponse.setQuantityReserved(quantityReserved);
+                Integer quantityLeft = tourSchedule.getQuantity() -  quantityReserved;
+                tourScheduleAdResponse.setQuantityLeft(quantityLeft);
+                tourScheduleAdResponse.setPriceAdultSale(handlePriceAdultSale(tourSchedule));
+                tourScheduleAdResponse.setPriceChildSale(handlePriceChildSale(tourSchedule));
+
+
+
+                tourScheduleAdResponses.add(tourScheduleAdResponse);
+            }
+        });
+
+        return tourScheduleAdResponses;
+    }
+
+    public Integer handlePriceAdultSale (TourSchedule tourSchedule) {
+        // Lấy LocalDateTime hiện tại
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        double percentage= 0;
+
+        for (Promotion promotion : tourSchedule.getPromotions()) {
+            if (currentDateTime.isAfter(promotion.getStartTime()) &&
+            currentDateTime.isBefore(promotion.getEndTime()) && promotion.getStatus() == 1) {
+                percentage += promotion.getPercentageAdult();
+            }
+        }
+
+        Integer priceSale = (Integer) (int)((double) tourSchedule.getPriceAdult() * (percentage/100) );
+
+        return tourSchedule.getPriceAdult() - priceSale;
+
+    }
+
+    public Integer handlePriceChildSale (TourSchedule tourSchedule) {
+        // Lấy LocalDateTime hiện tại
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        double percentage= 0;
+
+        for (Promotion promotion : tourSchedule.getPromotions()) {
+            if (currentDateTime.isAfter(promotion.getStartTime()) &&
+                    currentDateTime.isBefore(promotion.getEndTime()) && promotion.getStatus() == 1 ) {
+                percentage += promotion.getPercentageChild();
+            }
+        }
+
+        Integer priceSale = (Integer) (int)((double) tourSchedule.getPriceChild() * (percentage/100) );
+
+
+        return tourSchedule.getPriceChild() - priceSale ;
+
     }
 
 }

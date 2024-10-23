@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 23, 2024 lúc 10:51 AM
+-- Thời gian đã tạo: Th10 23, 2024 lúc 12:43 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`account_id`, `user_name`, `password`, `email`, `time`, `status`, `phone_number`) VALUES
-(1, 'duongngocle4231', 'Lengocduong.22062003', 'lengocduong003@gmail.com', '2024-10-21 15:37:23', 1, NULL);
+(1, 'duongngocle4231', 'Lengocduong.22062003', 'lengocduong003@gmail.com', '2024-10-23 16:50:10', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,7 +94,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customer_id`, `account_id`, `relationship_id`, `relationship_name`, `customer_name`, `customer_type`, `sex`, `phone_number`, `email`, `address`, `birthday`, `visa_expire`, `status`) VALUES
-(1, NULL, NULL, '', 'Dương Ngọc Lê', 'Trẻ em', 1, '0963717300', 'lengocduong4231@gmail.com', 'Tân Phú', NULL, NULL, 1);
+(1, NULL, NULL, '', 'Dương Ngọc Lê ', 'Trẻ em', 1, '0963717300', 'lengocduong4231@gmail.com', 'Tân Phú', NULL, NULL, 1),
+(2, NULL, NULL, 'duong le', 'Lê Ngọc Dương', 'Trẻ em', 0, '0963717300', 'lengocduong003@gmail.com', 'tan binh', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -166,7 +167,8 @@ INSERT INTO `image` (`image_id`, `tour_id`, `url`, `status`) VALUES
 (54, 1, '/admin/images/5014_xuat-khau-ca-phe_vao-thi-truong-Nhat-Ban.jpg', 2),
 (57, 15, '/admin/images/0.jpg', 0),
 (60, 1, '/admin/images/ao.jpg', 1),
-(61, 16, '/admin/images/5910452ed1df0f519eb46b7d06bc3bdf.jpg', 0);
+(61, 16, '/admin/images/5910452ed1df0f519eb46b7d06bc3bdf.jpg', 0),
+(62, 3, '/admin/images/d51557f45b3ff5b4051db64584a23dd4.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -177,11 +179,19 @@ INSERT INTO `image` (`image_id`, `tour_id`, `url`, `status`) VALUES
 CREATE TABLE `promotion` (
   `promotion_id` int(11) NOT NULL,
   `promotion_name` varchar(255) NOT NULL,
-  `percentage` double NOT NULL,
+  `percentage_adult` double NOT NULL,
+  `percentage_child` double NOT NULL,
   `start_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `promotion`
+--
+
+INSERT INTO `promotion` (`promotion_id`, `promotion_name`, `percentage_adult`, `percentage_child`, `start_time`, `end_time`, `status`) VALUES
+(1, 'Sale mùa hè Quảng Trị', 5, 0, '2024-10-22 17:36:13', '2024-10-24 17:36:13', 1);
 
 -- --------------------------------------------------------
 
@@ -193,6 +203,13 @@ CREATE TABLE `promotion_detail` (
   `promotion_id` int(11) NOT NULL,
   `schedule_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `promotion_detail`
+--
+
+INSERT INTO `promotion_detail` (`promotion_id`, `schedule_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -213,6 +230,13 @@ CREATE TABLE `reserve` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `reserve`
+--
+
+INSERT INTO `reserve` (`reserve_id`, `customer_id`, `schedule_id`, `employee_id`, `reserve_detail`, `adult_count`, `child_count`, `price`, `time`, `status`) VALUES
+(1, 1, 1, 1, NULL, 1, 0, 20000000, '2024-10-23 12:15:10', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -227,6 +251,14 @@ CREATE TABLE `reserve_detail` (
   `detail` varchar(255) DEFAULT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `reserve_detail`
+--
+
+INSERT INTO `reserve_detail` (`reserve_detail_id`, `reserve_id`, `customer_id`, `price`, `detail`, `status`) VALUES
+(1, 1, 1, 20000000, NULL, 1),
+(2, 1, 2, 20000000, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -251,7 +283,7 @@ CREATE TABLE `tour` (
 
 INSERT INTO `tour` (`tour_id`, `category_id`, `tour_name`, `tour_detail`, `departure_location`, `city`, `country`, `status`) VALUES
 (1, 3, 'Du lịch Thành Cổ, Thị Xã, Tỉnh Quảng Trị sfdsfds', '', 'TP HN', 'Quảng Trị', 'Việt Nam', 1),
-(3, 1, 'Bà nà', '', NULL, 'Đà Nẵng', 'Việt Nam', 1),
+(3, 1, 'Bà nà', '', 'TP HN', 'Đà Nẵng', 'Việt Nam', 1),
 (4, 2, 'Thái Lan', '', NULL, 'Bangkok', 'Thái Lan', 1),
 (5, 2, 'Du lịch Tượng Nữ Thần Tự Do', '', NULL, 'NewYork', 'Mỹ', 1),
 (6, 2, 'Du lịch Mỹ', '', NULL, 'NewYork', 'Mỹ', 1),
@@ -367,7 +399,9 @@ INSERT INTO `transport` (`transport_id`, `transport_name`, `transport_detail`, `
 (29, 'cdscfgfh.', 'ewf', 'bgfgbf', 'ed', 0),
 (30, 'fe', '', 'fefwf', 'fwef', 0),
 (31, 'dưq', 'ưqdqq', 'dưqd', 'ưqdwqd', 0),
-(32, 'đá', 'da', 'dá', 'dá', 0);
+(32, 'đá', 'da', 'dá', 'dá', 0),
+(33, 'vsd', '', 'fds', 'fds', 0),
+(34, 'fgd', 'gfd', 'gfdg', 'gdf', 0);
 
 -- --------------------------------------------------------
 
@@ -396,7 +430,6 @@ INSERT INTO `transport_detail` (`transport_detail_id`, `schedule_id`, `transport
 (5, 1, 5, '2024-10-22 00:14:00', '2024-10-19 00:14:00', 2),
 (6, 1, 11, '2024-10-20 23:49:00', '2024-10-21 23:49:00', 1),
 (9, 1, 12, '2024-10-21 00:48:00', '2024-10-31 00:48:00', 1),
-(11, 1, 13, '2024-10-21 09:43:00', '2024-10-22 09:43:00', 1),
 (13, 24, 4, '2024-10-22 14:12:00', '2024-10-25 14:12:00', 1),
 (14, 24, 4, '2024-10-23 14:15:00', '2024-10-23 14:15:00', 2),
 (15, 25, 4, '2024-10-21 14:36:00', '2024-10-23 14:36:00', 1),
@@ -531,7 +564,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `employee`
@@ -543,25 +576,25 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT cho bảng `image`
 --
 ALTER TABLE `image`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT cho bảng `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `promotion_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `promotion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `reserve`
 --
 ALTER TABLE `reserve`
-  MODIFY `reserve_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `reserve_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `reserve_detail`
 --
 ALTER TABLE `reserve_detail`
-  MODIFY `reserve_detail_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `reserve_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `tour`
@@ -579,7 +612,7 @@ ALTER TABLE `tour_schedule`
 -- AUTO_INCREMENT cho bảng `transport`
 --
 ALTER TABLE `transport`
-  MODIFY `transport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `transport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT cho bảng `transport_detail`
