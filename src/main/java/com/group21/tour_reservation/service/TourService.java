@@ -102,7 +102,7 @@ public class TourService {
                 .orElse(null);
         tour.setCategory(category);
         tour.setStatus(1);
-
+        tourRepository.save(tour);
         entityManager.clear();// This should work
 
 //      Code  Chỉnh sửa ảnh

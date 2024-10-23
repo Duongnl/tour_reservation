@@ -96,7 +96,7 @@ public class TourController {
                             @ModelAttribute("tour") Tour tour,
                             RedirectAttributes redirectAttributes)
     {
-
+        System.out.println(tour.getDepartureLocation());
         Tour tourRes = tourService.editTour(imgMain, img1, img2, categorySlug, tour,ipImg1,ipImg2);
         redirectAttributes.addFlashAttribute("successMessage", "Đổi thông tin tour thành công");
         return "redirect:/admin/tour/tour-overview/" + StringUtils.createSlug(tourRes.getTourName()) + "-" + tourRes.getTourId();
