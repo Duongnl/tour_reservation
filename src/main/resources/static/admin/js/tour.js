@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tourCountry = document.getElementById('country')
     const tourDetail = document.getElementById('tour-detail')
     const category = document.getElementById('category')
+    const departureLocation = document.getElementById('departure-location')
 
     const tourNameError = document.getElementById('tour-name-error')
     const tourCityError = document.getElementById('city-error')
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const categoryError = document.getElementById('category-error')
     const btnTourAdd = document.getElementById('btn-tour-add')
     const selectValue = document.querySelector('.tt-dataset')
+    const departureLocationError = document.getElementById('departure-location-error')
 
     const inputMainImg = document.getElementById('input-main-img')
     const imgMain = document.getElementById('img-main')
@@ -43,10 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let validation;
 
     if (tourId) {
-         validation = [...Array(6).fill(true)]
+         validation = [...Array(7).fill(true)]
     } else {
 
-     validation = [...Array(5).fill(false),true]
+     validation = [...Array(6).fill(false),true]
     }
 
     tourName.addEventListener("input", function () {
@@ -96,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tourDetail.addEventListener("input", function () {
         const successText = "Thông tin chi tiết hợp lệ"
         const errorText = "Thông tin chi tiết chỉ cho phép chứa chữ, số và , . -"
-        validation[5] = validateTextDetail(tourDetail, tourDetailError, successText, errorText);
+        validation[6] = validateTextDetail(tourDetail, tourDetailError, successText, errorText);
     });
 
     function loadImg (img,divImg,inputImg,inputImgError,event, hasImg) {
@@ -176,6 +178,12 @@ document.addEventListener("DOMContentLoaded", function () {
         ipImg2.value=''
     });
 
+
+    departureLocation.addEventListener("input", function () {
+        const successText = "Địa điểm xuất phát hợp lệ"
+        const errorText = "Địa điểm xuất phát chỉ cho phép chứa chữ, số và , . -"
+        validation[5] = validateText(departureLocation, departureLocationError, successText, errorText);
+    });
 
 
 

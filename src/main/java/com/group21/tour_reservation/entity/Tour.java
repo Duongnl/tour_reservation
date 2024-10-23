@@ -23,6 +23,9 @@ public class Tour {
     @Column (name = "tour_detail")
     private String tourDetail;
 
+    @Column (name = "departure_location")
+    private String departureLocation;
+
     @Column (name = "city")
     private String city;
 
@@ -47,16 +50,25 @@ public class Tour {
 
     public Tour() {}
 
-    public Tour(Integer tourId, String tourName, String tourDetail, String city, String country, int status, Category category, Set<Image> images, Set<TourSchedule> tourSchedules) {
+    public Tour(Integer tourId, String tourName, String tourDetail, String departureLocation, String city, String country, int status, Category category, Set<Image> images, Set<TourSchedule> tourSchedules) {
         this.tourId = tourId;
         this.tourName = tourName;
         this.tourDetail = tourDetail;
+        this.departureLocation = departureLocation;
         this.city = city;
         this.country = country;
         this.status = status;
         this.category = category;
         this.images = images;
         this.tourSchedules = tourSchedules;
+    }
+
+    public String getDepartureLocation() {
+        return departureLocation;
+    }
+
+    public void setDepartureLocation(String departureLocation) {
+        this.departureLocation = departureLocation;
     }
 
     public Integer getTourId() {

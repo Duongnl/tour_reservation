@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 21, 2024 lúc 10:23 AM
+-- Thời gian đã tạo: Th10 23, 2024 lúc 10:51 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -36,6 +36,13 @@ CREATE TABLE `account` (
   `status` int(11) NOT NULL,
   `phone_number` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `account`
+--
+
+INSERT INTO `account` (`account_id`, `user_name`, `password`, `email`, `time`, `status`, `phone_number`) VALUES
+(1, 'duongngocle4231', 'Lengocduong.22062003', 'lengocduong003@gmail.com', '2024-10-21 15:37:23', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -73,7 +80,7 @@ CREATE TABLE `customer` (
   `relationship_name` varchar(255) DEFAULT NULL,
   `customer_name` varchar(255) NOT NULL,
   `customer_type` varchar(255) DEFAULT NULL,
-  `sex` varchar(255) DEFAULT NULL,
+  `sex` int(11) DEFAULT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -81,6 +88,13 @@ CREATE TABLE `customer` (
   `visa_expire` date DEFAULT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `customer`
+--
+
+INSERT INTO `customer` (`customer_id`, `account_id`, `relationship_id`, `relationship_name`, `customer_name`, `customer_type`, `sex`, `phone_number`, `email`, `address`, `birthday`, `visa_expire`, `status`) VALUES
+(1, NULL, NULL, '', 'Dương Ngọc Lê', 'Trẻ em', 1, '0963717300', 'lengocduong4231@gmail.com', 'Tân Phú', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -95,6 +109,13 @@ CREATE TABLE `employee` (
   `birthday` date DEFAULT NULL,
   `phone_number` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `employee`
+--
+
+INSERT INTO `employee` (`employee_id`, `account_id`, `employee_name`, `birthday`, `phone_number`) VALUES
+(1, 1, 'Lê Ngọc Dương', '2003-06-22', '0963717300');
 
 -- --------------------------------------------------------
 
@@ -143,7 +164,9 @@ INSERT INTO `image` (`image_id`, `tour_id`, `url`, `status`) VALUES
 (31, 14, '/admin/images/hinh-anh-ly-cafe-dep-1.jpg', 0),
 (32, 1, '/admin/images/2.jpg', 0),
 (54, 1, '/admin/images/5014_xuat-khau-ca-phe_vao-thi-truong-Nhat-Ban.jpg', 2),
-(57, 15, '/admin/images/0.jpg', 0);
+(57, 15, '/admin/images/0.jpg', 0),
+(60, 1, '/admin/images/ao.jpg', 1),
+(61, 16, '/admin/images/5910452ed1df0f519eb46b7d06bc3bdf.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -216,6 +239,7 @@ CREATE TABLE `tour` (
   `category_id` int(11) NOT NULL,
   `tour_name` varchar(255) NOT NULL,
   `tour_detail` varchar(255) DEFAULT NULL,
+  `departure_location` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   `status` int(11) NOT NULL
@@ -225,21 +249,22 @@ CREATE TABLE `tour` (
 -- Đang đổ dữ liệu cho bảng `tour`
 --
 
-INSERT INTO `tour` (`tour_id`, `category_id`, `tour_name`, `tour_detail`, `city`, `country`, `status`) VALUES
-(1, 3, 'Du lịch Thành Cổ, Thị Xã, Tỉnh Quảng Trị', '', 'Quảng Trị', 'Việt Nam', 1),
-(3, 1, 'Bà nà', '', 'Đà Nẵng', 'Việt Nam', 1),
-(4, 2, 'Thái Lan', '', 'Bangkok', 'Thái Lan', 1),
-(5, 2, 'Du lịch Tượng Nữ Thần Tự Do', '', 'NewYork', 'Mỹ', 1),
-(6, 2, 'Du lịch Mỹ', '', 'NewYork', 'Mỹ', 1),
-(7, 1, 'Du lịch Thành Phố Hồ Chí Minh', '', 'Hồ Chí Minh', 'Việt Nam', 1),
-(8, 1, 'Du lịch Hà Nội', '', 'Hà Nội', 'Việt Nam', 1),
-(9, 1, 'Du lịch Quản Trị', '', 'Quảng Trị', 'Việt Nam', 1),
-(10, 1, 'Du lịch Đông Hà', '', 'Quảng Trị', 'Việt Nam', 1),
-(11, 1, 'Dương', 'dưa', 'Hồ Chí Minh', 'Việt Nam', 1),
-(12, 1, 'Tour du lịch Đà Nẵng', '', 'Đà Nẵng', 'Việt Nam', 0),
-(13, 1, 'Du lịch Nam Định', '', 'Nam Định', 'Việt Nam', 0),
-(14, 1, 'Du lịch Tây Bắc', '', 'Hà Giang', 'Việt Nam', 0),
-(15, 1, 'Du lịch AT', '', 'Quảng Trị', 'Việt Nam', 1);
+INSERT INTO `tour` (`tour_id`, `category_id`, `tour_name`, `tour_detail`, `departure_location`, `city`, `country`, `status`) VALUES
+(1, 3, 'Du lịch Thành Cổ, Thị Xã, Tỉnh Quảng Trị sfdsfds', '', 'TP HN', 'Quảng Trị', 'Việt Nam', 1),
+(3, 1, 'Bà nà', '', NULL, 'Đà Nẵng', 'Việt Nam', 1),
+(4, 2, 'Thái Lan', '', NULL, 'Bangkok', 'Thái Lan', 1),
+(5, 2, 'Du lịch Tượng Nữ Thần Tự Do', '', NULL, 'NewYork', 'Mỹ', 1),
+(6, 2, 'Du lịch Mỹ', '', NULL, 'NewYork', 'Mỹ', 1),
+(7, 1, 'Du lịch Thành Phố Hồ Chí Minh', '', NULL, 'Hồ Chí Minh', 'Việt Nam', 1),
+(8, 1, 'Du lịch Hà Nội', '', NULL, 'Hà Nội', 'Việt Nam', 1),
+(9, 1, 'Du lịch Quản Trị', '', NULL, 'Quảng Trị', 'Việt Nam', 1),
+(10, 1, 'Du lịch Đông Hà', '', NULL, 'Quảng Trị', 'Việt Nam', 1),
+(11, 1, 'Dương', 'dưa', NULL, 'Hồ Chí Minh', 'Việt Nam', 1),
+(12, 1, 'Tour du lịch Đà Nẵng', '', NULL, 'Đà Nẵng', 'Việt Nam', 0),
+(13, 1, 'Du lịch Nam Định', '', NULL, 'Nam Định', 'Việt Nam', 0),
+(14, 1, 'Du lịch Tây Bắc', '', NULL, 'Hà Giang', 'Việt Nam', 0),
+(15, 1, 'Du lịch AT', '', NULL, 'Quảng Trị', 'Việt Nam', 1),
+(16, 4, 'đá', 'dsa', 'cá', 'dá', 'dsa', 0);
 
 -- --------------------------------------------------------
 
@@ -364,7 +389,7 @@ CREATE TABLE `transport_detail` (
 --
 
 INSERT INTO `transport_detail` (`transport_detail_id`, `schedule_id`, `transport_id`, `departure_time`, `arrival_time`, `status`) VALUES
-(1, 1, 9, '2024-10-16 17:47:58', '2024-10-17 17:47:58', 1),
+(1, 1, 9, '2024-10-16 17:47:00', '2024-10-17 17:47:00', 1),
 (2, 2, 7, '2024-10-17 17:48:54', '2024-10-19 17:48:54', 1),
 (3, 1, 4, '2024-10-18 17:49:15', '2024-10-19 17:49:15', 1),
 (4, 1, 2, '2024-10-14 00:14:00', '2024-10-18 00:14:00', 2),
@@ -494,7 +519,7 @@ ALTER TABLE `transport_detail`
 -- AUTO_INCREMENT cho bảng `account`
 --
 ALTER TABLE `account`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `category`
@@ -506,19 +531,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `image`
 --
 ALTER TABLE `image`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT cho bảng `promotion`
@@ -542,7 +567,7 @@ ALTER TABLE `reserve_detail`
 -- AUTO_INCREMENT cho bảng `tour`
 --
 ALTER TABLE `tour`
-  MODIFY `tour_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `tour_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `tour_schedule`
