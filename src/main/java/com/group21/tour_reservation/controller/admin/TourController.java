@@ -53,16 +53,16 @@ public class TourController {
         if (tour == null) {
             return "admin/404.html";
         }
-        List<TourSchedule> tourSchedules = new ArrayList<>();
-        tour.getTourSchedules().forEach(tourSchedule -> {
-            if (tourSchedule.getStatus() == 1) {
-                tourSchedules.add(tourSchedule);
-            }
-        });
 
+//        List<TourSchedule> tourSchedules = new ArrayList<>();
+//        tour.getTourSchedules().forEach(tourSchedule -> {
+//            if (tourSchedule.getStatus() == 1) {
+//                tourSchedules.add(tourSchedule);
+//            }
+//        });
 
         model.addAttribute("tour", tour);
-        model.addAttribute("tourSchedules", tourSchedules);
+        model.addAttribute("tourScheduleAdResponses", tourService.tourOverView(tour));
 
         return "admin/tour/tour-overview.html";
     }
@@ -96,7 +96,6 @@ public class TourController {
                             @ModelAttribute("tour") Tour tour,
                             RedirectAttributes redirectAttributes)
     {
-        System.out.println(tour.getDepartureLocation());
         Tour tourRes = tourService.editTour(imgMain, img1, img2, categorySlug, tour,ipImg1,ipImg2);
         redirectAttributes.addFlashAttribute("successMessage", "Đổi thông tin tour thành công");
         return "redirect:/admin/tour/tour-overview/" + StringUtils.createSlug(tourRes.getTourName()) + "-" + tourRes.getTourId();

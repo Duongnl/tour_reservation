@@ -141,9 +141,12 @@
                                                     <th>Ngày đi</th>
                                                     <th>Ngày về</th>
                                                     <th>Số chổ</th>
+                                                    <th>Đã đặt</th>
                                                     <th>Còn lại</th>
                                                     <th>Giá người lớn</th>
+                                                    <th>Giá sale người lớn</th>
                                                     <th>Giá trẻ em</th>
+                                                    <th>Giá sale trẻ em</th>
                                                     <th>Hạn visa</th>
                                                     <th style="width: 10%">Hành động</th>
                                                 </tr>
@@ -153,15 +156,18 @@
                                                 <!-- body -->
                                                 <tbody>
 
-                                                <tr class="row-data" th:each="tourSchedule: ${tourSchedules}">
+                                                <tr class="row-data" th:each="tourSchedule: ${tourScheduleAdResponses}">
                                                     <td class="txt-id" th:text="${tourSchedule.scheduleId}"></td>
                                                     <td class="txt-name" th:text="${tourSchedule.scheduleName}"></td>
                                                     <td th:text="${tourSchedule.departureDate}"></td>
                                                     <td th:text="${tourSchedule.returnDate}"></td>
                                                     <td th:text="${tourSchedule.quantity}"></td>
-                                                    <td th:text="${tourSchedule.quantity}"></td>
+                                                    <td th:text="${tourSchedule.quantityReserved}"></td>
+                                                    <td th:text="${tourSchedule.quantityLeft}"></td>
                                                     <td th:text="${tourSchedule.priceAdult}"></td>
+                                                    <td th:text="${tourSchedule.priceAdultSale}"></td>
                                                     <td th:text="${tourSchedule.priceChild}"></td>
+                                                    <td th:text="${tourSchedule.priceChildSale}"></td>
                                                     <td th:text="${tourSchedule.visaExpire}"></td>
                                                     <td>
                                                         <div class="form-button-action">
