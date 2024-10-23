@@ -48,9 +48,11 @@ public class Reserve {
     @JsonManagedReference
     private Set<ReserveDetail> reserveDetails;
 
-    public Reserve() {}
+    public Reserve() {
+    }
 
-    public Reserve(Integer reserveId, String reserveDetail, int adultCount, int childCount, int price, LocalDateTime time, int status, Employee employee, Customer customer, Set<ReserveDetail> reserveDetails) {
+    public Reserve(Integer reserveId, String reserveDetail, int adultCount, int childCount, int price,
+            LocalDateTime time, int status, Employee employee, Customer customer, Set<ReserveDetail> reserveDetails) {
         this.reserveId = reserveId;
         this.reserveDetail = reserveDetail;
         this.adultCount = adultCount;

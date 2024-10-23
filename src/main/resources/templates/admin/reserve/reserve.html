@@ -45,7 +45,7 @@
                         <div class="d-flex align-items-center">
                             <h4 class="card-title">Danh sách đặt chỗ</h4>
                             <a
-                                    th:href="@{/admin/tour/add}"
+                                    th:href="@{/admin/reserve/add}"
                                     class="btn btn-primary btn-round ms-auto"
                             >
                                 <i class="fa fa-plus"></i>
@@ -65,14 +65,11 @@
                                 <!-- header -->
                                 <thead>
                                 <tr>
-                                    <th>reserve_id</th>
-                                    <th>customer_id</th>
-                                    <th>schedule_id</th>
-                                    <th>employee_id</th>
-                                    <th>adult_count</th>
-                                    <th>child_count</th>
-                                    <th>price</th>
-                                    <th>time</th>
+                                    <th>STT</th>
+                                    <th>Mã Khách Hàng</th>
+                                    <th>Số người lớn</th>
+                                    <th>Số trẻ con</th>
+                                    <th>Tổng tiền</th>
                                     <th style="width: 10%">Hành động</th>
                                 </tr>
                                 </thead>
@@ -81,12 +78,12 @@
                                 <!-- body -->
                                 <tbody>
 
-                                <tr  class="row-data"  th:each="reserves: ${reserve}" >
-                                    <td class="txt-id" th:text="${reserve.tourId}" ></td>
-                                    <td class="txt-name" th:text="${reserve.tourName}" ></td>
-                                    <td th:text="${reserve.category.categoryName}" ></td>
-                                    <td th:text="${reserve.city}" ></td>
-                                    <td th:text="${reserve.country}" ></td>
+                                <tr  class="row-data"  th:each="reserve: ${reserve}" >
+                                    <td class="txt-id" th:text="${reserve.reserveId}" ></td>
+                                    <td class="txt-name" th:text="${reserve.customer.customerId}" ></td>
+                                    <td th:text="${reserve.adultCount}" ></td>
+                                    <td th:text="${reserve.childCount}" ></td>
+                                    <td th:text="${reserve.price}" ></td>
                                     <td>
                                         <div class="form-button-action">
                                             <a
@@ -104,9 +101,8 @@
                                                     class="btn btn-link btn-danger"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal"
-                                                    th:attr="data-id=${tour.tourId},
-                                                    data-name=${tour.tourName},
-                                                    data-controller-delete='/admin/tour/delete-tour' ">
+                                                    th:attr="data-id=${reserve.reserveId},
+                                                    data-controller-delete='/admin/reserve/delete-reserve' ">
                                                 <i class="fa fa-times"></i>
                                             </button>
 
