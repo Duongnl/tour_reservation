@@ -156,7 +156,7 @@
                                                 <!-- body -->
                                                 <tbody>
 
-                                                <tr class="row-data" th:each="tourSchedule: ${tourScheduleAdResponses}">
+                                                <tr class="row-data" th:each="tourSchedule: ${tourScheduleTableResponse}">
                                                     <td class="txt-id" th:text="${tourSchedule.scheduleId}"></td>
                                                     <td class="txt-name" th:text="${tourSchedule.scheduleName}"></td>
                                                     <td th:text="${tourSchedule.departureDate}"></td>

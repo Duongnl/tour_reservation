@@ -13,5 +13,10 @@ public class HomePageController {
         return "client/home.html";
     }
 
+    @GetMapping("/tour")
+    public String tourView() {
+
+        return "client/tour-page.html";
+    }
 
 }
