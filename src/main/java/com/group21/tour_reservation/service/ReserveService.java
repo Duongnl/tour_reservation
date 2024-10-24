@@ -16,7 +16,7 @@ public class ReserveService {
     private ReserveRepository reserveRepository;
 
     public List<Reserve> getAllReserve() {
-        return reserveRepository.findAllByStatus(1);
+        return reserveRepository.findAll();
     }
 
     public Reserve getTour(String slug) {
@@ -36,8 +36,13 @@ public class ReserveService {
         return reserveRepository.save(reserve);
     }
 
-    public Reserve addReserve(Reserve reserve) {
-        reserve.setStatus(1);
+    public Reserve addReserve(Integer reserveID) {
+        Reserve reserve = reserveRepository.findById(reserveID).orElseThrow(null);
+        if (reserve != null) {
+            reserve.setStatus(2);
+        } else {
+            return null;
+        }
         return reserveRepository.save(reserve);
     }
 }
