@@ -32,7 +32,7 @@ public class Customer {
     private String customerType;
 
     @Column(name = "sex")
-    private int sex;
+    private Integer sex;
 
     @Column(name = "phone_number")
     private String phoneNumber;
