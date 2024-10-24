@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="page-inner">
+    <!--Table-->
+    <div class="col-md-12">
+      <div class="card">
+
+        <!-- header table -->
+        <div class="card-header">
+          <div class="d-flex align-items-center">
+            <h4 class="card-title">Danh sách Danh Mục</h4>
+            <a
+                    th:href="@{/admin/category/add}"
+                    class="btn btn-primary btn-round ms-auto"
+            >
+              <i class="fa fa-plus"></i>
+              Thêm tour
+            </a>
+          </div>
+        </div>
+        <!-- end header table -->
+
+        <!-- table -->
+        <div class="card-body">
+          <div class="table-responsive">
+            <table
+                    id="add-row"
+                    class="display table table-striped table-hover"
+            >
+              <!-- header -->
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Detail</th>
+                <th>Status</th>
+              </tr>
+              </thead>
+              <!-- end header -->
+
+              <!-- body -->
+              <tbody>
+
+              <tr  class="row-data"  th:each="category: ${categorys}" >
+                <td class="txt-id" th:text="${category.categoryId}" ></td>
+                <td class="txt-name" th:text="${category.categoryName}" ></td>
+                <td th:text="${category.categoryDetail}" ></td>
+                <td th:text="${category.status}" ></td>
+                <td>
+                  <a th:href="@{/admin/category/edit/{slug}(slug=${category.categoryId})}">
+                    <button type="button" class="btn btn-success">Sửa</button>
+                  </a>
+                  <a th:href="@{/admin/category/delete/{id}(id=${category.categoryId})}">
+                    <button type="button" class="btn btn-danger">Xóa</button>
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+              <!-- end body -->
+
+            </table>
+          </div>
+        </div>
+        <!-- end table -->
+
+      </div>
+    </div>
+    <!--End table-->
+  </div>
+</div>
