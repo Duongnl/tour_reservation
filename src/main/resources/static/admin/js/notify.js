@@ -10,7 +10,8 @@ export function successNotify (message) {
         placement: {
             from: "top", // Từ vị trí nào
             align: "center" // Căn chỉnh
-        }
+        },
+        z_index: 9999 // Đảm bảo thông báo nằm trên các phần tử khác
     });
 }
 
@@ -26,7 +27,8 @@ export function errorNotify (message) {
         placement: {
             from: "top", // Từ vị trí nào
             align: "center" // Căn chỉnh
-        }
+        },
+        z_index: 9999 // Đảm bảo thông báo nằm trên các phần tử khác
     });
 }
 
