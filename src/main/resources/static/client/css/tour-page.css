@@ -1,0 +1,193 @@
+.media-1{
+    margin-bottom: 20px;
+    width: 100%;
+    border: solid 1px #e0e0e0;
+    border-radius: 22px;
+    transition: all 0.3s;
+
+
+
+    /*position: relative; !* Để các phần tử con được căn chỉnh chính xác *!*/
+    /*overflow: hidden; !* Ẩn các phần tử bên ngoài card *!*/
+}
+
+.img-fluid {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+@media (max-width: 520px) {
+    .img-fluid {
+        height: 170px; /* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+    }
+}
+
+.div-filter{
+    background-color: #a0c1cf;
+    margin: 0px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    position: sticky !important;
+    z-index: 1000; /* Đảm bảo header nằm trên các phần tử khác */
+    top: 10px;
+}
+
+.div-filter-item{
+    margin-top: 10px;
+}
+.page-link:active{
+    color: black;
+}
+.page-item.active .page-link {
+    background-color: #a0c1cf ;
+}
+.span-price{
+    color: red;
+    font-size: 20px;
+}
+
+.span-price-sale{
+    color: grey;
+    text-decoration: line-through;
+    font-size: 20px;
+}
+.a-tour-name{
+    font-weight: bold;
+
+}
+.div-tour-content{
+    padding-right: 10px;
+    padding-left: 10px;
+
+}
+
+.media-1:hover {
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    transform: translateY(-5px);
+    transition: all 0.3s;
+}
+
+.h3-tour-name{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 16px;
+    height: 45px;
+}
+
+.departure-location{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 22px;
+    color: darkblue;
+}
+
+/*.div-row-filter{*/
+/*    border-top: solid 1px #e0e0e0;*/
+/*}*/
+
+.page-link{
+    color: black;
+}
+
+.page-link:hover{
+    background-color:  #a0c1cf;
+}
+
+.page-link:active{
+    background-color:  #a0c1cf;
+    border-color: #a0c1cf ;
+}
+
+.page-item{
+    border-color: #a0c1cf !important;
+}
+
+.scrollContainer{
+    display: flex;
+    overflow-x: auto;
+    width: 375px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 40px;
+}
+
+@media (max-width: 1200px) {
+    .scrollContainer {
+        width: 300px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+    }
+}
+
+@media (max-width: 992px) {
+    .scrollContainer {
+        width: 214px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+    }
+}
+
+@media (max-width: 768px) {
+    .scrollContainer {
+        width: 480px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+    }
+}
+
+@media (max-width: 768px) {
+    .scrollContainer {
+        width: 480px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+
+    }
+}
+
+@media (max-width: 537px) {
+    .scrollContainer {
+        width: 317px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+
+    }
+}
+
+@media (max-width: 372px) {
+    .scrollContainer {
+        width: 194px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+
+    }
+}
+
+
+.list-item {
+    margin: 0 5px; /* Khoảng cách giữa các ngày */
+    padding: 5px 10px; /* Padding cho mỗi ngày */
+    background-color: #a0c1cf; /* Màu nền cho mỗi ngày */
+    border-radius: 5px; /* Bo góc cho các ngày */
+}
+
+/* Tùy chỉnh thanh cuộn cho trình duyệt WebKit (Chrome, Safari) */
+.scrollContainer::-webkit-scrollbar {
+    height: 3px; /* Chiều cao thanh cuộn ngang */
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+    background-color: #888; /* Màu của thanh cuộn */
+    border-radius: 20px; /* Bo góc cho thanh cuộn */
+}
+
+.scrollContainer::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Màu nền của phần track */
+}
+
+/* Đối với Firefox */
+.scrollContainer {
+    scrollbar-width: thin; /* Làm thanh cuộn mỏng hơn */
+    scrollbar-color: #888 #f1f1f1; /* Màu của thanh cuộn và nền */
+}
+
+.div-price{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
+    /*margin-bottom: 10px;*/
+}

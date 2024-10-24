@@ -1,34 +1,31 @@
 package com.group21.tour_reservation.service;
 
 
-import com.group21.tour_reservation.entity.Category;
-import com.group21.tour_reservation.entity.Image;
-import com.group21.tour_reservation.entity.Tour;
-import com.group21.tour_reservation.entity.Transport;
+import com.group21.tour_reservation.dto.response.TourCardResponse;
+import com.group21.tour_reservation.dto.response.TourScheduleTableResponse;
+import com.group21.tour_reservation.entity.*;
+import com.group21.tour_reservation.mapper.TourMapper;
+import com.group21.tour_reservation.mapper.TourScheduleMapper;
 import com.group21.tour_reservation.repository.CategoryRepository;
 import com.group21.tour_reservation.repository.ImgRepository;
 import com.group21.tour_reservation.repository.TourRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Service
 public class TourService {
@@ -44,6 +41,12 @@ public class TourService {
 
     @Autowired
     private ImgRepository imgRepository;
+
+    @Autowired
+    private TourScheduleMapper tourScheduleMapper;
+
+    @Autowired
+    private TourMapper tourMapper;
 
     public List<Tour> getAllTours() {
         return tourRepository.findAllByStatus(1);
@@ -102,7 +105,7 @@ public class TourService {
                 .orElse(null);
         tour.setCategory(category);
         tour.setStatus(1);
-
+        tourRepository.save(tour);
         entityManager.clear();// This should work
 
 //      Code  Chỉnh sửa ảnh
@@ -205,6 +208,149 @@ public class TourService {
             return null;
         }
         return tourRepository.save(tour);
+    }
+
+    public List<TourScheduleTableResponse> tourOverView (Tour tour) {
+        List<TourScheduleTableResponse> tourScheduleTableRespons = new ArrayList<>();
+        tour.getTourSchedules().forEach(tourSchedule -> {
+            if (tourSchedule.getStatus() == 1) {
+
+
+                TourScheduleTableResponse tourScheduleTableResponse =
+                        tourScheduleMapper.toTourScheduleAdResponse(tourSchedule);
+
+                int quantityReserved = 0;
+                for(Reserve reserve : tourSchedule.getReserves()) {
+                    quantityReserved += reserve.getReserveDetails().size();
+                }
+
+                tourScheduleTableResponse.setQuantityReserved(quantityReserved);
+                Integer quantityLeft = tourSchedule.getQuantity() -  quantityReserved;
+                tourScheduleTableResponse.setQuantityLeft(quantityLeft);
+                tourScheduleTableResponse.setPriceAdultSale(handlePriceAdultSale(tourSchedule));
+                tourScheduleTableResponse.setPriceChildSale(handlePriceChildSale(tourSchedule));
+
+
+
+                tourScheduleTableRespons.add(tourScheduleTableResponse);
+            }
+        });
+
+        return tourScheduleTableRespons;
+    }
+
+    public Integer handlePriceAdultSale (TourSchedule tourSchedule) {
+        // Lấy LocalDateTime hiện tại
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        double percentage= 0;
+
+        for (Promotion promotion : tourSchedule.getPromotions()) {
+            if (currentDateTime.isAfter(promotion.getStartTime()) &&
+            currentDateTime.isBefore(promotion.getEndTime()) && promotion.getStatus() == 1) {
+                percentage += promotion.getPercentageAdult();
+            }
+        }
+
+        Integer priceSale = (Integer) (int)((double) tourSchedule.getPriceAdult() * (percentage/100) );
+
+        return tourSchedule.getPriceAdult() - priceSale;
+
+    }
+
+    public Integer handlePriceChildSale (TourSchedule tourSchedule) {
+        // Lấy LocalDateTime hiện tại
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        double percentage= 0;
+
+        for (Promotion promotion : tourSchedule.getPromotions()) {
+            if (currentDateTime.isAfter(promotion.getStartTime()) &&
+                    currentDateTime.isBefore(promotion.getEndTime()) && promotion.getStatus() == 1 ) {
+                percentage += promotion.getPercentageChild();
+            }
+        }
+
+        Integer priceSale = (Integer) (int)((double) tourSchedule.getPriceChild() * (percentage/100) );
+
+
+        return tourSchedule.getPriceChild() - priceSale ;
+
+    }
+
+//    public List<TourCardResponse> getTourCards ()
+//    {
+//        List<Tour> tours = tourRepository.findAllByStatus (1);
+//        List<TourCardResponse> tourCardResponses = new ArrayList<>();
+//        tours.forEach(tour -> {
+//
+//        })
+//
+//    }
+
+//    public TourCardResponse handleTourCard (Tour tour) {
+//        TourCardResponse  tourCardResponse = tourMapper.toTourCardResponse(tour);
+//        Set<String> departureDates = new HashSet<>();
+//        if (tour.getTourSchedules() != null) {
+//
+//            //        Lay thoi gian khoi hanh
+//            tour.getTourSchedules().forEach(tourSchedule -> {
+//                departureDates.add(handleConvertDateToString(tourSchedule.getDepartureDate()));
+//            });
+//            tourCardResponse.setDepartureDates(departureDates);
+//
+//            TourSchedule tourSchedulePriceMin = handlePriceSaleMin(tour);
+//            tourCardResponse.setPrice(tourSchedulePriceMin.get);
+//        }
+//
+//
+//    }
+
+    public TourSchedule handlePriceSaleMin(Tour tour) {
+
+//        tim gia tre em nho nhat
+        Integer priceChildSaleMin = 0;
+        TourSchedule tourSchedulePriceSaleChildMin = null;
+        for (TourSchedule tourSchedule : tour.getTourSchedules()) {
+            priceChildSaleMin = handlePriceChildSale(tourSchedule);
+            break;
+        }
+
+        for (TourSchedule tourSchedule : tour.getTourSchedules()) {
+           if (handlePriceChildSale(tourSchedule) < priceChildSaleMin) {
+               priceChildSaleMin = handlePriceChildSale(tourSchedule);
+               tourSchedulePriceSaleChildMin = tourSchedule;
+           }
+        }
+
+//      tim gia nguoi lon nho nhat
+        Integer priceAdultSaleMin = 0;
+        TourSchedule tourSchedulePriceSaleAdultMin = null;
+        for (TourSchedule tourSchedule : tour.getTourSchedules()) {
+            priceAdultSaleMin = handlePriceAdultSale(tourSchedule);
+            break;
+        }
+
+        for (TourSchedule tourSchedule : tour.getTourSchedules()) {
+            if (handlePriceAdultSale(tourSchedule) < priceAdultSaleMin) {
+                priceAdultSaleMin = handlePriceAdultSale(tourSchedule);
+                tourSchedulePriceSaleAdultMin = tourSchedule;
+            }
+        }
+
+        if ( handlePriceChildSale(tourSchedulePriceSaleChildMin) <
+                handlePriceAdultSale(tourSchedulePriceSaleAdultMin) ) {
+            return tourSchedulePriceSaleChildMin;
+        } else if (handlePriceChildSale(tourSchedulePriceSaleChildMin) >
+                handlePriceAdultSale(tourSchedulePriceSaleAdultMin)) {
+            return tourSchedulePriceSaleAdultMin;
+        } else {
+            return null;
+        }
+
+    }
+
+    public String handleConvertDateToString (LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM");
+        return date.format(formatter);
     }
 
 }

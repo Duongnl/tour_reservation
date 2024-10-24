@@ -14,8 +14,9 @@ public class HomePageController {
     }
 
     @GetMapping("/tour")
-    public String getTour(Model model) {
-        return "client/tour.html";
+    public String tourView() {
+
+        return "client/tour-page.html";
     }
 
 }
