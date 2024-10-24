@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TourScheduleAdResponse  {
+public class TourScheduleTableResponse {
 
     private Integer scheduleId;
 

@@ -62,7 +62,7 @@ public class TourController {
 //        });
 
         model.addAttribute("tour", tour);
-        model.addAttribute("tourScheduleAdResponses", tourService.tourOverView(tour));
+        model.addAttribute("tourScheduleTableResponse", tourService.tourOverView(tour));
 
         return "admin/tour/tour-overview.html";
     }

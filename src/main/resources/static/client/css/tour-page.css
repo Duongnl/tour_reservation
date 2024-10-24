@@ -108,3 +108,86 @@
 .page-item{
     border-color: #a0c1cf !important;
 }
+
+.scrollContainer{
+    display: flex;
+    overflow-x: auto;
+    width: 375px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 40px;
+}
+
+@media (max-width: 1200px) {
+    .scrollContainer {
+        width: 300px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+    }
+}
+
+@media (max-width: 992px) {
+    .scrollContainer {
+        width: 214px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+    }
+}
+
+@media (max-width: 768px) {
+    .scrollContainer {
+        width: 480px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+    }
+}
+
+@media (max-width: 768px) {
+    .scrollContainer {
+        width: 480px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+
+    }
+}
+
+@media (max-width: 537px) {
+    .scrollContainer {
+        width: 317px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+
+    }
+}
+
+@media (max-width: 372px) {
+    .scrollContainer {
+        width: 194px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
+
+    }
+}
+
+
+.list-item {
+    margin: 0 5px; /* Khoảng cách giữa các ngày */
+    padding: 5px 10px; /* Padding cho mỗi ngày */
+    background-color: #a0c1cf; /* Màu nền cho mỗi ngày */
+    border-radius: 5px; /* Bo góc cho các ngày */
+}
+
+/* Tùy chỉnh thanh cuộn cho trình duyệt WebKit (Chrome, Safari) */
+.scrollContainer::-webkit-scrollbar {
+    height: 3px; /* Chiều cao thanh cuộn ngang */
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+    background-color: #888; /* Màu của thanh cuộn */
+    border-radius: 20px; /* Bo góc cho thanh cuộn */
+}
+
+.scrollContainer::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Màu nền của phần track */
+}
+
+/* Đối với Firefox */
+.scrollContainer {
+    scrollbar-width: thin; /* Làm thanh cuộn mỏng hơn */
+    scrollbar-color: #888 #f1f1f1; /* Màu của thanh cuộn và nền */
+}
+
+.div-price{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
+    /*margin-bottom: 10px;*/
+}
