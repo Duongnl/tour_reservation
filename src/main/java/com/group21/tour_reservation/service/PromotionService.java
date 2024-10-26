@@ -6,14 +6,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group21.tour_reservation.entity.Promotion;
-
+import com.group21.tour_reservation.entity.TourSchedule;
 import com.group21.tour_reservation.repository.PromotionRepository;
+import com.group21.tour_reservation.repository.TourScheduleRepository;
 import com.group21.tour_reservation.utils.StringUtils;
 
 @Service
 public class PromotionService {
     @Autowired
     private PromotionRepository promotionRepository;
+
+    @Autowired
+    private TourScheduleRepository tourScheduleRepository;
 
     public List<Promotion> getAllPromotion() {
         return promotionRepository.findAllByStatus(1);
@@ -47,5 +51,9 @@ public class PromotionService {
             return null;
         }
         return promotionRepository.save(promotion);
+    }
+
+    public List<TourSchedule> getAllShedules() {
+        return tourScheduleRepository.findAllByStatus(1);  // Lấy tất cả lịch trình có status = 1
     }
 }

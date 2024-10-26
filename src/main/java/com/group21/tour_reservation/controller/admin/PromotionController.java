@@ -1,5 +1,7 @@
 package com.group21.tour_reservation.controller.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.group21.tour_reservation.entity.Promotion;
+import com.group21.tour_reservation.entity.TourSchedule;
 import com.group21.tour_reservation.entity.Transport;
 import com.group21.tour_reservation.service.PromotionService;
 
@@ -75,7 +78,8 @@ public class PromotionController {
     @GetMapping("/admin/promotion/add-promotion-to-tour/{id}")
     public String GetTourShedule(Model model,@PathVariable("id") String promotionId) {
         //System.out.println("123");
-        model.addAttribute("promotion", promotionService.getPromotion(promotionId));
+        List<TourSchedule> schedules = promotionService.getAllShedules();
+        model.addAttribute("schedules", schedules);
         //System.out.println("456");
         return "admin/promotion/promotion-add-tour.html";
     }

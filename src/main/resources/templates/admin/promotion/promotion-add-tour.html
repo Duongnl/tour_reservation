@@ -21,8 +21,10 @@
     <link th:href="@{/admin/css/demo.css}" rel="stylesheet" />
 
     <!-- Thêm thư viện Select2 vào dự án -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+     <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css}" rel="stylesheet" />
+     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
+
+     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js}"></script>
 
 </head>
 
@@ -40,7 +42,7 @@
                 <div class="page-inner">
 
                     <!--add form-->
-                    <form method="POST" th:action="@{/admin/promotion/add-promotion}" th:object="${promotion}">
+                    <form method="POST" th:action="@{/admin/promotion/add-promotion}" th:object="${schedules}">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
@@ -48,15 +50,19 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <select class="js-example-basic-single" name="state">
-                                            <option value="AL">Alabama</option>
-                                            ...
-                                            <option value="WY">Wyoming</option>
+                                        <select id="tour_schedule" class="form-control select2">
+                                            <option value="" selected disabled>Chọn tour</option>
+                                            <option th:each="schedule : ${schedules}"
+                                                    th:value="${schedule.scheduleId}"
+                                                    th:text="${schedule.scheduleName}">
+                                            </option>
                                         </select>
-
-
-
-
+                                    
+                                        <script>
+                                            $(document).ready(function() {
+                                                $('#tour_schedule').select2(); // Khởi tạo Select2
+                                            });
+                                        </script>
                                     </div>
                                 </div>
                                 <div class="card-action">
