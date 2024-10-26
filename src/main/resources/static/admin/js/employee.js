@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const btnemployeeAdd = document.getElementById("btn-employee-add");
 
+    const employeeUserNameOld = document.getElementById("employee-user-name-old")
+
     const txtId = document.getElementById('txt-id')
     let validation;
     if(txtId) {
@@ -66,15 +68,50 @@ document.addEventListener("DOMContentLoaded", function () {
         validation[4] = validateEmail(employeeEmail, employeeEmailError,successText,errorText);
     });
 
-    btnemployeeAdd.addEventListener("click", function (event){
+    const fetchApi = async  ()=> {
 
-        console.log("Validation",validation)
+        const res = await fetch ("/api/check-username", {
+            method:"POST",
+            headers: {
+                  'Content-Type' : 'text/plain'
+            },
+            body: employeeUsername.value
+        })
+
+        const data = res.json();
+        return data
+       
+    }
+
+     btnemployeeAdd.addEventListener("click", async function (event){
+        event.preventDefault();
+         
+
+
         if (!validation.some(v => v === false)) {
-
+            
+            if (!txtId || employeeUserNameOld.value != employeeUsername.value) {
+                const data = await fetchApi()
+                if (data === false) {
+                 errorNotify("Tài khoản đã tồn tại")
+                 employeeUsername.classList.remove("is-valid");
+                 employeeUsername.classList.add("is-invalid");
+                 employeeUsernameError.textContent = "Tài khoản đã tồn tại";
+                 employeeUsernameError.classList.add("text-danger");
+                } else {
+                 console.log("submit trong add")
+                 document.querySelector("form").submit(); // Replace "form" with the actual form selector if needed
+             }
+            } else {
+                document.querySelector("form").submit();
+                console.log("submit")
+            }
         } else {
-            event.preventDefault();
             errorNotify("Vui lòng điền đầy đủ thông tin hợp lệ")
         }
+
+      
+        
     });
 
 

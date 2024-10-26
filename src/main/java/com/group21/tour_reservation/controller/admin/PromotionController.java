@@ -18,6 +18,8 @@ public class PromotionController {
     @Autowired
     PromotionService promotionService;
 
+
+
     @GetMapping("/admin/promotion")
     public String Getpromotion(Model model) {
         model.addAttribute("promotions", promotionService.getAllPromotion());
@@ -67,6 +69,23 @@ public class PromotionController {
         } else {
             return "admin/404.html";
         }
+        return "redirect:/admin/promotion";
+    }
+
+    @GetMapping("/admin/promotion/add-promotion-to-tour/{id}")
+    public String GetTourShedule(Model model,@PathVariable("id") String promotionId) {
+        //System.out.println("123");
+        model.addAttribute("promotion", promotionService.getPromotion(promotionId));
+        //System.out.println("456");
+        return "admin/promotion/promotion-add-tour.html";
+    }
+
+    @PostMapping("/admin/promotion/add-promotion-to-tour")
+    public String addPromotionTour(Model model, @ModelAttribute("promotion") Promotion promotion, RedirectAttributes redirectAttributes) {
+        // promotionService.editPromotion(promotion);
+
+        // Thêm thông báo vào RedirectAttributes
+        redirectAttributes.addFlashAttribute("successMessage", "Chỉnh sửa khuyến mãi thành công!");
         return "redirect:/admin/promotion";
     }
 }

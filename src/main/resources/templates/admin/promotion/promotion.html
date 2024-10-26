@@ -75,14 +75,23 @@
 
                                             <tr class="row-data" th:each="promotion: ${promotions}">
                                                 <td class="txt-id" th:text="${promotion.promotionId}"></td>
-                                                <td class="txt-id" th:text="${promotion.promotionName}"></td>
-                                                <td class="txt-name" th:text="${promotion.percentageAdult}"></td>
-                                                <td class="txt-name" th:text="${promotion.percentageChild}"></td>
+                                                <td class="txt-name" th:text="${promotion.promotionName}"></td>
+                                                <td th:text="${promotion.percentageAdult}"></td>
+                                                <td th:text="${promotion.percentageChild}"></td>
                                                 <td th:text="${promotion.startTime}"></td>
                                                 <td th:text="${promotion.endTime}"></td>
 
                                                 <td>
                                                     <div class="form-button-action">
+
+                                                    
+
+                                                        <a type="button" data-bs-toggle="tooltip" title=""
+                                                            class="btn btn-link btn-warning btn-lg btn-detail"
+                                                            data-original-title="Detail Task" 
+                                                            th:href="@{/admin/promotion/add-promotion-to-tour/{id}(id=${promotion.promotionId})}">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </a>
                                 
                                                         <!-- Button trigger modal -->
                                                         <a type="button" data-bs-toggle="tooltip" title=""

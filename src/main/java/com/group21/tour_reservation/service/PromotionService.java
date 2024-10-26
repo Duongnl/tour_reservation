@@ -1,13 +1,12 @@
 package com.group21.tour_reservation.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.group21.tour_reservation.entity.Customer;
-import com.group21.tour_reservation.entity.Employee;
 import com.group21.tour_reservation.entity.Promotion;
-import com.group21.tour_reservation.entity.Transport;
+
 import com.group21.tour_reservation.repository.PromotionRepository;
 import com.group21.tour_reservation.utils.StringUtils;
 
@@ -23,6 +22,11 @@ public class PromotionService {
    public Promotion getPromotion(String slug) {
 
         return promotionRepository.findById(StringUtils.getIdFromSlug(slug)).orElse(null);
+    }
+
+    public Optional<Promotion> getPromotionDetail(int id) {
+
+        return promotionRepository.findById(id);
     }
 
     public void createPromotion(Promotion promotion) {

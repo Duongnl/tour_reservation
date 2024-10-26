@@ -46,6 +46,9 @@
                                         <div class="col-md-6 col-lg-4">
 
                                             <input id="txt-id" type="hidden" th:field="*{employeeId}" />
+                                            <input id="employee-user-name-old" type="hidden"
+                                                th:value="*{account.userName}" />
+
 
                                             <div class="form-group has-feedback">
                                                 <label for="employee-name">Tên nhân viên</label>
@@ -57,8 +60,8 @@
 
                                             <div class="form-group has-feedback">
                                                 <label for="employeeDate">Ngày sinh</label>
-                                                <input type="date" id="employeeDate" name="birthday" value="" class="form-control"
-                                                    th:value="*{birthday}" />
+                                                <input type="date" id="employeeDate" name="birthday" value=""
+                                                    class="form-control" th:value="*{birthday}" />
                                                 <small id="employeeDate-error" class="form-text text-muted">Điền ngày
                                                     sinh.</small>
                                             </div>
