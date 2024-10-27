@@ -23,6 +23,8 @@
             rel="stylesheet">
 
 
+    <link th:href="@{/client/css/select2.min.css}" rel="stylesheet"/>
+
     <link th:href="@{/client/css/bootstrap.min.css}" rel="stylesheet"/>
     <!-- <link rel="stylesheet" href="client/css/owl.carousel.min.css"> -->
     <link th:href="@{/client/css/owl.carousel.min.css}" rel="stylesheet"/>
@@ -77,8 +79,8 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-12  col-md-3 div-filter-container ">
-            <h5><i class="fa fa-filter"></i> Bộ lọc</h5>
+        <div class="col-12 col-sm-12 col-md-3 div-filter-container ">
+            <p style="font-size: 20px; margin-bottom: 24px" > <i class="fa fa-filter"></i>  Bộ lọc</p>
             <div class="row div-filter">
 
                 <!--                <div class="col-12 col-md-12 div-filter-item d-flex justify-content-center">-->
@@ -87,42 +89,31 @@
                 <!--                    </div>-->
                 <!--                </div>-->
 
+
                 <div class="col-6 col-md-12 div-filter-item">
                     <div class="form-group">
                         <label for="category">Danh mục</label>
-                        <select class="form-control" id="category">
-                            <option>Tất cả</option>
-                            <option>Trong nước</option>
-                            <option>Ngoài nước</option>
-                            <option>Châu Á</option>
-                            <option>Châu Âu</option>
+                        <select class="form-control js-example-basic-single" id="category">
+
                         </select>
                     </div>
                 </div>
+
 
                 <div class="col-6 col-md-12 div-filter-item">
                     <div class="form-group">
                         <label for="departure-location">Khởi hành</label>
-                        <select class="form-control" id="departure-location">
-                            <option>Tất cả</option>
-                            <option>Quảng Trị</option>
-                            <option>TP Hồ Chí Minh</option>
-                            <option>Hà Nội</option>
-                            <option>Châu Âu</option>
+                        <select class="form-control js-example-basic-single" id="departure-location">
+
                         </select>
                     </div>
                 </div>
 
                 <div class="col-6 col-md-12 div-filter-item">
                     <div class="form-group">
-                        <label for="country"> Điểm đến </label>
-                        <select class="form-control" id="country">
-                            <option> Tất cả</option>
-                            <option>Mỹ</option>
-                            <option> Việt Nam</option>
-                            <option> Thái Lan</option>
-                            <option> Nhật Bản</option>
-                            <option> Hàn quốc</option>
+                        <label for="destination-location"> Điểm đến </label>
+                        <select class="form-control js-example-basic-single" id="destination-location">
+
                         </select>
                     </div>
                 </div>
@@ -138,432 +129,79 @@
                     <div class="form-group">
                         <label for="price">Giá</label>
                         <select class="form-control" id="price">
-                            <option>Tất cả giá</option>
-                            <option>Dưới 5 triệu</option>
-                            <option>Từ 5 - 10 triệu</option>
-                            <option>Từ 10 - 20 triệu</option>
-                            <option>Trên 20 triệu</option>
+                            <option value="all">Tất cả giá</option>
+                            <option value="under5">Dưới 5 triệu</option>
+                            <option value="5to10">Từ 5 - 10 triệu</option>
+                            <option value="10to20">Từ 10 - 20 triệu</option>
+                            <option value="over20">Trên 20 triệu</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="col-12 col-md-12 div-filter-item d-flex justify-content-center">
+<!--                    <div class="col-12 col-md-12" >-->
+<!--                        <div class="row" >-->
+<!--                            <div class="col-6 col-md-6"  >-->
+<!--                                <div class="form-group">-->
+<!--                                    <button type="button" class="btn btn-light" id="btn-filter">Lọc</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-6 col-md-6" >-->
+<!--                                <div class="form-group">-->
+<!--                                    <button type="button" class="btn btn-light" id="btn-reset"   >Bỏ chọn</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                <div class="col-12 col-md-12 d-flex justify-content-center" >
                     <div class="form-group">
-                        <button type="button" class="btn btn-light">Lọc</button>
+                        <button type="button" class="btn btn-light" id="btn-filter">Lọc</button>
                     </div>
                 </div>
+
+
+
+
 
             </div>
         </div>
 
 
-        <div class="col-12  col-md-9 div-tour-container">
-            <h5>Danh sách tour</h5>
-            <div class="row div-row-filter">
-
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0">
-                    <div class="media-1">
-                        <a href="#" class="d-block mb-3"><img src="/admin/images/0.jpg" alt="Image"
-                                                              class="img-fluid"></a>
-                        <div class="div-tour-content">
-                            <span class="d-flex align-items-center loc mb-2">
-							<span class="icon-room mr-3"></span>
-							<span>Italy</span>
-						</span>
-                            <div class="d-flex align-items-center loc mb-2">
-                                <div>
-                                    <h3 class="h3-tour-name"><a href="#" class="a-tour-name"> Đi Mỹ thăm người thân, du
-                                        lịch tượng nữ thần tự do </a></h3>
-
-
-                                    <div class="div-price" >
-                                        <div class="price">
-                                            <span class="span-price">50.000.000 đ</span>
-                                        </div>
-                                        <div class="price">
-                                            <span class="span-price-sale">50.000.000 đ</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="price ml-auto">
-                                        <span class="departure-location">Khởi hành: Quảng Trị</span>
-                                    </div>
-
-                                    <div class="scrollContainer">
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0">
-                    <div class="media-1">
-                        <a href="#" class="d-block mb-3"><img src="/admin/images/0.jpg" alt="Image"
-                                                              class="img-fluid"></a>
-                        <div class="div-tour-content">
-                            <span class="d-flex align-items-center loc mb-2">
-							<span class="icon-room mr-3"></span>
-							<span>Italy</span>
-						</span>
-                            <div class="d-flex align-items-center loc mb-2">
-                                <div>
-                                    <h3 class="h3-tour-name"><a href="#" class="a-tour-name"> Đi Mỹ thăm người thân, du
-                                        lịch tượng nữ thần tự do </a></h3>
-
-
-                                    <div class="div-price" >
-                                        <div class="price">
-                                            <span class="span-price">50.000.000 đ</span>
-                                        </div>
-                                        <div class="price">
-                                            <span class="span-price-sale">50.000.000 đ</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="price ml-auto">
-                                        <span class="departure-location">Khởi hành: Quảng Trị</span>
-                                    </div>
-
-                                    <div class="scrollContainer">
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0">
-                    <div class="media-1">
-                        <a href="#" class="d-block mb-3"><img src="/admin/images/0.jpg" alt="Image"
-                                                              class="img-fluid"></a>
-                        <div class="div-tour-content">
-                            <span class="d-flex align-items-center loc mb-2">
-							<span class="icon-room mr-3"></span>
-							<span>Italy</span>
-						</span>
-                            <div class="d-flex align-items-center loc mb-2">
-                                <div>
-                                    <h3 class="h3-tour-name"><a href="#" class="a-tour-name"> Đi Mỹ thăm người thân, du
-                                        lịch tượng nữ thần tự do </a></h3>
-
-
-                                    <div class="div-price" >
-                                        <div class="price">
-                                            <span class="span-price">50.000.000 đ</span>
-                                        </div>
-                                        <div class="price">
-                                            <span class="span-price-sale">50.000.000 đ</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="price ml-auto">
-                                        <span class="departure-location">Khởi hành: Quảng Trị</span>
-                                    </div>
-
-                                    <div class="scrollContainer">
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0">
-                    <div class="media-1">
-                        <a href="#" class="d-block mb-3"><img src="/admin/images/0.jpg" alt="Image"
-                                                              class="img-fluid"></a>
-                        <div class="div-tour-content">
-                            <span class="d-flex align-items-center loc mb-2">
-							<span class="icon-room mr-3"></span>
-							<span>Italy</span>
-						</span>
-                            <div class="d-flex align-items-center loc mb-2">
-                                <div>
-                                    <h3 class="h3-tour-name"><a href="#" class="a-tour-name"> Đi Mỹ thăm người thân, du
-                                        lịch tượng nữ thần tự do </a></h3>
-
-
-                                    <div class="div-price" >
-                                        <div class="price">
-                                            <span class="span-price">50.000.000 đ</span>
-                                        </div>
-                                        <div class="price">
-                                            <span class="span-price-sale">50.000.000 đ</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="price ml-auto">
-                                        <span class="departure-location">Khởi hành: Quảng Trị</span>
-                                    </div>
-
-                                    <div class="scrollContainer">
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0">
-                    <div class="media-1">
-                        <a href="#" class="d-block mb-3"><img src="/admin/images/0.jpg" alt="Image"
-                                                              class="img-fluid"></a>
-                        <div class="div-tour-content">
-                            <span class="d-flex align-items-center loc mb-2">
-							<span class="icon-room mr-3"></span>
-							<span>Italy</span>
-						</span>
-                            <div class="d-flex align-items-center loc mb-2">
-                                <div>
-                                    <h3 class="h3-tour-name"><a href="#" class="a-tour-name"> Đi Mỹ thăm người thân, du
-                                        lịch tượng nữ thần tự do </a></h3>
-
-
-                                    <div class="div-price" >
-                                        <div class="price">
-                                            <span class="span-price">50.000.000 đ</span>
-                                        </div>
-                                        <div class="price">
-                                            <span class="span-price-sale">50.000.000 đ</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="price ml-auto">
-                                        <span class="departure-location">Khởi hành: Quảng Trị</span>
-                                    </div>
-
-                                    <div class="scrollContainer">
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0">
-                    <div class="media-1">
-                        <a href="#" class="d-block mb-3"><img src="/admin/images/0.jpg" alt="Image"
-                                                              class="img-fluid"></a>
-                        <div class="div-tour-content">
-                            <span class="d-flex align-items-center loc mb-2">
-							<span class="icon-room mr-3"></span>
-							<span>Italy</span>
-						</span>
-                            <div class="d-flex align-items-center loc mb-2">
-                                <div>
-                                    <h3 class="h3-tour-name"><a href="#" class="a-tour-name"> Đi Mỹ thăm người thân, du
-                                        lịch tượng nữ thần tự do </a></h3>
-
-
-                                    <div class="div-price" >
-                                        <div class="price">
-                                            <span class="span-price">50.000.000 đ</span>
-                                        </div>
-                                        <div class="price">
-                                            <span class="span-price-sale">50.000.000 đ</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="price ml-auto">
-                                        <span class="departure-location">Khởi hành: Quảng Trị</span>
-                                    </div>
-
-                                    <div class="scrollContainer">
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0">
-                    <div class="media-1">
-                        <a href="#" class="d-block mb-3"><img src="/admin/images/0.jpg" alt="Image"
-                                                              class="img-fluid"></a>
-                        <div class="div-tour-content">
-                            <span class="d-flex align-items-center loc mb-2">
-							<span class="icon-room mr-3"></span>
-							<span>Italy</span>
-						</span>
-                            <div class="d-flex align-items-center loc mb-2">
-                                <div>
-                                    <h3 class="h3-tour-name"><a href="#" class="a-tour-name"> Đi Mỹ thăm người thân, du
-                                        lịch tượng nữ thần tự do </a></h3>
-
-
-                                    <div class="div-price" >
-                                        <div class="price">
-                                            <span class="span-price">50.000.000 đ</span>
-                                        </div>
-                                        <div class="price">
-                                            <span class="span-price-sale">50.000.000 đ</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="price ml-auto">
-                                        <span class="departure-location">Khởi hành: Quảng Trị</span>
-                                    </div>
-
-                                    <div class="scrollContainer">
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                        <div class="list-item">31/10</div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div class="col-12 col-md-12 div-filter-item d-flex justify-content-center">
-                    <div class="form-group">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <button class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </button>
-                                </li>
-                                <li class="page-item active ">
-                                    <button class="page-link">1</button>
-                                </li>
-                                <li class="page-item">
-                                    <button class="page-link">2</button>
-                                </li>
-                                <li class="page-item">
-                                    <button class="page-link">3</button>
-                                </li>
-                                <li class="page-item">
-                                    <button class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </button>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+        <div class="col-12 col-sm-12 col-md-9 div-tour-container">
+            <p style="font-size: 20px" >Tìm thấy <span style="color: #0a5a97; font-size: 25px" id="tour-size" >8</span> chuyến đi cho quý khách</p>
+            <div class="row" id="div-row-tour">
 
 
             </div>
+            <!--            <div class="row" >-->
+            <!--                <div class="col-12 col-md-12 div-filter-item d-flex justify-content-center">-->
+            <!--                    <div class="form-group">-->
+            <!--                        <nav aria-label="Page navigation example">-->
+            <!--                            <ul class="pagination">-->
+            <!--                                <li class="page-item">-->
+            <!--                                    <button class="page-link" href="#" aria-label="Previous">-->
+            <!--                                        <span aria-hidden="true">&laquo;</span>-->
+            <!--                                    </button>-->
+            <!--                                </li>-->
+            <!--                                <li class="page-item active ">-->
+            <!--                                    <button class="page-link">1</button>-->
+            <!--                                </li>-->
+            <!--                                <li class="page-item">-->
+            <!--                                    <button class="page-link">2</button>-->
+            <!--                                </li>-->
+            <!--                                <li class="page-item">-->
+            <!--                                    <button class="page-link">3</button>-->
+            <!--                                </li>-->
+            <!--                                <li class="page-item">-->
+            <!--                                    <button class="page-link" href="#" aria-label="Next">-->
+            <!--                                        <span aria-hidden="true">&raquo;</span>-->
+            <!--                                    </button>-->
+            <!--                                </li>-->
+            <!--                            </ul>-->
+            <!--                        </nav>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
 
         </div>
 
@@ -635,9 +273,13 @@
         })
     </script>
 
-    <!-- <script src="client/js/custom.js"></script> -->
-    <script type="text/javascript" th:src="@{/client/js/custom.js}"></script>
+    <script type="text/javascript" th:src="@{/client/js/select2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/client/js/fetch-tour.js}"></script>
+    <script type="text/javascript" th:src="@{/client/js/fetch-category.js}"></script>
+    <script type="text/javascript" th:src="@{/client/js/fetch-departure-location.js}"></script>
+    <script type="text/javascript" th:src="@{/client/js/fetch-destination-location.js}"></script>
 
+    <script type="text/javascript" th:src="@{/client/js/custom.js}"></script>
 
 </body>
 
