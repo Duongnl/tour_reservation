@@ -1,6 +1,7 @@
 package com.group21.tour_reservation.service;
 
 
+import com.group21.tour_reservation.dto.request.TourFilterRequest;
 import com.group21.tour_reservation.dto.response.TourCardResponse;
 import com.group21.tour_reservation.dto.response.TourScheduleTableResponse;
 import com.group21.tour_reservation.entity.*;
@@ -9,6 +10,7 @@ import com.group21.tour_reservation.mapper.TourScheduleMapper;
 import com.group21.tour_reservation.repository.CategoryRepository;
 import com.group21.tour_reservation.repository.ImgRepository;
 import com.group21.tour_reservation.repository.TourRepository;
+import com.group21.tour_reservation.repository.TourRepositoryCustom;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,9 @@ public class TourService {
 
     @Autowired
     private TourMapper tourMapper;
+
+    @Autowired
+    private TourRepositoryCustom tourRepositoryCustom;
 
     public List<Tour> getAllTours() {
         return tourRepository.findAllByStatus(1);
@@ -261,7 +266,7 @@ public class TourService {
         // Lấy LocalDateTime hiện tại
         LocalDateTime currentDateTime = LocalDateTime.now();
         double percentage= 0;
-
+        System.out.println("tou schedule : "+ tourSchedule.getScheduleId());
         for (Promotion promotion : tourSchedule.getPromotions()) {
             if (currentDateTime.isAfter(promotion.getStartTime()) &&
                     currentDateTime.isBefore(promotion.getEndTime()) && promotion.getStatus() == 1 ) {
@@ -276,75 +281,119 @@ public class TourService {
 
     }
 
-//    public List<TourCardResponse> getTourCards ()
-//    {
-//        List<Tour> tours = tourRepository.findAllByStatus (1);
-//        List<TourCardResponse> tourCardResponses = new ArrayList<>();
-//        tours.forEach(tour -> {
-//
-//        })
-//
-//    }
+    public List<TourCardResponse> getTourCards ()
+    {
+        List<Tour> tours = tourRepository.findAllByStatus (1);
+        List<TourCardResponse> tourCardResponses = new ArrayList<>();
+        tours.forEach(tour -> {
+            tourCardResponses.add(handleTourCard(tour));
+        });
 
-//    public TourCardResponse handleTourCard (Tour tour) {
-//        TourCardResponse  tourCardResponse = tourMapper.toTourCardResponse(tour);
-//        Set<String> departureDates = new HashSet<>();
-//        if (tour.getTourSchedules() != null) {
-//
-//            //        Lay thoi gian khoi hanh
-//            tour.getTourSchedules().forEach(tourSchedule -> {
-//                departureDates.add(handleConvertDateToString(tourSchedule.getDepartureDate()));
-//            });
-//            tourCardResponse.setDepartureDates(departureDates);
-//
-//            TourSchedule tourSchedulePriceMin = handlePriceSaleMin(tour);
-//            tourCardResponse.setPrice(tourSchedulePriceMin.get);
-//        }
-//
-//
-//    }
+        return tourCardResponses;
+    }
+
+    public TourCardResponse handleTourCard (Tour tour) {
+        TourCardResponse  tourCardResponse = tourMapper.toTourCardResponse(tour);
+        Set<String> departureDates = new HashSet<>();
+        if (tour.getTourSchedules() != null) {
+
+            //        Lay thoi gian khoi hanh
+            tour.getTourSchedules().forEach(tourSchedule -> {
+                if (tourSchedule.getStatus() ==1) {
+                departureDates.add(handleConvertDateToString(tourSchedule.getDepartureDate()));
+                }
+            });
+            tourCardResponse.setDepartureDates(departureDates);
+
+            TourSchedule tourSchedulePriceMin = handlePriceSaleMin(tour);
+            if (tourSchedulePriceMin != null) {
+                if ( handlePriceAdultSale( tourSchedulePriceMin) <=
+                        handlePriceChildSale(tourSchedulePriceMin)){
+
+                    tourCardResponse.setPrice(tourSchedulePriceMin.getPriceAdult());
+                    tourCardResponse.setPriceSale(handlePriceAdultSale( tourSchedulePriceMin));
+                }
+                else {
+
+                    tourCardResponse.setPrice(tourSchedulePriceMin.getPriceChild());
+                    tourCardResponse.setPriceSale(handlePriceChildSale( tourSchedulePriceMin));
+                }
+            }
+
+
+
+            tour.getImages().forEach(image -> {
+                if (image.getStatus()==0){
+                    tourCardResponse.setImageMain(image.getUrl());
+                }
+            });
+
+
+
+
+        }
+    return tourCardResponse;
+
+    }
 
     public TourSchedule handlePriceSaleMin(Tour tour) {
 
 //        tim gia tre em nho nhat
         Integer priceChildSaleMin = 0;
-        TourSchedule tourSchedulePriceSaleChildMin = null;
+        TourSchedule tourSchedulePriceSaleChildMin = new TourSchedule();
         for (TourSchedule tourSchedule : tour.getTourSchedules()) {
-            priceChildSaleMin = handlePriceChildSale(tourSchedule);
-            break;
+            if (tourSchedule.getStatus() == 1) {
+                priceChildSaleMin = handlePriceChildSale(tourSchedule);
+                tourSchedulePriceSaleChildMin = tourSchedule;
+                break;
+            }
+
         }
 
         for (TourSchedule tourSchedule : tour.getTourSchedules()) {
-           if (handlePriceChildSale(tourSchedule) < priceChildSaleMin) {
-               priceChildSaleMin = handlePriceChildSale(tourSchedule);
-               tourSchedulePriceSaleChildMin = tourSchedule;
-           }
+            if (tourSchedule.getStatus() == 1) {
+                if (handlePriceChildSale(tourSchedule) < priceChildSaleMin) {
+                    priceChildSaleMin = handlePriceChildSale(tourSchedule);
+                    tourSchedulePriceSaleChildMin = tourSchedule;
+                }
+            }
+
+
         }
 
 //      tim gia nguoi lon nho nhat
         Integer priceAdultSaleMin = 0;
-        TourSchedule tourSchedulePriceSaleAdultMin = null;
+        TourSchedule tourSchedulePriceSaleAdultMin = new TourSchedule();
         for (TourSchedule tourSchedule : tour.getTourSchedules()) {
-            priceAdultSaleMin = handlePriceAdultSale(tourSchedule);
-            break;
-        }
-
-        for (TourSchedule tourSchedule : tour.getTourSchedules()) {
-            if (handlePriceAdultSale(tourSchedule) < priceAdultSaleMin) {
+            if (tourSchedule.getStatus() == 1) {
                 priceAdultSaleMin = handlePriceAdultSale(tourSchedule);
                 tourSchedulePriceSaleAdultMin = tourSchedule;
+                break;
             }
+
         }
 
-        if ( handlePriceChildSale(tourSchedulePriceSaleChildMin) <
-                handlePriceAdultSale(tourSchedulePriceSaleAdultMin) ) {
-            return tourSchedulePriceSaleChildMin;
-        } else if (handlePriceChildSale(tourSchedulePriceSaleChildMin) >
-                handlePriceAdultSale(tourSchedulePriceSaleAdultMin)) {
-            return tourSchedulePriceSaleAdultMin;
+        for (TourSchedule tourSchedule : tour.getTourSchedules()) {
+            if (tourSchedule.getStatus() == 1) {
+                if (handlePriceAdultSale(tourSchedule) < priceAdultSaleMin) {
+                    priceAdultSaleMin = handlePriceAdultSale(tourSchedule);
+                    tourSchedulePriceSaleAdultMin = tourSchedule;
+                }
+            }
+
+        }
+
+        if (tourSchedulePriceSaleChildMin.getScheduleId() != null && tourSchedulePriceSaleAdultMin.getScheduleId() != null) {
+            if ( handlePriceChildSale(tourSchedulePriceSaleChildMin) <=
+                    handlePriceAdultSale(tourSchedulePriceSaleAdultMin) ) {
+                return tourSchedulePriceSaleChildMin;
+            } else  {
+                return tourSchedulePriceSaleAdultMin;
+            }
         } else {
             return null;
         }
+
 
     }
 
@@ -353,4 +402,60 @@ public class TourService {
         return date.format(formatter);
     }
 
+    public Set<String> getClientDepartureLocations (){
+        Set<String> departureLocations = new HashSet<>();
+        List<Tour> tours = tourRepository.findAllByStatus(1);
+        tours.forEach(tour -> {
+            if (tour.getDepartureLocation() != null && !tour.getDepartureLocation().isEmpty()) {
+            departureLocations.add(tour.getDepartureLocation().trim());
+            }
+        });
+        return departureLocations;
+    }
+
+    public Set<String> getClientDestinationLocations (){
+        Set<String> destinationLocations = new HashSet<>();
+        List<Tour> tours = tourRepository.findAllByStatus(1);
+        tours.forEach(tour -> {
+            if (tour.getCountry() != null  && !tour.getCountry().isEmpty()) {
+                destinationLocations.add(tour.getCountry().trim());
+            }
+        });
+        return destinationLocations;
+    }
+
+    public List<TourCardResponse> filterTours (TourFilterRequest tourFilterRequest) {
+
+        List<Tour> tours = tourRepositoryCustom.filterTourRepository(tourFilterRequest);
+        List<TourCardResponse> tourCardResponses = new ArrayList<>();
+        tours.forEach(tour -> {
+            TourCardResponse tourCardResponse = handleTourCard(tour);
+            if (tourFilterRequest.getPrice().equals("all")) {
+                tourCardResponses.add(tourCardResponse);
+            } else if (tourCardResponse.getPrice() != null) {
+                if (tourFilterRequest.getPrice().equals("under5")
+                        && tourCardResponse.getPriceSale() <= 5000000) {
+                    tourCardResponses.add(tourCardResponse);
+                } else if (tourFilterRequest.getPrice().equals("5to10")
+                        && tourCardResponse.getPriceSale() >= 5000000
+                        && tourCardResponse.getPriceSale() <= 10000000) {
+                    tourCardResponses.add(tourCardResponse);
+                } else if (tourFilterRequest.getPrice().equals("10to20")
+                        && tourCardResponse.getPriceSale() >= 10000000
+                        && tourCardResponse.getPriceSale() <= 20000000) {
+                    tourCardResponses.add(tourCardResponse);
+                } else if (tourFilterRequest.getPrice().equals("over20")
+                        && tourCardResponse.getPriceSale() >= 20000000) {
+                    tourCardResponses.add(tourCardResponse);
+                }
+            }
+
+            if (Objects.equals(tourCardResponse.getPrice(), tourCardResponse.getPriceSale())) {
+                tourCardResponse.setPriceSale(null);
+            }
+        });
+
+
+        return tourCardResponses;
+    }
 }
