@@ -1,7 +1,6 @@
 package com.group21.tour_reservation.service;
 
 import com.group21.tour_reservation.entity.Category;
-import com.group21.tour_reservation.entity.Transport;
 import com.group21.tour_reservation.repository.CategoryRepository;
 import com.group21.tour_reservation.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class CategoryService {
         return categoryRepository.findAllByStatus(1);
     }
 
-    public Category getTransport(String slug) {
+    public Category getCategory(String slug) {
 
         return categoryRepository.findById(StringUtils.getIdFromSlug(slug)).orElse(null);
     }
@@ -29,9 +28,11 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public Category editCategory(Category category) {
-        category.setStatus(1);
-        return categoryRepository.save(category);
+    public Category editCategory(Category newCategory) {
+//        Category category = categoryRepository.findById( Integer.parseInt(categoryId)).orElseThrow(null);
+
+        newCategory.setStatus(1);
+        return categoryRepository.save(newCategory);
     }
 
     public Category deleteCategory(String categoryId) {

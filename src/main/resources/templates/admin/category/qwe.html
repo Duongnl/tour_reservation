@@ -34,26 +34,55 @@
         <div th:replace="/admin/layout/header.html :: header"></div>
 
         <!-- content-->
-        <div th:replace="/admin/category/component/categoryList.html"></div>
+        <div class="container">
+            <div class="page-inner">
+                123
+                <div th:replace="/admin/category/component/categoryList.html"></div>
+                <!-- your code is here
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                    *
+                -->
+
+            </div>
+        </div>
 
         <!-- start footer -->
         <div th:replace="/admin/layout/footer.html :: footer"></div>
         <!-- end footer -->
     </div>
-    <!-- Kiểm tra xem có thông báo thành công không -->
+    <!-- Kiểm tra xem có thông báo thành công không, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
     <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;">
         <span th:text="${successMessage}"></span>
     </div>
     <div th:if="${errorMessage}" class="alert alert-success" id="error-message" style="display: none;">
         <span th:text="${errorMessage}"></span>
     </div>
-    <!--modal delete-->
+    <!--modal delete, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
     <div th:replace="/admin/modal.html :: modal"></div>
 </div>
-<!--my js-->
+
+<!--js tự viết thông báo và tạo slug, phần này chỉ để ở trang quản lý table, không  cần để trong trang edit, create-->
 <script type="module" th:src="@{/admin/js/notify.js}"></script>
 <script type="module" th:src="@{/admin/js/create-slug.js}"></script>
-
+<!-- end js tự viết-->
 
 <!--   Core JS Files   -->
 <script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>

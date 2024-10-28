@@ -1,5 +1,9 @@
+
+<!-- content-->
 <div class="container">
   <div class="page-inner">
+    <!--                <h4>Quản lý phương tiện</h4>-->
+
     <!--Table-->
     <div class="col-md-12">
       <div class="card">
@@ -7,13 +11,13 @@
         <!-- header table -->
         <div class="card-header">
           <div class="d-flex align-items-center">
-            <h4 class="card-title">Danh sách Danh Mục</h4>
+            <h4 class="card-title">Danh sách phương tiện</h4>
             <a
                     th:href="@{/admin/category/add}"
                     class="btn btn-primary btn-round ms-auto"
             >
               <i class="fa fa-plus"></i>
-              Thêm tour
+              Thêm phương tiện
             </a>
           </div>
         </div>
@@ -33,6 +37,7 @@
                 <th>Name</th>
                 <th>Detail</th>
                 <th>Status</th>
+                <th style="width: 10%">Hành động</th>
               </tr>
               </thead>
               <!-- end header -->
@@ -43,15 +48,30 @@
               <tr  class="row-data"  th:each="category: ${categorys}" >
                 <td class="txt-id" th:text="${category.categoryId}" ></td>
                 <td class="txt-name" th:text="${category.categoryName}" ></td>
-                <td th:text="${category.categoryDetail}" ></td>
+                <td th:text="${category.categoryName}" ></td>
                 <td th:text="${category.status}" ></td>
                 <td>
-                  <a th:href="@{/admin/category/edit/{slug}(slug=${category.categoryId})}">
-                    <button type="button" class="btn btn-success">Sửa</button>
-                  </a>
-                  <a th:href="@{/admin/category/delete/{id}(id=${category.categoryId})}">
-                    <button type="button" class="btn btn-danger">Xóa</button>
-                  </a>
+                  <div class="form-button-action">
+                    <a
+                            type="button"
+                            data-bs-toggle="tooltip"
+                            class="btn  btn-primary btn-lg btn-edit"
+                            th:href="@{/admin/category/edit/{slug}(slug=${category.categoryId})}"
+                           >
+                      <i class="fa fa-edit">123</i>
+                    </a>
+                    <!-- Button trigger modal -->
+                    <button type="button"
+                            class="btn btn-link btn-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                            th:attr="data-id=${category.categoryId},
+
+                                                        data-controller-delete='/admin/category/delete' ">
+                      <i class="fa fa-times"></i>
+                    </button>
+
+                  </div>
                 </td>
               </tr>
               </tbody>
@@ -65,5 +85,6 @@
       </div>
     </div>
     <!--End table-->
+
   </div>
 </div>

@@ -11,6 +11,20 @@
                     <div class="col-md-6 col-lg-4">
 
                         <div class="form-group has-feedback">
+                            <label for="categoryId">ID</label>
+                            <input
+                                    type="text"
+                                    id="categoryId"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{categoryId}"
+                                    readonly
+                            />
+                            <small id="transport-name-error" class="form-text text-muted"
+                            >Điền tên danh mục</small>
+                        </div>
+
+                        <div class="form-group has-feedback">
                             <label for="categoryName">Tên danh mục </label>
                             <input
                                     type="text"

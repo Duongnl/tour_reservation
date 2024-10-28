@@ -33,7 +33,7 @@ public class CategoryController {
 
     @GetMapping("/admin/category/edit/{slug}")
     public String EditView(Model model,@PathVariable("slug") String slug) {
-        Category category = categoryService.getTransport(slug);
+        Category category = categoryService.getCategory(slug);
         if (category == null) {
             return "admin/404.html";
         }
@@ -52,7 +52,9 @@ public class CategoryController {
     }
 
     @PostMapping("/admin/category/edit")
-    public String edit(Model model, @ModelAttribute("category") Category category, RedirectAttributes redirectAttributes) {
+    public String edit(Model model, @ModelAttribute("category") Category category,
+                       RedirectAttributes redirectAttributes) {
+
         categoryService.editCategory(category);
 
         // Thêm thông báo vào RedirectAttributes
