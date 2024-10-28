@@ -55,7 +55,6 @@
                     <a
                             type="button"
                             data-bs-toggle="tooltip"
-                            class="btn  btn-primary btn-lg btn-edit"
                             th:href="@{/admin/category/edit/{slug}(slug=${category.categoryId})}"
                            >
                       <i class="fa fa-edit">123</i>
@@ -66,7 +65,6 @@
                             data-bs-toggle="modal"
                             data-bs-target="#exampleModal"
                             th:attr="data-id=${category.categoryId},
-
                                                         data-controller-delete='/admin/category/delete' ">
                       <i class="fa fa-times"></i>
                     </button>
