@@ -31,7 +31,7 @@ public class CategoryService {
     public Category editCategory(Category newCategory) {
 //        Category category = categoryRepository.findById( Integer.parseInt(categoryId)).orElseThrow(null);
 
-        newCategory.setStatus(1);
+//        newCategory.setStatus(1);
         return categoryRepository.save(newCategory);
     }
 

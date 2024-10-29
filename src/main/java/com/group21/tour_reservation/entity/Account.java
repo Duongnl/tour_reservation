@@ -32,6 +32,10 @@ public class Account {
     @Column(name = "time")
     private LocalDateTime time;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+
     @Column(name = "status")
     private int status;
 
