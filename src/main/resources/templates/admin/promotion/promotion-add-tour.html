@@ -21,10 +21,11 @@
     <link th:href="@{/admin/css/demo.css}" rel="stylesheet" />
 
     <!-- Thêm thư viện Select2 vào dự án -->
-     <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css}" rel="stylesheet" />
-     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
+    <link th:href="@{/client/css/select2.min.css}" rel="stylesheet" />
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css}" rel="stylesheet" />
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
 
-     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js}"></script>
 
 </head>
 
@@ -42,31 +43,58 @@
                 <div class="page-inner">
 
                     <!--add form-->
-                    <form method="POST" th:action="@{/admin/promotion/add-promotion}" th:object="${schedules}">
+                    <form method="POST" th:action="@{/admin/promotion/add-promotion-to-tour}" th:object="${schedules}">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title">Thêm mới nhân viên</div>
+                                    <div class="card-title">Thêm khuyến mãi vào lịch trình</div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <select id="tour_schedule" class="form-control select2">
+                                        <select id="tour_schedule" name="scheduleId"
+                                            class="form-control select2 js-example-basic-single">
                                             <option value="" selected disabled>Chọn tour</option>
-                                            <option th:each="schedule : ${schedules}"
-                                                    th:value="${schedule.scheduleId}"
-                                                    th:text="${schedule.scheduleName}">
+                                            <option th:each="schedule : ${schedules}" th:value="${schedule.scheduleId}"
+                                                th:text="${schedule.scheduleId + ' - ' + schedule.scheduleName}">
                                             </option>
                                         </select>
-                                    
-                                        <script>
-                                            $(document).ready(function() {
-                                                $('#tour_schedule').select2(); // Khởi tạo Select2
-                                            });
-                                        </script>
+                                      
+                                        <input type="hidden" name="promotionId" th:value="${promotionId}" />
+
+
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="add-row" class="display table table-striped table-hover">
+                                                    <!-- header -->
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID Lịch trình</th>
+                                                            <th>Tên lịch trình</th>
+                                                            <th>Tên khuyễn mãi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <!-- end header -->     
+                                                    <!-- body -->
+                                                    <tbody>
+                                                        <tr th:each="schedule : ${promotionchedule}">
+                                                            <td th:text="${schedule.scheduleId}"></td>
+                                                            <td th:text="${schedule.scheduleName}"></td>
+                                                            <td>
+                                                                <ul style="list-style-type: none;">
+                                                                    <li th:each="promotion : ${schedule.promotions}" th:text="${promotion.promotionName}"></li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <!-- end body -->
+            
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-action">
-                                    <button class="btn btn-success" id="btn-promotion-add" type="submit">Thêm</button>
+                                    <button class="btn btn-success"  type="submit">Thêm</button>
                                     <a class="btn btn-danger" th:href="@{/admin/promotion}">Quay lại</a>
                                 </div>
                             </div>
@@ -81,15 +109,15 @@
         </div>
     </div>
 
-
-    <script>
+    <script th:inline="javascript">
 
         $(document).ready(function () {
-            $('.js-example-basic-multiple').select2();
+            $('.js-example-basic-single').select2();
         });
     </script>
     <!-- My js -->
     <script type="module" th:src="@{/admin/js/promotion.js}"></script>
+
 
     <!--   Core JS Files   -->
     <script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>
@@ -123,6 +151,7 @@
 
     <!-- Kaiadmin JS -->
     <script type="text/javascript" th:src="@{/admin/js/kaiadmin.min.js}"></script>
+    <script type="text/javascript" th:src="@{/client/js/select2.min.js}"></script>
 
 </body>
 

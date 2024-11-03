@@ -56,4 +56,15 @@ public class PromotionService {
     public List<TourSchedule> getAllShedules() {
         return tourScheduleRepository.findAllByStatus(1);  // Lấy tất cả lịch trình có status = 1
     }
+
+    public void addPromotionToSchedule(Integer promotionId, Integer scheduleId){
+        Promotion promotion = promotionRepository.findById(promotionId).orElseThrow(() -> new RuntimeException("Không tìm thấy khuyễn mãi"));
+        TourSchedule tourSchedule = tourScheduleRepository.findById(scheduleId).orElseThrow(() -> new RuntimeException("Không tìm thấy lịch trình"));
+
+        tourSchedule.getPromotions().add(promotion); // Thêm promotion vào danh sách của TourSchedule
+        tourScheduleRepository.save(tourSchedule); 
+    }
+    public List<TourSchedule> getAllSchedulesWithPromotions() {
+        return tourScheduleRepository.findSchedulesWithPromotions(); 
+    }
 }
