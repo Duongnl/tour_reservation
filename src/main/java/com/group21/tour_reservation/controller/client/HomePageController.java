@@ -16,7 +16,7 @@ public class HomePageController {
     @GetMapping("/tour")
     public String tourView() {
 
-        return "client/tour-page.html";
+        return "client/tour-persional-infor.html";
     }
 
 }
