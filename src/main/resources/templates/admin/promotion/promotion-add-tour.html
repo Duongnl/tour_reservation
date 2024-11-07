@@ -48,53 +48,49 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title">Thêm khuyến mãi vào lịch trình</div>
+
                                 </div>
+                                <select id="tour_schedule" name="scheduleId"
+                                    class="form-control select2 js-example-basic-single">
+                                    <option value="" selected disabled>Chọn tour</option>
+                                    <option th:each="schedule : ${schedules}" th:value="${schedule.scheduleId}"
+                                        th:text="${schedule.scheduleId + ' - ' + schedule.scheduleName + ' - ' + schedule.tour.tourName}">
+                                    </option>
+                                </select>
+                                <input type="hidden" name="promotionId" th:value="${promotionId}" />
+
                                 <div class="card-body">
-                                    <div class="row">
-                                        <select id="tour_schedule" name="scheduleId"
-                                            class="form-control select2 js-example-basic-single">
-                                            <option value="" selected disabled>Chọn tour</option>
-                                            <option th:each="schedule : ${schedules}" th:value="${schedule.scheduleId}"
-                                                th:text="${schedule.scheduleId + ' - ' + schedule.scheduleName}">
-                                            </option>
-                                        </select>
-                                      
-                                        <input type="hidden" name="promotionId" th:value="${promotionId}" />
+                                    <div class="table-responsive">
+                                        <table id="add-row" class="display table table-striped table-hover">
+                                            <!-- header -->
+                                            <thead>
+                                                <tr>
+                                                    <th>ID Lịch trình</th>
+                                                    <th>Tên lịch trình</th>
+                                                    <th>Tên khuyễn mãi</th>
+                                                    <th style="width: 10%">Hành động</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- end header -->
+                                            <!-- body -->
+                                            <tbody>
+                                                <tr th:each="schedule : ${promotionchedule}">
+                                                    <td th:text="${schedule.scheduleId}"></td>
+                                                    <td th:text="${schedule.scheduleName}"></td>
+                                                    <td th:text="${schedule.tour.tourName}"></td>
+                                                    <td> <button type="button" class="btn btn-link btn-danger"
+                                                            data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            <i class="fa fa-times"></i>
+                                                        </button></td>
+                                                </tr>
+                                            </tbody>
+                                            <!-- end body -->
 
-
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table id="add-row" class="display table table-striped table-hover">
-                                                    <!-- header -->
-                                                    <thead>
-                                                        <tr>
-                                                            <th>ID Lịch trình</th>
-                                                            <th>Tên lịch trình</th>
-                                                            <th>Tên khuyễn mãi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <!-- end header -->     
-                                                    <!-- body -->
-                                                    <tbody>
-                                                        <tr th:each="schedule : ${promotionchedule}">
-                                                            <td th:text="${schedule.scheduleId}"></td>
-                                                            <td th:text="${schedule.scheduleName}"></td>
-                                                            <td>
-                                                                <ul style="list-style-type: none;">
-                                                                    <li th:each="promotion : ${schedule.promotions}" th:text="${promotion.promotionName}"></li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                    <!-- end body -->
-            
-                                                </table>
-                                            </div>
-                                        </div>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="card-action">
-                                    <button class="btn btn-success"  type="submit">Thêm</button>
+                                    <button class="btn btn-success" type="submit">Thêm</button>
                                     <a class="btn btn-danger" th:href="@{/admin/promotion}">Quay lại</a>
                                 </div>
                             </div>
@@ -114,7 +110,13 @@
         $(document).ready(function () {
             $('.js-example-basic-single').select2();
         });
+
+        $('#add-row').DataTable();
     </script>
+
+
+
+
     <!-- My js -->
     <script type="module" th:src="@{/admin/js/promotion.js}"></script>
 

@@ -18,7 +18,7 @@ public class Tour {
     private Integer tourId;
 
     @Column(name = "tour_name")
-    private String tourName;;
+    private String tourName;
 
     @Column (name = "tour_detail")
     private String tourDetail;
