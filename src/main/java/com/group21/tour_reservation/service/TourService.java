@@ -266,7 +266,6 @@ public class TourService {
         // Lấy LocalDateTime hiện tại
         LocalDateTime currentDateTime = LocalDateTime.now();
         double percentage= 0;
-        System.out.println("tou schedule : "+ tourSchedule.getScheduleId());
         for (Promotion promotion : tourSchedule.getPromotions()) {
             if (currentDateTime.isAfter(promotion.getStartTime()) &&
                     currentDateTime.isBefore(promotion.getEndTime()) && promotion.getStatus() == 1 ) {
