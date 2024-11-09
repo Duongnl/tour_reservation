@@ -19,6 +19,12 @@ public class ReserveService {
         return reserveRepository.findAllByStatus(1);
     }
 
+    public List<Reserve> getAllReserveByYear(int year) {
+        return reserveRepository.findAllReserveByYear(year);
+    }
+
+    public List<Reserve> getAllReserveByYearAndMonth(int year, int month) {return reserveRepository.findAllReserveByYearAndMonth(year, month);}
+
     public Reserve getTour(String slug) {
         Reserve reserve = reserveRepository.findById(
                 com.group21.tour_reservation.utils.StringUtils.getIdFromSlug(slug)).orElse(null);

@@ -1,0 +1,44 @@
+<!--Table-->
+<div class="col-md-12">
+    <div class="card">
+
+        <!-- header table -->
+        <div class="card-header">
+            <div class="d-flex align-items-center">
+                <h4 class="card-title">Bảng doanh thu</h4>
+            </div>
+        </div>
+        <!-- end header table -->
+
+        <!-- table -->
+        <div class="card-body">
+            <div class="">
+                <table
+                        class="display table table-striped table-hover"
+                >
+                    <!-- header -->
+                    <tbody class="row-data">
+                        <tr class="txt-id">
+                            <td th:each="label: ${labels}" >
+                                <span th:text="${label}"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- end header -->
+
+                    <!-- body -->
+                    <tbody class="row-data"  >
+                        <tr  class="txt-id"  >
+                            <td th:each="money: ${money_mm}">
+                                <span th:text="${money}"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- end body -->
+                </table>
+            </div>
+        </div>
+        <!-- end table -->
+    </div>
+</div>
+<!--End table-->

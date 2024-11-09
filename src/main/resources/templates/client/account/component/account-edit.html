@@ -1,0 +1,175 @@
+<!--<form method="POST"-->
+<!--      th:action="@{/personal-info/edit}"-->
+<!--      th:object="${customer}">-->
+<!--    <div class="card">-->
+<!--        <div class="card-header row ">-->
+<!--        </div>-->
+<!--        <div class="card-body">-->
+<!--            <table class="table mt-3">-->
+<!--                <tbody>-->
+<!--                <tr >-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group mb-3 " >-->
+<!--                            <span class="input-group-text col-2" style="display: none;">Customer Id</span>-->
+<!--                            <input-->
+
+<!--                                    type="text"-->
+<!--                                    th:field="${customer.customerId}"-->
+<!--                                    class="form-control col-7"-->
+<!--                                    style="background-color: white ; display: none;"-->
+<!--                                    aria-describedby="basic-addon3"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </tr>-->
+
+
+<!--                <tr>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group mb-3 " >-->
+<!--                            <span class="input-group-text col-2" >Họ và Tên</span>-->
+<!--                            <input-->
+<!--                                    type="text"-->
+<!--                                    th:field="${customer.customerName}"-->
+<!--                                    class="form-control col-7"-->
+<!--                                    style="background-color: white "-->
+<!--                                    aria-describedby="basic-addon3"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group mb-3 " >-->
+<!--                            <span class="input-group-text col-2" >Địa chỉ Email</span>-->
+<!--                            <input-->
+<!--                                    type="text"-->
+<!--                                    th:field="${customer.email}"-->
+<!--                                    class="form-control col-7"-->
+<!--                                    style="background-color: white "-->
+<!--                                    aria-describedby="basic-addon3"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group mb-3 " >-->
+<!--                            <span class="input-group-text col-2" >Số điện thoại</span>-->
+<!--                            <input-->
+<!--                                    type="text"-->
+<!--                                    th:field="${customer.phoneNumber}"-->
+<!--                                    class="form-control col-7"-->
+<!--                                    style="background-color: white "-->
+<!--                                    aria-describedby="basic-addon3"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group mb-3 " >-->
+<!--                            <span class="input-group-text col-2" >Giới tính</span>-->
+<!--&lt;!&ndash;                            <label for="status"></label>&ndash;&gt;-->
+<!--                            <select id="status" class="form-control  col-7" th:field="*{customer.sex}">-->
+<!--                                <option th:value="0" selected >Nam</option>-->
+<!--                                <option th:value="1"  >Nữ</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </tr>-->
+<!--                <tr>-->
+
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group mb-3 " >-->
+<!--                            <span class="input-group-text col-2" >Địa chỉ</span>-->
+<!--                            <input-->
+<!--                                    type="text"-->
+<!--                                    th:field="${customer.address}"-->
+<!--                                    class="form-control col-7"-->
+<!--                                    style="background-color: white "-->
+<!--                                    aria-describedby="basic-addon3"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </tr>-->
+<!--                <tr >-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group mb-3 " >-->
+<!--                            <span class="input-group-text col-2" >Customer Type</span>-->
+<!--                            <input-->
+<!--                                    type="text"-->
+<!--                                    th:field="${customer.customerType}"-->
+<!--                                    class="form-control col-7"-->
+<!--                                    style="background-color: white "-->
+<!--                                    aria-describedby="basic-addon3"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                   <div class="form-group">-->
+<!--                        <div class="input-group mb-3 " >-->
+<!--                            <span class="input-group-text col-2" >Birthday</span>-->
+<!--                            <input-->
+<!--                                    type="date"-->
+<!--                                    th:text="${#dates.format(customer.birthday, 'yyyy/MM/dd')"-->
+<!--                                    th:field="${customer.birthday}"-->
+<!--                                    class="form-control col-7"-->
+<!--                                    style="background-color: white "-->
+<!--                                    aria-describedby="basic-addon3"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </tr>-->
+<!--                <tr  >-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group mb-3 " >-->
+<!--                            <span class="input-group-text col-2 " >Relationship Name</span>-->
+<!--                            <input-->
+<!--                                    type="text"-->
+<!--                                    th:field="${customer.relationshipName}"-->
+<!--                                    class="form-control col-7"-->
+<!--                                    style="background-color: white "-->
+<!--                                    aria-describedby="basic-addon3"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group mb-3 " >-->
+<!--                            <span class="input-group-text col-2" >Visa Expire</span>-->
+<!--                            <input-->
+<!--                                    type="text"-->
+<!--                                    th:field="${customer.visaExpire}"-->
+<!--                                    class="form-control col-7"-->
+<!--                                    style="background-color: white "-->
+<!--                                    aria-describedby="basic-addon3"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group mb-3 " >-->
+<!--                            <span class="input-group-text col-2" >Trạng Thái</span>-->
+<!--                            <select id="" class="form-control  col-7" th:field="*{customer.status}">-->
+<!--                                <option th:value="1" selected >Enable</option>-->
+<!--                                <option th:value="0" >UnEnable</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </tr>-->
+
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--        <div class="card-actionz">-->
+<!--            <button class="btn btn-success" id="btn-transport-add" type="submit">Sửa</button>-->
+<!--            <a class="btn btn-danger"-->
+<!--               th:href="@{/personal-info}"-->
+<!--            >Quay lại</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
