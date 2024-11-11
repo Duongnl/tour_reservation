@@ -85,7 +85,7 @@ public class PromotionController {
         model.addAttribute("promotionchedule", promotionSchedule);
         model.addAttribute("promotionId", promotionId); // Thêm promotionId vào model
         //System.out.println("456");
-        return "admin/promotion/promotion-add-tour.html";
+        return "admin/promotion/promotion-add-tourschedule.html";
     }
 
     @PostMapping("/admin/promotion/add-promotion-to-tour")

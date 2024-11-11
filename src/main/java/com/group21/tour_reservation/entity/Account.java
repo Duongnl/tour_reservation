@@ -26,6 +26,9 @@ public class Account {
     @Column(name = "time")
     private LocalDateTime time;
 
+    @Column(name = "role")
+    private String role; // Thêm trường role
+
     @Column(name = "status")
     private int status;
 
@@ -39,12 +42,13 @@ public class Account {
 
     public Account() {}
 
-    public Account(Integer accountId, String userName, String password, String email, LocalDateTime time, int status, Employee employee, Customer customer) {
+    public Account(Integer accountId, String userName, String password, String email, LocalDateTime time,String role, int status, Employee employee, Customer customer) {
         this.accountId = accountId;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.time = time;
+        this.role = role;
         this.status = status;
         this.employee = employee;
         this.customer = customer;
@@ -112,5 +116,13 @@ public class Account {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

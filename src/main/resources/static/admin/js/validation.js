@@ -129,15 +129,10 @@ export function validateUsername(inputElement, errorElement, successText, errorT
 
 //hàm kiểm tra tên mật khẩu
 export function validatePassword(inputElement, errorElement, successText, errorText) {
-
     // Mật khẩu từ 8 đến 20 ký tự, chứa ít nhất một số, chữ thường, hoa,ký tự đặc biệt
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,20}$/;
-
-
-
     // Lấy giá trị từ input và loại bỏ khoảng trắng ở đầu và cuối
     const value = inputElement.value.trim();
-
     // Kiểm tra định dạng tên mật khẩu
     if (!regex.test(value) || value.includes(" ")) {
         inputElement.classList.remove("is-valid");
@@ -148,6 +143,28 @@ export function validatePassword(inputElement, errorElement, successText, errorT
     } else {
         inputElement.classList.remove("is-invalid");
         inputElement.classList.add("is-valid");
+        errorElement.textContent = successText;
+        errorElement.classList.remove("text-danger");
+        errorElement.classList.add("text-success");
+        return true;
+    }
+}
+//Hàm xác nhận mật khẩu
+export function validateConfirmPassword(passwordElement, confirmPasswordElement, errorElement, successText, errorText) {
+    // Lấy giá trị từ các input và loại bỏ khoảng trắng ở đầu và cuối
+    const passwordValue = passwordElement.value.trim();
+    const confirmPasswordValue = confirmPasswordElement.value.trim();
+
+    // Kiểm tra xem mật khẩu và xác nhận mật khẩu có giống nhau không
+    if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
+        confirmPasswordElement.classList.remove("is-valid");
+        confirmPasswordElement.classList.add("is-invalid");
+        errorElement.textContent = errorText;
+        errorElement.classList.add("text-danger");
+        return false;
+    } else {
+        confirmPasswordElement.classList.remove("is-invalid");
+        confirmPasswordElement.classList.add("is-valid");
         errorElement.textContent = successText;
         errorElement.classList.remove("text-danger");
         errorElement.classList.add("text-success");

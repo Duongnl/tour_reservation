@@ -30,16 +30,11 @@ public class EmployeeService {
     }
 
     public void createEmployee(Employee employee) {
-
-        // if (accountRepository.existsByEmail(account.getEmail())) {
-        // throw new IllegalArgumentException("Email đã tồn tại trong hệ thống.");
-        // }
         Account account = employee.getAccount();
         account.setTime(LocalDateTime.now());
         account.setStatus(1);
         accountRepository.save(account);
         employeeRepository.save(employee);
-
     }
 
     public Employee editEmployee(Employee employee) {
