@@ -59,4 +59,9 @@ public class Reserve {
     @JsonBackReference
     private TourSchedule tourSchedule;
 
+    public static Reserve getReserve(String slug) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getReserve'");
+    }
+
 }

@@ -37,5 +37,4 @@ public class ReserveDetail {
     @JsonBackReference
     private Reserve reserve;
 
-
 }

@@ -16,11 +16,13 @@
     <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/admin/css/plugins.min.css}" rel="stylesheet" />
     <link th:href="@{/admin/css/kaiadmin.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/reserve.css}" rel="stylesheet" />
 
 
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link th:href="@{/admin/css/demo.css}" rel="stylesheet" />
+    <link 
 </head>
 
 <body>
@@ -86,20 +88,21 @@
                                     <td th:text="${reserve.adultCount}" ></td>
                                     <td th:text="${reserve.childCount}" ></td>
                                     <td th:text="${reserve.price}" ></td>
-                                    <td>
+                                    <td class="action_td">
 
                                         <div class="form-button-action" th:id="'stt_1'" th:if="${reserve.status == 1}">
                                             <button type="button"
-                                                    class="btn btn-link btn-danger"
+                                                    id="btn_duyet"
+                                                    class="btn btn-link  btn_duyet"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal"
                                                     th:attr="data-id=${reserve.reserveId},
                                                     data-controller-delete='/admin/reserve/add-reserve' ">
-                                                duyệt
+                                                Duyệt
                                             </button>
                                             <!-- Button trigger modal -->
                                             <button type="button"
-                                                    class="btn btn-link btn-danger"
+                                                    class="btn btn-link  btn_xoa"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal"
                                                     th:attr="data-id=${reserve.reserveId},
@@ -109,30 +112,10 @@
                                            
                                         </div>
                                         <div class="form-button-action" th:id="'stt_2'" th:if="${reserve.status == 2}">
-                                            <a
-                                                    type="button"
-                                                    data-bs-toggle="tooltip"
-                                                    title=""
-                                                    class="btn btn-link btn-primary btn-lg btn-edit"
-                                                    data-original-title="Edit Task"
-                                                    href="#"
-                                            >
-                                               Đã Duyệt
-                                            </a>
-                                            
-                                            
+                                            <p class="p_duyet">Đã Duyệt</P> 
                                         </div>
                                         <div class="form-button-action" th:id="'stt_0'" th:if="${reserve.status == 0}">
-                                            <a
-                                                    type="button"
-                                                    data-bs-toggle="tooltip"
-                                                    title=""
-                                                    class="btn btn-link btn-primary btn-lg btn-edit"
-                                                    data-original-title="Edit Task"
-                                                    href="#"
-                                            >
-                                               Đã Hủy
-                                            </a>
+                                            <p class="p_huy">Đã Hủy</P> 
                                             
                                             
                                         </div>
@@ -140,15 +123,16 @@
                                     <td>
                                         <div class="form-button-action">
                                            
-                                            <!-- Button trigger modal -->
-                                            <button type="button"
-                                                    class="btn btn-link btn-danger"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal"
-                                                    th:attr="data-id=${reserve.reserveId},
-                                                    data-controller-delete='/admin/reserve/delete-reserve' ">
-                                                Xem chi tiết
-                                            </button>
+                                            <a
+                                                        type="button"
+                                                        data-bs-toggle="tooltip"
+                                                        title=""
+                                                        class="btn btn-link btn-primary btn-lg btn-chiTiet"
+                                                        data-original-title="Edit Task"
+                                                        href="#"
+                                                >
+                                                    <i class="fa fa-edit"></i>
+                                            </a>
 
                                         </div>
                                     </td>
@@ -186,6 +170,25 @@
 <!--js tự viết thông báo và tạo slug, phần này chỉ để ở trang quản lý table, không  cần để trong trang edit, create-->
 <script type="module" th:src="@{/admin/js/notify.js}"></script>
 <script type="module" th:src="@{/admin/js/create-slug.js}"></script>
+<script th:inline="javascript" type="module">
+    import {CreateSlug} from /*[[@{/admin/js/create-slug.js}]]*/'';
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lặp qua tất cả các hàng trong bảng
+        const rows = document.querySelectorAll('.row-data');
+        const pathname = window.location.pathname;
+        if (rows) {
+            rows.forEach(row => {
+                const txtId = row.querySelector('.txt-id'); // Lấy phần tử txt-id trong hàng
+                const btnChiTiet = row.querySelector('.btn-chiTiet'); // Lấy nút btn-chiTiet trong hàng
+
+                if (btnChiTiet && txtId ) {
+                    btnChiTiet.href = `${pathname}/reserve-detail/${txtId.textContent}`; // Gán giá trị href mới
+
+                }
+            });
+        }
+    })
+</script>
 <!-- end js tự viết-->
 
 <!--   Core JS Files   -->
