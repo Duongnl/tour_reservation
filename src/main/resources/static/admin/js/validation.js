@@ -52,8 +52,8 @@ export function validateEmail(inputElement, errorElement, successText, errorText
 
 export function validatePhoneNumber(inputElement, errorElement, successText, errorText) {
     // Biểu thức chính quy kiểm tra định dạng số điện thoại
-    const regex = /^\+?\d{0,11}$/;
 
+    const regex = /^\+?\d{1,11}$/;
     // Lấy giá trị từ input và loại bỏ khoảng trắng ở đầu và cuối
     const value = inputElement.value.trim();
 

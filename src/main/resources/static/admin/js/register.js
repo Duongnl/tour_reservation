@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
     employeePassword.addEventListener("input", function () {
         const successText = "mật khẩu hợp lệ"
         const errorText = " Mật khẩu từ 8 đến 20 ký tự, chứa ít nhất một số, chữ thường, hoa,ký tự đặc biệt"
-        validation[4] = validatePassword(employeePassword, employeePasswordError, successText, errorText);
+        validation[3] = validatePassword(employeePassword, employeePasswordError, successText, errorText);
     });
 
     //Kiểm tra xác nhận password
@@ -74,14 +74,14 @@ document.addEventListener("DOMContentLoaded", function () {
     customerEmail.addEventListener("input", function () {
         const successText = "Email hợp lệ"
         const errorText = "Email không hợp lệ (VD: abc@gmail.com)"
-        validation[3] = validateEmail(customerEmail, customerEmailError, successText, errorText);
+        validation[5] = validateEmail(customerEmail, customerEmailError, successText, errorText);
     });
 
     // Lắng nghe sự kiện 'input' của trường nhập liệu
     customerAddress.addEventListener("input", function () {
         const successText = "Địa chỉ hợp lệ"
         const errorText = "Địa chỉ không hợp lệ"
-        validation[5] = validateText(customerAddress, customerAddressError, successText, errorText);
+        validation[6] = validateText(customerAddress, customerAddressError, successText, errorText);
     });
 
     const fetchApi = async () => {
@@ -123,11 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             errorNotify("Vui lòng điền đầy đủ thông tin hợp lệ")
         }
-
-
-
     });
-
-
 
 });

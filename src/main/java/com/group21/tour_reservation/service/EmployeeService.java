@@ -3,6 +3,7 @@ package com.group21.tour_reservation.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.group21.tour_reservation.entity.Account;
@@ -20,6 +21,9 @@ public class EmployeeService {
     @Autowired
     private AccountRepository accountRepository;
 
+     @Autowired 
+    private PasswordEncoder passwordEncoder;
+
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAllByStatus(1);
     }
@@ -32,7 +36,10 @@ public class EmployeeService {
     public void createEmployee(Employee employee) {
         Account account = employee.getAccount();
         account.setTime(LocalDateTime.now());
+        account.setRole("ROLE_ADMIN");
         account.setStatus(1);
+        String hashPassword = this.passwordEncoder.encode(account.getPassword());
+        account.setPassword(hashPassword);
         accountRepository.save(account);
         employeeRepository.save(employee);
     }

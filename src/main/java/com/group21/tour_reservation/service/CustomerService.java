@@ -2,7 +2,10 @@ package com.group21.tour_reservation.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.group21.tour_reservation.entity.Account;
 import com.group21.tour_reservation.entity.Customer;
@@ -16,6 +19,9 @@ public class CustomerService {
     private CustomerRepository customerRepository;
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired 
+    private PasswordEncoder passwordEncoder;
 
     public List<Customer> getAllCustomer() {
         return customerRepository.findAllByStatus(1);
@@ -37,6 +43,8 @@ public class CustomerService {
         account.setTime(LocalDateTime.now());
         account.setRole("ROLE_USER");
         account.setEmail(customer.getEmail());
+        String hashPassword = this.passwordEncoder.encode(account.getPassword());
+        account.setPassword(hashPassword);
         account.setStatus(1);
         customer.setStatus(1);
         accountRepository.save(account);
@@ -97,4 +105,8 @@ public class CustomerService {
      public List<Customer> getCustomersByRelationshipId(Integer customerId) {
         return customerRepository.findByCustomer_RelationshipId(customerId);
     }
+    public Optional<Customer> findByUsername(String username) {
+        return customerRepository.findByUsername(username);
+    }
+
 }

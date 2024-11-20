@@ -19,8 +19,11 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer>{
     List<Customer> findByCustomerIsNullAndStatus(int status);
     Optional<Customer> findByCustomerId(int customerId);
 
+    @Query("SELECT c FROM Customer c JOIN c.account a WHERE a.userName = :username")
+    Optional<Customer> findByUsername(@Param("username") String username);
+
     // List<Customer> findByCustomer(int customer);
 
     @Query("SELECT c FROM Customer c WHERE c.customer.customerId = :customerId")
-List<Customer> findByCustomer_RelationshipId(@Param("customerId") Integer customerId);
+    List<Customer> findByCustomer_RelationshipId(@Param("customerId") Integer customerId);
 }
