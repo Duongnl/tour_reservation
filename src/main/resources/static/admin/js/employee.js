@@ -1,4 +1,4 @@
-import { validateText, validateTextDetail, validateEmail, validatePhoneNumber, validateUsername, validatePassword } from './validation.js';
+import { validateText, validateDate, validateEmail, validatePhoneNumber, validateUsername, validatePassword } from './validation.js';
 import { errorNotify, successNotify } from "./notify.js";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const employeeEmail = document.getElementById("employee-email");
     const employeeEmailError = document.getElementById("employee-email-error");
+
+    const employeeBirthday = document.getElementById("employeeDate");
+    const employeeBirthdayError = document.getElementById("employeeDate-error");
 
     const btnemployeeAdd = document.getElementById("btn-employee-add");
 
@@ -66,6 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const successText = "Email hợp lệ"
         const errorText = "Email không hợp lệ (VD: abc@gmail.com)"
         validation[4] = validateEmail(employeeEmail, employeeEmailError, successText, errorText);
+    });
+
+    employeeBirthday.addEventListener("input", function () {
+        const successText = "Ngày hợp lệ"
+        const errorText = "Ngày không hợp lệ"
+        validation[5] = validateDate(employeeBirthday, employeeBirthdayError, successText, errorText);
     });
 
     const fetchApi = async () => {

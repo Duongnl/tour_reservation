@@ -51,6 +51,7 @@ public class EmployeeService {
             // Đặt lại thời gian và trạng thái nếu cần thay đổi
             account.setTime(LocalDateTime.now());
             account.setStatus(1);
+            account.setRole("ROLE_ADMIN");
     
             // Lưu lại Account hiện có (không thêm mới)
             accountRepository.save(account);
