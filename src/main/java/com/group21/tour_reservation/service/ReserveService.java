@@ -8,6 +8,8 @@ import com.group21.tour_reservation.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -25,6 +27,11 @@ public class ReserveService {
 
     public List<Reserve> getAllReserveByYearAndMonth(int year, int month) {return reserveRepository.findAllReserveByYearAndMonth(year, month);}
 
+    public List<Integer> getAllYear(){
+        List<Integer> yearList = reserveRepository.getAllYears();
+        Collections.sort(yearList);
+        return  yearList;
+    }
     public Reserve getTour(String slug) {
         Reserve reserve = reserveRepository.findById(
                 com.group21.tour_reservation.utils.StringUtils.getIdFromSlug(slug)).orElse(null);

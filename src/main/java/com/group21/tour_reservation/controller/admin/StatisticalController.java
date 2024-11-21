@@ -26,6 +26,8 @@ public class StatisticalController {
     @Autowired
     private StatisticalService statisticalService;
 
+
+
     @GetMapping("/admin/statistical/year/{slug}")
     public String year(Model model, @PathVariable("slug") String slug) {
         int year = statisticalService.getYear(slug);
@@ -34,6 +36,7 @@ public class StatisticalController {
         model.addAttribute("reserves", reserveService.getAllReserveByYear(year));
         model.addAttribute("money_mm", statisticalService.getPrice12Months(data));
         model.addAttribute("year", year);
+        model.addAttribute("allYear", reserveService.getAllYear());
         model.addAttribute("labels", labels);
         model.addAttribute("type", statisticalService.directContent("revenue_year"));
         model.addAttribute("sum", statisticalService.sumPrice(data));

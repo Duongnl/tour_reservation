@@ -5,7 +5,17 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header row">
-                    <div class="card-title" >Thống kê doanh thu năm <span th:text="${year}"></span></div>
+                    <div class="card-title" >Thống kê doanh thu năm <span th:text="${year}"></span>
+                        <select id="status" class="form-control" >
+                            <option th:value="0" >Un Enable</option>
+                            <option th:value="1" selected >Enable</option>
+                        </select>
+                        <td th:each="label: ${labels}" >
+                            <span th:text="${label}"></span>
+                        </td>
+                    </div>
+
+
                 </div>
                 <div class="card-body">
                     <div class="chart-container">
