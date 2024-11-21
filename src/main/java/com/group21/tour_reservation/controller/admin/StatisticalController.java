@@ -1,4 +1,5 @@
 package com.group21.tour_reservation.controller.admin;
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.List;
@@ -26,7 +27,21 @@ public class StatisticalController {
     @Autowired
     private StatisticalService statisticalService;
 
-
+    @GetMapping("/admin/statistical")
+    public String index(Model model) {
+        LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        List<String> labels = List.of("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+        List<Reserve> data = reserveService.getAllReserveByYear(year);
+        model.addAttribute("reserves", reserveService.getAllReserveByYear(year));
+        model.addAttribute("money_mm", statisticalService.getPrice12Months(data));
+        model.addAttribute("year", year);
+        model.addAttribute("allYear", reserveService.getAllYear());
+        model.addAttribute("labels", labels);
+        model.addAttribute("type", statisticalService.directContent("revenue_year"));
+        model.addAttribute("sum", statisticalService.sumPrice(data));
+        return "admin/statistical/index.html";
+    }
 
     @GetMapping("/admin/statistical/year/{slug}")
     public String year(Model model, @PathVariable("slug") String slug) {
