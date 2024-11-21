@@ -83,13 +83,13 @@ document.addEventListener("DOMContentLoaded", function () {
             method: "POST",
             headers: {
                 'Content-Type': 'text/plain'
-            },
-            body: employeeUsername.value
-        })
 
+            },
+            body: employeeUsername.value,
+            credentials: "include",
+        })
         const data = res.json();
         return data
-
     }
 
     btnemployeeAdd.addEventListener("click", async function (event) {
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     employeeUsernameError.classList.add("text-danger");
                 } else {
                     console.log("submit trong add")
-                    document.querySelector("form").submit(); // Replace "form" with the actual form selector if needed
+                   // document.querySelector("form").submit(); // Replace "form" with the actual form selector if needed
                 }
             } else {
                 document.querySelector("form").submit();

@@ -62,52 +62,18 @@
 
 <body>
 
-    <div th:replace="~{/client/layout/header.html :: header_nav}"></div>
-    <div class="hero">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-5">
-                    <div class="card shadow-lg border-0 rounded-lg mt-5">
-                        <div class="card-header">
-                            <h3 class="text-center font-weight-light my-4">Login</h3>
-                        </div>
-
-                        <div class="card-body">
-                            <div th:if="${param.error}" style="color: red;">
-                                Invalid username and password.</div>
-                            <div th:if="${param.logout}" style="color: blue;">
-                                You have been logged out.</div>
-                            <form name="login" th:action="@{/login}" method="post">
-                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                                <div class="form-floating mb-3">
-
-                                    <input class="form-control" id="username" name="username" type="text"
-                                        placeholder="username" />
-
-                                    <label for="inputEmail">Username</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input class="form-control" id="password" name="password" type="password"
-                                        placeholder="Password" />
-                                    <label for="inputPassword">Password</label>
-                                </div>
-
-                                <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                    <!-- <a class="small" href="password.html">Forgot Password?</a> -->
-                                    <button type="submit" class="btn btn-primary">Login</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-footer text-center py-3">
-                            <div class="small"><a href="/register">Need an account? Sign up!</a></div>
-                        </div>
-                    </div>
+    <div class="container">
+        <div class="row ">
+            <div class="col-12 mt-5">
+                <div class="alert alert-danger" role="alert">
+                    Bạn không có quyền truy cập nguồn tài nguyên này
                 </div>
+                <a href="/" class="btn btn-success">Trang Chủ</a>
             </div>
         </div>
     </div>
 
-    <div th:replace="~{/client/layout/footer.html :: footer_bottom}"></div>
+    <script type="module" th:src="@{/admin/js/register.js}"></script>
 
     <script type="text/javascript" th:src="@{/client/js/jquery-3.4.1.min.js}"></script>
     <script type="text/javascript" th:src="@{/client/js/popper.min.js}"></script>
