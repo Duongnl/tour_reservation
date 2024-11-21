@@ -32,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 user.getUserName(),
                 user.getPassword(),
                 //Collections.singletonList(new SimpleGrantedAuthority(user.getRole())));
-                Collections.singletonList(new SimpleGrantedAuthority(user.getRole())));
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+user.getRole())));
 
     }
 }

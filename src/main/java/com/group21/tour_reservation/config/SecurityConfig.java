@@ -62,46 +62,26 @@ public class SecurityConfig {
                 return authProvider;
         }
 
-        // @Bean
-        // SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // http
-        // .authorizeHttpRequests(authorize -> authorize
-        // .requestMatchers("/", "/login", "/register", "/static/**",
-        // "/templates/**", "/client/**", "/admin/**", "/css/**",
-        // "/js/**", "/images/**")
-        // .permitAll()
-        // .requestMatchers("/admin/**").hasRole("ADMIN")
-
-        // )
-        // .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
-        // .sessionManagement((sessionManagement) -> sessionManagement
-        // .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-        // .invalidSessionUrl("/logout?expired")
-        // .maximumSessions(1)
-        // .maxSessionsPreventsLogin(false))
-        // .logout(logout ->
-        // logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
-        // .formLogin(formLogin -> formLogin
-        // .loginPage("/login")
-        // .failureUrl("/login?error")
-        // .permitAll());
-        // return http.build();
-        // }
-
         @Bean
         SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
                 http
                                 .authorizeHttpRequests(authorize -> authorize
-                                                .requestMatchers("/", "/login", "/register", "/static/**",
-                                                                "/templates/**", "/client/**", "/admin/**", "/css/**",
-                                                                "/js/**", "/images/**","/api/check-username")
+                                                .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                                                                DispatcherType.INCLUDE)
                                                 .permitAll()
+
+                                                .requestMatchers("/", "/login", "/register", "/static/**",
+                                                                "/templates/**", "/client/**", "/css/**",
+                                                                "/js/**", "/images/**", "/api/check-username")
+                                                .permitAll()
+
                                                 .requestMatchers("/admin/**").hasRole("ADMIN")
+
                                                 .anyRequest().authenticated())
-                                                
-                                // .rememberMe(r -> r.key("uniqueAndSecret").tokenValiditySeconds(86400))
-                                .sessionManagement(sessionManagement -> sessionManagement
-                                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+
+                                .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
+                                .sessionManagement((sessionManagement) -> sessionManagement
+                                                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                                                 .invalidSessionUrl("/logout?expired")
                                                 .maximumSessions(1)
                                                 .maxSessionsPreventsLogin(false))
@@ -111,11 +91,11 @@ public class SecurityConfig {
                                 .formLogin(formLogin -> formLogin
                                                 .loginPage("/login")
                                                 .failureUrl("/login?error")
-                                                .defaultSuccessUrl("/", true)
+                                                .successHandler(customSuccessHandler())
                                                 .permitAll())
-                                .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"))
+                                        .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"))
                                 .csrf(csrf -> csrf.disable());
-                                http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/check-username"));
+                http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/check-username"));
 
                 return http.build();
         }

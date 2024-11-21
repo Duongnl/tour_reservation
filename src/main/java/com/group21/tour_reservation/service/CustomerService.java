@@ -41,7 +41,7 @@ public class CustomerService {
     public void createAccount(Customer customer) {
         Account account = customer.getAccount();
         account.setTime(LocalDateTime.now());
-        account.setRole("ROLE_USER");
+        account.setRole("USER");
         account.setEmail(customer.getEmail());
         String hashPassword = this.passwordEncoder.encode(account.getPassword());
         account.setPassword(hashPassword);

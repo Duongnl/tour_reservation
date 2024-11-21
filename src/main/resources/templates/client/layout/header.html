@@ -1,7 +1,7 @@
 <!-- Header -->
 <div th:fragment="header_nav" class="header">
-  
-  <div class="site-mobile-menu site-navbar-target">
+
+	<div class="site-mobile-menu site-navbar-target">
 		<div class="site-mobile-menu-header">
 			<div class="site-mobile-menu-close">
 				<span class="icofont-close js-menu-toggle"></span>
@@ -44,17 +44,15 @@
 					<li><a href="about.html">Tin tức</a></li>
 					<li><a href="contact.html">Liên hệ</a></li>
 					
-						<li class="has-children"><a href="contact.html"><i id="login_icon" class="fa fa-user"></i></a>
-							<ul class="dropdown">
-								<li><a href="/admin">Admin</a></li>
-								<li><a href="#">Thông tin cá nhân</a></li>
-								<li><a href="#">Đăng xuất</a></li>
-							</ul>
-						</li>
-						
-					
+					<li class="has-children"><a href="contact.html"><i id="login_icon" class="fa fa-user"></i></a>
+						<ul class="dropdown">
+							<li><a href="/admin">Admin</a></li>
+							<li><a href="#">Thông tin cá nhân</a></li>
+							<li><a href="#">Đăng xuất</a></li>
+						</ul>
+					</li>
 				</ul>
-				
+
 				<a href="#"
 					class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light"
 					data-toggle="collapse" data-target="#main-navbar">

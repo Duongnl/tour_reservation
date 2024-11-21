@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     employeeUsernameError.classList.add("text-danger");
                 } else {
                     console.log("submit trong add")
-                   // document.querySelector("form").submit(); // Replace "form" with the actual form selector if needed
+                   document.querySelector("form").submit(); // Replace "form" with the actual form selector if needed
                 }
             } else {
                 document.querySelector("form").submit();
