@@ -13,7 +13,7 @@
 	<nav class="site-nav">
 		<div class="container">
 			<div class="site-navigation">
-				<a href="index.html" class="logo m-0">Tour <span class="text-primary">.</span></a>
+				<a href="/" class="logo m-0">Tour <span class="text-primary">.</span></a>
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
 					<li class="active"><a href="index.html">Tour</a></li>
@@ -44,12 +44,22 @@
 					<li><a href="about.html">Tin tức</a></li>
 					<li><a href="contact.html">Liên hệ</a></li>
 					
-					<li class="has-children"><a href="contact.html"><i id="login_icon" class="fa fa-user"></i></a>
+					<li sec:authorize="isAuthenticated()" class="has-children" >
+						<a href="contact.html">
+							<i id="login_icon" class="fa fa-user"></i>
+						</a>
 						<ul class="dropdown">
-							<li><a href="/admin">Admin</a></li>
+							<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin">Admin</a></li>
 							<li><a href="#">Thông tin cá nhân</a></li>
-							<li><a href="#">Đăng xuất</a></li>
+							<li><form method="post" action="/logout">
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+								<button class="dropdown-item">Đăng xuất</button>
+							</form></li>
 						</ul>
+					</li>
+
+					<li sec:authorize="isAnonymous()">
+						<a th:href="@{/login}">Đăng nhập</a>
 					</li>
 				</ul>
 
