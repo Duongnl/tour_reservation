@@ -22,8 +22,6 @@ public class PromotionController {
     @Autowired
     PromotionService promotionService;
 
-
-
     @GetMapping("/admin/promotion")
     public String Getpromotion(Model model) {
         model.addAttribute("promotions", promotionService.getAllPromotion());
@@ -38,7 +36,8 @@ public class PromotionController {
     }
 
     @PostMapping("/admin/promotion/add-promotion")
-    public String addPromotion(Model model, @ModelAttribute("promotion") Promotion promotion, RedirectAttributes redirectAttributes) {
+    public String addPromotion(Model model, @ModelAttribute("promotion") Promotion promotion,
+            RedirectAttributes redirectAttributes) {
         promotionService.createPromotion(promotion);
 
         // Thêm thông báo vào RedirectAttributes
@@ -46,9 +45,8 @@ public class PromotionController {
         return "redirect:/admin/promotion";
     }
 
-
     @GetMapping("/admin/promotion/{slug}")
-    public String promotionEditView(Model model,@PathVariable("slug") String slug) {
+    public String promotionEditView(Model model, @PathVariable("slug") String slug) {
         Promotion promotion = promotionService.getPromotion(slug);
         if (promotion == null) {
             return "admin/404.html";
@@ -57,8 +55,10 @@ public class PromotionController {
         model.addAttribute("promotion", promotion); // Thêm đối tượng vào mô hình
         return "admin/promotion/promotion-edit.html";
     }
+
     @PostMapping("/admin/promotion/edit-promotion")
-    public String editPromotion(Model model, @ModelAttribute("promotion") Promotion promotion, RedirectAttributes redirectAttributes) {
+    public String editPromotion(Model model, @ModelAttribute("promotion") Promotion promotion,
+            RedirectAttributes redirectAttributes) {
         promotionService.editPromotion(promotion);
 
         // Thêm thông báo vào RedirectAttributes
@@ -67,7 +67,8 @@ public class PromotionController {
     }
 
     @GetMapping("/admin/promotion/delete-promotion/{id}")
-    public String deletePromotion(Model model,@PathVariable("id") String promotionId, RedirectAttributes redirectAttributes) {
+    public String deletePromotion(Model model, @PathVariable("id") String promotionId,
+            RedirectAttributes redirectAttributes) {
         if (promotionService.deletePromotion(promotionId) != null) {
             redirectAttributes.addFlashAttribute("successMessage", "Xóa thành công!");
         } else {
@@ -77,26 +78,34 @@ public class PromotionController {
     }
 
     @GetMapping("/admin/promotion/add-promotion-to-tour/{id}")
-    public String GetTourShedule(Model model,@PathVariable("id") String promotionId) {
-        //System.out.println("123");
+    public String GetTourShedule(Model model, @PathVariable("id") String promotionId) {
+        // System.out.println("123");
         List<TourSchedule> schedules = promotionService.getAllShedules();
         List<TourSchedule> promotionSchedule = promotionService.getAllSchedulesWithPromotions();
         model.addAttribute("schedules", schedules);
         model.addAttribute("promotionchedule", promotionSchedule);
         model.addAttribute("promotionId", promotionId); // Thêm promotionId vào model
-        //System.out.println("456");
+        // System.out.println("456");
         return "admin/promotion/promotion-add-tourschedule.html";
     }
 
     @PostMapping("/admin/promotion/add-promotion-to-tour")
-    public String addPromotionTour(Model model,@RequestParam Integer promotionId, @RequestParam Integer scheduleId, RedirectAttributes redirectAttributes) {
+    public String addPromotionTour(Model model, @RequestParam Integer promotionId, @RequestParam Integer scheduleId,
+            RedirectAttributes redirectAttributes) {
         try {
             promotionService.addPromotionToSchedule(promotionId, scheduleId);
             redirectAttributes.addFlashAttribute("successMessage", "Thêm khuyến mãi thành công!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Lỗi khi thêm khuyến mãi!");
         }
-        
+
+        return "redirect:/admin/promotion";
+    }
+
+    @PostMapping("/admin/promotion/add-promotion-to-tour/delete")
+    public String deletePromotionDetail(@RequestParam("promotionId") Integer promotionId,
+            @RequestParam("scheduleId") Integer scheduleId) {
+        promotionService.deletePromotionDetail(promotionId, scheduleId);
         return "redirect:/admin/promotion";
     }
 }

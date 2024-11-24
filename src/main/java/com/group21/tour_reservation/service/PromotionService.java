@@ -67,4 +67,9 @@ public class PromotionService {
     public List<TourSchedule> getAllSchedulesWithPromotions() {
         return tourScheduleRepository.findSchedulesWithPromotions(); 
     }
+
+    // Hàm xóa lịch trình sau khi thêm vào khuyễn mãi
+    public void deletePromotionDetail(Integer promotionId, Integer scheduleId) {
+        promotionRepository.removeTourScheduleFromPromotion(promotionId, scheduleId);
+    }
 }
