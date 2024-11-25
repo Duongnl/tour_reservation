@@ -1,5 +1,5 @@
-import { validateText,validateTextDetail, validateEmail, validatePhoneNumber, validateUsername, validatePassword } from './validation.js';
-import {errorNotify, successNotify} from "./notify.js";
+import { validateText, validateDate, validateEmail, validatePhoneNumber, validateUsername, validatePassword } from './validation.js';
+import { errorNotify, successNotify } from "./notify.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     const employeeName = document.getElementById("employee-name");
@@ -15,18 +15,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const employeePasswordError = document.getElementById("employee-password-error");
 
     const employeeEmail = document.getElementById("employee-email");
-    const employeeEmailError = document.getElementById("employee-emai-error");
+    const employeeEmailError = document.getElementById("employee-email-error");
+
+    const employeeBirthday = document.getElementById("employeeDate");
+    const employeeBirthdayError = document.getElementById("employeeDate-error");
 
     const btnemployeeAdd = document.getElementById("btn-employee-add");
 
+    const employeeUserNameOld = document.getElementById("employee-user-name-old")
+
     const txtId = document.getElementById('txt-id')
     let validation;
-    if(txtId) {
+    if (txtId) {
         // đang ở form chỉnh sửa
-         validation = [...Array(4).fill(true)]
+        validation = [...Array(4).fill(true)]
     } else {
         // đang ở form thêm mới
-         validation = [...Array(3).fill(false),true]
+        validation = [...Array(3).fill(false), true]
     }
 
 
@@ -34,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     employeeName.addEventListener("input", function () {
         const successText = "Tên nhân viên hợp lệ"
         const errorText = "Tên nhân viên chỉ cho phép chứa chữ, số và , . -"
-        validation[0] = validateText(employeeName, employeeNameError,successText,errorText);
+        validation[0] = validateText(employeeName, employeeNameError, successText, errorText);
     });
 
 
@@ -42,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
     phoneNumber.addEventListener("input", function () {
         const successText = "Số điện thoại hợp lệ"
         const errorText = "Số điện thoại chỉ chứa số và không quá 10 kí tự"
-        validation[1] =validatePhoneNumber(phoneNumber, phoneNumberError,successText,errorText);
+        validation[1] = validatePhoneNumber(phoneNumber, phoneNumberError, successText, errorText);
     });
 
 
@@ -50,31 +55,70 @@ document.addEventListener("DOMContentLoaded", function () {
     employeeUsername.addEventListener("input", function () {
         const successText = "Tên đăng nhập hợp lệ"
         const errorText = "Tên đăng nhập không hợp lệ"
-        validation[2] = validateUsername(employeeUsername, employeeUsernameError,successText,errorText);
+        validation[2] = validateUsername(employeeUsername, employeeUsernameError, successText, errorText);
     });
 
     //Kiểm tra password
     employeePassword.addEventListener("input", function () {
         const successText = "mật khẩu hợp lệ"
         const errorText = " Mật khẩu từ 8 đến 20 ký tự, chứa ít nhất một số, chữ thường, hoa,ký tự đặc biệt"
-        validation[3] = validatePassword(employeePassword, employeePasswordError,successText,errorText);
+        validation[3] = validatePassword(employeePassword, employeePasswordError, successText, errorText);
     });
 
     employeeEmail.addEventListener("input", function () {
         const successText = "Email hợp lệ"
         const errorText = "Email không hợp lệ (VD: abc@gmail.com)"
-        validation[4] = validateEmail(employeeEmail, employeeEmailError,successText,errorText);
+        validation[4] = validateEmail(employeeEmail, employeeEmailError, successText, errorText);
     });
 
-    btnemployeeAdd.addEventListener("click", function (event){
+    employeeBirthday.addEventListener("input", function () {
+        const successText = "Ngày hợp lệ"
+        const errorText = "Ngày không hợp lệ"
+        validation[5] = validateDate(employeeBirthday, employeeBirthdayError, successText, errorText);
+    });
 
-        console.log("Validation",validation)
+    const fetchApi = async () => {
+
+        const res = await fetch("/api/check-username", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'text/plain'
+
+            },
+            body: employeeUsername.value,
+        })
+        const data = res.json();
+        return data
+    }
+
+    btnemployeeAdd.addEventListener("click", async function (event) {
+        event.preventDefault();
+        console.log("validation >>> ", validation)
         if (!validation.some(v => v === false)) {
 
+            console.log("txt-id", txtId)
+            console.log("employeeUserNameOld", employeeUserNameOld.value)
+            console.log("employeeUsername", employeeUsername.value)            
+            if (!txtId || employeeUserNameOld.value !== employeeUsername.value) {
+
+                const data = await fetchApi()
+                if (data === false) {
+                    errorNotify("Tài khoản đã tồn tại")
+                    employeeUsername.classList.remove("is-valid");
+                    employeeUsername.classList.add("is-invalid");
+                    employeeUsernameError.textContent = "Tài khoản đã tồn tại";
+                    employeeUsernameError.classList.add("text-danger");
+                } else {
+                      document.getElementById("form2").submit();
+                }
+            } else {
+
+                document.getElementById("form2").submit();
+            }
         } else {
-            event.preventDefault();
             errorNotify("Vui lòng điền đầy đủ thông tin hợp lệ")
         }
+
     });
 
 

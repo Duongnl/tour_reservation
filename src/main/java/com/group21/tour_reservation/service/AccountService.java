@@ -2,7 +2,6 @@ package com.group21.tour_reservation.service;
 
 import com.group21.tour_reservation.entity.Account;
 import com.group21.tour_reservation.repository.AccountRepository;
-import com.group21.tour_reservation.repository.AccountRepository;
 import com.group21.tour_reservation.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +43,10 @@ public class AccountService {
         Account.setStatus(0);
 
         return accountRepository.save(Account);
+    }
+
+    public Account getAccountByUserName(String username) {
+        return accountRepository.findByUserName(username);
     }
 
 }
