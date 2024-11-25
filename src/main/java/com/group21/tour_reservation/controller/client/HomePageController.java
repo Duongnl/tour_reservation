@@ -56,6 +56,11 @@ public class HomePageController {
     @GetMapping("/access-deny")
     public String getDenyPage(Model model) {
        
-        return "client/auth/deny.html";
+        return "client/auth/deny.html";}
+        
+    @GetMapping("/tour")
+    public String tourView() {
+
+        return "client/tour-page.html";
     }
 }

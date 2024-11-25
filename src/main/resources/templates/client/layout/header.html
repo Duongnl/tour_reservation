@@ -1,7 +1,7 @@
-<!-- Header -->
+<!-- Header -->2e
 <div th:fragment="header_nav" class="header">
-
-	<div class="site-mobile-menu site-navbar-target">
+	<link th:href="@{/client/css/header.css}" rel="stylesheet" />
+  <div class="site-mobile-menu site-navbar-target">
 		<div class="site-mobile-menu-header">
 			<div class="site-mobile-menu-close">
 				<span class="icofont-close js-menu-toggle"></span>
@@ -16,7 +16,7 @@
 				<a href="/" class="logo m-0">Tour <span class="text-primary">.</span></a>
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
-					<li class="active"><a href="#">Tour</a></li>
+					<li class="active"><a href="/tour">Tour</a></li>
 					
 					<li sec:authorize="isAuthenticated()" class="has-children" >
 						<a href="contact.html">

@@ -68,6 +68,7 @@
                                         <th>STT</th>
                                         <th>Tên tour</th>
                                         <th>Danh mục</th>
+                                        <th>Điểm  xuất phát</th>
                                         <th>Thành phố/Tỉnh</th>
                                         <th>Nước</th>
                                         <th style="width: 10%">Hành động</th>
@@ -82,6 +83,7 @@
                                         <td class="txt-id" th:text="${tour.tourId}" ></td>
                                         <td class="txt-name" th:text="${tour.tourName}" ></td>
                                         <td th:text="${tour.category.categoryName}" ></td>
+                                        <td th:text="${tour.departureLocation}" ></td>
                                         <td th:text="${tour.city}" ></td>
                                         <td th:text="${tour.country}" ></td>
                                         <td>

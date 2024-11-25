@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="page-inner">
+    <!--Table-->
+    <div class="col-md-12">
+      <div class="card">
+
+        <!-- header table -->
+        <div class="card-header">
+          <div class="d-flex align-items-center">
+            <h4 class="card-title">Danh sách Account</h4>
+            <a
+                    th:href="@{/admin/account/add}"
+                    class="btn btn-primary btn-round ms-auto"
+            >
+              <i class="fa fa-plus"></i>
+              Thêm Account
+            </a>
+          </div>
+        </div>
+        <!-- end header table -->
+
+        <!-- table -->
+        <div class="card-body">
+          <div class="table-responsive">
+            <table
+                    id="add-row"
+                    class="display table table-striped table-hover"
+            >
+              <!-- header -->
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>User Name</th>
+                <th>PassWord</th>
+                <th>Email</th>
+                <th>Time</th>
+              </tr>
+              </thead>
+              <!-- end header -->
+
+              <!-- body -->
+              <tbody>
+
+              <tr  class="row-data"  th:each="account: ${accounts}" >
+                <td class="txt-id" th:text="${account.accountId}" ></td>
+                <td class="txt-name" th:text="${account.userName}" ></td>
+                <td th:text="${account.email}" ></td>
+                <td th:text="${account.time}" ></td>
+                <td th:text="${account.status}" ></td>
+                <td>
+                  <a th:href="@{/admin/account/edit/{slug}(slug=${account.accountId})}">
+                    <button type="button" class="btn btn-success">Sửa</button>
+                  </a>
+                  <a th:href="@{/admin/account/delete/{id}(id=${account.accountId})}">
+                    <button type="button" class="btn btn-danger">Xóa</button>
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+              <!-- end body -->
+
+            </table>
+          </div>
+        </div>
+        <!-- end table -->
+
+      </div>
+    </div>
+    <!--End table-->
+  </div>
+</div>
