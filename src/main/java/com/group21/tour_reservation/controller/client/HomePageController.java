@@ -12,6 +12,9 @@ import com.group21.tour_reservation.entity.Customer;
 
 import com.group21.tour_reservation.service.CustomerService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class HomePageController {
 
@@ -19,7 +22,10 @@ public class HomePageController {
     private CustomerService customerService;
 
     @GetMapping("/")
-    public String getHomePage(Model model) {
+    public String getHomePage(Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession(false);
+        System.out.println(">>> check id" + session.getAttribute("id"));
         return "client/home.html";
     }
 
