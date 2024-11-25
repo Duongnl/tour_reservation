@@ -86,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             },
             body: employeeUsername.value,
-            credentials: "include",
         })
         const data = res.json();
         return data
@@ -94,8 +93,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     btnemployeeAdd.addEventListener("click", async function (event) {
         event.preventDefault();
+        console.log("validation >>> ", validation)
         if (!validation.some(v => v === false)) {
-            if (!txtId || employeeUserNameOld.value != employeeUsername.value) {
+
+            console.log("txt-id", txtId)
+            console.log("employeeUserNameOld", employeeUserNameOld.value)
+            console.log("employeeUsername", employeeUsername.value)            
+            if (!txtId || employeeUserNameOld.value !== employeeUsername.value) {
+
                 const data = await fetchApi()
                 if (data === false) {
                     errorNotify("Tài khoản đã tồn tại")
@@ -104,12 +109,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     employeeUsernameError.textContent = "Tài khoản đã tồn tại";
                     employeeUsernameError.classList.add("text-danger");
                 } else {
-                    console.log("submit trong add")
-                   document.querySelector("form").submit(); // Replace "form" with the actual form selector if needed
+                      document.getElementById("form2").submit();
                 }
             } else {
-                document.querySelector("form").submit();
-                console.log("submit")
+
+                document.getElementById("form2").submit();
             }
         } else {
             errorNotify("Vui lòng điền đầy đủ thông tin hợp lệ")

@@ -60,7 +60,7 @@ public class EmployeeController {
     @PostMapping("/admin/employee/edit-employee")
     public String editEmployee(Model model, @ModelAttribute("employee") Employee employee, RedirectAttributes redirectAttributes) {
         employeeService.editEmployee(employee);
-
+        System.out.println("covao");
         // Thêm thông báo vào RedirectAttributes
         redirectAttributes.addFlashAttribute("successMessage", "Chỉnh sửa nhân viên thành công!");
         return "redirect:/admin/employee";
