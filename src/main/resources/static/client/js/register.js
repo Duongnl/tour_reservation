@@ -1,5 +1,5 @@
 import { validateText, validateEmail, validatePhoneNumber, validateUsername, validatePassword, validateConfirmPassword } from './validation.js';
-import { errorNotify, successNotify } from "./notify.js";
+
 
 document.addEventListener("DOMContentLoaded", function () {
 

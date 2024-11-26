@@ -72,7 +72,10 @@ public class SecurityConfig {
 
                                                 .requestMatchers("/", "/login", "/register", "/static/**",
                                                                 "/templates/**", "/client/**", "/css/**",
-                                                                "/js/**", "/images/**", "/api/check-username")
+                                                                "/js/**", "/images/**", "/api/check-username","/api/client/filter-tour","/admin/images/**"
+                                                        ,"/reserve/**","/tour/**","/client/js/**", "/api/client/**", "/admin/js/**", "/admin/css/**",
+                                                        "/client/css/**", "/client/fonts/**",
+                                                        "/admin/fonts/**")
                                                 .permitAll()
 
                                                 .requestMatchers("/admin/**").hasRole("ADMIN")
@@ -95,7 +98,7 @@ public class SecurityConfig {
                                                 .permitAll())
                                         .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"))
                                 .csrf(csrf -> csrf.disable());
-                http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/check-username"));
+                http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/check-username","/api/client/filter-tour","/api/client/reserve"));
 
                 return http.build();
         }
