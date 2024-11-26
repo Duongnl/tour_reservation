@@ -23,6 +23,24 @@
 
             <tbody>
             <tr>
+                <td class="col-2">Acount Id:</td>
+                <td th:text="${customer.customerId == null ? 'Không có dữ liệu' : customer.customerId}"
+                    class="col-8"
+                ></td>
+            </tr>
+            <tr>
+                <td class="col-2">relationshipName:</td>
+                <td th:text="${customer.relationshipName == null ? 'Không có dữ liệu' : customer.relationshipName}"
+                    class="col-8"
+                ></td>
+            </tr>
+            <tr>
+                <td class="col-2">Customer Type:</td>
+                <td th:text="${customer.customerType == null ? 'Không có dữ liệu' : customer.customerType}"
+                    class="col-8"
+                ></td>
+            </tr>
+            <tr>
                 <td class="col-2">Địa chỉ Email:</td>
                 <td th:text="${customer.email == null ? 'Không có dữ liệu' : customer.email}"
                     class="col-8"

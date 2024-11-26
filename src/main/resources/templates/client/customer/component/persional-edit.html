@@ -55,7 +55,7 @@
                 <tr>
                     <div class="form-group">
                         <div class="input-group mb-3 " >
-                            <span class="input-group-text col-2" >Số điện thoại</span>
+                            <span class="input-group-text col-2" >SDT</span>
                             <input
                                     type="text"
                                     th:field="${customer.phoneNumber}"
@@ -96,7 +96,7 @@
                 <tr >
                     <div class="form-group">
                         <div class="input-group mb-3 " >
-                            <span class="input-group-text col-2" >Customer Type</span>
+                            <span class="input-group-text col-2" >Type</span>
                             <input
                                     type="text"
                                     th:field="${customer.customerType}"
@@ -112,8 +112,8 @@
                         <div class="input-group mb-3 " >
                             <span class="input-group-text col-2" >Birthday</span>
                             <input
-                                    type="date"
-                                    th:text="${#dates.format(customer.birthday, 'yyyy/MM/dd')"
+                                    id="birthday_123"
+                                    type="text"
                                     th:field="${customer.birthday}"
                                     class="form-control col-7"
                                     style="background-color: white "
@@ -173,3 +173,23 @@
         </div>
     </div>
 </form>
+<!--<script>-->
+<!--    console.log(12312)-->
+<!--</script>-->
+<script th:inline="javascript">
+    let status = document.getElementById("birthday_123");
+    /*<![CDATA[*/
+    var customer = /*[[${customer}]]*/[];
+    console.log(customer)
+    // status.value = customer.birthday
+    // status.value=year
+    // status.addEventListener("change", function() {
+    //     var selectedYear = this.value;
+    //     if (selectedYear != year){
+    //         var url = "/admin/statistical/year/" + selectedYear;
+    //         window.location.href = url;
+    //     }
+    // });
+    /*]]>*/
+    console.log(status)
+</script>
