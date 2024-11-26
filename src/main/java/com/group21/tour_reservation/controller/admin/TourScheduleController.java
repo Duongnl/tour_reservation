@@ -49,7 +49,6 @@ public class TourScheduleController {
         if (schedule == null) {
             return "admin/404.html";
         }
-        System.out.println(schedule.getScheduleId());
         model.addAttribute("schedule", schedule);
         return "admin/schedule/schedule-edit.html";
     }
@@ -112,7 +111,7 @@ public class TourScheduleController {
                                @RequestParam(name = "visa-expire", required = false) LocalDate visaExpire
     ) {
 
-        TourSchedule scheduleRes = tourScheduleService.addSchedule(schedule, departureDate, returnDate, visaExpire, tourId);
+        TourSchedule scheduleRes = tourScheduleService.editSchedule(schedule, departureDate, returnDate, visaExpire, tourId);
         redirectAttributes.addFlashAttribute("successMessage", "Chỉnh sửa lịch trình thành công");
         return "redirect:/admin/tour/schedule/schedule-overview/" + StringUtils.createSlug(scheduleRes.getScheduleName()) + "-" + scheduleRes.getScheduleId();
     }

@@ -22,13 +22,13 @@ public class Category {
     private Integer categoryId;
 
     @Column(name = "category_name")
-    String categoryName;
+    private String categoryName;
 
     @Column(name = "category_detail")
-    String categoryDetail;
+    private String categoryDetail;
 
     @Column(name = "status")
-    int status;
+    private int status;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @JsonManagedReference

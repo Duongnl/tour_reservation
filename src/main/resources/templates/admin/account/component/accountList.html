@@ -1,0 +1,166 @@
+<!--<div class="container">-->
+<!--  <div class="page-inner">-->
+<!--    &lt;!&ndash;Table&ndash;&gt;-->
+<!--    <div class="col-md-12">-->
+<!--      <div class="card">-->
+
+<!--        &lt;!&ndash; header table &ndash;&gt;-->
+<!--        <div class="card-header">-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            <h4 class="card-title">Danh sách Account</h4>-->
+<!--            <a-->
+<!--                    th:href="@{/admin/account/add}"-->
+<!--                    class="btn btn-primary btn-round ms-auto"-->
+<!--            >-->
+<!--              <i class="fa fa-plus"></i>-->
+<!--              Thêm Account-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; end header table &ndash;&gt;-->
+
+<!--        &lt;!&ndash; table &ndash;&gt;-->
+<!--        <div class="card-body">-->
+<!--          <div class="table-responsive">-->
+<!--            <table-->
+<!--                    id="add-row"-->
+<!--                    class="display table table-striped table-hover"-->
+<!--            >-->
+<!--              &lt;!&ndash; header &ndash;&gt;-->
+<!--              <thead>-->
+<!--              <tr>-->
+<!--                <th>ID</th>-->
+<!--                <th>User Name</th>-->
+<!--                <th>PassWord</th>-->
+<!--                <th>Email</th>-->
+<!--                <th>Time</th>-->
+<!--              </tr>-->
+<!--              </thead>-->
+<!--              &lt;!&ndash; end header &ndash;&gt;-->
+
+<!--              &lt;!&ndash; body &ndash;&gt;-->
+<!--              <tbody>-->
+
+<!--              <tr  class="row-data"  th:each="account: ${accounts}" >-->
+<!--                <td class="txt-id" th:text="${account.accountId}" ></td>-->
+<!--                <td class="txt-name" th:text="${account.userName}" ></td>-->
+<!--                <td th:text="${account.email}" ></td>-->
+<!--                <td th:text="${account.time}" ></td>-->
+<!--                <td th:text="${account.status}" ></td>-->
+<!--                <td>-->
+<!--                  <a th:href="@{/admin/account/edit/{slug}(slug=${account.accountId})}">-->
+<!--                    <button type="button" class="btn btn-success">Sửa</button>-->
+<!--                  </a>-->
+<!--                  <a th:href="@{/admin/account/delete/{id}(id=${account.accountId})}">-->
+<!--                    <button type="button" class="btn btn-danger">Xóa</button>-->
+<!--                  </a>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--              </tbody>-->
+<!--              &lt;!&ndash; end body &ndash;&gt;-->
+
+<!--            </table>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; end table &ndash;&gt;-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;End table&ndash;&gt;-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!-- content-->
+<div class="container">
+  <div class="page-inner">
+    <!--                <h4>Quản lý phương tiện</h4>-->
+
+    <!--Table-->
+    <div class="col-md-12">
+      <div class="card">
+
+        <!-- header table -->
+        <div class="card-header">
+          <div class="d-flex align-items-center">
+            <h4 class="card-title">Danh sách Account</h4>
+            <a
+                    th:href="@{/admin/account/add}"
+                    class="btn btn-primary btn-round ms-auto"
+            >
+              <i class="fa fa-plus"></i>
+              Thêm phương tiện
+            </a>
+          </div>
+        </div>
+        <!-- end header table -->
+
+        <!-- table -->
+        <div class="card-body">
+          <div class="table-responsive">
+            <table
+                    id="add-row"
+                    class="display table table-striped table-hover"
+            >
+              <!-- header -->
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>User Name</th>
+                <th>PassWord</th>
+                <th>Email</th>
+                <th>Time</th>
+                <th>NumberPhone</th>
+                <th>Status</th>
+                <th style="width: 10%">Hành động</th>
+              </tr>
+              </thead>
+              <!-- end header -->
+
+              <!-- body -->
+              <tbody>
+
+              <tr  class="row-data"  th:each="account: ${accounts}" >
+                <td class="txt-id" th:text="${account.accountId}" ></td>
+                <td class="txt-name" th:text="${account.userName}" ></td>
+                <td th:text="${account.password}" ></td>
+                <td th:text="${account.email}" ></td>
+                <td th:text="${account.time}" ></td>
+                <td th:text="${account.phoneNumber}" ></td>
+                <td th:text="${account.status}" ></td>
+                <td>
+                  <div class="form-button-action">
+                    <a
+                            type="button"
+                            data-bs-toggle="tooltip"
+                            th:href="@{/admin/account/edit/{slug}(slug=${account.accountId})}"
+                    >
+                      <i class="fa fa-edit"></i>
+                    </a>
+                    <!-- Button trigger modal -->
+                    <button type="button"
+                            class="btn btn-link btn-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                            th:attr="data-id=${account.accountId},
+                                                        data-controller-delete='/admin/account/delete' ">
+                      <i class="fa fa-times"></i>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+              <!-- end body -->
+
+            </table>
+          </div>
+        </div>
+        <!-- end table -->
+
+      </div>
+    </div>
+    <!--End table-->
+
+  </div>
+</div>

@@ -57,12 +57,6 @@ public class TransportDetailController {
             RedirectAttributes redirectAttributes,
             Model model
     ) {
-        System.out.println("schedule-slug : " + scheduleSlug);
-        System.out.println("transport-slug : " + transportSlug);
-        System.out.println("transportDetailId : " + transportDetail.getTransportDetailId());
-        System.out.println("departureTime : " + transportDetail.getDepartureTime());
-        System.out.println("arrivalTime : " + transportDetail.getArrivalTime());
-        System.out.println("status : " + transportDetail.getStatus());
 
 
         TransportDetail transportDetailRes = transportDetailService.editTransportDetail(scheduleSlug, transportSlug, transportDetail);

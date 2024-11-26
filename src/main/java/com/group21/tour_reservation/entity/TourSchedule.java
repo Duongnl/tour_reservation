@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -61,7 +62,7 @@ public class TourSchedule {
 
     @OneToMany(mappedBy = "tourSchedule", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<TransportDetail> transportDetails;
+    private List<TransportDetail> transportDetails;
 
     @OneToMany(mappedBy = "tourSchedule", cascade = CascadeType.ALL)
     @JsonManagedReference

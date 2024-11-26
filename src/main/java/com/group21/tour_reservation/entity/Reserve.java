@@ -41,7 +41,7 @@ public class Reserve {
     int status;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false, referencedColumnName = "employee_id")
+    @JoinColumn(name = "employee_id", nullable = true, referencedColumnName = "employee_id")
     @JsonBackReference
     private Employee employee;
 

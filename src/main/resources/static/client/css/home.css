@@ -1,3 +1,56 @@
+#login_icon {
+    margin-left: 10px;
+    color: aliceblue;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#login_icon:hover {
+    cursor: pointer;
+}
+body{
+    background-color: #6998AB;
+}
+@media (max-width: 991.98px) {
+    #login_icon {
+        margin-left: 0px;
+        color: #000000;
+        cursor: pointer;
+        font-size: 16px;
+    }
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.username{
+    margin-bottom: 30px;
+}
+.register{
+    margin: 0 auto;
+    font-size: 16px;
+    font-family:  Arial, Helvetica, sans-serif;
+}
+.register-title{
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.title{
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+}
+.form-check{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.btn_register{
+    text-align: center;
+}
+
 .hero .slides img {
     height: 100%;
     width: 100%;

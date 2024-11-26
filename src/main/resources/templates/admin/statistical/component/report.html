@@ -1,0 +1,73 @@
+<!--Table-->
+<div class="col-md-12">
+  <div class="card">
+
+    <!-- header table -->
+    <div class="card-header">
+      <div class="d-flex align-items-center">
+        <h4 class="card-title">Bảng báo cáo</h4>
+      </div>
+    </div>
+    <!-- end header table -->
+
+    <!-- table -->
+    <div class="card-body">
+      <div class="">
+        <ul>
+          <li><b id="doanhthu-max"></b></li>
+          <li><b id="doanhthu-min"></b></li>
+          <li> <b> Tổng doanh thu : <span th:text="${sum}"></span> </b> </li>
+        </ul>
+      </div>
+    </div>
+    <!-- end table -->
+  </div>
+</div>
+<!--End table-->
+
+<div class="col-md-12">
+  <div class="card">
+
+  </div>
+</div>
+
+
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var data = /*[[${money_mm}]]*/[];
+  var labels = /*[[${labels}]]*/[];
+
+
+
+  function findMax(arr) {
+    let max = arr[0]; // Giả sử phần tử đầu tiên là lớn nhất
+    let index = 0;
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] > max) {
+        index = i;
+        max = arr[i];
+      }
+    }
+    return {index: index, value: max}
+  }
+  function findMin(arr) {
+    let min = arr[0]; // Giả sử phần tử đầu tiên là nhỏ nhất
+    let index = 0;
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] < min) {
+        index = i;
+        min = arr[i];
+      }
+    }
+    return {index: index, value: min}
+  }
+
+  const numbers = [3, 7, 2, 9, 5];
+  let result_max = findMax(data);
+  let result_min = findMin(data);
+  // console.log("mã", result); // Output: 9
+  document.getElementById("doanhthu-max").innerText = `Doanh thu của tháng Cao nhất là: Tháng ${result_max.index+1} ( ${result_max.value} )`;
+  document.getElementById("doanhthu-min").innerText = `Doanh thu của tháng Thấp nhất là: Tháng ${result_min.index+1} ( ${result_min.value} )`;
+
+  /*]]>*/
+</script>

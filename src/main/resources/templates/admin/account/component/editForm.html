@@ -1,0 +1,102 @@
+<form method="POST"
+      th:action="@{/admin/account/edit}"
+      th:object="${account}">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Edit Account</div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+
+                        <div class="form-group has-feedback">
+                            <label for="accountId">ID Acount </label>
+                            <input
+                                    type="text"
+                                    id="accountId"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{accountId}"
+                                    readonly
+                            />
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="userName">Tên Acount </label>
+                            <input
+                                    type="text"
+                                    id="userName"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{userName}"
+                            />
+
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="password">Password</label>
+                            <input
+                                    type="text"
+                                    id="password"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{password}"
+                            />
+
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="email">Email</label>
+                            <input
+                                    type="text"
+                                    id="email"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{email}"
+                            />
+
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="time">Time</label>
+                            <input type="date" id="time" name="time"  class="form-control"
+                                   th:value="*{time}"
+                                   th:field="*{time}"
+                            />
+                        </div>
+
+
+                        <div class="form-group has-feedback">
+                            <label for="phoneNumber">Number Phone</label>
+                            <input
+                                    type="number"
+                                    id="phoneNumber"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{phoneNumber}"
+                            />
+
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="status">Chọn trạng thái</label>
+                            <select id="status" class="form-control" th:field="*{status}">
+                                <option value="0" >Un Enable</option>
+                                <option th:value="1" selected >Enable</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success" id="btn-transport-add" type="submit">Thêm</button>
+                <a class="btn btn-danger"
+                   th:href="@{/admin/account}"
+                >Quay lại</a>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,58 @@
+<form method="POST"
+      th:action="@{/admin/category/add}"
+      th:object="${category}">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Thêm mới danh mục</div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+
+                        <div class="form-group has-feedback">
+                            <label for="categoryName">Tên danh mục </label>
+                            <input
+                                    type="text"
+                                    id="categoryName"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{categoryName}"
+                            />
+                            <small id="transport-name-error" class="form-text text-muted"
+                            >Điền tên danh mục</small>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="categoryDetail">Chi tiết danh mục</label>
+                            <input
+                                    type="text"
+                                    id="categoryDetail"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{categoryDetail}"
+                            />
+                            <small id="departure-location-error" class="form-text text-muted"
+                            >Điền Chi tiết danh mục</small>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="status">Chọn trạng thái</label>
+                            <select id="status" class="form-control" th:field="*{status}">
+                                <option value="0" >Un Enable</option>
+                                <option th:value="1" selected >Enable</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success" id="btn-transport-add" type="submit">Thêm</button>
+                <a class="btn btn-danger"
+                   th:href="@{/admin/category}"
+                >Quay lại</a>
+            </div>
+        </div>
+    </div>
+</form>

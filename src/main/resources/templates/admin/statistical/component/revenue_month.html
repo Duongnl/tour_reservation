@@ -1,0 +1,67 @@
+<!-- content-->
+<div class="container">
+    <div class="page-inner">
+        <!--Table-->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header row">
+                    <div class="card-title" >Thống kê doanh thu tháng <span th:text="${month}"></span> Năm <span th:text="${year}"></span> </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="barChart">123</canvas>
+                    </div>
+                </div>
+                <div> Tổng doanh thu : <span th:text="${sum}"></span>
+            </div>
+        </div>
+        <!--End table-->
+    </div>
+</div>
+
+
+<!--<div th:text="*{money_mm[11]}">-->
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script type="text/javascript" src="jscript/graph.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var data = /*[[${money_mm}]]*/[];
+    var labels = /*[[${labels}]]*/[];
+    console.log(123);
+    console.log(data[11]);
+
+    let barChart = document.getElementById("barChart").getContext("2d");
+    var myBarChart = new Chart(barChart, {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Sales",
+                    backgroundColor: "rgb(23, 125, 255)",
+                    borderColor: "rgb(23, 125, 255)",
+                    data: data //[3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4],
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [
+                    {
+                        ticks: {
+                            beginAtZero: true,
+                        },
+                    },
+                ],
+            },
+        },
+    });
+    console.log(barChart)
+    /*]]>*/
+</script>
+

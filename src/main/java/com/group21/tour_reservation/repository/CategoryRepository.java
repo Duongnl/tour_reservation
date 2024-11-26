@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
     List<Category> findAllByStatus(int status);
+//    Category findById(int id);
 }

@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.group21.tour_reservation.entity.Employee;
+import java.time.LocalDate;
+
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Integer>{

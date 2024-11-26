@@ -54,13 +54,13 @@
                                             </div>
 
                                             <div class="form-group has-feedback">
-                                                <label for="relationshipId">Người chủ hộ</label>
+                                                <label for="relationshipId">Người đại diện</label>
                                                 <select id="relationshipId" name="selectedCustomerId" class="form-control" >
-                                                    <option value="" disabled selected>Chọn chủ hộ</option>
+                                                    <option value="" disabled selected>Chọn người đại diện</option>
                                                     <!-- Duyệt qua danh sách khách hàng chưa có người đại diện và status bằng 1 -->
                                                     <option th:each="customer : ${customers}" 
                                                             th:value="${customer.customerId}" 
-                                                            th:text="${customer.customerName}"></option>
+                                                            th:text="${customer.customerId + ' - ' + customer.customerName}"></option>
                                                 </select>
                                                 <small id="relationshipId-error" class="form-text text-muted">Chọn chủ hộ.</small>
                                             </div>
@@ -81,17 +81,8 @@
                                                     th:field="*{customerType}">
                                                     <option value="" selected disabled >Chọn loại khách hàng</option>
                                                     <!-- Giá trị mặc định -->
-                                                    <option th:value="'Trẻ em'">Trẻ em (0-12 tuổi)</option>
-                                                    <option th:value="'Thanh thiếu niên'">Thanh thiếu niên (13-17 tuổi)
-                                                    </option>
-                                                    <option th:value="'Sinh viên và giới trẻ'">Sinh viên và giới trẻ
-                                                        (18-25 tuổi)</option>
-                                                    <option th:value="'Người trưởng thành'">Người trưởng thành (26-40
-                                                        tuổi)</option>
-                                                    <option th:value="'Người trung niên'">Người trung niên (41-60 tuổi)
-                                                    </option>
-                                                    <option th:value="'Người cao tuổi'">Người cao tuổi (60 tuổi trở lên)
-                                                    </option>
+                                                    <option th:value="'Trẻ em'">Trẻ em</option>
+                                                    <option th:value="'Người lớn'">Người lớn</option>
                                                 </select>
                                                 <small id="customer-type-error" class="form-text text-muted">Chọn loại
                                                     khách hàng.</small>
