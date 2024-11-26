@@ -4,6 +4,8 @@ import com.group21.tour_reservation.entity.Account;
 import com.group21.tour_reservation.entity.Customer;
 import com.group21.tour_reservation.service.AccountService;
 import com.group21.tour_reservation.service.CustomerService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +20,10 @@ public class AccountInfoController {
     @Autowired
     private AccountService accountService;
     @GetMapping("/account-info")
-    public String index(Model model) {
-        model.addAttribute("account", accountService.getAccount("2"));
+    public String index(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        Object idObj = session.getAttribute("id");
+        model.addAttribute("account", accountService.getAccount(String.valueOf(idObj)));
         return "client/account/index.html";
     }
     @GetMapping("/account-info/edit/{slug}")

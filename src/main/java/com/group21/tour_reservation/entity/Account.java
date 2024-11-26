@@ -32,6 +32,9 @@ public class Account {
     @Column(name = "time")
     private LocalDateTime time;
 
+    @Column(name = "role")
+    private String role; // Thêm trường role
+
     @Column(name = "phone_number")
     private String phoneNumber;
 

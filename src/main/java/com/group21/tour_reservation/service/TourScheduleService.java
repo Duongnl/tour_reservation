@@ -1,7 +1,9 @@
 package com.group21.tour_reservation.service;
 
+import com.group21.tour_reservation.dto.response.TourReserveResponse;
 import com.group21.tour_reservation.entity.Tour;
 import com.group21.tour_reservation.entity.TourSchedule;
+import com.group21.tour_reservation.mapper.TourMapper;
 import com.group21.tour_reservation.repository.TourRepository;
 import com.group21.tour_reservation.repository.TourScheduleRepository;
 import com.group21.tour_reservation.utils.StringUtils;
@@ -34,14 +36,17 @@ public class TourScheduleService {
         return schedule;
     }
 
-    public TourSchedule addSchedule(TourSchedule schedule, LocalDate departureDate,
+    public TourSchedule editSchedule(TourSchedule schedule, LocalDate departureDate,
                                     LocalDate returnDate, LocalDate visaExpire,
                                     Integer tourId) {
+
+        TourSchedule touScheduleOld = tourScheduleRepository.findById(tourId).orElse(null);
         Tour tour = tourRepository.findById(tourId).orElse(null);
         System.out.println("Schedule Id : " + schedule.getScheduleId());
         schedule.setTour(tour);
         schedule.setDepartureDate(departureDate);
         schedule.setReturnDate(returnDate);
+        schedule.setPromotions(touScheduleOld.getPromotions());
         if (visaExpire != null) {
         schedule.setVisaExpire(visaExpire);
         }

@@ -1,0 +1,186 @@
+.content-test{
+    height: 50px;
+    background-color: red;
+}
+
+.col-step{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.item-step{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 20px;
+    flex-wrap: wrap;
+}
+
+.item-icon{
+    margin-bottom: 20px;
+}
+
+.img-fluid{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.tour-title{
+    font-size: 20px;
+    font-weight: bold;
+    color: #2d4271;
+}
+
+.text-color{
+    color: #2d4271;
+}
+
+.text-bold-color{
+    color: #2d4271;
+    font-weight: bold;
+}
+
+.input-inf{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.count-group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    border: solid 1px #e0e0e0;
+    padding: 5px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+.start{
+    display: flex;
+    align-items: baseline;
+}
+
+.item-start{
+    /*height: 100%;*/
+}
+
+
+.line-break{
+    border-left: 1px dashed black;
+    height: 127px;
+}
+
+/*768*/
+
+
+@media (max-width: 1200px) {
+    .line-break{
+        height: 149px;
+    }
+}
+
+@media (max-width: 992px) {
+    .line-break{
+        height: 191px;
+    }
+}
+
+@media (max-width: 768px) {
+    .line-break{
+        height: 127px;
+    }
+}
+
+/*992*/
+
+
+.end{
+    display: flex;
+    align-items: baseline;
+    border-bottom: solid 1px #e0e0e0;
+}
+
+.count{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-change{
+    padding: 8px;
+    margin: 5px;
+}
+
+.number{
+    width: 50px;
+    border: 0px !important;
+    color: #0a53be;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.inf-title{
+    font-weight: bold;
+    color: #f26522 !important;
+    font-size: 20px;
+}
+
+.count-customer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.adult{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.child{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 1px #e0e0e0;
+}
+
+.line{
+    border-bottom: solid 1px #e0e0e0;
+    width: 100%;
+}
+
+.text-price{
+    color: #e01600;
+    font-weight: bold;
+}
+
+.text-price-total{
+    color: #e01600;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.inf-customer{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.inf-detail{
+    position: sticky !important;
+    z-index: 1000; /* Đảm bảo header nằm trên các phần tử khác */
+    top: 10px;
+}

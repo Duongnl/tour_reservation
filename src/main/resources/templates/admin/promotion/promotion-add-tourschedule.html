@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" th:href="@{/admin/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/webfont/webfont.min.js}"></script>
+    <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet" />
+
+    <!-- CSS Files -->
+    <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/plugins.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/kaiadmin.min.css}" rel="stylesheet" />
+
+<!-- Thêm thư viện Select2 vào dự án -->
+<link th:href="@{/client/css/select2.min.css}" rel="stylesheet" />
+<link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css}" rel="stylesheet" />
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js}"></script>
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link th:href="@{/admin/css/demo.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- start sidebar -->
+        <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
+        <!-- end sidebar -->
+
+        <div class="main-panel">
+            <!-- header  -->
+            <div th:replace="/admin/layout/header.html :: header"></div>
+
+            <!-- content-->
+            <div class="container">
+                <div class="page-inner">
+                    <!--Table-->
+                    <div class="col-md-12">
+                        <div class="card">
+
+                            <!-- header table -->
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <h4 class="card-title">Thêm khuyến mãi vào tour</h4>
+
+                                </div>
+
+                            </div>
+                            <!-- end header table -->
+
+                            <!-- table -->
+                            <form method="POST" th:action="@{/admin/promotion/add-promotion-to-tour}"
+                                th:object="${schedules}">
+                                <select id="tour_schedule" name="scheduleId"
+                                    class="form-control select2 js-example-basic-single">
+                                    <option value="" selected disabled>Chọn tour</option>
+                                    <option th:each="schedule : ${schedules}" th:value="${schedule.scheduleId}"
+                                        th:text="${schedule.scheduleId + ' - ' + schedule.scheduleName + ' - ' + schedule.tour.tourName}">
+                                    </option>
+                                </select>
+                                <input type="hidden" name="promotionId" th:value="${promotionId}" />
+
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="add-row" class="display table table-striped table-hover">
+                                            <!-- header -->
+                                            <thead>
+                                                <tr>
+                                                    <th>ID Lịch trình</th>
+                                                    <th>Tên lịch trình</th>
+                                                    <th>Tên Tour</th>
+                                                    <th style="width: 10%">Hành động</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- end header -->
+                                            <!-- body -->
+                                            <tbody>
+                                                <tr th:each="schedule : ${promotionchedule}">
+                                                    <td th:text="${schedule.scheduleId}"></td>
+                                                    <td th:text="${schedule.scheduleName}"></td>
+                                                    <td th:text="${schedule.tour.tourName}"></td>
+                                                    <td> 
+                                                        <button type="button" class="btn btn-link btn-danger"
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <!-- end body -->
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <button class="btn btn-success" type="submit">Thêm</button>
+                                    <a class="btn btn-danger" th:href="@{/admin/promotion}">Quay lại</a>
+                                </div>
+
+                            </form>
+                            <!-- end table -->
+
+                        </div>
+                    </div>
+                    <!--End table-->
+                </div>
+            </div>
+
+            <!-- start footer -->
+            <div th:replace="/admin/layout/footer.html :: footer"></div>
+            <!-- end footer -->
+        </div>
+        <!-- Kiểm tra xem có thông báo thành công không, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
+        <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;">
+            <span th:text="${successMessage}"></span>
+        </div>
+        <div th:if="${errorMessage}" class="alert alert-success" id="error-message" style="display: none;">
+            <span th:text="${errorMessage}"></span>
+        </div>
+        <!--modal delete, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
+        <div th:replace="/admin/modal.html :: modal"></div>
+    </div>
+
+    <!--js tự viết thông báo và tạo slug, phần này chỉ để ở trang quản lý table, không  cần để trong trang edit, create-->
+    <script type="module" th:src="@{/admin/js/notify.js}"></script>
+    <script type="module" th:src="@{/admin/js/create-slug.js}"></script>
+    <!-- end js tự viết-->
+
+    <script th:inline="javascript">
+
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+    <!--   Core JS Files   -->
+    <script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/core/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/core/bootstrap.min.js}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+    <!-- Chart JS -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/chart.js/chart.min.js}"></script>
+
+    <!-- jQuery Sparkline -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
+
+    <!-- Chart Circle -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/chart-circle/circles.min.js}"></script>
+
+    <!-- Datatables -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/datatables/datatables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/datatables.js}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/world.js}"></script>
+
+    <!-- Sweet Alert -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script type="text/javascript" th:src="@{/admin/js/kaiadmin.min.js}"></script>
+    <script type="text/javascript" th:src="@{/client/js/select2.min.js}"></script>
+
+
+</body>
+
+</html>

@@ -3,6 +3,7 @@ package com.group21.tour_reservation.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.group21.tour_reservation.entity.Account;
@@ -20,6 +21,9 @@ public class EmployeeService {
     @Autowired
     private AccountRepository accountRepository;
 
+     @Autowired 
+    private PasswordEncoder passwordEncoder;
+
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAllByStatus(1);
     }
@@ -30,16 +34,14 @@ public class EmployeeService {
     }
 
     public void createEmployee(Employee employee) {
-
-        // if (accountRepository.existsByEmail(account.getEmail())) {
-        // throw new IllegalArgumentException("Email đã tồn tại trong hệ thống.");
-        // }
         Account account = employee.getAccount();
         account.setTime(LocalDateTime.now());
+        account.setRole("ROLE_ADMIN");
         account.setStatus(1);
+        String hashPassword = this.passwordEncoder.encode(account.getPassword());
+        account.setPassword(hashPassword);
         accountRepository.save(account);
         employeeRepository.save(employee);
-
     }
 
     public Employee editEmployee(Employee employee) {
@@ -49,7 +51,8 @@ public class EmployeeService {
             // Đặt lại thời gian và trạng thái nếu cần thay đổi
             account.setTime(LocalDateTime.now());
             account.setStatus(1);
-    
+            account.setRole("ADMIN");
+            
             // Lưu lại Account hiện có (không thêm mới)
             accountRepository.save(account);
         } else {

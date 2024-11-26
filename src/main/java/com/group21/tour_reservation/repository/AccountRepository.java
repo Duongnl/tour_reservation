@@ -10,5 +10,8 @@ import java.util.List;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account,Integer> {
-    List<Account> findAllByStatus(int status);
+List<Account> findAllByStatus(int status);
+    Account findByUserName(String userName);
+    
+    List<Account> findAllByUserName(String userName);
 }

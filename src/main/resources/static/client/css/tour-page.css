@@ -72,11 +72,12 @@
 
 .h3-tour-name{
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     font-size: 16px;
-    height: 45px;
+    margin-bottom: 10px;
+    /*height: 45px;*/
 }
 
 .departure-location{
@@ -88,9 +89,6 @@
     color: darkblue;
 }
 
-/*.div-row-filter{*/
-/*    border-top: solid 1px #e0e0e0;*/
-/*}*/
 
 .page-link{
     color: black;
@@ -115,7 +113,7 @@
     width: 375px;
     margin-top: 5px;
     margin-bottom: 5px;
-    height: 40px;
+    /*height: 40px;*/
 }
 
 @media (max-width: 1200px) {
@@ -130,7 +128,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 769px) {
     .scrollContainer {
         width: 480px;/* Thay đổi chiều cao cho màn hình nhỏ hơn hoặc bằng 520px */
     }
@@ -189,5 +187,29 @@
     display: flex;
     justify-content: space-between;
     flex-wrap:wrap;
+    /*height: 50px;*/
     /*margin-bottom: 10px;*/
 }
+
+.span-country{
+    font-weight: bold;
+    color: darkblue;
+}
+
+.select2{
+    width: 100% !important;
+}
+
+.select2-selection{
+    height: 45px !important;
+    font-size: 15px;
+    padding: 7px;
+}
+
+#btn-reset{
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+
