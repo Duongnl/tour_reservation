@@ -1,4 +1,5 @@
-import {validateEmail, validatePhoneNumber, validateText} from "../../admin/js/validation.js";
+import { validateText, validateEmail, validatePhoneNumber, validateUsername, validatePassword,
+    validateConfirmPassword } from './validation.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const minusAdult = document.getElementById("minus-adult")

@@ -58,7 +58,11 @@ public class CustomerController {
             return "admin/404.html";
         }
         List<Customer> customersWithoutRep = customerService.findCustomersWithNullRelationshipId();
+
+         // Lấy danh sách khách hàng có relationship_id trùng với customerId của khách hàng hiện tại
+         List<Customer> relatedCustomers = customerService.getCustomersByRelationshipId(customer.getCustomerId());
         model.addAttribute("customers", customersWithoutRep);
+        model.addAttribute("relatedCustomers", relatedCustomers); // Khách hàng liên quan
         model.addAttribute("customer", customer); // Thêm đối tượng vào mô hình
         return "admin/customer/customer-edit.html";
     }

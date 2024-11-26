@@ -1,10 +1,15 @@
 package com.group21.tour_reservation.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import com.group21.tour_reservation.entity.Account;
 import com.group21.tour_reservation.entity.Customer;
+import com.group21.tour_reservation.repository.AccountRepository;
 import com.group21.tour_reservation.repository.CustomerRepository;
 import com.group21.tour_reservation.utils.StringUtils;
 
@@ -12,6 +17,11 @@ import com.group21.tour_reservation.utils.StringUtils;
 public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired 
+    private PasswordEncoder passwordEncoder;
 
     public List<Customer> getAllCustomer() {
         return customerRepository.findAllByStatus(1);
@@ -28,7 +38,18 @@ public class CustomerService {
         return customerRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy khách hàng với ID: " + customerId));
     }
-
+    public void createAccount(Customer customer) {
+        Account account = customer.getAccount();
+        account.setTime(LocalDateTime.now());
+        account.setRole("USER");
+        account.setEmail(customer.getEmail());
+        String hashPassword = this.passwordEncoder.encode(account.getPassword());
+        account.setPassword(hashPassword);
+        account.setStatus(1);
+        customer.setStatus(1);
+        accountRepository.save(account);
+        customerRepository.save(customer);
+    }
     public void createCustomer(Customer customer, int selectedCustomerId) {
 
         // if (accountRepository.existsByEmail(account.getEmail())) {
@@ -79,4 +100,13 @@ public class CustomerService {
         }
         return customerRepository.save(customer);
     }
+
+     // Phương thức tìm khách hàng theo relationship_id
+     public List<Customer> getCustomersByRelationshipId(Integer customerId) {
+        return customerRepository.findByCustomer_RelationshipId(customerId);
+    }
+    public Optional<Customer> findByUsername(String username) {
+        return customerRepository.findByUsername(username);
+    }
+
 }
