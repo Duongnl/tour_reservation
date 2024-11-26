@@ -71,11 +71,25 @@ public class HomePageController {
     }
 
     @GetMapping("/reserve/{slug}")
-    public String reserveView(Model model, @PathVariable("slug") String slug) {
+    public String reserveView(Model model, @PathVariable("slug") String slug, HttpServletRequest request ) {
         TourReserveResponse tourReserveResponse = tourService.getTourReserveClient(slug);
+
+        HttpSession session = request.getSession(false);
+        Integer id = (Integer) session.getAttribute("id");
+
+        if (id != null) {
+
+            int idValue = id;
+           Customer customer = customerService.getCustomerById(idValue);
+            tourReserveResponse.setName(customer.getCustomerName());
+            tourReserveResponse.setAddress(customer.getAddress());
+            tourReserveResponse.setEmail(customer.getEmail());
+            tourReserveResponse.setPhone(customer.getPhoneNumber());
+        }
         if (tourReserveResponse == null) {
             return "admin/404.html";
         }
+
         model.addAttribute("tourReserveResponse", tourReserveResponse);
         return "client/reserve-page.html";
     }

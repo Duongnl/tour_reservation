@@ -2,10 +2,7 @@ package com.group21.tour_reservation.service;
 
 
 import com.group21.tour_reservation.dto.request.TourFilterRequest;
-import com.group21.tour_reservation.dto.response.TourCardResponse;
-import com.group21.tour_reservation.dto.response.TourReserveResponse;
-import com.group21.tour_reservation.dto.response.TourScheduleTableResponse;
-import com.group21.tour_reservation.dto.response.TransportReserveResponse;
+import com.group21.tour_reservation.dto.response.*;
 import com.group21.tour_reservation.entity.*;
 import com.group21.tour_reservation.mapper.TourMapper;
 import com.group21.tour_reservation.mapper.TourScheduleMapper;
@@ -427,9 +424,7 @@ public class TourService {
         return destinationLocations;
     }
 
-    public List<TourCardResponse> filterTours (TourFilterRequest tourFilterRequest) {
-
-        List<Tour> tours = tourRepositoryCustom.filterTourRepository(tourFilterRequest);
+    public  List<TourCardResponse> filterPrice (List<Tour> tours, TourFilterRequest tourFilterRequest) {
         List<TourCardResponse> tourCardResponses = new ArrayList<>();
         tours.forEach(tour -> {
             TourCardResponse tourCardResponse = handleTourCard(tour);
@@ -457,9 +452,32 @@ public class TourService {
                 tourCardResponse.setPriceSale(null);
             }
         });
+        return  tourCardResponses;
+    }
 
+    public TourPageResponse filterTours (TourFilterRequest tourFilterRequest) {
 
-        return tourCardResponses;
+        List<Tour> tours = tourRepositoryCustom.filterTourRepository(tourFilterRequest,true);
+        List<TourCardResponse> tourCardResponses = new ArrayList<>();
+        tourCardResponses = filterPrice(tours, tourFilterRequest);
+
+        System.out.println("tourCardResponses >>> "+ tourCardResponses.size());
+
+        List<Tour> toursReal = tourRepositoryCustom.filterTourRepository(tourFilterRequest,false);
+        List<TourCardResponse> tourCardResponsesReal = new ArrayList<>();
+        tourCardResponsesReal = filterPrice(toursReal, tourFilterRequest);
+        System.out.println("tourCardResponsesReal >>> "+ tourCardResponsesReal.size());
+
+        double number = (double) tourCardResponsesReal.size() / 6.0;
+        int roundedUp = (int) Math.ceil(number);
+
+        TourPageResponse tourPageResponse = new TourPageResponse();
+        tourPageResponse.setTourCardResponses(tourCardResponses);
+        tourPageResponse.setPageCurrent(tourFilterRequest.getPageCurrent());
+        tourPageResponse.setPage(roundedUp);
+        tourPageResponse.setCardTotal(tourCardResponsesReal.size());
+
+        return tourPageResponse;
     }
 
     public TransportDetail getTransportDeparture (TourSchedule tourSchedule) {
