@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -44,7 +45,7 @@ public class ReserveService {
 
 
     public List<Reserve> getAllReserve() {
-        return reserveRepository.findAllByStatus(1);
+        return reserveRepository.findAll();
     }
 
     public List<Reserve> getAllReserveByYear(int year) {
@@ -65,6 +66,13 @@ public class ReserveService {
         return reserve;
     }
 
+    public Reserve getReserve(String slug) {
+        Reserve reserve = reserveRepository.findById(
+                com.group21.tour_reservation.utils.StringUtils.getIdFromSlug(slug)).orElse(null);
+
+        return reserve;
+    }
+
     public Reserve deleteReserve(Integer reserveID) {
         Reserve reserve = reserveRepository.findById(reserveID).orElseThrow(null);
         if (reserve != null) {
@@ -75,8 +83,13 @@ public class ReserveService {
         return reserveRepository.save(reserve);
     }
 
-    public Reserve addReserve(Reserve reserve) {
-        reserve.setStatus(1);
+    public Reserve addReserve(Integer reserveID) {
+        Reserve reserve = reserveRepository.findById(reserveID).orElseThrow(null);
+        if (reserve != null) {
+            reserve.setStatus(2);
+        } else {
+            return null;
+        }
         return reserveRepository.save(reserve);
     }
 

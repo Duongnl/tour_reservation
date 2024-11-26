@@ -225,7 +225,6 @@ public class TourService {
         tour.getTourSchedules().forEach(tourSchedule -> {
             if (tourSchedule.getStatus() == 1) {
 
-
                 TourScheduleTableResponse tourScheduleTableResponse =
                         tourScheduleMapper.toTourScheduleAdResponse(tourSchedule);
 

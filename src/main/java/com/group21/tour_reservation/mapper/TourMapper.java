@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface TourMapper {
+    
     TourCardResponse toTourCardResponse(Tour tour);
 
     TourReserveResponse toTourReserveResponse(Tour tour);
