@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -45,6 +47,17 @@ public class ReserveService {
         return reserveRepository.findAllByStatus(1);
     }
 
+    public List<Reserve> getAllReserveByYear(int year) {
+        return reserveRepository.findAllReserveByYear(year);
+    }
+
+    public List<Reserve> getAllReserveByYearAndMonth(int year, int month) {return reserveRepository.findAllReserveByYearAndMonth(year, month);}
+
+    public List<Integer> getAllYear(){
+        List<Integer> yearList = reserveRepository.getAllYears();
+        Collections.sort(yearList);
+        return  yearList;
+    }
     public Reserve getTour(String slug) {
         Reserve reserve = reserveRepository.findById(
                 com.group21.tour_reservation.utils.StringUtils.getIdFromSlug(slug)).orElse(null);

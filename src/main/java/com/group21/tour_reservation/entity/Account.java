@@ -35,6 +35,10 @@ public class Account {
     @Column(name = "role")
     private String role; // Thêm trường role
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+
     @Column(name = "status")
     private int status;
 

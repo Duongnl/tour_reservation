@@ -16,7 +16,7 @@ public class AccountController {
 
     @Autowired
     private AccountService accountService;
-
+    
     @GetMapping("/admin/account")
     public String index(Model model) {
         model.addAttribute("accounts", accountService.getAllAccount());

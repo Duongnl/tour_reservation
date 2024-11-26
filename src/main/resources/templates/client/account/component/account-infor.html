@@ -1,0 +1,69 @@
+<!--<div class="col-md-12">-->
+
+<!--</div>-->
+<div class="card">
+    <div class="card-header row ">
+        <!--        <div class="card-title">Basic Table</div>-->
+        <h4>Thông Tin Account</h4>
+        <a class="button"
+           th:href="@{/account-info/edit/{slug}(slug=${account.accountId})}"
+        >
+            <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"
+                 style="margin-right: 4px;">
+                <path d="M8.54 0L6.987 1.56l3.46 3.48L12 3.48M0 8.52l.073 3.428L3.46 12l6.21-6.18-3.46-3.48"
+                      fill="#9B9B9B" fill-rule="evenodd"></path>
+            </svg>Sửa hồ sơ
+        </a>
+    </div>
+    <div class="card-body">
+        <!--        <div class="card-sub">-->
+        <!--            This is the basic table view of the ready dashboard :-->
+        <!--        </div>-->
+        <table class="table mt-3">
+
+            <tbody>
+            <tr>
+                <td class="col-2">UserName</td>
+                <td th:text="${account.userName == null ? 'Không có dữ liệu' : account.userName}"
+                    class="col-8"
+                ></td>
+            </tr>
+            <tr>
+                <td class="col-2">Email</td>
+                <td
+                        th:text="${account.email == null ? 'Không có dữ liệu' : account.email}"
+                        class="col-8"
+                ></td>
+            </tr>
+            <tr>
+                <td class="col-2">Phone Number</td>
+                <td
+                        th:text="${account.phoneNumber == null ? 'Không có dữ liệu' : account.phoneNumber}"
+                        class="col-8"
+                ></td>
+            </tr>
+            <tr>
+                <td class="col-2">Status</td>
+                <td th:text="${account.status == null ? 'Không có dữ liệu' : account.status}"
+                    class="col-8"
+
+                ></td>
+            </tr>
+<!--            <tr>-->
+<!--                <td class="col-2">Trạng Thái</td>-->
+<!--                <td th:text="${customer.status == 1 ? 'Hoạt động' : 'Khác'}"-->
+<!--                    class="col-8"-->
+<!--                ></td>-->
+<!--            </tr>-->
+
+
+            <!--            <tr>-->
+            <!--                <td>3</td>-->
+            <!--                <td colspan="2">Larry the Bird</td>-->
+
+            <!--            </tr>-->
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -11,6 +11,18 @@
                     <div class="col-md-6 col-lg-4">
 
                         <div class="form-group has-feedback">
+                            <label for="categoryId">ID</label>
+                            <input
+                                    type="text"
+                                    id="categoryId"
+                                    value=""
+                                    class="form-control"
+                                    th:field="*{categoryId}"
+                                    readonly
+                            />
+                        </div>
+
+                        <div class="form-group has-feedback">
                             <label for="categoryName">Tên danh mục </label>
                             <input
                                     type="text"
@@ -19,7 +31,7 @@
                                     class="form-control"
                                     th:field="*{categoryName}"
                             />
-                            <small id="transport-name-error" class="form-text text-muted"
+                            <small id="category-name-error" class="form-text text-muted"
                             >Điền tên danh mục</small>
                         </div>
 
@@ -32,22 +44,19 @@
                                     class="form-control"
                                     th:field="*{categoryDetail}"
                             />
-                            <small id="departure-location-error" class="form-text text-muted"
+                            <small id="category-detail-error" class="form-text text-muted"
                             >Điền Chi tiết danh mục</small>
                         </div>
 
                         <div class="form-group has-feedback">
-                            <label for="status">Trạng thái</label>
-                            <input
-                                    type="text"
-                                    id="status"
-                                    value=""
-                                    class="form-control"
-                                    th:field="*{status}"
-                            />
-                            <small id="destination-location-error" class="form-text text-muted"
-                            >Điền trạng thái</small>
+                            <label for="status">Chọn trạng thái</label>
+                            <select id="status" class="form-control" th:field="*{status}">
+                                <option value="0" >Un Enable</option>
+                                <option th:value="1" selected >Enable</option>
+                            </select>
+
                         </div>
+
                     </div>
                 </div>
             </div>
