@@ -79,6 +79,10 @@ public class SecurityConfig {
 
                                                 .anyRequest().authenticated())
 
+                                // .oauth2Login(oauth2 -> oauth2
+                                // .loginPage("/login")
+                                // .defaultSuccessUrl("/", true))
+
                                 .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
                                 .sessionManagement((sessionManagement) -> sessionManagement
                                                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
@@ -93,7 +97,7 @@ public class SecurityConfig {
                                                 .failureUrl("/login?error")
                                                 .successHandler(customSuccessHandler())
                                                 .permitAll())
-                                        .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"))
+                                .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"))
                                 .csrf(csrf -> csrf.disable());
                 http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/check-username"));
 

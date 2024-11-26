@@ -1,6 +1,8 @@
 package com.group21.tour_reservation.controller.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +26,10 @@ public class HomePageController {
     @GetMapping("/")
     public String getHomePage(Model model, HttpServletRequest request) {
 
-        HttpSession session = request.getSession(false);
-        System.out.println(">>> check id" + session.getAttribute("id"));
+        // sử dụng khi có session
+        // HttpSession session = request.getSession(false);
+        // System.out.println(">>> check id" + session.getAttribute("id"));
+        // int id = (int) session.getAttribute("id");
         return "client/home.html";
     }
 
@@ -55,12 +59,23 @@ public class HomePageController {
 
     @GetMapping("/access-deny")
     public String getDenyPage(Model model) {
-       
-        return "client/auth/deny.html";}
-        
+
+        return "client/auth/deny.html";
+    }
+
     @GetMapping("/tour")
     public String tourView() {
 
         return "client/tour-page.html";
     }
+
+    // @GetMapping("/home")
+    // public String home(Model model, @AuthenticationPrincipal OidcUser oidcUser) {
+    //     model.addAttribute("user", oidcUser);
+    //     model.addAttribute("name", oidcUser.getFullName());
+    //     model.addAttribute("email", oidcUser.getEmail());
+    //     model.addAttribute("picture", oidcUser.getPicture());
+    //     return "client/logingoogle.html";
+    // }
+
 }

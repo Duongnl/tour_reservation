@@ -81,8 +81,8 @@
                                                     th:field="*{customerType}">
                                                     <option value="" selected disabled >Chọn loại khách hàng</option>
                                                     <!-- Giá trị mặc định -->
-                                                    <option th:value="'Trẻ em'">Trẻ em</option>
-                                                    <option th:value="'Người lớn'">Người lớn</option>
+                                                    <option th:value="'child'">Trẻ em</option>
+                                                    <option th:value="'adult'">Người lớn</option>
                                                 </select>
                                                 <small id="customer-type-error" class="form-text text-muted">Chọn loại
                                                     khách hàng.</small>
@@ -107,7 +107,6 @@
                                                     <!-- 0 là giá trị mặc định không hợp lệ -->
                                                     <option th:value="1">Nam</option>
                                                     <option th:value="2">Nữ</option>
-                                                    <option th:value="3">Khác</option>
                                                 </select>
                                                 <small id="customer-sex-error" class="form-text text-muted">Chọn giới
                                                     tính.</small>
