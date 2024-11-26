@@ -16,6 +16,11 @@ public class TourReserveResponse {
     private String departureLocation; // tên địa điểm xuất phát của tour
     private String country; // tên địa điểm đến của tour
 
+    private String name;
+    private String email;
+    private String phone;
+    private String address;
+
     private LocalDate departureDate; // ngày khởi hành
     private Integer quantityLeft; // số lượng còn lại
     private Integer priceAdult;

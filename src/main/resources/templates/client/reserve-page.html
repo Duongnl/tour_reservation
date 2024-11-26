@@ -111,7 +111,7 @@
                 <p class="text-color"> Điểm đến: <span class="text-bold-color" th:text="${tourReserveResponse.country}" ></span></p>
                 <p class="text-color"> Nơi khởi hành: <span class="text-bold-color" th:text="${tourReserveResponse.departureLocation}" ></span></p>
                 <p class="text-color"> Khởi hành: <span class="text-bold-color" th:text="${tourReserveResponse.departureDate}"></span></p>
-                <p class="text-color"> Số chổ còn nhận: <span class="text-bold-color" th:text="${tourReserveResponse.quantityLeft}"></span></p>
+                <p class="text-color"> Số chổ còn nhận: <span class="text-bold-color" id="quantity-left" th:text="${tourReserveResponse.quantityLeft}"></span></p>
             </div>
         </div>
     </div>
@@ -123,24 +123,36 @@
             <div class="input-inf">
                 <div class="form-group w-50 pr-4">
                     <label for="name-inf" class="text-bold-color">Họ tên</label>
-                    <input id="name-inf" type="email" class="form-control" aria-describedby="emailHelp">
+                    <input id="name-inf" type="text" class="form-control" aria-describedby="emailHelp"
+
+                           th:field="${tourReserveResponse.name}"
+                    >
                     <small id="name-inf-error" class="form-text ">Vui lòng điền tên</small>
                 </div>
                 <div class="form-group w-50 pr-4">
                     <label for="phone-number" class="text-bold-color">Số điện thoại</label>
-                    <input id="phone-number" type="number" class="form-control" aria-describedby="emailHelp">
+                    <input id="phone-number" type="number" class="form-control" aria-describedby="emailHelp"
+
+                           th:field="${tourReserveResponse.phone}"
+                    >
                     <small id="phone-number-error" class="form-text ">Vui lòng điền số điện thoại</small>
                 </div>
             </div>
             <div class="input-inf">
                 <div class="form-group w-50 pr-4">
                     <label for="email" class="text-bold-color">Email</label>
-                    <input id="email" type="email" class="form-control" aria-describedby="emailHelp">
+                    <input id="email" type="email" class="form-control" aria-describedby="emailHelp"
+
+                           th:field="${tourReserveResponse.email}"
+                    >
                     <small id="email-error" class="form-text">Vui lòng điền email</small>
                 </div>
                 <div class="form-group w-50 pr-4">
                     <label for="address" class="text-bold-color">Địa chỉ</label>
-                    <input id="address" type="email" class="form-control" aria-describedby="emailHelp">
+                    <input id="address" type="text" class="form-control" aria-describedby="emailHelp"
+
+                           th:field="${tourReserveResponse.address}"
+                    >
                     <small id="address-error" class="form-text ">Vui lòng điền địa chỉ</small>
                 </div>
             </div>
