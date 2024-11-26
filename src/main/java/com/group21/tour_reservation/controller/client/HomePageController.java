@@ -19,4 +19,5 @@ public class HomePageController {
         return "client/tour-page.html";
     }
 
+   
 }

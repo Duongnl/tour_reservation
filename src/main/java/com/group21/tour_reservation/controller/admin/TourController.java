@@ -39,7 +39,6 @@ public class TourController {
         for (Category category : categories) {
             states.add(category.getCategoryId()+"-"+category.getCategoryName());
         }
-
         Tour tour = new Tour();
         model.addAttribute("states",states);
         model.addAttribute("tour", tour); // Thêm đối tượng vào mô hình
