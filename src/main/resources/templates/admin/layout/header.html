@@ -3,7 +3,7 @@
     <!-- Logo Header -->
     <div class="logo-header" data-background-color="dark">
       <a href="index.html" class="logo">
-        <img th:src="@{/admin/images/logo_light.svg}" alt="navbar brand" class="navbar-brand" height="20" />
+        <img th:src="@{/admin/images/user.png}" alt="navbar brand" class="navbar-brand" height="20" />
       </a>
       <div class="nav-toggle">
         <button class="btn btn-toggle toggle-sidebar">
@@ -30,7 +30,7 @@
         <li class="nav-item topbar-user dropdown hidden-caret">
           <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
             <div class="avatar-sm">
-              <img th:src="@{/admin/images/profile.jpg}" alt="..." class="avatar-img rounded-circle" />
+              <img th:src="@{/admin/images/user.png}" alt="..." class="avatar-img rounded-circle" />
             </div>
             <span class="profile-username">
               <span class="op-7">Hi,</span>
@@ -43,11 +43,10 @@
               <li>
                 <div class="user-box">
                   <div class="avatar-lg">
-                    <img th:src="@{/admin/images/profile.jpg}" alt="image profile" class="avatar-img rounded" />
+                    <img th:src="@{/admin/images/user.png}" alt="image profile" class="avatar-img rounded" />
                   </div>
                   <div class="u-text">
-                    <h4>Hizrian</h4>
-                    <p class="text-muted">hello@example.com</p>
+                    <h4  sec:authentication="name"></h4>
                     <a href="/account-info" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                   </div>
                 </div>
