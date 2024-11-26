@@ -3,7 +3,9 @@ package com.group21.tour_reservation.service;
 
 import com.group21.tour_reservation.dto.request.TourFilterRequest;
 import com.group21.tour_reservation.dto.response.TourCardResponse;
+import com.group21.tour_reservation.dto.response.TourReserveResponse;
 import com.group21.tour_reservation.dto.response.TourScheduleTableResponse;
+import com.group21.tour_reservation.dto.response.TransportReserveResponse;
 import com.group21.tour_reservation.entity.*;
 import com.group21.tour_reservation.mapper.TourMapper;
 import com.group21.tour_reservation.mapper.TourScheduleMapper;
@@ -52,6 +54,9 @@ public class TourService {
 
     @Autowired
     private TourRepositoryCustom tourRepositoryCustom;
+
+    @Autowired
+    private TourScheduleService tourScheduleService;
 
     public List<Tour> getAllTours() {
         return tourRepository.findAllByStatus(1);
@@ -457,4 +462,78 @@ public class TourService {
 
         return tourCardResponses;
     }
+
+    public TransportDetail getTransportDeparture (TourSchedule tourSchedule) {
+        for (TransportDetail transportDetail : tourSchedule.getTransportDetails()) {
+            if (transportDetail.getStatus() == 1) {
+                return transportDetail;
+            }
+        }
+        return null;
+    }
+
+    public TransportDetail getTransportReturn (TourSchedule tourSchedule) {
+        for (TransportDetail transportDetail : tourSchedule.getTransportDetails()) {
+            if (transportDetail.getStatus() == 2) {
+                return transportDetail;
+            }
+        }
+        return null;
+    }
+
+    public Integer handleQuantityLeftOfSchedule (TourSchedule tourSchedule) {
+        int quantityReserved = 0;
+        for(Reserve reserve : tourSchedule.getReserves()) {
+            quantityReserved += reserve.getReserveDetails().size();
+        }
+
+        return tourSchedule.getQuantity() -  quantityReserved;
+    }
+
+    public TourReserveResponse getTourReserveClient (String slug) {
+        TourSchedule schedule = tourScheduleService.getSchedule(slug);
+           if (schedule == null) {
+               return null;
+           }
+
+
+            TourReserveResponse tourReserveResponse = tourMapper.toTourReserveResponse(schedule.getTour());
+
+            tourReserveResponse.setDepartureDate(schedule.getDepartureDate());
+            tourReserveResponse.setPriceAdult(handlePriceAdultSale(schedule));
+            tourReserveResponse.setPriceChild(handlePriceChildSale(schedule));
+            tourReserveResponse.setQuantityLeft(handleQuantityLeftOfSchedule(schedule));
+
+            TransportReserveResponse transportDeparture = new TransportReserveResponse();
+            TransportDetail transportDetailDeparture = getTransportDeparture(schedule);
+
+            if (transportDetailDeparture != null) {
+                transportDeparture.setTransportName(transportDetailDeparture.getTransport()
+                        .getTransportName());
+                transportDeparture.setTransportLocation(transportDetailDeparture.getTransport().getDepartureLocation());
+                transportDeparture.setDepartureTime(transportDetailDeparture.getDepartureTime());
+
+                tourReserveResponse.setTransportDeparture(transportDeparture);
+            }
+
+
+
+            // phuong tien di ve
+
+            TransportReserveResponse transportReturn = new TransportReserveResponse();
+            TransportDetail transportDetailReturn = getTransportReturn(schedule);
+            if(transportDetailReturn != null) {
+                transportReturn.setTransportName(transportDetailReturn.getTransport()
+                        .getTransportName());
+                transportReturn.setTransportLocation(transportDetailReturn.getTransport().getDepartureLocation());
+                transportReturn.setDepartureTime(transportDetailReturn.getDepartureTime());
+                tourReserveResponse.setTransportReturn(transportReturn);
+            }
+
+
+
+            return tourReserveResponse;
+
+    }
+
 }

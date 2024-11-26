@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const loader = document.querySelector('.loader');
-    const overlayer = document.getElementById('overlayer');
+    // const loader = document.querySelector('.loader');
+    // const overlayer = document.getElementById('overlayer');
     let tours = [];
     const category = document.getElementById("category")
     const departureLocation = document.getElementById("departure-location")
@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log("Data  >>> ", tourData)
                 tours = tourData;
                 // Ẩn loader và overlay
-                loader.style.display = 'none';
-                overlayer.style.display = 'none';
+                // loader.style.display = 'none';
+                // overlayer.style.display = 'none';
                 tourSize.innerHTML = tours.length
                 // Chuyển đổi số sang định dạng tiền tệ
                 const formatPrice = (price) => {

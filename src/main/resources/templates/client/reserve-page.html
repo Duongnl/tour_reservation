@@ -1,0 +1,375 @@
+<!-- /*
+* Template Name: Tour
+* Template Author: Untree.co
+* Tempalte URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+
+    <meta name="description" content=""/>
+    <meta name="keywords" content="bootstrap, bootstrap4"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Serif+Pro:wght@400;700&display=swap"
+            rel="stylesheet">
+
+
+    <link th:href="@{/client/css/bootstrap.min.css}" rel="stylesheet"/>
+    <!-- <link rel="stylesheet" href="client/css/owl.carousel.min.css"> -->
+    <link th:href="@{/client/css/owl.carousel.min.css}" rel="stylesheet"/>
+
+
+    <!-- <link rel="stylesheet" href="client/css/owl.theme.default.min.css"> -->
+    <link th:href="@{/client/css/owl.theme.default.min.css}" rel="stylesheet"/>
+
+    <!-- <link rel="stylesheet" href="client/css/jquery.fancybox.min.css"> -->
+    <link th:href="@{/client/css/jquery.fancybox.min.css}" rel="stylesheet"/>
+
+    <!-- <link rel="stylesheet" href="client/fonts/flaticon/font/flaticon.css"> -->
+    <link th:href="@{/client/fonts/flaticon/font/flaticon.css}" rel="stylesheet"/>
+
+    <!-- Fonts and icons -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/webfont/webfont.min.js}"></script>
+    <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet"/>
+
+    <!-- <link rel="stylesheet" href="client/css/daterangepicker.css"> -->
+    <link th:href="@{/client/css/daterangepicker.css}" rel="stylesheet"/>
+
+    <!-- <link rel="stylesheet" href="client/css/aos.css"> -->
+    <link th:href="@{/client/css/aos.css}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="client/fonts/icomoon/style.css">
+    <link th:href="@{/client/fonts/icomoon/style.css}" rel="stylesheet"/>
+
+    <!-- <link rel="stylesheet" href="client/css/style.css"> -->
+    <link th:href="@{/client/css/style.css}" rel="stylesheet"/>
+
+    <link th:href="@{/client/css/reserve-page.css}" rel="stylesheet"/>
+
+    <style>
+        .hero {
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+    </style>
+
+
+    <title>Tour Free Bootstrap Template for Travel Agency by Untree.co</title>
+</head>
+
+<body>
+
+<div th:replace="/client/layout/header.html :: header_nav"></div>
+
+<div class="hero">
+
+</div>
+
+
+<div class="container">
+
+    <div class="row p-2 m-3">
+        <div class="col-12 col-sm-6 col-md-4 p-2 col-step">
+            <div class="item-step">
+                <i class="fa fa-receipt item-icon"></i>
+                <p class="font-weight-bold">NHẬP THÔNG TIN</p>
+            </div>
+            <i class="fa fa-arrow-right"></i>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 p-2 col-step">
+            <div class="item-step">
+                <i class="fa fa-credit-card item-icon"></i>
+                <p class="font-weight-bold">THANH TOÁN</p>
+            </div>
+            <i class="fa fa-arrow-right"></i>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 p-2 col-step">
+            <div class="item-step">
+                <i class="fa fa-clipboard-check item-icon"></i>
+                <p class="font-weight-bold">HOÀN TẤT</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row p-2 m-3 badge-light rounded-20">
+        <div class="col-12 col-md-4 p-2 col-step">
+            <img src="/admin/images/0.jpg" class="img-fluid" alt="Image">
+        </div>
+        <div class="col-12 col-md-8 p-2">
+            <div>
+                <p class="tour-title"  th:text="${tourReserveResponse.tourName}" ></p>
+                <p class="text-color"> Điểm đến: <span class="text-bold-color" th:text="${tourReserveResponse.country}" ></span></p>
+                <p class="text-color"> Nơi khởi hành: <span class="text-bold-color" th:text="${tourReserveResponse.departureLocation}" ></span></p>
+                <p class="text-color"> Khởi hành: <span class="text-bold-color" th:text="${tourReserveResponse.departureDate}"></span></p>
+                <p class="text-color"> Số chổ còn nhận: <span class="text-bold-color" th:text="${tourReserveResponse.quantityLeft}"></span></p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row p-2 m-3  ">
+        <div class="col-12 col-sm-12 col-md-8 p-2 ">
+            <p class="inf-title">Thông tin liên hệ</p>
+            <div class="input-inf">
+                <div class="form-group w-50 pr-4">
+                    <label for="name-inf" class="text-bold-color">Họ tên</label>
+                    <input id="name-inf" type="email" class="form-control" aria-describedby="emailHelp">
+                    <small id="name-inf-error" class="form-text ">Vui lòng điền tên</small>
+                </div>
+                <div class="form-group w-50 pr-4">
+                    <label for="phone-number" class="text-bold-color">Số điện thoại</label>
+                    <input id="phone-number" type="number" class="form-control" aria-describedby="emailHelp">
+                    <small id="phone-number-error" class="form-text ">Vui lòng điền số điện thoại</small>
+                </div>
+            </div>
+            <div class="input-inf">
+                <div class="form-group w-50 pr-4">
+                    <label for="email" class="text-bold-color">Email</label>
+                    <input id="email" type="email" class="form-control" aria-describedby="emailHelp">
+                    <small id="email-error" class="form-text">Vui lòng điền email</small>
+                </div>
+                <div class="form-group w-50 pr-4">
+                    <label for="address" class="text-bold-color">Địa chỉ</label>
+                    <input id="address" type="email" class="form-control" aria-describedby="emailHelp">
+                    <small id="address-error" class="form-text ">Vui lòng điền địa chỉ</small>
+                </div>
+            </div>
+            <p class="inf-title">Hành khách</p>
+            <div class="input-inf">
+                <div class=" w-50 pr-4">
+                    <div class="count-group">
+                        <div class="ml-2">
+                            <p class="text-bold-color mb-0">Người lớn</p>
+                            <p class="text-color mb-0"> Từ 12</p>
+                        </div>
+
+                        <div class="count">
+                            <button type="button" class="btn btn-primary btn-change" id="minus-adult">-</button>
+                            <input class="number" type="text" id="number-adult" readonly>
+                            <button type="button" class="btn btn-primary btn-change" id="plus-adult">+</button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="w-50 pr-4">
+                    <div class="count-group">
+                        <div class="ml-2">
+                            <p class="text-bold-color mb-0">Trẻ em</p>
+                            <p class="text-color mb-0"> Dưới 12</p>
+                        </div>
+                        <div class="count">
+                            <button type="button" class="btn btn-primary btn-change" id="minus-child">-</button>
+                            <input class="number" type="text" id="number-child" readonly>
+                            <button type="button" class="btn btn-primary btn-change" id="plus-child">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="inf-title mt-4">Thông tin hành khách</p>
+
+            <p class="text-bold-color">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24"
+                     height="24"
+                     fill="none">
+                    <path
+                            fill="#000" d="m13.71 5.87.01.05.03-.06c-.01 0-.03 0-.04.01"></path>
+                    <path fill="#000"
+                          d="m21.4 15.82-2.08-.64c-.16-.06-.25-.19-.25-.33v-1.14c.65-.6 1.06-1.44 1.06-2.38v-.56c.03-.05.07-.11.12-.2.11-.17.25-.42.39-.71.28-.59.57-1.39.56-2.2-.01-.76-.3-1.52-1-2.09-.68-.56-1.74-.89-3.23-.89-1.84 0-2.76.53-3.21 1.17 0 0 0 .01-.01.01l-.03.06-.01-.05c-.85.17-1.68.96-1.68 2.13 0 .75.3 1.4.58 1.84.15.23.29.41.4.53.03.03.06.07.08.09v.87c0 .94.41 1.79 1.07 2.39v1.13c0 .14-.09.27-.26.33l-1.84.57c-.17.05-.26.24-.21.41s.24.26.41.21l1.09-.34c.84.8 1.99 1.3 3.26 1.3s2.43-.5 3.26-1.3l1.33.42c.89.27 1.47 1.05 1.47 1.9V19c0 .18.15.32.33.32s.33-.14.33-.32v-.65c0-1.16-.79-2.17-1.93-2.53m-7.66-4.49v-1a.29.29 0 0 0-.1-.23v-.01l-.03-.03a.4.4 0 0 1-.11-.12c-.09-.1-.22-.26-.34-.45-.25-.39-.48-.91-.48-1.49 0-.63.34-1.1.76-1.34-.01.02-.01.03-.01.05-.01.11-.01.21-.01.28 0 .04 0 .07.01.09v.04a.325.325 0 0 0 .64-.1v-.05c0-.04 0-.1.01-.18.02-.16.07-.36.22-.57.27-.4.95-.89 2.67-.89 1.4 0 2.29.31 2.82.75.53.42.75.99.76 1.59 0 .59-.19 1.22-.42 1.74v-.17c-.01-.05-.02-.12-.04-.2-.05-.16-.13-.37-.3-.58-.34-.43-.98-.78-2.11-.78H15c-.44 0-.84.26-.98.67l-.2.54c-.06.17.03.36.2.42s.36-.03.42-.2l.19-.55c.05-.13.19-.23.37-.23h2.68c.99 0 1.42.3 1.61.54.1.12.15.25.17.34.01.04.02.08.02.1v2.02c0 1.46-1.26 2.68-2.87 2.68-1.6 0-2.87-1.22-2.87-2.68m2.87 5.35c-.96 0-1.85-.33-2.53-.87l.02-.01c.41-.13.71-.51.71-.95v-.67c.53.31 1.15.48 1.8.48.66 0 1.28-.17 1.81-.48v.67c0 .44.3.82.71.95l.02.01c-.68.54-1.57.87-2.54.87"></path>
+                    <path fill="#000"
+                          d="M17.45 12.5c-.24.1-.53.16-.84.16-.3 0-.59-.06-.83-.16a.327.327 0 0 1-.18-.43c.07-.16.26-.24.43-.17.16.06.36.11.58.11.23 0 .43-.05.59-.11.16-.07.35.01.42.17.07.17-.01.36-.17.43M15.52 10.33v.34c0 .18-.15.32-.33.32s-.32-.14-.32-.32v-.34c0-.18.14-.32.32-.32s.33.14.33.32M18.36 10.33v.34c0 .18-.15.32-.33.32s-.32-.14-.32-.32v-.34c0-.18.14-.32.32-.32s.33.14.33.32M7.16 12.83c-.24.1-.53.16-.84.16-.3 0-.59-.06-.83-.16a.327.327 0 0 1-.18-.43c.07-.16.26-.24.43-.17.16.07.36.11.58.11.23 0 .43-.04.59-.11s.35.01.42.17c.07.17-.01.36-.17.43M5.41 10.67V11c0 .18-.15.32-.33.32s-.32-.14-.32-.32v-.33c0-.18.14-.33.32-.33s.33.15.33.33M7.89 10.67V11c0 .18-.15.32-.33.32-.17 0-.32-.14-.32-.32v-.33c0-.18.15-.33.32-.33.18 0 .33.15.33.33"></path>
+                    <path fill="#000"
+                          d="m10.04 15.82-1.72-.53c-.15-.06-.24-.17-.24-.3h2.5c.18 0 .33-.14.33-.32v-5c0-2.41-2.08-4.33-4.59-4.33S1.74 7.26 1.74 9.67v5c0 .18.15.32.32.32h2.51c0 .13-.09.24-.25.3l-1.72.53c-1.14.36-1.92 1.37-1.92 2.53V19c0 .18.14.32.32.32s.32-.14.32-.32v-.65c0-.85.59-1.63 1.48-1.9l.66-.21c.46.69 1.13 1.27 1.67 1.69a15 15 0 0 0 .95.64c.02.01.05.02.06.03s.01.01.02.01v.01c.1.05.22.05.32 0l.01-.01s.01 0 .02-.01q.015-.015.06-.03c.05-.03.13-.08.22-.14.18-.12.44-.29.72-.5.55-.42 1.22-1 1.68-1.69l.66.21c.89.27 1.47 1.05 1.47 1.9V19c0 .18.15.32.33.32.17 0 .32-.14.32-.32v-.65c0-1.16-.79-2.17-1.93-2.53m-7.65-1.48V9.67c0-2.01 1.74-3.68 3.93-3.68s3.94 1.67 3.94 3.68v4.67H8.07v-.18c.85-.53 1.42-1.44 1.42-2.49v-1c0-.24-.13-.45-.27-.61s-.33-.31-.54-.45c-.43-.28-.98-.55-1.52-.78-.54-.24-1.08-.44-1.48-.58-.21-.07-.37-.13-.49-.17-.06-.02-.11-.03-.14-.04-.02-.01-.03-.01-.04-.01L5 8.02a.33.33 0 0 0-.41.22c-.05.17.04.35.22.4 0 0 0 .01.01.01 0 0 .02 0 .03.01.03.01.08.02.13.04.12.04.28.09.48.16.4.14.92.34 1.44.56.53.23 1.04.48 1.42.73.18.13.32.24.41.34.1.11.11.17.11.18v1c0 1.27-1.11 2.34-2.52 2.34s-2.51-1.07-2.51-2.34v-.93c0-.2.06-.39.18-.55l.47-.67c.1-.14.07-.35-.08-.45a.314.314 0 0 0-.45.08l-.47.66c-.2.27-.3.59-.3.93v.93c0 1.05.57 1.96 1.42 2.49v.18zm4.73 3.07c-.27.2-.51.36-.68.47-.04.03-.08.06-.12.08l-.11-.08c-.18-.11-.42-.27-.69-.47-.48-.36-1.01-.84-1.41-1.37l.41-.13c.41-.13.71-.51.71-.95v-.49c.34.13.71.19 1.09.19s.76-.07 1.1-.19v.49c0 .44.3.82.71.95l.4.13c-.4.53-.93 1.01-1.41 1.37"></path>
+                </svg>
+                Người lớn
+            </p>
+            <div id="ctn-customer-adult">
+
+
+                <div class="inf-customer cus-adult">
+                    <div class="form-group pr-4 w-50">
+                        <label class="text-bold-color">Họ tên</label>
+                        <input type="text" class="form-control name-cus" aria-describedby="emailHelp">
+                        <small class="form-text  name-error">Vui lòng điền tên</small>
+                    </div>
+                    <div class="form-group pr-4 w-25">
+                        <label class="text-bold-color">Ngày sinh</label>
+                        <input type="date" class="form-control birthday-cus" aria-describedby="emailHelp">
+                        <small class="form-text  birthday-error">Vui lòng chọn ngày sinh</small>
+                    </div>
+                    <div class="form-group pr-4 w-25">
+                        <label class="text-bold-color">Giới tính</label>
+                        <select class="form-control sex">
+                            <option value=1>Nam</option>
+                            <option value=2>Nữ</option>
+                            <option value=3>Khác</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="line mb-3">
+
+            </div>
+
+
+            <div id="ctn-customer-child">
+
+            </div>
+
+
+            <p class="inf-title mt-4">Ghi chú</p>
+            <div class="form-group">
+                <label class="text-bold-color" for="detail">Thông tin thêm</label>
+                <textarea class="form-control" id="detail" rows="5"></textarea>
+            </div>
+
+
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 p-2 badge-light inf-detail"
+             style="border-radius: 20px;height: fit-content">
+            <p class="inf-title">Tóm tắt chuyến đi</p>
+            <div class="start ">
+                <div class="item-start">
+                    <i class="fa fa-calendar-minus"></i>
+                    <div class="line-break">
+
+                    </div>
+                </div>
+
+
+                <div class="pl-3">
+                    <p class="text-color">Bắt đầu chuyến đi</p>
+                    <p class="text-color">Phương tiện : <span class="text-bold-color" th:if="${tourReserveResponse.transportDeparture != null}"  th:text="${tourReserveResponse.transportDeparture.transportName}"></span></p>
+                    <p class="text-color">Địa điểm : <span class="text-bold-color" th:if="${tourReserveResponse.transportDeparture != null}" th:text="${tourReserveResponse.transportDeparture.transportLocation}"></span></p>
+                    <p class="text-color"> Thời gian : <span class="text-bold-color" th:if="${tourReserveResponse.transportDeparture != null}" th:text="${tourReserveResponse.transportDeparture.departureTime}" ></span></p>
+                </div>
+            </div>
+            <div class="end  mb-1 ">
+
+                <i class="fa fa-calendar-minus"></i>
+
+                <div class="pl-3">
+                    <p class="text-color">Kết thúc chuyến đi</p>
+                    <p class="text-color">Phương tiện : <span class="text-bold-color"  th:if="${tourReserveResponse.transportReturn != null}" th:text="${tourReserveResponse.transportReturn.transportName}"></span></p>
+                    <p class="text-color">Địa điểm : <span class="text-bold-color"   th:if="${tourReserveResponse.transportReturn != null}" th:text="${tourReserveResponse.transportReturn.transportLocation}"></span></p>
+                    <p class="text-color">Thời gian : <span class="text-bold-color"  th:if="${tourReserveResponse.transportReturn != null}" th:text="${tourReserveResponse.transportReturn.departureTime}"></span></p>
+                </div>
+            </div>
+            <div class="count-customer mt-2">
+                <p class="text-bold-color"> Hành khách </p>
+                <div id="count-customer">
+                    <span class="tour-title"><i class="fa fa-user"></i> 1 người</span>
+                </div>
+            </div>
+            <div class="adult mt-4">
+                <p class="text-color">Người lớn</p>
+                <input type="hidden" id="inp-price-adult"  th:value="${tourReserveResponse.priceAdult}">
+                <div id="price-adult" >
+
+                </div>
+            </div>
+            <input type="hidden" id="inp-price-child" th:value="${tourReserveResponse.priceChild}">
+            <div class="mb-1" id="price-child">
+
+            </div>
+            <div class="total mt-2">
+                <p class="tour-title">Tổng tiền</p>
+                <div id="total-price" >
+
+                </div>
+            </div>
+            <button type="button" class="btn btn-danger" style="width: 100%"
+            id="reserve" disabled
+            >Đặt tour</button>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<div th:replace="/client/layout/footer.html :: footer_bottom"></div>
+
+<!-- <script src="client/js/jquery-3.4.1.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/jquery-3.4.1.min.js}"></script>
+
+<!-- <script src="client/js/popper.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/popper.min.js}"></script>
+
+<!-- <script src="client/js/bootstrap.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/bootstrap.min.js}"></script>
+
+<!-- <script src="client/js/owl.carousel.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/owl.carousel.min.js}"></script>
+
+<!-- <script src="client/js/jquery.animateNumber.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/jquery.animateNumber.min.js}"></script>
+
+<!-- <script src="client/js/jquery.waypoints.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/jquery.waypoints.min.js}"></script>
+
+<!-- <script src="client/js/jquery.fancybox.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/jquery.fancybox.min.js}"></script>
+
+<!-- <script src="client/js/aos.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/aos.js}"></script>
+
+<!-- <script src="client/js/moment.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/moment.min.js}"></script>
+
+<!-- <script src="client/js/daterangepicker.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/daterangepicker.js}"></script>
+
+
+<!-- <script src="client/js/typed.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/typed.js}"></script>
+
+<script th:inline="javascript">
+    $(function () {
+        var slides = $('.slides'),
+            images = slides.find('img');
+
+        images.each(function (i) {
+            $(this).attr('data-id', i + 1);
+        })
+
+        var typed = new Typed('.typed-words', {
+            strings: ["San Francisco.", " Paris.", " New Zealand.", " Maui.", " London."],
+            typeSpeed: 80,
+            backSpeed: 80,
+            backDelay: 4000,
+            startDelay: 1000,
+            loop: true,
+            showCursor: true,
+            preStringTyped: (arrayPos, self) => {
+                arrayPos++;
+                console.log(arrayPos);
+                $('.slides img').removeClass('active');
+                $('.slides img[data-id="' + arrayPos + '"]').addClass('active');
+            }
+
+        });
+    })
+
+
+</script>
+<script type="text/javascript" th:src="@{/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+<script  type="module" th:src="@{/client/js/reserve-page.js}"></script>
+
+
+</body>
+
+</html>
