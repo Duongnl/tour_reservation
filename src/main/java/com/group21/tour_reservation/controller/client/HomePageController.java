@@ -1,6 +1,7 @@
 package com.group21.tour_reservation.controller.client;
 
 import com.group21.tour_reservation.dto.response.TourReserveResponse;
+import com.group21.tour_reservation.service.AccountService;
 import com.group21.tour_reservation.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class HomePageController {
 
     @Autowired
     private TourService tourService;
+
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping("/")
     public String getHomePage(Model model, HttpServletRequest request) {
@@ -80,7 +84,8 @@ public class HomePageController {
         if (id != null) {
 
             int idValue = id;
-           Customer customer = customerService.getCustomerById(idValue);
+            Account account = accountService.getAccount(String.valueOf(idValue));
+           Customer customer = customerService.getCustomerById(account.getCustomer().getCustomerId());
             tourReserveResponse.setName(customer.getCustomerName());
             tourReserveResponse.setAddress(customer.getAddress());
             tourReserveResponse.setEmail(customer.getEmail());

@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     tourContainer.innerHTML = `
                                 <div class="media-1">
-                                    <a href="#" class="d-block mb-3">
+                                    <a href="/tour/tour_detail/${tourData.tourId}" class="d-block mb-3">
                                         <img src="${tourData.imageMain}" alt="Image" class="img-fluid">
                                     </a>
                                     <div class="div-tour-content">
