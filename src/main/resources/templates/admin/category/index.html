@@ -24,70 +24,70 @@
 </head>
 
 <body>
-<div class="wrapper">
-    <!-- start sidebar -->
-    <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
-    <!-- end sidebar -->
+    <div class="wrapper">
+        <!-- start sidebar -->
+        <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
+        <!-- end sidebar -->
 
-    <div class="main-panel">
-        <!-- header  -->
-        <div th:replace="/admin/layout/header.html :: header"></div>
+        <div class="main-panel">
+            <!-- header  -->
+            <div th:replace="/admin/layout/header.html :: header"></div>
 
-        <!-- content-->
-        <div th:replace="/admin/category/component/categoryList.html"></div>
+            <!-- content-->
+            <div th:replace="/admin/category/component/categoryList.html"></div>
 
-        <!-- start footer -->
-        <div th:replace="/admin/layout/footer.html :: footer"></div>
-        <!-- end footer -->
+            <!-- start footer -->
+            <div th:replace="/admin/layout/footer.html :: footer"></div>
+            <!-- end footer -->
+        </div>
+        <!-- Kiểm tra xem có thông báo thành công không -->
+        <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;">
+            <span th:text="${successMessage}"></span>
+        </div>
+        <div th:if="${errorMessage}" class="alert alert-success" id="error-message" style="display: none;">
+            <span th:text="${errorMessage}"></span>
+        </div>
+        <!--modal delete-->
+        <div th:replace="/admin/modal.html :: modal"></div>
     </div>
-    <!-- Kiểm tra xem có thông báo thành công không -->
-    <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;">
-        <span th:text="${successMessage}"></span>
-    </div>
-    <div th:if="${errorMessage}" class="alert alert-success" id="error-message" style="display: none;">
-        <span th:text="${errorMessage}"></span>
-    </div>
-    <!--modal delete-->
-    <div th:replace="/admin/modal.html :: modal"></div>
-</div>
-<!--my js-->
-<script type="module" th:src="@{/admin/js/notify.js}"></script>
-<script type="module" th:src="@{/admin/js/create-slug.js}"></script>
+    <!--my js-->
+    <script type="module" th:src="@{/admin/js/notify.js}"></script>
+    <script type="module" th:src="@{/admin/js/create-slug.js}"></script>
+    
 
+    <!--   Core JS Files   -->
+    <script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/core/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/core/bootstrap.min.js}"></script>
 
-<!--   Core JS Files   -->
-<script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>
-<script type="text/javascript" th:src="@{/admin/js/core/popper.min.js}"></script>
-<script type="text/javascript" th:src="@{/admin/js/core/bootstrap.min.js}"></script>
+    <!-- jQuery Scrollbar -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
 
-<!-- jQuery Scrollbar -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+    <!-- Chart JS -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/chart.js/chart.min.js}"></script>
 
-<!-- Chart JS -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/chart.js/chart.min.js}"></script>
+    <!-- jQuery Sparkline -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
 
-<!-- jQuery Sparkline -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
+    <!-- Chart Circle -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/chart-circle/circles.min.js}"></script>
 
-<!-- Chart Circle -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/chart-circle/circles.min.js}"></script>
+    <!-- Datatables -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/datatables/datatables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/datatables.js}"></script>
 
-<!-- Datatables -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/datatables/datatables.min.js}"></script>
-<script type="text/javascript" th:src="@{/admin/js/datatables.js}"></script>
+    <!-- Bootstrap Notify -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
 
-<!-- Bootstrap Notify -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+    <!-- jQuery Vector Maps -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/world.js}"></script>
 
-<!-- jQuery Vector Maps -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
-<script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/world.js}"></script>
+    <!-- Sweet Alert -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/sweetalert/sweetalert.min.js}"></script>
 
-<!-- Sweet Alert -->
-<script type="text/javascript" th:src="@{/admin/js/plugin/sweetalert/sweetalert.min.js}"></script>
-
-<!-- Kaiadmin JS -->
-<script type="text/javascript" th:src="@{/admin/js/kaiadmin.min.js}"></script>
+    <!-- Kaiadmin JS -->
+    <script type="text/javascript" th:src="@{/admin/js/kaiadmin.min.js}"></script>
 
 
 </body>

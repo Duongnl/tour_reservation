@@ -47,7 +47,7 @@ public class CategoryController {
         categoryService.addCategory(category);
 
         // Thêm thông báo vào RedirectAttributes
-        redirectAttributes.addFlashAttribute("successMessage", "Thêm mới phương tiện thành công!");
+        redirectAttributes.addFlashAttribute("successMessage", "Thêm mới danh mục thành công!");
         return "redirect:/admin/category";
     }
 
@@ -58,7 +58,7 @@ public class CategoryController {
         categoryService.editCategory(category);
 
         // Thêm thông báo vào RedirectAttributes
-        redirectAttributes.addFlashAttribute("successMessage", "Chỉnh sửa phương tiện thành công!");
+        redirectAttributes.addFlashAttribute("successMessage", "Chỉnh sửa danh mục thành công!");
         return "redirect:/admin/category";
     }
 
@@ -70,7 +70,7 @@ public class CategoryController {
         }
         else
         if (category.getStatus() == 1) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Phương tiện này đang được sử dụng không thể xóa!");
+            redirectAttributes.addFlashAttribute("errorMessage", "danh mục này đang được sử dụng không thể xóa!");
         } else if (category.getStatus() == 0) {
             redirectAttributes.addFlashAttribute("successMessage", "Xóa thành công!");
         }
