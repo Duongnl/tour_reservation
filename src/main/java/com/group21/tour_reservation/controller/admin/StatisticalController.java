@@ -27,24 +27,27 @@ public class StatisticalController {
     @Autowired
     private StatisticalService statisticalService;
 
-    @GetMapping("/admin/statistical")
+    @GetMapping("/admin")
     public String index(Model model) {
+        reserveService.autoDestroyReserve();
         LocalDate today = LocalDate.now();
         int year = today.getYear();
-        List<String> labels = List.of("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
-        List<Reserve> data = reserveService.getAllReserveByYear(year);
-        model.addAttribute("reserves", reserveService.getAllReserveByYear(year));
-        model.addAttribute("money_mm", statisticalService.getPrice12Months(data));
-        model.addAttribute("year", year);
-        model.addAttribute("allYear", reserveService.getAllYear());
-        model.addAttribute("labels", labels);
-        model.addAttribute("type", statisticalService.directContent("revenue_year"));
-        model.addAttribute("sum", statisticalService.sumPrice(data));
-        return "admin/statistical/index.html";
-    }
+        return "redirect:/admin/statistical-revenue/year/"+year;
 
-    @GetMapping("/admin/statistical/year/{slug}")
-    public String year(Model model, @PathVariable("slug") String slug) {
+//        List<String> labels = List.of("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+//    List<Reserve> data = reserveService.getAllReserveByYear(year);
+//        model.addAttribute("reserves", reserveService.getAllReserveByYear(year));
+//        model.addAttribute("money_mm", statisticalService.getPrice12Months(data));
+//        model.addAttribute("year", year);
+//        model.addAttribute("allYear", reserveService.getAllYear());
+//        model.addAttribute("labels", labels);
+//        model.addAttribute("type", statisticalService.directContent("revenue"));
+//        model.addAttribute("sum", statisticalService.sumPrice(data));
+//        return "admin/statistical/index.html";
+}
+
+    @GetMapping("/admin/statistical-revenue/year/{slug}")
+    public String revenueYear(Model model, @PathVariable("slug") String slug) {
         int year = statisticalService.getYear(slug);
         List<String> labels = List.of("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
         List<Reserve> data = reserveService.getAllReserveByYear(year);
@@ -53,10 +56,53 @@ public class StatisticalController {
         model.addAttribute("year", year);
         model.addAttribute("allYear", reserveService.getAllYear());
         model.addAttribute("labels", labels);
-        model.addAttribute("type", statisticalService.directContent("revenue_year"));
+        model.addAttribute("type", statisticalService.directContent("revenue"));
         model.addAttribute("sum", statisticalService.sumPrice(data));
         return "admin/statistical/index.html";
     }
+
+    @GetMapping("/admin/statistical-customer/year/{slug}")
+    public String countCoustomer(Model model, @PathVariable("slug") String slug) {
+        int year = statisticalService.getYear(slug);
+        List<String> labels = List.of("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+        int[] TotalAdult = statisticalService.getTotalAdultsByYear(year);
+        int[] TotalChildren = statisticalService.getTotalChildrenByYear(year);
+        int AllTotalAdult = statisticalService.getAllTotalAdultsByYear(year);
+        int AllTotalChildren = statisticalService.getAllTotalChildrenByYear(year);
+        int[] AllTotalCustomer = statisticalService.getTotalCustomerByYear(year);
+        model.addAttribute("year", year);
+        model.addAttribute("labels", labels);
+        model.addAttribute("allYear", reserveService.getAllYear());
+//        model.addAttribute("sum", AllTotalAdult + AllTotalChildren );
+
+
+
+        model.addAttribute("TotalAdult", TotalAdult);
+        model.addAttribute("TotalChildren", TotalChildren);
+
+        model.addAttribute("AllTotalAdult", AllTotalAdult);
+        model.addAttribute("AllTotalChildren", AllTotalChildren);
+
+        model.addAttribute("AllTotalCustomer", AllTotalCustomer);
+
+
+
+
+
+//        List<Reserve> data = reserveService.getAllReserveByYear(year);
+//        model.addAttribute("reserves", reserveService.getAllReserveByYear(year));
+//        model.addAttribute("money_mm", statisticalService.getPrice12Months(data));
+
+//        model.addAttribute("allYear", reserveService.getAllYear());
+        model.addAttribute("type", statisticalService.directContent("count_customer"));
+        return "admin/statistical/index.html";
+    }
+
+
+
+
+
+
 
     @GetMapping("/admin/statistical/date/{slug}")
     public String month(Model model, @PathVariable("slug") String slug) {
