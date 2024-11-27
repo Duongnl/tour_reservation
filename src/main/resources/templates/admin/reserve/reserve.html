@@ -97,6 +97,7 @@
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal"
                                                     th:attr="data-id=${reserve.reserveId},
+                                                    data-name=${reserve.customer.customerName},
                                                     data-controller-delete='/admin/reserve/add-reserve' ">
                                                 Thanh toán
                                             </button>
@@ -106,6 +107,7 @@
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal"
                                                     th:attr="data-id=${reserve.reserveId},
+                                                     data-name=${reserve.customer.customerName},
                                                     data-controller-delete='/admin/reserve/delete-reserve' ">
                                                 Hủy
                                             </button>

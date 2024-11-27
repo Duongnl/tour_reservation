@@ -7,6 +7,8 @@ import com.group21.tour_reservation.entity.TourSchedule;
 import com.group21.tour_reservation.service.TourScheduleService;
 import com.group21.tour_reservation.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +26,12 @@ public class TourDetailController {
     private TourService tourService;
 
     @GetMapping("/tour/tour_detail/{slug}")
-    public String tourDetail(Model model, @PathVariable("slug") String slug) {
+    public String tourDetail(Model model, @PathVariable("slug") String slug, @AuthenticationPrincipal OAuth2User user) {
+
+        if ( user != null) {
+            model.addAttribute("name", user.getAttribute("name"));
+        }
+
         Tour tour = tourService.getTour(slug);
         if (tour == null) {
             return "admin/404.html";
