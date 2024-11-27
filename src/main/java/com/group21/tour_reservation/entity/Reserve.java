@@ -25,6 +25,9 @@ public class Reserve {
     @Column(name = "reserve_detail")
     private String reserveDetail;
 
+    @Column(name = "url" ,columnDefinition = "text")
+    private String url;
+
     @Column(name = "adult_count")
     private int adultCount;
 

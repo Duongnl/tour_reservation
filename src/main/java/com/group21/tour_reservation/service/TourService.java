@@ -227,7 +227,9 @@ public class TourService {
 
                 int quantityReserved = 0;
                 for(Reserve reserve : tourSchedule.getReserves()) {
+                   if (reserve.getStatus() ==1 || reserve.getStatus() ==3) {
                     quantityReserved += reserve.getReserveDetails().size();
+                   }
                 }
 
                 tourScheduleTableResponse.setQuantityReserved(quantityReserved);
@@ -510,7 +512,9 @@ public class TourService {
     public Integer handleQuantityLeftOfSchedule (TourSchedule tourSchedule) {
         int quantityReserved = 0;
         for(Reserve reserve : tourSchedule.getReserves()) {
-            quantityReserved += reserve.getReserveDetails().size();
+            if (reserve.getStatus() == 1 || reserve.getStatus() == 3) {
+             quantityReserved += reserve.getReserveDetails().size();
+            }
         }
 
         return tourSchedule.getQuantity() -  quantityReserved;

@@ -98,7 +98,7 @@
                                                     data-bs-target="#exampleModal"
                                                     th:attr="data-id=${reserve.reserveId},
                                                     data-controller-delete='/admin/reserve/add-reserve' ">
-                                                Duyệt
+                                                Thanh toán
                                             </button>
                                             <!-- Button trigger modal -->
                                             <button type="button"
@@ -107,17 +107,18 @@
                                                     data-bs-target="#exampleModal"
                                                     th:attr="data-id=${reserve.reserveId},
                                                     data-controller-delete='/admin/reserve/delete-reserve' ">
-                                                Xóa
+                                                Hủy
                                             </button>
                                            
                                         </div>
                                         <div class="form-button-action" th:id="'stt_2'" th:if="${reserve.status == 2}">
-                                            <p class="p_duyet">Đã Duyệt</P> 
+                                            <p class="p_duyet">Đã thanh toán</P>
                                         </div>
                                         <div class="form-button-action" th:id="'stt_0'" th:if="${reserve.status == 0}">
-                                            <p class="p_huy">Đã Hủy</P> 
-                                            
-                                            
+                                            <p class="p_huy">Đã Hủy</P>
+                                        </div>
+                                        <div class="form-button-action" th:id="'stt_3'" th:if="${reserve.status == 3}">
+                                            <p class="p_cho_duyet">Chưa thanh toán</P>
                                         </div>
                                     </td>
                                     <td>

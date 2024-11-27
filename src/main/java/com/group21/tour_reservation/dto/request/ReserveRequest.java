@@ -20,5 +20,6 @@ public class ReserveRequest {
     private String customerName;
     private String phoneNumber;
     private String reserveDetail;
+    private String pay;
     List<CusInfRequest> customers;
 }

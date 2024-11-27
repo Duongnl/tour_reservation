@@ -13,3 +13,19 @@
     align-items: center;
     flex-wrap: wrap;
 }
+
+.inf-title{
+    font-weight: bold;
+    color: #f26522 !important;
+    font-size: 20px;
+    padding-left: 15px;
+}
+
+.text-color{
+    color: #2d4271;
+}
+
+.text-bold-color{
+    color: #2d4271;
+    font-weight: bold;
+}
