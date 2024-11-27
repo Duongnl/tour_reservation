@@ -93,14 +93,18 @@
                                 <div class="d-flex align-items-center justify-content-around">
                                     <!-- <a class="small" href="password.html">Forgot Password?</a> -->
                                     <button type="submit" class="btn btn-primary">Đăng nhập</button>
-                                    
+
                                 </div>
                             </form>
-                            <div class="d-flex align-items-center justify-content-center mt-2"><a href="/register">Đăng nhập với Google</a></div>
+                            
                         </div>
                         <div class="card-footer text-center py-3">
-                            
-                            
+
+                            <div class="d-flex align-items-center justify-content-around mt-2 mb-3"><a th:href="@{/oauth2/authorization/google}" class="login_google">
+                                Đăng nhập với Google</a>
+                                <a th:href="@{/oauth2/authorization/facebook}" class="login_facebook">
+                                    Đăng nhập với Facebook</a>
+                            </div>
                             <div><a href="/register">Bạn chưa có tài khoản? Đăng ký ngay!</a></div>
                         </div>
                     </div>

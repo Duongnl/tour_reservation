@@ -36,7 +36,7 @@ public class EmployeeService {
     public void createEmployee(Employee employee) {
         Account account = employee.getAccount();
         account.setTime(LocalDateTime.now());
-        account.setRole("ROLE_ADMIN");
+        account.setRole("ADMIN");
         account.setStatus(1);
         String hashPassword = this.passwordEncoder.encode(account.getPassword());
         account.setPassword(hashPassword);

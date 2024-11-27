@@ -17,11 +17,11 @@
     <link th:href="@{/admin/css/plugins.min.css}" rel="stylesheet" />
     <link th:href="@{/admin/css/kaiadmin.min.css}" rel="stylesheet" />
 
-<!-- Thêm thư viện Select2 vào dự án -->
-<link th:href="@{/client/css/select2.min.css}" rel="stylesheet" />
-<link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css}" rel="stylesheet" />
-<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
-<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js}"></script>
+    <!-- Thêm thư viện Select2 vào dự án -->
+    <link th:href="@{/client/css/select2.min.css}" rel="stylesheet" />
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css}" rel="stylesheet" />
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js}"></script>
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link th:href="@{/admin/css/demo.css}" rel="stylesheet" />
@@ -65,7 +65,6 @@
                                     </option>
                                 </select>
                                 <input type="hidden" name="promotionId" th:value="${promotionId}" />
-
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table id="add-row" class="display table table-striped table-hover">
@@ -85,16 +84,16 @@
                                                     <td th:text="${schedule.scheduleId}"></td>
                                                     <td th:text="${schedule.scheduleName}"></td>
                                                     <td th:text="${schedule.tour.tourName}"></td>
-                                                    <td> 
+                                                    <td>
                                                         <button type="button" class="btn btn-link btn-danger"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        <i class="fa fa-times"></i>
+                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                            th:attr="data-schedule-id=${schedule.scheduleId}, data-promotion-id=${promotionId}">
+                                                            <i class="fa fa-times"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                             <!-- end body -->
-
                                         </table>
                                     </div>
                                 </div>
@@ -111,6 +110,33 @@
                     <!--End table-->
                 </div>
             </div>
+
+            <!-- Modal Xác Nhận Xóa -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Bạn có chắc chắn muốn xóa lịch trình này khỏi khuyến mãi?
+                        </div>
+                        <div class="modal-footer">
+                            <form th:action="@{/admin/promotion/remove-promotion-schedule}" method="post"
+                                id="deleteForm">
+                                <input type="hidden" name="promotionId" id="deletePromotionId">
+                                <input type="hidden" name="scheduleId" id="deleteScheduleId">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-danger">Xóa</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
             <!-- start footer -->
             <div th:replace="/admin/layout/footer.html :: footer"></div>
@@ -137,6 +163,23 @@
         $(document).ready(function () {
             $('.js-example-basic-single').select2();
         });
+
+        // JavaScript để cập nhật thông tin vào modal khi nhấn nút xóa
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.btn-danger[data-bs-target="#exampleModal"]');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const scheduleId = this.getAttribute('data-schedule-id');
+                    const promotionId = this.getAttribute('data-promotion-id');
+
+                    // Gán giá trị vào các input hidden trong form
+                    document.getElementById('deleteScheduleId').value = scheduleId;
+                    document.getElementById('deletePromotionId').value = promotionId;
+                });
+            });
+        });
+
+
     </script>
     <!--   Core JS Files   -->
     <script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>

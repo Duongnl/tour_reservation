@@ -20,12 +20,12 @@
 					<li class="active"><a href="/tour">Tour</a></li>
 					
 					<li sec:authorize="isAuthenticated()" class="has-children" >
-						<a href="#">
+						<a>
 							<i id="login_icon" class="fa fa-user"></i>
 						</a>
 						<ul class="dropdown">
 							<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin">Admin</a></li>
-							<li><a href="/account-info">Thông tin cá nhân</a></li>
+							<li th:if="${name == null}"><a href="#">Thông tin cá nhân</a></li>
 							<li><form method="post" action="/logout">
 								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 								<button class="dropdown-item">Đăng xuất</button>

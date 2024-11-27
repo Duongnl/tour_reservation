@@ -55,3 +55,15 @@ body{
     height: 100%;
     width: 100%;
 }
+.login_google{
+    padding: 10px;
+    border-radius: 25px;
+    background-color: #DB4437;
+    color: aliceblue;
+}
+.login_facebook{
+    padding: 10px;
+    border-radius: 25px;
+    background-color: #4267B2;
+    color: aliceblue;
+}
