@@ -1,0 +1,58 @@
+<canvas
+        id="pieChart"
+        style="width: 50%; height: 50%"
+></canvas>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let AllTotalAdult = /*[[${AllTotalAdult}]]*/[];
+    let AllTotalChildren = /*[[${AllTotalChildren}]]*/[];
+    // let sum = AllTotalAdult + AllTotalChildren
+    // let rateAdult = AllTotalAdult / sum;
+    // let rateChildren = 1 - rateAdult
+
+    let data = [AllTotalAdult, AllTotalChildren]
+    pieChart = document.getElementById("pieChart").getContext("2d")
+    var myPieChart = new Chart(pieChart, {
+        type: "pie",
+        data: {
+            datasets: [
+                {
+                    data: data,
+                    backgroundColor: ["#59d05d", "#fdaf4b"],
+                    borderWidth: 0,
+                },
+            ],
+            labels: ["Adult", "Children"],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position: "bottom",
+                labels: {
+                    fontColor: "rgb(154, 154, 154)",
+                    fontSize: 11,
+                    usePointStyle: true,
+                    padding: 20,
+                },
+            },
+            pieceLabel: {
+                render: "percentage",
+                fontColor: "white",
+                fontSize: 14,
+            },
+            tooltips: false,
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20,
+                },
+            },
+        },
+    });
+
+    /*]]>*/
+</script>

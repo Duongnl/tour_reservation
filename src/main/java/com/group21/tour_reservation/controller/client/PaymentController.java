@@ -5,9 +5,11 @@ import com.group21.tour_reservation.dto.response.PaymentResponse;
 import com.group21.tour_reservation.entity.Reserve;
 import com.group21.tour_reservation.payment.Config;
 import com.group21.tour_reservation.repository.ReserveRepository;
+import com.group21.tour_reservation.service.ReserveService;
 import com.group21.tour_reservation.utils.PayUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,19 +27,23 @@ public class PaymentController {
     @Autowired
     private ReserveRepository reserveRepository;
 
+    @Autowired
+    ReserveService reserveService;
+
     public int scheduleId = -1;
     public int reserveId = -1;
 
     @PostMapping("/create_payment")
     public ResponseEntity<?> createPayment(HttpServletRequest request , @RequestBody ReserveRequest reserveRequest) throws UnsupportedEncodingException {
+        scheduleId = reserveRequest.getTourScheduleId();
+        reserveId = reserveRequest.getReserveId();
+        Reserve reserve = reserveRepository.findById(reserveId).orElseThrow(null);
 
-//        String orderType = "other";
-//        long amount = Integer.parseInt(req.getParameter("amount"))*100;
-//        String bankCode = req.getParameter("bankCode");
+
 
         System.out.println("secretKey >>> "+Config.secretKey);
 
-        long amount = 10000*100 ;
+        long amount = reserve.getPrice()* 100L;
 
         String vnp_TxnRef = Config.getRandomNumber(8);
 //        String vnp_IpAddr = Config.getIpAddress(req);
@@ -52,13 +58,12 @@ public class PaymentController {
         vnp_Params.put("vnp_CurrCode", "VND");
         vnp_Params.put("vnp_BankCode", "NCB");
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
-        vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
+        vnp_Params.put("vnp_OrderInfo", String.valueOf(reserveId) );
 
         vnp_Params.put("vnp_OrderType", "other");
 
         vnp_Params.put("vnp_Locale", "vn");
-        scheduleId = reserveRequest.getTourScheduleId();
-        reserveId = reserveRequest.getReserveId();
+//        vnp_Params.put("reserveId",String.valueOf(reserveId) );
 
 
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
@@ -104,30 +109,42 @@ public class PaymentController {
         PaymentResponse paymentResponse = new PaymentResponse();
         paymentResponse.setStatus("OK");
         paymentResponse.setMessage("Successfully");
+        paymentResponse.setReserveId(reserveId);
         paymentResponse.setURL(paymentUrl);
+
+        reserve.setUrl(paymentUrl);
+        reserveRepository.save(reserve);
 
         return ResponseEntity.status(HttpStatus.OK).body(paymentResponse);
     }
 
 
     @GetMapping("/payment_info")
-    public String transaction (
-    @RequestParam(value = "vnp_Amount") String amount,
-    @RequestParam(value = "vnp_BankCode") String bankCode,
+    public ResponseEntity<?> transaction (
     @RequestParam(value = "vnp_OrderInfo") String orderInfo,
     @RequestParam(value = "vnp_ResponseCode") String responseCode
-
     ) {
         if (responseCode.equals("00")) {
-            Reserve reserve = reserveRepository.findById(reserveId).orElseThrow(null);
+            Reserve reserve = reserveRepository.findById( Integer.parseInt(orderInfo.trim())).
+                    orElseThrow(() -> new RuntimeException("Reserve not found for id: " + reserveId));
             if (reserve != null) {
+                System.out.println(">>>> reserve " + reserve.getReserveId());
                 reserve.setStatus(2);
                 reserveRepository.save(reserve);
             }
-            return "success" + "schedule id >>> " + scheduleId + "reserve id >>> " + reserveId;
+
+            // Redirect to the confirmation page with the correct reserveId
+
+
+        }
+        // Redirect to /tour page
+        HttpHeaders headers = new HttpHeaders();
+        if (reserveId == -1) {
+        headers.add("Location", "/reserve-account");  // Đặt URL cần chuyển hướng
 
         } else {
-            return "error";
+            headers.add("Location", "/confirm_info/" + reserveId);  // Đặt URL cần chuyển hướng
         }
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);  // 302 Found là mã HTTP cho chuyển hướng
     }
 }

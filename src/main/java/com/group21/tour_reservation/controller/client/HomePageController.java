@@ -1,6 +1,7 @@
 package com.group21.tour_reservation.controller.client;
 
 import com.group21.tour_reservation.dto.response.TourReserveResponse;
+import com.group21.tour_reservation.repository.AccountRepository;
 import com.group21.tour_reservation.service.AccountService;
 import com.group21.tour_reservation.service.TourService;
 
@@ -44,10 +45,12 @@ public class HomePageController {
 
     @Autowired
     private ReserveService reserveService;
+    @Autowired
+    private AccountRepository accountRepository;
 
     @GetMapping("/")
     public String getHomePage(Model model, HttpServletRequest request, @AuthenticationPrincipal OAuth2User user) {
-
+        reserveService.autoDestroyReserve();
         // sử dụng khi có session
         HttpSession session = request.getSession(false);
         System.out.println(">>> check id" + session.getAttribute("id"));
@@ -110,7 +113,8 @@ public class HomePageController {
     }
 
     @GetMapping("/reserve/{slug}")
-    public String reserveView(Model model, @PathVariable("slug") String slug, HttpServletRequest request ) {
+    public String reserveView(Model model, @PathVariable("slug") String slug, HttpServletRequest request, @AuthenticationPrincipal OAuth2User user ) {
+
         TourReserveResponse tourReserveResponse = new TourReserveResponse();
         tourReserveResponse=   tourService.getTourReserveClient(slug);
 
@@ -125,16 +129,42 @@ public class HomePageController {
 
             int idValue = id;
             Account account = accountService.getAccount(String.valueOf(idValue));
-             Customer customer = customerService.getCustomerById(account.getCustomer().getCustomerId());
-            tourReserveResponse.setName(customer.getCustomerName());
-            tourReserveResponse.setAddress(customer.getAddress());
-            tourReserveResponse.setEmail(customer.getEmail());
-            tourReserveResponse.setPhone(customer.getPhoneNumber());
+            if (account.getCustomer() !=null) {
+                Customer customer = customerService.getCustomerById(account.getCustomer().getCustomerId());
+                tourReserveResponse.setName(customer.getCustomerName());
+                tourReserveResponse.setAddress(customer.getAddress());
+                tourReserveResponse.setEmail(customer.getEmail());
+                tourReserveResponse.setPhone(customer.getPhoneNumber());
+
+            }
+
+        } else
+        if ( user != null) {
+            model.addAttribute("name", user.getAttribute("name"));
+            tourReserveResponse.setName(user.getAttribute("name"));
+            tourReserveResponse.setEmail(user.getAttribute("email"));
         }
 
 
         model.addAttribute("tourReserveResponse", tourReserveResponse);
         return "client/reserve-page.html";
+    }
+
+    @GetMapping("/confirm_info/{slug}")
+    public String getHomePage(Model model, @PathVariable("slug") String slug) {
+        Reserve reserve = reserveService.getReserve(slug);
+
+        if (reserve.getStatus() == 3) {
+        model.addAttribute("expire", reserve.getTime().plusMinutes(15));
+        } else if (reserve.getStatus() == 1) {
+            model.addAttribute("expire", reserve.getTime().plusDays(2));
+        } else {
+            model.addAttribute("expire","Hết hạn");
+        }
+
+
+        model.addAttribute("reserve", reserve);
+        return "client/confirm_info.html";
     }
 
     @GetMapping("/reserve-account")
@@ -147,9 +177,10 @@ public class HomePageController {
 
         // Lấy id từ session
         Integer id = (Integer) session.getAttribute("id");
+        Account account = accountRepository.findById(id).orElse(null);
 
         // Lấy thông tin Customer
-        Customer customer = customerService.getCustomerById(id);
+        Customer customer = customerService.getCustomerById(account.getCustomer().getCustomerId());
 
         // Lấy danh sách Reserve từ Customer
         List<Reserve> listDatChoAccount = new ArrayList<>(customer.getReserves());
@@ -171,12 +202,7 @@ public class HomePageController {
         // Trả về view hiển thị
         return "client/reserve-detail-account-page.html";
     }
-    @GetMapping("/confirm_info/{slug}")
-    public String getHomePage(Model model, @PathVariable("slug") String slug) {
 
-
-        return "client/confirm_info.html";
-    }
 
     @GetMapping("/home")
     public String home(Model model, @AuthenticationPrincipal OAuth2User user) {

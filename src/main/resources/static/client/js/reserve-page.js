@@ -362,18 +362,32 @@ document.addEventListener('DOMContentLoaded', function () {
             listCus.push(customer)
         });
 
+        let data;
 
-
-
-        const data = {
-            tourScheduleId: handleTourScheduleId(),
-            reserveDetail:detail.value,
-            customerName:nameInf.value,
-            phoneNumber : phoneNumber.value,
-            email : email.value,
-            address: address.value,
-            customers:listCus
+        if ( tienMat.checked) {
+             data = {
+                tourScheduleId: handleTourScheduleId(),
+                reserveDetail:detail.value,
+                customerName:nameInf.value,
+                phoneNumber : phoneNumber.value,
+                email : email.value,
+                address: address.value,
+                customers:listCus,
+                pay:"tienMat"
+            }
+        }  else if (chuyenKhoan.checked) {
+            data = {
+                tourScheduleId: handleTourScheduleId(),
+                reserveDetail:detail.value,
+                customerName:nameInf.value,
+                phoneNumber : phoneNumber.value,
+                email : email.value,
+                address: address.value,
+                customers:listCus,
+                pay:"chuyenKhoan"
+            }
         }
+
 
         const res = await  fetch("/api/client/reserve", {
             method: "POST",
@@ -407,8 +421,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     body: JSON.stringify(data)
                 })
                 const dataRes1 = await res.json();
-                window.location.href = dataRes1.url
+                 window.location.href = `/confirm_info/${dataRes1.reserveId}`
 
+
+            } else if (tienMat.checked) {
+                window.location.href = `/confirm_info/${dataRes.reserveId}`
             }
 
         } else if (dataRes.code === 201) {

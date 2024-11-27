@@ -81,7 +81,7 @@ public class SecurityConfig {
                                                                 "/js/**", "/images/**", "/api/check-username","/api/client/filter-tour","/admin/images/**"
                                                         ,"/reserve/**","/tour/**","/client/js/**", "/api/client/**", "/admin/js/**", "/admin/css/**",
                                                         "/client/css/**", "/client/fonts/**",
-                                                        "/admin/fonts/**", "/api/payment/create_payment", "/payment/**", "/api/payment/payment_info"
+                                                        "/admin/fonts/**", "/api/payment/create_payment", "/payment/**", "/api/payment/**"
                                                                 ,"/confirm_info/**"
                                                 )
                                                 .permitAll()

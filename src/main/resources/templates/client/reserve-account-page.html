@@ -2,31 +2,79 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
-    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-    <link rel="icon" th:href="@{/admin/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap4" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Serif+Pro:wght@400;700&display=swap"
+            rel="stylesheet">
+
+
+    <link th:href="@{/client/css/bootstrap.min.css}" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="client/css/owl.carousel.min.css"> -->
+    <link th:href="@{/client/css/owl.carousel.min.css}" rel="stylesheet" />
+
+
+    <!-- <link rel="stylesheet" href="client/css/owl.theme.default.min.css"> -->
+    <link th:href="@{/client/css/owl.theme.default.min.css}" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="client/css/jquery.fancybox.min.css"> -->
+    <link th:href="@{/client/css/jquery.fancybox.min.css}" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="client/fonts/flaticon/font/flaticon.css"> -->
+    <link th:href="@{/client/fonts/flaticon/font/flaticon.css}" rel="stylesheet" />
 
     <!-- Fonts and icons -->
     <script type="text/javascript" th:src="@{/admin/js/plugin/webfont/webfont.min.js}"></script>
     <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet" />
 
-    <!-- CSS Files -->
-    <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/admin/css/plugins.min.css}" rel="stylesheet" />
-    <link th:href="@{/admin/css/kaiadmin.min.css}" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="client/css/daterangepicker.css"> -->
+    <link th:href="@{/client/css/daterangepicker.css}" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="client/css/aos.css"> -->
+    <link th:href="@{/client/css/aos.css}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="client/fonts/icomoon/style.css">
+    <link th:href="@{/client/fonts/icomoon/style.css}" rel="stylesheet" />
+
+
     <link th:href="@{/admin/css/reserve.css}" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="client/css/style.css"> -->
+    <link th:href="@{/client/css/style.css}" rel="stylesheet" />
+
+
+
+
+    <style>
+        .hero {
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+    </style>
 
 
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link th:href="@{/admin/css/demo.css}" rel="stylesheet" />
-    <link 
+
 </head>
 
 <body>
-<div class="wrapper">
+
+<div th:replace="/client/layout/header.html :: header_nav"></div>
+
+<div class="hero">
+
+</div>
+
+<div class="wrapper container">
    
 
         <!-- content-->
@@ -77,18 +125,21 @@
                                     <td th:text="${reserve.price}" ></td>
                                     <td class="action_td">
 
-                                        <div class="form-button-action" th:id="'stt_1'" th:if="${reserve.status == 1}">
-                                            <p class="p_cho_duyet">Đang chờ</P> 
-                                           
+
+                                        <div class="form-button-action" th:id="'stt_1'" th:if="${reserve.status == 2}">
+                                            <p class="p_duyet">Đã thanh toán</P>
                                         </div>
-                                        <div class="form-button-action" th:id="'stt_2'" th:if="${reserve.status == 2}">
-                                            <p class="p_duyet">Đã Duyệt</P> 
+                                        <div class="form-button-action" th:id="'stt_2'" th:if="${reserve.status == 1}">
+                                            <p class="p_huy">Chưa thanh toán</P>
+                                        </div>
+                                        <div class="form-button-action" th:id="'stt_3'" th:if="${reserve.status == 3}">
+                                            <p class="p_huy">Chưa thanh toán</P>
                                         </div>
                                         <div class="form-button-action" th:id="'stt_0'" th:if="${reserve.status == 0}">
-                                            <p class="p_huy">Đã Hủy</P> 
-                                            
-                                            
+                                            <p class="p_huy">Đã hủy</P>
                                         </div>
+
+
                                     </td>
                                     <td>
                                         <div class="form-button-action">
@@ -100,6 +151,7 @@
                                                         class="btn btn-link btn-primary btn-lg btn-chiTiet"
                                                         data-original-title="Edit Task"
                                                         href="#"
+                                                        style="background-color: white"
                                                 >
                                                     <i class="fa fa-edit"></i>
                                             </a>
@@ -120,10 +172,10 @@
             <!--End table-->
 
             </div>
-        </div>
 
-       
+        </div>
     </div>
+            <div th:replace="/client/layout/footer.html :: footer_bottom"></div>
     <!-- Kiểm tra xem có thông báo thành công không, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
     <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;">
         <span th:text="${successMessage}"></span>
@@ -150,7 +202,7 @@
                 const btnChiTiet = row.querySelector('.btn-chiTiet'); // Lấy nút btn-chiTiet trong hàng
 
                 if (btnChiTiet && txtId ) {
-                    btnChiTiet.href = `${pathname}/reserve-detail-account/${txtId.textContent}`; // Gán giá trị href mới
+                    btnChiTiet.href = `/confirm_info/${txtId.textContent}`; // Gán giá trị href mới
                 }
             });
         }
