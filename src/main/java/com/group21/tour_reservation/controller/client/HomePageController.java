@@ -7,7 +7,12 @@ import com.group21.tour_reservation.service.TourService;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.group21.tour_reservation.entity.Account;
 import com.group21.tour_reservation.entity.Customer;
 import com.group21.tour_reservation.entity.Reserve;
-import com.group21.tour_reservation.entity.ReserveDetail;
+import com.group21.tour_reservation.entity.ReserveDetail;import com.group21.tour_reservation.service.AccountService;
 import com.group21.tour_reservation.service.CustomerService;
 import com.group21.tour_reservation.service.ReserveService;
 
@@ -41,10 +46,25 @@ public class HomePageController {
     private ReserveService reserveService;
 
     @GetMapping("/")
-    public String getHomePage(Model model, HttpServletRequest request) {
+    public String getHomePage(Model model, HttpServletRequest request, @AuthenticationPrincipal OAuth2User user) {
 
+        // sử dụng khi có session
         HttpSession session = request.getSession(false);
         System.out.println(">>> check id" + session.getAttribute("id"));
+        // int id = (int) session.getAttribute("id");
+
+        if (user != null) {
+
+            Map<String, Object> attributes = user.getAttributes();
+
+            // Hiển thị các thuộc tính của người dùng
+            attributes.forEach((key, value) -> {
+                System.out.println(">>> check:  "+key + ": " + value);
+            });
+            model.addAttribute("name", user.getAttribute("name"));
+            model.addAttribute("email", user.getAttribute("email"));
+            model.addAttribute("attributes", attributes);
+        }
         return "client/home.html";
     }
 
@@ -78,9 +98,14 @@ public class HomePageController {
         return "client/auth/deny.html";
     }
 
-    @GetMapping("/tour")
-    public String tourView() {
 
+
+    @GetMapping("/tour")
+    public String tourView(Model model, @AuthenticationPrincipal OAuth2User user) {
+        if ( user != null) {
+            model.addAttribute("name", user.getAttribute("name"));
+        }
+        
         return "client/tour-page.html";
     }
 
@@ -151,5 +176,22 @@ public class HomePageController {
 
 
         return "client/confirm_info.html";
+    }
+
+    @GetMapping("/home")
+    public String home(Model model, @AuthenticationPrincipal OAuth2User user) {
+        if (user != null) {
+
+            Map<String, Object> attributes = user.getAttributes();
+
+            // Hiển thị các thuộc tính của người dùng
+            attributes.forEach((key, value) -> {
+                System.out.println(">>> check:  "+key + ": " + value);
+            });
+            model.addAttribute("name", user.getAttribute("name"));
+            model.addAttribute("email", user.getAttribute("email"));
+            model.addAttribute("attributes", attributes);
+        }
+        return "client/logingoogle.html";
     }
 }

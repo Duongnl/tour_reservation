@@ -96,9 +96,9 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("validation >>> ", validation)
         if (!validation.some(v => v === false)) {
 
-            console.log("txt-id", txtId)
-            console.log("employeeUserNameOld", employeeUserNameOld.value)
-            console.log("employeeUsername", employeeUsername.value)            
+            // console.log("txt-id", txtId)
+            // console.log("employeeUserNameOld", employeeUserNameOld.value)
+            // console.log("employeeUsername", employeeUsername.value)            
             if (!txtId || employeeUserNameOld.value !== employeeUsername.value) {
 
                 const data = await fetchApi()

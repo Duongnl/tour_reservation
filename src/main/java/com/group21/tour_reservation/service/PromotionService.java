@@ -64,12 +64,15 @@ public class PromotionService {
         tourSchedule.getPromotions().add(promotion); // Thêm promotion vào danh sách của TourSchedule
         tourScheduleRepository.save(tourSchedule); 
     }
-    public List<TourSchedule> getAllSchedulesWithPromotions() {
-        return tourScheduleRepository.findSchedulesWithPromotions(); 
+    public List<TourSchedule> getSchedulesByPromotionId(String promotionId) {
+        // Giả sử bạn có phương thức trong repository để lấy lịch trình theo promotionId
+        return promotionRepository.findSchedulesByPromotionId(promotionId);
     }
+    
 
     // Hàm xóa lịch trình sau khi thêm vào khuyễn mãi
-    public void deletePromotionDetail(Integer promotionId, Integer scheduleId) {
+    public void removeScheduleFromPromotion(Integer promotionId, Integer scheduleId) {
         promotionRepository.removeTourScheduleFromPromotion(promotionId, scheduleId);
     }
+    
 }
