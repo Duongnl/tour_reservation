@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const priceAdult = document.getElementById("inp-price-adult").value;
     const priceChild = document.getElementById("inp-price-child").value;
 
+    const quantityLeft = document.getElementById("quantity-left")
+
     numberAdult.value = 1
     numberChild.value = 0
 
@@ -41,6 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const addressError = document.getElementById("address-error")
 
     const detail = document.getElementById("detail")
+
+    const tienMat = document.getElementById("tien-mat")
+    const chuyenKhoan = document.getElementById("chuyen-khoan")
+
 
     let customers = []
 
@@ -173,12 +179,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const handleValidateReserve = () => {
-        if (!validation.some(v => v === false)) {
+        if (!validation.some(v => v === false) && (tienMat.checked || chuyenKhoan.checked)) {
             btnReserve.disabled = false
         } else {
             btnReserve.disabled = true
         }
+
+        if (parseInt(quantityLeft.innerText) === 0) {
+            btnReserve.disabled = true
+        }
+        console.log("quantityLeft >>> ", quantityLeft.innerText)
     }
+
+    const validateAutoFiled = () => {
+        if (nameInf.value !== "") {
+            validation[0] = true
+        }
+        if (phoneNumber.value !== "") {
+            validation[1] = true
+        }
+        if (email.value !== "") {
+            validation[2] = true
+        }
+
+        if (address.value !== "") {
+            validation[3] = true
+        }
+        handleValidateReserve()
+    }
+
+    validateAutoFiled()
 
 
     minusAdult.addEventListener("click", function () {
@@ -249,6 +279,22 @@ document.addEventListener('DOMContentLoaded', function () {
         handleValidateReserve()
     });
 
+    tienMat.addEventListener('change', function () {
+       console.log("tien mat >>> ", tienMat.checked)
+        if (tienMat.checked) {
+            chuyenKhoan.checked = false
+        }
+        handleValidateReserve()
+    })
+
+    chuyenKhoan.addEventListener('change', function () {
+        console.log("chuyen khoan >>> ", chuyenKhoan.checked)
+        if (chuyenKhoan.checked) {
+            tienMat.checked = false
+        }
+        handleValidateReserve()
+    })
+
 
     const nameCusElements = document.querySelectorAll(".name-cus");
     const birthdayCusElements = document.querySelectorAll(".birthday-cus");
@@ -316,19 +362,32 @@ document.addEventListener('DOMContentLoaded', function () {
             listCus.push(customer)
         });
 
+        let data;
 
-
-
-        const data = {
-            tourScheduleId: handleTourScheduleId(),
-            reserveDetail:detail.value,
-            customerName:nameInf.value,
-            phoneNumber : phoneNumber.value,
-            email : email.value,
-            address: address.value,
-            customers:listCus
+        if ( tienMat.checked) {
+             data = {
+                tourScheduleId: handleTourScheduleId(),
+                reserveDetail:detail.value,
+                customerName:nameInf.value,
+                phoneNumber : phoneNumber.value,
+                email : email.value,
+                address: address.value,
+                customers:listCus,
+                pay:"tienMat"
+            }
+        }  else if (chuyenKhoan.checked) {
+            data = {
+                tourScheduleId: handleTourScheduleId(),
+                reserveDetail:detail.value,
+                customerName:nameInf.value,
+                phoneNumber : phoneNumber.value,
+                email : email.value,
+                address: address.value,
+                customers:listCus,
+                pay:"chuyenKhoan"
+            }
         }
-        console.log("data >>> ", data)
+
 
         const res = await  fetch("/api/client/reserve", {
             method: "POST",
@@ -339,15 +398,43 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify(data)
         })
         const dataRes = await res.json();
+        console.log("dataRes", dataRes)
         if(dataRes.code === 200 ) {
+
+            if (chuyenKhoan.checked) {
+                const data = {
+                    tourScheduleId: handleTourScheduleId(),
+                    reserveId:dataRes.reserveId,
+                    reserveDetail:detail.value,
+                    customerName:nameInf.value,
+                    phoneNumber : phoneNumber.value,
+                    email : email.value,
+                    address: address.value,
+                    customers:listCus
+                }
+
+                const res = await  fetch("/api/payment/create_payment", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                const dataRes1 = await res.json();
+                 window.location.href = `/confirm_info/${dataRes1.reserveId}`
+
+
+            } else if (tienMat.checked) {
+                window.location.href = `/confirm_info/${dataRes.reserveId}`
+            }
 
         } else if (dataRes.code === 201) {
 
             errorNotify("Chuyến đi đã hết chổ")
 
-            console.log("Đã vào")
+
         }
-        console.log("dataRes >>> ", dataRes)
+
 
     })
 

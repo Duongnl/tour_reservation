@@ -1,0 +1,238 @@
+<!-- /*
+* Template Name: Tour
+* Template Author: Untree.co
+* Tempalte URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap4" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Serif+Pro:wght@400;700&display=swap"
+            rel="stylesheet">
+
+
+    <link th:href="@{/client/css/bootstrap.min.css}" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="client/css/owl.carousel.min.css"> -->
+    <link th:href="@{/client/css/owl.carousel.min.css}" rel="stylesheet" />
+
+
+    <!-- <link rel="stylesheet" href="client/css/owl.theme.default.min.css"> -->
+    <link th:href="@{/client/css/owl.theme.default.min.css}" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="client/css/jquery.fancybox.min.css"> -->
+    <link th:href="@{/client/css/jquery.fancybox.min.css}" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="client/fonts/flaticon/font/flaticon.css"> -->
+    <link th:href="@{/client/fonts/flaticon/font/flaticon.css}" rel="stylesheet" />
+
+    <!-- Fonts and icons -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/webfont/webfont.min.js}"></script>
+    <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="client/css/daterangepicker.css"> -->
+    <link th:href="@{/client/css/daterangepicker.css}" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="client/css/aos.css"> -->
+    <link th:href="@{/client/css/aos.css}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="client/fonts/icomoon/style.css">
+    <link th:href="@{/client/fonts/icomoon/style.css}" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="client/css/style.css"> -->
+    <link th:href="@{/client/css/style.css}" rel="stylesheet" />
+
+    <link th:href="@{/client/css/confirm_info.css}" rel="stylesheet" />
+
+
+    <style>
+        .hero {
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+    </style>
+
+
+
+    <title>Tour Free Bootstrap Template for Travel Agency by Untree.co</title>
+</head>
+
+<body>
+
+<div th:replace="/client/layout/header.html :: header_nav"></div>
+
+<div class="hero">
+
+</div>
+
+
+<div class="container">
+    <div class="row p-2 m-3">
+        <div class="col-12 col-sm-6 col-md-4 p-2 col-step">
+            <div class="item-step">
+                <i class="fa fa-receipt item-icon"></i>
+                <p class="font-weight-bold">NHẬP THÔNG TIN</p>
+            </div>
+            <i class="fa fa-arrow-right"></i>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 p-2 col-step">
+            <div class="item-step">
+                <i class="fa fa-credit-card item-icon"></i>
+                <p class="font-weight-bold">THANH TOÁN</p>
+            </div>
+            <i class="fa fa-arrow-right"></i>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 p-2 col-step">
+            <div class="item-step">
+                <i class="fa fa-clipboard-check item-icon"></i>
+                <p class="font-weight-bold">HOÀN TẤT</p>
+            </div>
+        </div>
+    </div>
+
+    <form>
+    <p class="inf-title mt-4">Thông tin liên hệ</p>
+    <div class="row p-2 m-3 badge-light rounded-20">
+        <div>
+            <p class="text-color"> Họ tên: <span class="text-bold-color" th:if="${reserve.customer.customerName!= null}" th:text="${reserve.customer.customerName}" ></span></p>
+            <p class="text-color"> Số điện thoại: <span class="text-bold-color"  th:if="${reserve.customer.phoneNumber != null}"  th:text="${reserve.customer.phoneNumber}"></span></p>
+            <p class="text-color"> Địa chỉ: <span class="text-bold-color" th:if="${reserve.customer.address != null}"   th:text="${reserve.customer.address}" ></span></p>
+            <p class="text-color"> Email: <span class="text-bold-color"  th:if="${reserve.customer.email != null}"  th:text="${reserve.customer.email}"></span></p>
+        </div>
+    </div>
+
+    <p class="inf-title mt-4">Chi tiết booking</p>
+    <div class="row p-2 m-3 badge-light rounded-20">
+        <div>
+            <p class="text-color"> Tên tour: <span class="text-bold-color" th:if="${reserve.tourSchedule.tour.tourName != null}"   th:text="${reserve.tourSchedule.tour.tourName}"></span></p>
+            <p class="text-color"> Điểm đến: <span class="text-bold-color" th:if="${reserve.tourSchedule.tour.country != null}"   th:text="${reserve.tourSchedule.tour.country}" ></span></p>
+            <p class="text-color"> Nơi khởi hành: <span class="text-bold-color" th:if="${reserve.tourSchedule.tour.departureLocation != null}"   th:text="${reserve.tourSchedule.tour.departureLocation}" ></span></p>
+            <p class="text-color"> Khởi hành: <span class="text-bold-color" th:if="${reserve.tourSchedule.departureDate != null}"   th:text="${reserve.tourSchedule.departureDate}"  ></span></p>
+            <p class="text-color"> Ngày tạo: <span class="text-bold-color" th:if="${reserve.time != null}"   th:text="${reserve.time}"  ></span></p>
+            <p class="text-color"> Trạng thái thanh toán: <span class="text-bold-color"  style="color: red" th:text="${reserve.status != 2 ? 'Chưa thanh toán' : 'Đã thanh toán'}"    ></span></p>
+            <p class="text-color"> Hình thức thanh toán: <span class="text-bold-color" th:text="${reserve.url == null ? 'Tiền mặt' : 'Chuyển khoản'}" > </span></p>
+            <p class="text-color"> Thời hạn thanh toán: <span class="text-bold-color" style="color: red"  th:text="${expire}"  ></span></p>
+
+            <a type="button" class="btn btn-danger"  th:if="${reserve.status == 3}" th:href="@{${reserve.url}}"
+            >Thanh toán ngay  </a>
+        </div>
+    </div>
+
+    <p class="inf-title mt-4">Thông tin hành khách</p>
+    <div class="row p-2 m-3 badge-light rounded-20">
+        <div style="width: 100%;">
+            <table class="table" style="width: 100%;">
+                <thead>
+                <tr>
+                    <th scope="col">Tên khách hàng</th>
+                    <th scope="col">Độ tuổi</th>
+                    <th scope="col">Ngày sinh</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Giá</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reserveDetail: ${reserve.reserveDetails}" >
+                    <td  th:if="${reserveDetail.customer.customerName != null}" th:text="${reserveDetail.customer.customerName}"></td>
+                    <td th:if="${reserveDetail.customer.customerType != null}"  th:text="${reserveDetail.customer.customerType == 'adult'? 'Người lớn' : 'Trẻ em' }" >/td>
+                    <td th:text="${ reserveDetail.customer.birthday == null ? 'Trống' : reserveDetail.customer.birthday}"></td>
+                    <td th:if="${reserveDetail.customer.sex != null}" th:text="${reserveDetail.customer.sex == 1 ? 'Nam' : 'Nữ' }">  </td>
+                    <td th:if="${reserveDetail.price!= null}"  th:text="${reserveDetail.price}" style="color: red; font-size: 17px; font-weight: bold" ></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="width: 100%;display: flex; justify-content: flex-end;">
+            <p style="color:red; font-size: 23px;  font-weight: bold"  th:if="${reserve.price != null}"  th:text="${reserve.price}" >  </p>
+        </div>
+    </div>
+    </form>
+
+</div>
+
+
+
+
+
+
+
+<div th:replace="/client/layout/footer.html :: footer_bottom"></div>
+
+<!-- <script src="client/js/jquery-3.4.1.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/jquery-3.4.1.min.js}"></script>
+
+<!-- <script src="client/js/popper.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/popper.min.js}"></script>
+
+<!-- <script src="client/js/bootstrap.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/bootstrap.min.js}"></script>
+
+<!-- <script src="client/js/owl.carousel.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/owl.carousel.min.js}"></script>
+
+<!-- <script src="client/js/jquery.animateNumber.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/jquery.animateNumber.min.js}"></script>
+
+<!-- <script src="client/js/jquery.waypoints.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/jquery.waypoints.min.js}"></script>
+
+<!-- <script src="client/js/jquery.fancybox.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/jquery.fancybox.min.js}"></script>
+
+<!-- <script src="client/js/aos.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/aos.js}"></script>
+
+<!-- <script src="client/js/moment.min.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/moment.min.js}"></script>
+
+<!-- <script src="client/js/daterangepicker.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/daterangepicker.js}"></script>
+
+
+<!-- <script src="client/js/typed.js"></script> -->
+<script type="text/javascript" th:src="@{/client/js/typed.js}"></script>
+
+<script th:inline="javascript">
+    $(function () {
+        var slides = $('.slides'),
+            images = slides.find('img');
+
+        images.each(function (i) {
+            $(this).attr('data-id', i + 1);
+        })
+
+        var typed = new Typed('.typed-words', {
+            strings: ["San Francisco.", " Paris.", " New Zealand.", " Maui.", " London."],
+            typeSpeed: 80,
+            backSpeed: 80,
+            backDelay: 4000,
+            startDelay: 1000,
+            loop: true,
+            showCursor: true,
+            preStringTyped: (arrayPos, self) => {
+                arrayPos++;
+                console.log(arrayPos);
+                $('.slides img').removeClass('active');
+                $('.slides img[data-id="' + arrayPos + '"]').addClass('active');
+            }
+
+        });
+    })
+</script>
+
+
+
+</body>
+
+</html>

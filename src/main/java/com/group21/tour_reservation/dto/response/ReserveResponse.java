@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class ReserveResponse {
     private Integer code;
     private String message;
+    private int reserveId;
 }

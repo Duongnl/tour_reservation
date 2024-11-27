@@ -1,0 +1,630 @@
+<!-- /*
+* Template Name: Tour
+* Template Author: Untree.co
+* Tempalte URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+
+    <meta name="description" content=""/>
+    <meta name="keywords" content="bootstrap, bootstrap4"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Serif+Pro:wght@400;700&display=swap"
+            rel="stylesheet">
+
+
+    <link th:href="@{/client/css/bootstrap.min.css}" rel="stylesheet"/>
+    <!-- <link rel="stylesheet" href="client/css/owl.carousel.min.css"> -->
+    <link th:href="@{/client/css/owl.carousel.min.css}" rel="stylesheet"/>
+
+
+    <!-- <link rel="stylesheet" href="client/css/owl.theme.default.min.css"> -->
+    <link th:href="@{/client/css/owl.theme.default.min.css}" rel="stylesheet"/>
+
+    <!-- <link rel="stylesheet" href="client/css/jquery.fancybox.min.css"> -->
+    <link th:href="@{/client/css/jquery.fancybox.min.css}" rel="stylesheet"/>
+
+    <!-- <link rel="stylesheet" href="client/fonts/flaticon/font/flaticon.css"> -->
+    <link th:href="@{/client/fonts/flaticon/font/flaticon.css}" rel="stylesheet"/>
+
+    <!-- Fonts and icons -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/webfont/webfont.min.js}"></script>
+    <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet"/>
+
+    <!-- <link rel="stylesheet" href="client/css/daterangepicker.css"> -->
+    <link th:href="@{/client/css/daterangepicker.css}" rel="stylesheet"/>
+
+    <!-- <link rel="stylesheet" href="client/css/aos.css"> -->
+    <link th:href="@{/client/css/aos.css}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="client/fonts/icomoon/style.css">
+    <link th:href="@{/client/fonts/icomoon/style.css}" rel="stylesheet"/>
+
+    <!-- <link rel="stylesheet" href="client/css/style.css"> -->
+    <link th:href="@{/client/css/style.css}" rel="stylesheet"/>
+
+    <link th:href="@{/client/css/tour-detail-page.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+        .hero {
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+    </style>
+
+
+    <title>Tour Free Bootstrap Template for Travel Agency by Untree.co</title>
+</head>
+
+<body>
+
+<div th:replace="/client/layout/header.html :: header_nav"></div>
+
+<div class="hero">
+
+</div>
+
+<div class="containe">
+    <div>
+        <p ></p>
+    </div>
+    <div class="tour_header_content">
+        <h2 class="tour_header_name" th:text="${tourDetail.tourName}"></h2>
+    </div>
+    <div class="tour_detail_content row">
+        <div class="tour_detail_content_left col-9">
+            <div class="image_gallery row">
+                <div class="image_gallery_thumbnails col-3">
+                    <div class="image_phu" th:each="image : ${tourDetail.images}" th:if="${image.status == 0}">
+                        <img class="img-thumbnail" onclick="openImage(this)"
+                            th:src="${image.url}"
+                            alt="">
+                    </div>
+                    <div class="image_phu" th:each="image : ${tourDetail.images}" th:if="${image.status == 1}">
+                        <img class="img-thumbnail" onclick="openImage(this)"
+                            th:src="${image.url}"
+                            alt="">
+                    </div>
+                    <div class="image_phu" th:each="image : ${tourDetail.images}" th:if="${image.status == 1}">
+                        <img class="img-thumbnail" onclick="openImage(this)"
+                            th:src="${image.url}"
+                            alt="">
+                    </div>
+                </div>
+                <div class="image_gallery_main col-9">
+                    <div class="image_chinh" th:each="image : ${tourDetail.images}" th:if="${image.status == 1}">
+                        <img class="img-thumbnail" onclick="openImage(this)"
+                        th:src="${image.url}" alt="">
+                    </div>
+                </div>
+                <div id="imageModal" class="modal" onclick="closeImage()">
+                    <span class="close" onclick="closeImage()">&times;</span>
+                    <img class="modal-content" id="modalImage">
+                </div>
+            </div>
+            <div class="container-fluid tour_info mb-4">
+                <h3 class="tour_info-p">Lịch khởi hành</h3>
+                <div class=" mt-5">
+                    <div class="row calendar-container">
+                        <!-- Sidebar -->
+                        <div class="col-lg-2 col-md-3 col-12 calendar-sidebar">
+                            <p>Chọn tháng</p>
+                            <button onclick="showCalendar(11)" class="calendar-btn active">11/2024</button>
+                            <button onclick="showCalendar(12)" class="calendar-btn">12/2024</button>
+                            <button onclick="showCalendar(1)" class="calendar-btn">1/2025</button>
+                            <button onclick="showCalendar(2)" class="calendar-btn">2/2025</button>
+                            <button onclick="showCalendar(3)" class="calendar-btn">3/2025</button>
+                            <button onclick="showCalendar(4)" class="calendar-btn">4/2025</button>
+                            <button onclick="showCalendar(5)" class="calendar-btn">5/2025</button>
+                            <button onclick="showCalendar(6)" class="calendar-btn">6/2025</button>
+                            <button onclick="showCalendar(7)" class="calendar-btn">7/2025</button>
+                        </div>
+                        <!-- Main Calendar -->
+                        <div class="col-lg-10 col-md-9 col-12 calendar-main">
+                            <h3 id="calendar-title" class="text-center">Tháng 11/2024</h3>
+                            <div class="calendar-grid">
+                                <!-- Lưới ngày sẽ được render bởi JavaScript -->
+                            </div>
+                            <p class="calendar-note text-center mt-3">Quý khách vui lòng chọn ngày phù hợp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tour_detail_content_right col-3">
+            <div class="tour_detail_content_right_booking mb-4">
+                <div class="border-shadow">
+                    <div class="tour_price">
+                        <h2 class="tour_header_name mb-3">Địa điểm : <span th:text="${tourDetail.tourName}"></span></h2>
+                        <h4 class="old_price">Giá từ</h4>
+                        <div class="price">
+                            <p class="price_number" th:text="${minPrice}"></p>
+                        </div>
+                        <div class="tour_transport">
+                            <div class="mb-3 tour_transport_detail">
+                                <i class="fa-solid fa-car-side"></i>
+                                <span class="transport_di_chuyen">Di chuyển :</span>
+                                <span class="transport_di_chuyen_phuong_tien">Di chuyển bằng ô tô </span>
+                            </div>
+                            <div class="mb-3 tour_transport_detail">
+                                <i class="fa-solid fa-plane"></i>
+                                <span class="transport_di_chuyen">Di chuyển : </span>
+                                <span class="transport_di_chuyen_phuong_tien">Di chuyển bằng máy bay</span>
+                            </div>
+                            <div class="tour_time mb-3 tour_transport_detail">
+                                <i class="fa-solid fa-clock"></i>
+                                <span class="tour_time_time">Thời gian :</span>
+                                <span class="tour_time_day">6 ngày 5 đêm</span>
+                            </div>
+                        </div>
+
+                        <div class="tour_mota mb-4">
+                            <p>
+                                - Hành trình đặc sắc khám phá nước Ý lãng mạn, tìm hiểu cuộc sống thanh bình và con
+                                người nơi đây
+                            </p>
+                            <p>
+                                - Thưởng ngoạn các danh lam thắng cảnh, chiêm ngưỡng các công trình kiến trúc, các
+                                chứng tích lịch sử cổ kính, những kiệt tác của các hoạ sỹ thiên tài…
+                            </p>
+                            <p>
+                                - Đặc biệt, khám phá một Vatican nhỏ bé nhưng đầy bí ẩn trong lòng Rome !
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tour_btn_chon_ngay_khoi_hanh" >
+                        <button class="btn_chon_ngay_khoi_hanh btn btn-primary" id="tour_btn_chon_ngay_khoi_hanh">
+                            <i class="fa-solid fa-calendar-days icon_calender"></i>
+                            <span class="p_chon_ngay_khoi_hanh">Chọn ngày khởi hành</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="tour_detail_content_right_btn_other">
+                <div class="border-shadow">
+                    <div class="btn_chuong_trinh_tour">
+                        <button id="btn_thong_tin_them">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            THÔNG TIN THÊM
+                        </button>
+                    </div>
+                    <div class="btn_quy_dinh_tour" id="btn_quy_dinh_tour">
+                        <button>
+                            <i class="fa-solid fa-window-restore"></i>
+                            THÔNG TIN CẦN LƯU Ý
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tour_thong_tin_them" id="tour_thong_tin_them">
+            <h1 class="tour_luuY_p">Thông tin thêm về chuyến đi
+            </h1>
+            <div class="row">
+                <div class="col-4">
+                    <p><i class="fa-solid fa-map-location-dot"></i></p>
+                    <div class="tour_thong_tin_them_local">
+                        <h3>Điểm tham quan</h3>
+                        <p th:text="${tourDetail.tourName}"></p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <p><i class="fa-solid fa-utensils"></i></p>
+                    <div class="tour_thong_tin_them_local">
+                        <h3>Ẩm thực</h3>
+                        <p>Buffet sáng, Theo thực đơn</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <p><i class="fa-solid fa-people-roof"></i></p>
+                    <div class="tour_thong_tin_them_local">
+                        <h3>Đối tượng thích hợp
+                        </h3>
+                        <p>Cặp đôi, Gia đình nhiều thế hệ, Thanh niên</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <p><i class="fa-solid fa-clock"></i></p>
+                    <div class="tour_thong_tin_them_local">
+                        <h3>Thời gian lý tưởng</h3>
+                        <p>Quanh năm</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <p><i class="fa-solid fa-car-on"></i></p>
+                    <div class="tour_thong_tin_them_local">
+                        <h3>Phương tiện</h3>
+                        <p>Máy bay, Xe du lịch</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <p><i class="fa-solid fa-percent"></i></p>
+                    <div class="tour_thong_tin_them_local">
+                        <h3>Khuyến mãi</h3>
+                        <p>Đã bao gồm trong giá tour</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tour_thong_tin_luu_y" id="tour_thong_tin_luu_y">
+            <h1 class="tour_luuY_p tour_nhung_thongTin">Những thông tin cần lưu ý
+            </h1>
+            <div class="content tour_luuY mb-4">
+                <ul>
+                    <li>
+                        <div class="item_luu_y">
+                            <button class="collapsible">Lưu ý về chuyền và hủy tour <i
+                                    class="fa-solid fa-chevron-down tour_thong_tin_them_icon_toggle"></i></button>
+                            <div class="inner_luu_y">
+                                <p>- Sau khi đóng tiền, nếu Quý khách muốn chuyển/huỷ tour xin vui lòng mang Vé Du
+                                    Lịch đến văn phòng đăng ký tour để làm thủ tục chuyển/huỷ tour và chịu mất phí
+                                    theo quy định của Vietravel. Không giải quyết các trường hợp liên hệ chuyển/huỷ
+                                    tour qua điện thoại.
+    
+                                </p>
+                                <p>- Thời gian hủy chuyến du lịch được tính cho ngày làm việc, không tính thứ 7, Chủ
+                                    Nhật và các ngày Lễ, Tết.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item_luu_y">
+                            <button class="collapsible ">Trường hợp bất khả kháng <i
+                                    class="fa-solid fa-chevron-down tour_thong_tin_them_icon_toggle"></i></button>
+                            <div class="inner_luu_y">
+                                <p>Nếu chương trình du lịch bị hủy bỏ hoặc thay đổi bởi một trong hai bên vì lý do
+                                    bất khả kháng (hỏa hoạn, thời tiết, tai nạn, thiên tai, chiến tranh, dịch bệnh,
+                                    hoãn, dời, và hủy chuyến hoặc thay đổi khác của các phương tiện vận chuyển công
+                                    cộng hoặc các sự việc bất khả kháng khác theo quy định pháp luật…), thì hai bên
+                                    sẽ không chịu bất kỳ nghĩa vụ bồi hoàn các tổn thất đã xảy ra và không chịu bất
+                                    kỳ trách nhiệm pháp lý nào. Tuy nhiên mỗi bên có trách nhiệm cố gắng tối đa để
+                                    giúp đỡ bên bị thiệt hại nhằm giảm thiểu các tổn thất gây ra vì lý do bất khả
+                                    kháng.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item_luu_y">
+                            <button class="collapsible">Điều kiện thanh toán <i
+                                    class="fa-solid fa-chevron-down tour_thong_tin_them_icon_toggle"></i></button>
+                            <div class="inner_luu_y">
+                                <p>- Khi đăng ký đặt cọc 50% số tiền tour </p>
+                                <p>- Số tiền còn lại thanh toán hết trước ngày khởi hành 7-10 ngày (áp dụng tour
+                                    ngày thường), trước ngày khởi hành 20-25 ngày (áp dụng tour lễ tết)</p>
+    
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="item_luu_y">
+                            <button class="collapsible">Giá tour không bao gồm <i
+                                    class="fa-solid fa-chevron-down icon_down tour_thong_tin_them_icon_toggle"></i></button>
+                            <div class="inner_luu_y">
+                                <p>- Chi phí cá nhân: ăn uống ngoài chương trình, giặt ủi, chi phí hủy đổi hành
+                                    trình và nâng hạng chuyến bay, hành lý quá cước, phụ thu phòng đơn,…
+    
+                                </p>
+                                <p>- Chi phí tham quan ngoài chương trình</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item_luu_y">
+                            <button class="collapsible">Các điều kiện hủy tour <i
+                                    class="fa-solid fa-chevron-down tour_thong_tin_them_icon_toggle"></i></button>
+                            <div class="inner_luu_y">
+                                <p>- Được chuyển sang các tuyến du lịch khác trước ngày khởi hành 30 ngày : Không
+                                    mất chi phí.
+                                </p>
+                                <p>
+                                    - Nếu hủy hoặc chuyển sang các chuyến du lịch khác ngay sau khi đăng ký từ 25-29
+                                    ngày trước ngày khởi hành: Chi phí hủy tour: 50% tiền cọc tour.
+                                </p>
+                                <p> - Nếu hủy hoặc chuyển sang các chuyến du lịch khác từ 20-24 ngày trước ngày khởi
+                                    hành: Chi phí hủy tour: 100% tiền cọc tour.
+                                </p>
+                                <p>
+                                    - Nếu hủy chuyến du lịch trong vòng từ 17-19 ngày trước ngày khởi hành: Chi phí
+                                    hủy tour: 50% trên giá tour du lịch.
+                                </p>
+                                <p>
+                                    - Nếu hủy chuyến du lịch trong vòng từ 08-16 ngày trước ngày khởi hành: Chi phí
+                                    hủy tour: 70% trên giá tour du lịch.
+                                </p>
+                                <p>
+                                    - Nếu hủy chuyến du lịch trong vòng từ 02-07 ngày trước ngày khởi hành: Chi phí
+                                    hủy tour: 90% trên giá vé du lịch.
+                                </p>
+                                <p> - Nếu hủy chuyến du lịch trong vòng 1 ngày trước ngày khởi hành : Chi phí hủy
+                                    tour: 100% trên giá vé du lịch.
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item_luu_y">
+                            <button class="collapsible">Liên hệ <i
+                                    class="fa-solid fa-chevron-down tour_thong_tin_them_icon_toggle"></i></button>
+                            <div class="inner_luu_y">
+                                <p>VIETRAVEL KÍNH CHÚC QUÝ KHÁCH MỘT CHUYẾN DU LỊCH VUI VẺ!</p>
+                                <p>Mọi chi tiết vui lòng liên hệ</p>
+                                <p> KHỐI KHÁCH LẺ - DU LỊCH TRONG NƯỚC</p>
+                                <p>190 PASTEUR, PHƯỜNG VÕ THỊ SÁU, QUẬN 3, TP.HCM</p>
+                                <p>Điện thoại: 028 3822 8898</p>
+                                <p>Hotline: 1900.1839</p>
+    
+    
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tour_other_tour">
+            <h1 class="tour_luuY_p">Các tour du lịch khác</h1>
+        </div>
+
+
+
+        
+        <div class="" th:each="scheduleData : ${scheduleData}" >
+                <p class="scheduleData" th:text="${scheduleData}"></P>
+        </div>
+    </div>
+
+
+    <div th:replace="/client/layout/footer.html :: footer_bottom"></div>
+
+    <!-- <script src="client/js/jquery-3.4.1.min.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/jquery-3.4.1.min.js}"></script>
+
+    <!-- <script src="client/js/popper.min.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/popper.min.js}"></script>
+
+    <!-- <script src="client/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/bootstrap.min.js}"></script>
+
+    <!-- <script src="client/js/owl.carousel.min.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/owl.carousel.min.js}"></script>
+
+    <!-- <script src="client/js/jquery.animateNumber.min.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/jquery.animateNumber.min.js}"></script>
+
+    <!-- <script src="client/js/jquery.waypoints.min.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/jquery.waypoints.min.js}"></script>
+
+    <!-- <script src="client/js/jquery.fancybox.min.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/jquery.fancybox.min.js}"></script>
+
+    <!-- <script src="client/js/aos.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/aos.js}"></script>
+
+    <!-- <script src="client/js/moment.min.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/moment.min.js}"></script>
+
+    <!-- <script src="client/js/daterangepicker.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/daterangepicker.js}"></script>
+
+
+    <!-- <script src="client/js/typed.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/typed.js}"></script>
+
+    <script th:inline="javascript">
+        $(function () {
+            var slides = $('.slides'),
+                images = slides.find('img');
+
+            images.each(function (i) {
+                $(this).attr('data-id', i + 1);
+            })
+
+            var typed = new Typed('.typed-words', {
+                strings: ["San Francisco.", " Paris.", " New Zealand.", " Maui.", " London."],
+                typeSpeed: 80,
+                backSpeed: 80,
+                backDelay: 4000,
+                startDelay: 1000,
+                loop: true,
+                showCursor: true,
+                preStringTyped: (arrayPos, self) => {
+                    arrayPos++;
+                    console.log(arrayPos);
+                    $('.slides img').removeClass('active');
+                    $('.slides img[data-id="' + arrayPos + '"]').addClass('active');
+                }
+
+            });
+        })
+    </script>
+
+    <!-- <script src="client/js/custom.js"></script> -->
+    <script type="text/javascript" th:src="@{/client/js/custom.js}"></script>
+
+    <!-- script tự viết-->
+    <script>
+
+        function openImage(element) {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+            modal.style.display = "flex";
+            modalImg.src = element.src;
+        }
+
+        function closeImage() {
+            var modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
+
+    </script>
+    <script>
+        const tourSchedules = [];
+        const scheduleElements = document.querySelectorAll('.scheduleData');
+        scheduleElements.forEach(element => {
+            const data = element.innerHTML.trim();  // Lấy dữ liệu từ innerHTML và loại bỏ khoảng trắng thừa
+        
+            // Sử dụng biểu thức chính quy để tách các giá trị date, price, và scheduleId
+            const regex = /date=(\d{4}-\d{2}-\d{2}), price=(\d+), scheduleId=(\d+)/;
+            const match = data.match(regex);
+        
+            if (match) {
+                // Tạo đối tượng schedule và thêm vào mảng tourSchedules
+                const schedule = {
+                    date: match[1],  // match[1] là giá trị của date
+                    price: match[2], // match[2] là giá trị của price
+                    scheduleId: match[3] // match[3] là giá trị của scheduleId
+                };
+                tourSchedules.push(schedule);
+            }
+        });
+        const monthsData = {
+            11: { year: 2024, month: 11 },
+            12: { year: 2024, month: 12 },
+            1: { year: 2025, month: 1 },
+            2: { year: 2025, month: 2 },
+            3: { year: 2025, month: 3 },
+            4: { year: 2025, month: 4 },
+            5: { year: 2025, month: 5 },
+            6: { year: 2025, month: 6 },
+            7: { year: 2025, month: 7 },
+
+        };
+          
+        function showCalendar(month) {
+        const { year, month: selectedMonth } = monthsData[month];
+        const calendarTitle = document.getElementById('calendar-title');
+        const calendarGrid = document.querySelector('.calendar-grid');
+
+        // Tiêu đề tháng
+        const monthName = new Date(year, selectedMonth - 1).toLocaleString('default', { month: 'long', year: 'numeric' });
+        calendarTitle.textContent = `Tháng ${selectedMonth}/${year}`;
+
+        // Lấy thông tin ngày
+        const firstDayOfMonth = new Date(year, selectedMonth - 1, 1);
+        const totalDays = new Date(year, selectedMonth, 0).getDate();
+        const emptyDaysBefore = (firstDayOfMonth.getDay() + 6) % 7; // Điều chỉnh bắt đầu từ Thứ 2
+
+        let calendarHTML = '';
+
+        // Hàng tiêu đề các thứ trong tuần
+        const weekDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
+        weekDays.forEach(day => {
+            calendarHTML += `<div class="calendar-day header">${day}</div>`;
+        });
+
+        // Các ô trống trước ngày 1
+        for (let i = 0; i < emptyDaysBefore; i++) {
+            calendarHTML += `<div class="calendar-day empty"></div>`;
+        }
+
+        // Các ngày trong tháng
+        for (let i = 1; i <= totalDays; i++) {
+            // Tạo chuỗi ngày theo định dạng yyyy-MM-dd
+            const currentDate = `${year}-${String(selectedMonth).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+
+            // Tìm dữ liệu giá từ tourSchedules
+            const schedule = tourSchedules.find(t => t.date === currentDate);
+
+            if (schedule) {
+                // Nếu có lịch, hiển thị giá
+                calendarHTML += `
+                <button class="price_schedule_button" onclick="window.location.href='/reserve/${schedule.scheduleId}'">
+                    <div class="calendar-day available">
+                        <span class="date">${i}</span>
+                        <p class="price_schedule">${schedule.price}K</p>
+                    </div>
+                </button>`;
+                    
+            } else {
+                // Nếu không có lịch, chỉ hiển thị ngày
+                calendarHTML += `<div class="calendar-day">${i}</div>`;
+            }
+            }
+
+            // Render lịch
+            calendarGrid.innerHTML = calendarHTML;
+
+            // Cập nhật trạng thái active
+            document.querySelectorAll('.calendar-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.calendar-btn[onclick="showCalendar(${month})"]`).classList.add('active');
+        }
+
+        // Hiển thị lịch mặc định (tháng 11)
+        window.onload = function () {
+            showCalendar(11);
+        };
+    </script>
+    <script>
+        document.querySelectorAll('.collapsible').forEach((button) => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+
+                // Đóng tất cả các accordion khác
+                document.querySelectorAll('.collapsible').forEach((btn) => {
+                    if (btn !== button) {
+                        btn.classList.remove('open');
+                        const otherContent = btn.nextElementSibling;
+                        if (otherContent) {
+                            otherContent.classList.remove('show');
+                            otherContent.style.maxHeight = null;
+                        }
+                    }
+                });
+
+                // Mở/đóng accordion hiện tại
+                button.classList.toggle('open');
+                if (content.classList.contains('show')) {
+                    content.classList.remove('show');
+                    content.style.maxHeight = null;
+                } else {
+                    content.classList.add('show');
+                    content.style.maxHeight = content.scrollHeight + 'px'; // Tự động điều chỉnh chiều cao
+                }
+                // Đổi biểu tượng
+                const icon = this.querySelector('.tour_thong_tin_them_icon_toggle');
+                if (icon) {
+                    if (this.classList.contains('active')) {
+                        icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+                    } else {
+                        icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        document.getElementById("btn_thong_tin_them").addEventListener("click", function () {
+            const tourScroll = document.querySelector(".tour_thong_tin_them");
+            if (tourScroll) {
+                tourScroll.scrollIntoView({ behavior: "smooth" });
+            }
+        });
+        
+        document.getElementById("tour_btn_chon_ngay_khoi_hanh").addEventListener("click", function () {
+            const tourScroll = document.querySelector(".tour_info");
+            if (tourScroll) {
+                tourScroll.scrollIntoView({ behavior: "smooth" });
+            }
+        });
+        document.getElementById("btn_quy_dinh_tour").addEventListener("click", function () {
+            const tourScroll = document.querySelector(".tour_thong_tin_luu_y");
+            if (tourScroll) {
+                tourScroll.scrollIntoView({ behavior: "smooth" });
+            }
+        });
+    </script>
+</body>
+
+</html>

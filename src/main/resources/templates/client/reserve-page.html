@@ -111,7 +111,7 @@
                 <p class="text-color"> Điểm đến: <span class="text-bold-color" th:text="${tourReserveResponse.country}" ></span></p>
                 <p class="text-color"> Nơi khởi hành: <span class="text-bold-color" th:text="${tourReserveResponse.departureLocation}" ></span></p>
                 <p class="text-color"> Khởi hành: <span class="text-bold-color" th:text="${tourReserveResponse.departureDate}"></span></p>
-                <p class="text-color"> Số chổ còn nhận: <span class="text-bold-color" th:text="${tourReserveResponse.quantityLeft}"></span></p>
+                <p class="text-color"> Số chổ còn nhận: <span class="text-bold-color" id="quantity-left" th:text="${tourReserveResponse.quantityLeft}"></span></p>
             </div>
         </div>
     </div>
@@ -123,24 +123,36 @@
             <div class="input-inf">
                 <div class="form-group w-50 pr-4">
                     <label for="name-inf" class="text-bold-color">Họ tên</label>
-                    <input id="name-inf" type="email" class="form-control" aria-describedby="emailHelp">
+                    <input id="name-inf" type="text" class="form-control" aria-describedby="emailHelp"
+
+                           th:field="${tourReserveResponse.name}"
+                    >
                     <small id="name-inf-error" class="form-text ">Vui lòng điền tên</small>
                 </div>
                 <div class="form-group w-50 pr-4">
                     <label for="phone-number" class="text-bold-color">Số điện thoại</label>
-                    <input id="phone-number" type="number" class="form-control" aria-describedby="emailHelp">
+                    <input id="phone-number" type="number" class="form-control" aria-describedby="emailHelp"
+
+                           th:field="${tourReserveResponse.phone}"
+                    >
                     <small id="phone-number-error" class="form-text ">Vui lòng điền số điện thoại</small>
                 </div>
             </div>
             <div class="input-inf">
                 <div class="form-group w-50 pr-4">
                     <label for="email" class="text-bold-color">Email</label>
-                    <input id="email" type="email" class="form-control" aria-describedby="emailHelp">
+                    <input id="email" type="email" class="form-control" aria-describedby="emailHelp"
+
+                           th:field="${tourReserveResponse.email}"
+                    >
                     <small id="email-error" class="form-text">Vui lòng điền email</small>
                 </div>
                 <div class="form-group w-50 pr-4">
                     <label for="address" class="text-bold-color">Địa chỉ</label>
-                    <input id="address" type="email" class="form-control" aria-describedby="emailHelp">
+                    <input id="address" type="text" class="form-control" aria-describedby="emailHelp"
+
+                           th:field="${tourReserveResponse.address}"
+                    >
                     <small id="address-error" class="form-text ">Vui lòng điền địa chỉ</small>
                 </div>
             </div>
@@ -236,6 +248,27 @@
                 <textarea class="form-control" id="detail" rows="5"></textarea>
             </div>
 
+            <p class="inf-title mt-4">Hình thức thanh toán</p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input" id="tien-mat">
+                        <i style="margin-left: 20px" class="fa fa-money-bill"></i>
+                    </div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with checkbox" value=" Tiền mặt" disabled
+
+                >
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" id="chuyen-khoan" aria-label="Checkbox for following text input">
+                        <i style="margin-left: 20px" class="fa fa-money-check"></i>
+                    </div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with checkbox" value="Chuyển khoản" disabled>
+            </div>
 
         </div>
         <div class="col-12 col-sm-12 col-md-4 p-2 badge-light inf-detail"
@@ -291,9 +324,14 @@
 
                 </div>
             </div>
-            <button type="button" class="btn btn-danger" style="width: 100%"
-            id="reserve" disabled
-            >Đặt tour</button>
+
+
+                <input type="hidden" name="url" id="url">
+                <button type="button" class="btn btn-danger" style="width: 100%"
+                        id="reserve" disabled
+                >Đặt tour</button>
+
+
 
         </div>
     </div>

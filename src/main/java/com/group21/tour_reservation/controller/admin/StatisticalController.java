@@ -27,8 +27,9 @@ public class StatisticalController {
     @Autowired
     private StatisticalService statisticalService;
 
-    @GetMapping("/admin/statistical")
+    @GetMapping("/admin")
     public String index(Model model) {
+        reserveService.autoDestroyReserve();
         LocalDate today = LocalDate.now();
         int year = today.getYear();
         return "redirect:/admin/statistical-revenue/year/"+year;

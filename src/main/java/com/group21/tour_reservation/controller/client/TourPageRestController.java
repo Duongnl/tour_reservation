@@ -3,6 +3,7 @@ package com.group21.tour_reservation.controller.client;
 import com.group21.tour_reservation.dto.request.TourFilterRequest;
 import com.group21.tour_reservation.dto.response.CategorySelect2Response;
 import com.group21.tour_reservation.dto.response.TourCardResponse;
+import com.group21.tour_reservation.dto.response.TourPageResponse;
 import com.group21.tour_reservation.entity.Category;
 import com.group21.tour_reservation.entity.Tour;
 import com.group21.tour_reservation.service.CategoryService;
@@ -47,7 +48,7 @@ public class TourPageRestController {
     }
 
     @PostMapping("/api/client/filter-tour")
-    public List<TourCardResponse> FilterTours (@RequestBody TourFilterRequest tourFilterRequest) {
+    public TourPageResponse FilterTours (@RequestBody TourFilterRequest tourFilterRequest) {
         return tourService.filterTours(tourFilterRequest);
     }
 

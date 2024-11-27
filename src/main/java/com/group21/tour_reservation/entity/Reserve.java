@@ -25,6 +25,9 @@ public class Reserve {
     @Column(name = "reserve_detail")
     private String reserveDetail;
 
+    @Column(name = "url" ,columnDefinition = "text")
+    private String url;
+
     @Column(name = "adult_count")
     private int adultCount;
 
@@ -58,5 +61,10 @@ public class Reserve {
     @JoinColumn(name = "schedule_id", nullable = false, referencedColumnName = "schedule_id")
     @JsonBackReference
     private TourSchedule tourSchedule;
+
+    public static Reserve getReserve(String slug) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getReserve'");
+    }
 
 }

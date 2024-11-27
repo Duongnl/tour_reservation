@@ -1,6 +1,7 @@
 package com.group21.tour_reservation.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,7 +82,7 @@ public class PromotionController {
     public String GetTourShedule(Model model, @PathVariable("id") String promotionId) {
         // System.out.println("123");
         List<TourSchedule> schedules = promotionService.getAllShedules();
-        List<TourSchedule> promotionSchedule = promotionService.getAllSchedulesWithPromotions();
+        List<TourSchedule> promotionSchedule = promotionService.getSchedulesByPromotionId(promotionId);
         model.addAttribute("schedules", schedules);
         model.addAttribute("promotionchedule", promotionSchedule);
         model.addAttribute("promotionId", promotionId); // Thêm promotionId vào model
@@ -90,8 +91,16 @@ public class PromotionController {
     }
 
     @PostMapping("/admin/promotion/add-promotion-to-tour")
-    public String addPromotionTour(Model model, @RequestParam Integer promotionId, @RequestParam Integer scheduleId,
+    public String addPromotionTour(Model model,
+            @RequestParam Integer promotionId,
+            @RequestParam(value = "scheduleId", required = false) Integer scheduleId,
             RedirectAttributes redirectAttributes) {
+        if (scheduleId == null) {
+            // Nếu không có scheduleId, trả về thông báo lỗi
+            redirectAttributes.addFlashAttribute("errorMessage", "Vui lòng chọn lịch trình trước khi thêm khuyến mãi.");
+            return "redirect:/admin/promotion/add-promotion-to-tour/" + promotionId;
+        }
+
         try {
             promotionService.addPromotionToSchedule(promotionId, scheduleId);
             redirectAttributes.addFlashAttribute("successMessage", "Thêm khuyến mãi thành công!");
@@ -99,13 +108,21 @@ public class PromotionController {
             redirectAttributes.addFlashAttribute("errorMessage", "Lỗi khi thêm khuyến mãi!");
         }
 
-        return "redirect:/admin/promotion";
+        return "redirect:/admin/promotion/add-promotion-to-tour/" + promotionId;
     }
 
-    @PostMapping("/admin/promotion/add-promotion-to-tour/delete")
-    public String deletePromotionDetail(@RequestParam("promotionId") Integer promotionId,
-            @RequestParam("scheduleId") Integer scheduleId) {
-        promotionService.deletePromotionDetail(promotionId, scheduleId);
-        return "redirect:/admin/promotion";
+    @PostMapping("/admin/promotion/remove-promotion-schedule")
+    public String removePromotionSchedule(@RequestParam Integer promotionId,
+            @RequestParam Integer scheduleId,
+            RedirectAttributes redirectAttributes) {
+        try {
+            promotionService.removeScheduleFromPromotion(promotionId, scheduleId);
+            redirectAttributes.addFlashAttribute("successMessage",
+                    "Lịch trình đã được xóa khỏi khuyến mãi thành công!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Có lỗi xảy ra khi xóa lịch trình khỏi khuyến mãi!");
+        }
+        return "redirect:/admin/promotion/add-promotion-to-tour/" + promotionId;
     }
+
 }

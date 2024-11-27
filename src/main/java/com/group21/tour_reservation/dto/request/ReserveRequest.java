@@ -14,10 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 public class ReserveRequest {
     private int tourScheduleId;
+    private int reserveId;
     private String address;
     private String email;
     private String customerName;
     private String phoneNumber;
     private String reserveDetail;
+    private String pay;
     List<CusInfRequest> customers;
 }

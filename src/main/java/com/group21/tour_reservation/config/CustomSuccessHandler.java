@@ -49,18 +49,26 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             return;
         }
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-
         // Get email
         String username = authentication.getName();
         // Query User
         Account user = accountService.getAccountByUserName(username);
         if (user != null) {
-            session.setAttribute("fullName", user.getCustomer().getCustomerName());
+            if (user.getCustomer() != null) {
+                session.setAttribute("fullName", user.getCustomer().getCustomerName());
+            } else {
+                session.setAttribute("fullName", "");
+            } 
+            
+            if (user.getEmployee() != null ){
+                session.setAttribute("nameAdmin", user.getEmployee().getEmployeeName());
+            }else {
+                session.setAttribute("nameAdmin", "");
+            }
+            session.setAttribute("time", user.getTime());
             session.setAttribute("role", user.getRole());
             session.setAttribute("id", user.getAccountId());
             session.setAttribute("email", user.getEmail());
-            // int sum = user.getCart() == null ? 0 : user.getCart().getSum();
-            // session.setAttribute("sum", sum);
         }
     }
 
@@ -69,6 +77,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
+
         String targetUrl = determineTargetUrl(authentication);
         if (response.isCommitted()) {
 
@@ -77,5 +86,4 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         redirectStrategy.sendRedirect(request, response, targetUrl);
         clearAuthenticationAttributes(request, authentication);
     }
-
 }

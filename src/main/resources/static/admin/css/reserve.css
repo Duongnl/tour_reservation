@@ -1,0 +1,64 @@
+#btn_duyet{
+    color: blue;
+    border: 1px solid blue !important;
+    border-radius: 5px;
+}
+#btn_duyet:hover{
+    transition: all 0.5s;
+    color: white;
+    background-color: blue !important;
+}
+.btn_xoa{
+    color: red;
+    border: 1px solid red !important;
+    margin-left: 5px;
+    width: 77.77px;
+    text-decoration: none !important;
+    border-radius: 5px;
+
+}
+.btn_xoa:hover{
+    transition: all 0.5s;
+    color: white;
+    background-color: red !important;
+    text-decoration: none !important;
+    
+}
+.form-button-action{
+    display: flex;
+    justify-content: space-around;
+}
+.form-button-action button:hover{
+    text-decoration: none !important;
+}
+.form-button-action button{
+    text-decoration: none !important;
+
+}
+.p_duyet{
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    border-radius: 10px;
+    background-color: #28a745;
+    height: 50px;
+}
+.p_huy{
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    border-radius: 10px;
+    background-color: #dc3545;
+    height: 50px;
+}
+.p_cho_duyet{
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    color: black;
+    border-radius: 10px;
+    background-color: yellow;
+    height: 50px;
+}

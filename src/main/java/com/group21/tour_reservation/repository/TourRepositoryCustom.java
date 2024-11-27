@@ -17,7 +17,8 @@ public class TourRepositoryCustom {
     @Autowired
     private EntityManager entityManager;
 
-    public List<Tour> filterTourRepository(TourFilterRequest tourFilterRequest) {
+    public List<Tour> filterTourRepository(TourFilterRequest tourFilterRequest, boolean pagination) {
+
 
         StringBuilder sql = new StringBuilder("SELECT t FROM Tour t WHERE t.status = 1");
         if (tourFilterRequest.getDepartureDate() != null) {
@@ -37,6 +38,9 @@ public class TourRepositoryCustom {
             sql.append(" AND t.country LIKE :destinationLocation");
         }
 
+
+        
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         Query query = entityManager.createQuery(sql.toString(), Tour.class);
@@ -54,6 +58,18 @@ public class TourRepositoryCustom {
         if(tourFilterRequest.getDepartureDate() != null) {
             query.setParameter("departureDate", LocalDate.parse(tourFilterRequest.getDepartureDate(), formatter));
         }
+
+        if (pagination) {
+            int fromIndex = 0;
+
+            for (int i = 2; i <= tourFilterRequest.getPageCurrent(); i++) {
+                fromIndex += 6;
+            }
+            query.setFirstResult(fromIndex); // Tương đương OFFSET
+            query.setMaxResults(6);  // Tương đương LIMIT
+        }
+
+
 
         return query.getResultList();
     }

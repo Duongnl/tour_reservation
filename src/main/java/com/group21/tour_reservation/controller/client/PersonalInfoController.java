@@ -1,8 +1,13 @@
 package com.group21.tour_reservation.controller.client;
 
+import com.group21.tour_reservation.entity.Account;
 import com.group21.tour_reservation.entity.Category;
 import com.group21.tour_reservation.entity.Customer;
+import com.group21.tour_reservation.repository.EmployeeRepository;
+import com.group21.tour_reservation.service.AccountService;
 import com.group21.tour_reservation.service.CustomerService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +27,25 @@ import java.util.Date;
 public class PersonalInfoController {
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
         @GetMapping("/personal-info")
-    public String index(Model model) {
-        model.addAttribute("customer", customerService.getCustomer("2"));
+    public String index(Model model, HttpServletRequest request) {
+
+            HttpSession session = request.getSession(false);
+            Object idObj = session.getAttribute("id");
+            Account account = accountService.getAccount(String.valueOf(idObj));
+
+            if (account.getCustomer() != null) {
+                 model.addAttribute("customer", customerService.getCustomer(String.valueOf(account.getCustomer().getCustomerId())));
+            }
+
+
+
         return "client/customer/index.html";
     }
     @GetMapping("/personal-info/edit/{slug}")
