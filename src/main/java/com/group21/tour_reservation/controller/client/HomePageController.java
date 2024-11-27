@@ -110,7 +110,8 @@ public class HomePageController {
     }
 
     @GetMapping("/reserve/{slug}")
-    public String reserveView(Model model, @PathVariable("slug") String slug, HttpServletRequest request ) {
+    public String reserveView(Model model, @PathVariable("slug") String slug, HttpServletRequest request, @AuthenticationPrincipal OAuth2User user ) {
+
         TourReserveResponse tourReserveResponse = new TourReserveResponse();
         tourReserveResponse=   tourService.getTourReserveClient(slug);
 
@@ -125,11 +126,20 @@ public class HomePageController {
 
             int idValue = id;
             Account account = accountService.getAccount(String.valueOf(idValue));
-             Customer customer = customerService.getCustomerById(account.getCustomer().getCustomerId());
-            tourReserveResponse.setName(customer.getCustomerName());
-            tourReserveResponse.setAddress(customer.getAddress());
-            tourReserveResponse.setEmail(customer.getEmail());
-            tourReserveResponse.setPhone(customer.getPhoneNumber());
+            if (account.getCustomer() !=null) {
+                Customer customer = customerService.getCustomerById(account.getCustomer().getCustomerId());
+                tourReserveResponse.setName(customer.getCustomerName());
+                tourReserveResponse.setAddress(customer.getAddress());
+                tourReserveResponse.setEmail(customer.getEmail());
+                tourReserveResponse.setPhone(customer.getPhoneNumber());
+
+            }
+
+        } else
+        if ( user != null) {
+            model.addAttribute("name", user.getAttribute("name"));
+            tourReserveResponse.setName(user.getAttribute("name"));
+            tourReserveResponse.setEmail(user.getAttribute("email"));
         }
 
 
