@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface ReserveDetailRepository extends JpaRepository<Reserve, Integer> {
     List<ReserveDetail> findAllByStatus(int status);
+
+    List<ReserveDetail> findByReserveId(int reserveId);
 }

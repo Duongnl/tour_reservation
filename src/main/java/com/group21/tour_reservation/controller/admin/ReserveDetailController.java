@@ -28,7 +28,6 @@ public class ReserveDetailController {
     @GetMapping("/admin/reserve/reserve-detail/{slug}")
     public String reserveDetail(Model model, @PathVariable("slug") String slug) {
         Reserve rs = reserveService.getReserve(slug);
-
         model.addAttribute("reserveDetail", rs.getReserveDetails());
         return "admin/reserve/reserve-detail.html";
     }

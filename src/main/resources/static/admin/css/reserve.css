@@ -53,3 +53,12 @@
     background-color: #dc3545;
     height: 50px;
 }
+.p_cho_duyet{
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    color: black;
+    border-radius: 10px;
+    background-color: yellow;
+    height: 50px;
+}
