@@ -76,7 +76,12 @@ public class HomePageController {
 
     @GetMapping("/reserve/{slug}")
     public String reserveView(Model model, @PathVariable("slug") String slug, HttpServletRequest request ) {
-        TourReserveResponse tourReserveResponse = tourService.getTourReserveClient(slug);
+        TourReserveResponse tourReserveResponse = new TourReserveResponse();
+        tourReserveResponse=   tourService.getTourReserveClient(slug);
+
+        if (tourReserveResponse == null) {
+            return "admin/404.html";
+        }
 
         HttpSession session = request.getSession(false);
         Integer id = (Integer) session.getAttribute("id");
@@ -85,18 +90,23 @@ public class HomePageController {
 
             int idValue = id;
             Account account = accountService.getAccount(String.valueOf(idValue));
-           Customer customer = customerService.getCustomerById(account.getCustomer().getCustomerId());
+             Customer customer = customerService.getCustomerById(account.getCustomer().getCustomerId());
             tourReserveResponse.setName(customer.getCustomerName());
             tourReserveResponse.setAddress(customer.getAddress());
             tourReserveResponse.setEmail(customer.getEmail());
             tourReserveResponse.setPhone(customer.getPhoneNumber());
         }
-        if (tourReserveResponse == null) {
-            return "admin/404.html";
-        }
+
 
         model.addAttribute("tourReserveResponse", tourReserveResponse);
         return "client/reserve-page.html";
+    }
+
+    @GetMapping("/confirm_info/{slug}")
+    public String getHomePage(Model model, @PathVariable("slug") String slug) {
+
+
+        return "client/confirm_info.html";
     }
 
 

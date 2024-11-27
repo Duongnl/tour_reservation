@@ -44,6 +44,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const detail = document.getElementById("detail")
 
+    const tienMat = document.getElementById("tien-mat")
+    const chuyenKhoan = document.getElementById("chuyen-khoan")
+
+
     let customers = []
 
 
@@ -175,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const handleValidateReserve = () => {
-        if (!validation.some(v => v === false)) {
+        if (!validation.some(v => v === false) && (tienMat.checked || chuyenKhoan.checked)) {
             btnReserve.disabled = false
         } else {
             btnReserve.disabled = true
@@ -275,6 +279,22 @@ document.addEventListener('DOMContentLoaded', function () {
         handleValidateReserve()
     });
 
+    tienMat.addEventListener('change', function () {
+       console.log("tien mat >>> ", tienMat.checked)
+        if (tienMat.checked) {
+            chuyenKhoan.checked = false
+        }
+        handleValidateReserve()
+    })
+
+    chuyenKhoan.addEventListener('change', function () {
+        console.log("chuyen khoan >>> ", chuyenKhoan.checked)
+        if (chuyenKhoan.checked) {
+            tienMat.checked = false
+        }
+        handleValidateReserve()
+    })
+
 
     const nameCusElements = document.querySelectorAll(".name-cus");
     const birthdayCusElements = document.querySelectorAll(".birthday-cus");
@@ -354,7 +374,6 @@ document.addEventListener('DOMContentLoaded', function () {
             address: address.value,
             customers:listCus
         }
-        console.log("data >>> ", data)
 
         const res = await  fetch("/api/client/reserve", {
             method: "POST",
@@ -365,15 +384,40 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify(data)
         })
         const dataRes = await res.json();
+        console.log("dataRes", dataRes)
         if(dataRes.code === 200 ) {
+
+            if (chuyenKhoan.checked) {
+                const data = {
+                    tourScheduleId: handleTourScheduleId(),
+                    reserveId:dataRes.reserveId,
+                    reserveDetail:detail.value,
+                    customerName:nameInf.value,
+                    phoneNumber : phoneNumber.value,
+                    email : email.value,
+                    address: address.value,
+                    customers:listCus
+                }
+
+                const res = await  fetch("/api/payment/create_payment", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                const dataRes1 = await res.json();
+                window.location.href = dataRes1.url
+
+            }
 
         } else if (dataRes.code === 201) {
 
             errorNotify("Chuyến đi đã hết chổ")
 
-            console.log("Đã vào")
+
         }
-        console.log("dataRes >>> ", dataRes)
+
 
     })
 
