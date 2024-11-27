@@ -1,33 +1,25 @@
 package com.group21.tour_reservation.controller.client;
 
-import com.group21.tour_reservation.entity.Image;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.group21.tour_reservation.entity.Tour;
 import com.group21.tour_reservation.entity.TourSchedule;
-import com.group21.tour_reservation.entity.Transport;
-import com.group21.tour_reservation.entity.TransportDetail;
-import com.group21.tour_reservation.repository.ImgRepository;
-import com.group21.tour_reservation.repository.TourScheduleRepository;
-import com.group21.tour_reservation.repository.TransportRepository;
 import com.group21.tour_reservation.service.TourScheduleService;
 import com.group21.tour_reservation.service.TourService;
-import com.group21.tour_reservation.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TourDetailController {
 
     @Autowired
     TourScheduleService tourScheduleService;
-    @Autowired
-    private ImgRepository imgResponsitory;
     @Autowired
     private TourService tourService;
 
@@ -37,8 +29,36 @@ public class TourDetailController {
         if (tour == null) {
             return "admin/404.html";
         }
-        System.out.println(tour.getTourId());
+        int minPrice = -1;
+        List<Map<String, Object>> dataTourSchedules = new ArrayList<>();
+        for (TourSchedule tourSchedule : tour.getTourSchedules()) {
+            minPrice = tourService.minPriceSale(tourSchedule);
+        }
+        for (TourSchedule tourSchedule : tour.getTourSchedules()) {
+            Map<String, Object> scheduleData = new HashMap<>();
+            scheduleData.put("scheduleId", tourSchedule.getScheduleId());
+            scheduleData.put("date", tourSchedule.getDepartureDate());
+            scheduleData.put("price", tourService.minPriceSale(tourSchedule));
+            dataTourSchedules.add(scheduleData);
+            if (minPrice > tourService.minPriceSale(tourSchedule)) {
+                minPrice = tourService.minPriceSale(tourSchedule);
+            }
+        }
+        String minPriceString = minPrice+" đ / Khách";
+        System.out.println("DataTourSchedules: aaaaaaaaaaaaaaaaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        for (Map<String, Object> schedule : dataTourSchedules) {
+            System.out.println(schedule);
+        }
+        model.addAttribute("scheduleData", dataTourSchedules);
         model.addAttribute("tourDetail", tour);
+        model.addAttribute("minPrice", minPriceString);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String schedulesJson = objectMapper.writeValueAsString(dataTourSchedules);
+            model.addAttribute("schedulesJson", schedulesJson);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return "client/tour-detail-page.html";
     }
 
