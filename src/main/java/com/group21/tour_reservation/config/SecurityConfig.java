@@ -1,11 +1,9 @@
 package com.group21.tour_reservation.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -14,11 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
-
+import com.group21.tour_reservation.repository.AccountRepository;
 import com.group21.tour_reservation.service.AccountService;
 import com.group21.tour_reservation.service.CustomUserDetailsService;
 
@@ -27,6 +23,11 @@ import jakarta.servlet.DispatcherType;
 @Configuration
 @EnableMethodSecurity // Nếu bạn cần hỗ trợ @PreAuthorize, @Secured
 public class SecurityConfig {
+        @Autowired
+        private AccountRepository accountRepository;
+
+        @Autowired
+        private CustomerOAuth2UserService customerOAuth2UserService;
 
         @Bean
         public AuthenticationSuccessHandler customSuccessHandler() {
@@ -41,6 +42,11 @@ public class SecurityConfig {
         @Bean
         public UserDetailsService userDetailsService(AccountService userService) {
                 return new CustomUserDetailsService(userService);
+        }
+
+        @Bean
+        public HttpSessionSecurityContextRepository httpSessionSecurityContextRepository() {
+                return new HttpSessionSecurityContextRepository();
         }
 
         @Bean
@@ -72,17 +78,20 @@ public class SecurityConfig {
 
                                                 .requestMatchers("/", "/login", "/register", "/static/**",
                                                                 "/templates/**", "/client/**", "/css/**",
-                                                                "/js/**", "/images/**", "/api/check-username")
+                                                                "/js/**", "/images/**", "/api/check-username",
+                                                                "/logingoogle")
                                                 .permitAll()
 
                                                 .requestMatchers("/admin/**").hasRole("ADMIN")
 
                                                 .anyRequest().authenticated())
 
-                                // .oauth2Login(oauth2 -> oauth2
-                                // .loginPage("/login")
-                                // .defaultSuccessUrl("/", true))
-
+                                .oauth2Login(oauth2Login -> oauth2Login
+                                                .loginPage("/login")
+                                                .defaultSuccessUrl("/", true)
+                                                .userInfoEndpoint(userInfo -> userInfo
+                                                                .userService(customerOAuth2UserService)))
+                                
                                 .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
                                 .sessionManagement((sessionManagement) -> sessionManagement
                                                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
@@ -100,7 +109,6 @@ public class SecurityConfig {
                                 .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"))
                                 .csrf(csrf -> csrf.disable());
                 http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/check-username"));
-
                 return http.build();
         }
 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home</title>
+</head>
+
+<body>
+    <h1>Welcome Home</h1>
+    <div th:if="${name}">
+        <h2>Welcome, <span th:text="${attributes['name']}">Name</span>!</h2>
+        <p>Email: <span th:text="${attributes['email']}">Email</span></p>
+        <p>Facebook: <span th:text="${attributes['id']}">ID</span></p>
+        <p>Google: <span th:text="${attributes['sub']}">ID</span></p>
+        <!-- <p><strong>ID:</strong> <span th:text="${google-id}"></span></p> -->
+
+        <a th:href="@{/}">Home</a>
+    </div>
+
+    <div th:if="${name == null}">
+        <p>Please <a th:href="@{/login}">login</a> to continue.</p>
+    </div>
+</body>
+
+</html>
