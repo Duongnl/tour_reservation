@@ -101,6 +101,63 @@
         </div>
     </div>
 
+    <form>
+    <p class="inf-title mt-4">Thông tin liên hệ</p>
+    <div class="row p-2 m-3 badge-light rounded-20">
+        <div>
+            <p class="text-color"> Họ tên: <span class="text-bold-color" th:if="${reserve.customer.customerName!= null}" th:text="${reserve.customer.customerName}" ></span></p>
+            <p class="text-color"> Số điện thoại: <span class="text-bold-color"  th:if="${reserve.customer.phoneNumber != null}"  th:text="${reserve.customer.phoneNumber}"></span></p>
+            <p class="text-color"> Địa chỉ: <span class="text-bold-color" th:if="${reserve.customer.address != null}"   th:text="${reserve.customer.address}" ></span></p>
+            <p class="text-color"> Email: <span class="text-bold-color"  th:if="${reserve.customer.email != null}"  th:text="${reserve.customer.email}"></span></p>
+        </div>
+    </div>
+
+    <p class="inf-title mt-4">Chi tiết booking</p>
+    <div class="row p-2 m-3 badge-light rounded-20">
+        <div>
+            <p class="text-color"> Tên tour: <span class="text-bold-color" th:if="${reserve.tourSchedule.tour.tourName != null}"   th:text="${reserve.tourSchedule.tour.tourName}"></span></p>
+            <p class="text-color"> Điểm đến: <span class="text-bold-color" th:if="${reserve.tourSchedule.tour.country != null}"   th:text="${reserve.tourSchedule.tour.country}" ></span></p>
+            <p class="text-color"> Nơi khởi hành: <span class="text-bold-color" th:if="${reserve.tourSchedule.tour.departureLocation != null}"   th:text="${reserve.tourSchedule.tour.departureLocation}" ></span></p>
+            <p class="text-color"> Khởi hành: <span class="text-bold-color" th:if="${reserve.tourSchedule.departureDate != null}"   th:text="${reserve.tourSchedule.departureDate}"  ></span></p>
+            <p class="text-color"> Ngày tạo: <span class="text-bold-color" th:if="${reserve.time != null}"   th:text="${reserve.time}"  ></span></p>
+            <p class="text-color"> Trạng thái thanh toán: <span class="text-bold-color"  style="color: red" th:text="${reserve.status != 2 ? 'Chưa thanh toán' : 'Đã thanh toán'}"    ></span></p>
+            <p class="text-color"> Hình thức thanh toán: <span class="text-bold-color" th:text="${reserve.url == null ? 'Tiền mặt' : 'Chuyển khoản'}" > </span></p>
+            <p class="text-color"> Thời hạn thanh toán: <span class="text-bold-color" style="color: red"  th:text="${expire}"  ></span></p>
+
+            <a type="button" class="btn btn-danger"  th:if="${reserve.status == 3}" th:href="@{${reserve.url}}"
+            >Thanh toán ngay  </a>
+        </div>
+    </div>
+
+    <p class="inf-title mt-4">Thông tin hành khách</p>
+    <div class="row p-2 m-3 badge-light rounded-20">
+        <div style="width: 100%;">
+            <table class="table" style="width: 100%;">
+                <thead>
+                <tr>
+                    <th scope="col">Tên khách hàng</th>
+                    <th scope="col">Độ tuổi</th>
+                    <th scope="col">Ngày sinh</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Giá</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reserveDetail: ${reserve.reserveDetails}" >
+                    <td  th:if="${reserveDetail.customer.customerName != null}" th:text="${reserveDetail.customer.customerName}"></td>
+                    <td th:if="${reserveDetail.customer.customerType != null}"  th:text="${reserveDetail.customer.customerType == 'adult'? 'Người lớn' : 'Trẻ em' }" >/td>
+                    <td th:text="${ reserveDetail.customer.birthday == null ? 'Trống' : reserveDetail.customer.birthday}"></td>
+                    <td th:if="${reserveDetail.customer.sex != null}" th:text="${reserveDetail.customer.sex == 1 ? 'Nam' : 'Nữ' }">  </td>
+                    <td th:if="${reserveDetail.price!= null}"  th:text="${reserveDetail.price}" style="color: red; font-size: 17px; font-weight: bold" ></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="width: 100%;display: flex; justify-content: flex-end;">
+            <p style="color:red; font-size: 23px;  font-weight: bold"  th:if="${reserve.price != null}"  th:text="${reserve.price}" >  </p>
+        </div>
+    </div>
+    </form>
 
 </div>
 

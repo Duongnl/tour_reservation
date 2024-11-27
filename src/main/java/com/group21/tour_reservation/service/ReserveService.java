@@ -99,7 +99,9 @@ public class ReserveService {
     public Integer handleQuantityLeftOfSchedule(TourSchedule tourSchedule) {
         int quantityReserved = 0;
         for (Reserve reserve : tourSchedule.getReserves()) {
-            quantityReserved += reserve.getReserveDetails().size();
+            if (reserve.getStatus() ==1 || reserve.getStatus()==3) {
+                quantityReserved += reserve.getReserveDetails().size();
+            }
         }
 
         return tourSchedule.getQuantity() - quantityReserved;
@@ -218,7 +220,12 @@ public class ReserveService {
                 reserve.setChildCount(countChild(reserveRequest));
                 reserve.setPrice(handlePrice(tourSchedule, reserveRequest));
                 reserve.setTime(LocalDateTime.now());
-                reserve.setStatus(1);
+                if (reserveRequest.getPay().equals("tienMat")) {
+                    reserve.setStatus(1);
+                } else if (reserveRequest.getPay().equals("chuyenKhoan")) {
+                    reserve.setStatus(3);
+                }
+
 
                 customerInf.setCustomers(customers);
                 reserve.setReserveDetails(reserveDetails);
@@ -242,5 +249,44 @@ public class ReserveService {
         System.out.println("reserveResponse >>> " + reserveResponse);
 
         return reserveResponse;
+    }
+
+    public static boolean isTimePassed(LocalDateTime milestone) {
+        // Cộng thêm 15 phút vào mốc thời gian
+        LocalDateTime deadline = milestone.plusMinutes(15);
+
+        // Lấy thời gian hiện tại
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        // So sánh thời gian hiện tại với mốc thời gian đã cộng thêm 15 phút
+        return currentTime.isAfter(deadline);
+    }
+
+    public static boolean isDayPassed(LocalDateTime milestone) {
+        // Cộng thêm 2 ngày vào mốc thời gian
+        LocalDateTime deadline = milestone.plusDays(2);
+
+        // Lấy thời gian hiện tại
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        // So sánh thời gian hiện tại với mốc thời gian đã cộng thêm 2 ngày
+        return currentTime.isAfter(deadline);
+    }
+
+    public void autoDestroyReserve () {
+        List<Reserve> reserves = reserveRepository.findAll();
+        for (Reserve reserve : reserves) {
+            if (reserve.getStatus() ==3) {
+                if (isTimePassed(reserve.getTime())) {
+                    reserve.setStatus(0);
+                    reserveRepository.save(reserve);
+                }
+            } else if (reserve.getStatus() ==1) {
+                if (isDayPassed(reserve.getTime())) {
+                    reserve.setStatus(0);
+                    reserveRepository.save(reserve);
+                }
+            }
+        }
     }
 }
