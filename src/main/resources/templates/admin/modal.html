@@ -11,8 +11,8 @@
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
-                <a href="" class="btn btn-danger modal-delete">Xóa</a>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                <a href="" class="btn btn-danger modal-delete">Ok</a>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
                 const modalDelete = modalElement.querySelector('.modal-delete');
 
                 modalTitle.textContent = `Cảnh báo`;
-                modalBody.textContent = `Bạn có chắc muốn xóa ${dataName} ?`;
+                modalBody.textContent = `Bạn có chắc chắn ${dataName} ?`;
                 modalDelete.href = `${dataControllerDelete}/${dataId}`;
             });
         });

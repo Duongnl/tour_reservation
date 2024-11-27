@@ -51,6 +51,7 @@
                       <!-- Button trigger modal -->
                       <button type="button" class="btn btn-link btn-danger" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" th:attr="data-id=${category.categoryId},
+                        data-name=${category.categoryName},
                                                         data-controller-delete='/admin/category/delete' ">
                         <i class="fa fa-times"></i>
                       </button>

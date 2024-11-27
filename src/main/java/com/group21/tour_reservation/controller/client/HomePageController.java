@@ -151,16 +151,27 @@ public class HomePageController {
     }
 
     @GetMapping("/confirm_info/{slug}")
-    public String getHomePage(Model model, @PathVariable("slug") String slug) {
+    public String getHomePage(Model model, @PathVariable("slug") String slug, @AuthenticationPrincipal OAuth2User user) {
+
+        if ( user != null) {
+            model.addAttribute("name", user.getAttribute("name"));
+        }
+
         Reserve reserve = reserveService.getReserve(slug);
+        if (reserve == null) {
+            return "redirect:/admin/404.html";
+        }
 
         if (reserve.getStatus() == 3) {
         model.addAttribute("expire", reserve.getTime().plusMinutes(15));
         } else if (reserve.getStatus() == 1) {
             model.addAttribute("expire", reserve.getTime().plusDays(2));
+        } else if (reserve.getStatus() == 2) {
+            model.addAttribute("expire","Đã thanh toán");
         } else {
             model.addAttribute("expire","Hết hạn");
         }
+
 
 
         model.addAttribute("reserve", reserve);
