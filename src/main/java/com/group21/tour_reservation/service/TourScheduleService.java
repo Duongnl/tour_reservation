@@ -40,7 +40,8 @@ public class TourScheduleService {
                                     LocalDate returnDate, LocalDate visaExpire,
                                     Integer tourId) {
 
-        TourSchedule touScheduleOld = tourScheduleRepository.findById(tourId).orElse(null);
+        TourSchedule touScheduleOld = tourScheduleRepository.findById(schedule.getScheduleId()).orElse(null);
+        System.out.println(">>>> id"+ tourId);
         Tour tour = tourRepository.findById(tourId).orElse(null);
         System.out.println("Schedule Id : " + schedule.getScheduleId());
         schedule.setTour(tour);

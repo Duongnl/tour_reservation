@@ -110,7 +110,7 @@ public class TourScheduleController {
                                @RequestParam("return-date") LocalDate returnDate,
                                @RequestParam(name = "visa-expire", required = false) LocalDate visaExpire
     ) {
-
+        System.out.println("controoler >>> "+ tourId);
         TourSchedule scheduleRes = tourScheduleService.editSchedule(schedule, departureDate, returnDate, visaExpire, tourId);
         redirectAttributes.addFlashAttribute("successMessage", "Chỉnh sửa lịch trình thành công");
         return "redirect:/admin/tour/schedule/schedule-overview/" + StringUtils.createSlug(scheduleRes.getScheduleName()) + "-" + scheduleRes.getScheduleId();
