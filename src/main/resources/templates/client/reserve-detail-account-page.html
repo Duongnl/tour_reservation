@@ -27,13 +27,7 @@
 
 <body>
 <div class="wrapper">
-    <!-- start sidebar -->
-    <div th:replace="/admin/layout/sidebar.html :: sidebar"></div>
-    <!-- end sidebar -->
-
-    <div class="main-panel">
-        <!-- header  -->
-        <div th:replace="/admin/layout/header.html :: header"></div>
+   
 
         <!-- content-->
         <div class="container">
@@ -71,7 +65,7 @@
                                                 <!-- body -->
                                                 <tbody>
 
-                                                <tr class="row-data" th:each="reserveDetail: ${reserveDetail}">
+                                                <tr class="row-data" th:each="reserveDetail: ${reserveDetails}">
                                                     <td class="txt-id" th:text="${reserveDetail.reserveDetailId}"></td>
                                                     <td class="txt-id" th:text="${reserveDetail.reserve.reserveId}"></td>
                                                     <td class="txt-name" th:text="${reserveDetail.customer.customerId}"></td>
@@ -96,9 +90,7 @@
             </div>
         </div>
 
-        <!-- start footer -->
-        <div th:replace="/admin/layout/footer.html :: footer"></div>
-        <!-- end footer -->
+       
     </div>
     <!-- Kiểm tra xem có thông báo thành công không, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
     <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;">

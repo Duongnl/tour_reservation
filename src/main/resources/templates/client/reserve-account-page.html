@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" th:href="@{/admin/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script type="text/javascript" th:src="@{/admin/js/plugin/webfont/webfont.min.js}"></script>
+    <link th:href="@{/admin/css/fonts.min.css}" rel="stylesheet" />
+
+    <!-- CSS Files -->
+    <link th:href="@{/admin/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/plugins.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/kaiadmin.min.css}" rel="stylesheet" />
+    <link th:href="@{/admin/css/reserve.css}" rel="stylesheet" />
+
+
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link th:href="@{/admin/css/demo.css}" rel="stylesheet" />
+    <link 
+</head>
+
+<body>
+<div class="wrapper">
+   
+
+        <!-- content-->
+        <div class="container">
+            <div class="page-inner">
+               <!--Table-->
+               <div class="col-md-12">
+                <div class="card">
+
+                    <!-- header table -->
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Danh sách đặt chỗ</h4>
+                        </div>
+                    </div>
+                    <!-- end header table -->
+
+                    <!-- table -->
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table
+                                    id="add-row"
+                                    class="display table table-striped table-hover"
+                            >
+                                <!-- header -->
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên Khách Hàng</th>
+                                    <th>Số người lớn</th>
+                                    <th>Số trẻ con</th>
+                                    <th>Tổng tiền</th>
+                                    <th style="width: 15%">Hành động</th>
+                                    <th style="width: 10%">Chi tiết</th>
+
+                                </tr>
+                                </thead>
+                                <!-- end header -->
+
+                                <!-- body -->
+                                <tbody>
+
+                                <tr  class="row-data"  th:each="reserve: ${listDatChoAccount}"  >
+                                    <td class="txt-id" th:text="${reserve.reserveId}" ></td>
+                                    <td class="txt-name" th:text="${reserve.customer.customerName}" ></td>
+                                    <td th:text="${reserve.adultCount}" ></td>
+                                    <td th:text="${reserve.childCount}" ></td>
+                                    <td th:text="${reserve.price}" ></td>
+                                    <td class="action_td">
+
+                                        <div class="form-button-action" th:id="'stt_1'" th:if="${reserve.status == 1}">
+                                            <p class="p_cho_duyet">Đang chờ</P> 
+                                           
+                                        </div>
+                                        <div class="form-button-action" th:id="'stt_2'" th:if="${reserve.status == 2}">
+                                            <p class="p_duyet">Đã Duyệt</P> 
+                                        </div>
+                                        <div class="form-button-action" th:id="'stt_0'" th:if="${reserve.status == 0}">
+                                            <p class="p_huy">Đã Hủy</P> 
+                                            
+                                            
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-button-action">
+                                           
+                                            <a
+                                                        type="button"
+                                                        data-bs-toggle="tooltip"
+                                                        title=""
+                                                        class="btn btn-link btn-primary btn-lg btn-chiTiet"
+                                                        data-original-title="Edit Task"
+                                                        href="#"
+                                                >
+                                                    <i class="fa fa-edit"></i>
+                                            </a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <!-- end body -->
+
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end table -->
+
+                </div>
+            </div>
+            <!--End table-->
+
+            </div>
+        </div>
+
+       
+    </div>
+    <!-- Kiểm tra xem có thông báo thành công không, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
+    <div th:if="${successMessage}" class="alert alert-success" id="success-message" style="display: none;">
+        <span th:text="${successMessage}"></span>
+    </div>
+    <div th:if="${errorMessage}" class="alert alert-success" id="error-message" style="display: none;">
+        <span th:text="${errorMessage}"></span>
+    </div>
+    <!--modal delete, chỉ để ở trang quản lý table, không  cần để trong trang edit, create -->
+    <div th:replace="/admin/modal.html :: modal"></div>
+</div>
+
+<!--js tự viết thông báo và tạo slug, phần này chỉ để ở trang quản lý table, không  cần để trong trang edit, create-->
+<script type="module" th:src="@{/admin/js/notify.js}"></script>
+<script type="module" th:src="@{/admin/js/create-slug.js}"></script>
+<script th:inline="javascript" type="module">
+    import {CreateSlug} from /*[[@{/admin/js/create-slug.js}]]*/'';
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lặp qua tất cả các hàng trong bảng
+        const rows = document.querySelectorAll('.row-data');
+        const pathname = window.location.pathname;
+        if (rows) {
+            rows.forEach(row => {
+                const txtId = row.querySelector('.txt-id'); // Lấy phần tử txt-id trong hàng
+                const btnChiTiet = row.querySelector('.btn-chiTiet'); // Lấy nút btn-chiTiet trong hàng
+
+                if (btnChiTiet && txtId ) {
+                    btnChiTiet.href = `${pathname}/reserve-detail-account/${txtId.textContent}`; // Gán giá trị href mới
+                }
+            });
+        }
+    })
+</script>
+<!-- end js tự viết-->
+
+<!--   Core JS Files   -->
+<script type="text/javascript" th:src="@{/admin/js/core/jquery-3.7.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/core/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/core/bootstrap.min.js}"></script>
+
+<!-- jQuery Scrollbar -->
+<script type="text/javascript" th:src="@{/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+<!-- Chart JS -->
+<script type="text/javascript" th:src="@{/admin/js/plugin/chart.js/chart.min.js}"></script>
+
+<!-- jQuery Sparkline -->
+<script type="text/javascript" th:src="@{/admin/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
+
+<!-- Chart Circle -->
+<script type="text/javascript" th:src="@{/admin/js/plugin/chart-circle/circles.min.js}"></script>
+
+<!-- Datatables -->
+<script type="text/javascript" th:src="@{/admin/js/plugin/datatables/datatables.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/datatables.js}"></script>
+
+<!-- Bootstrap Notify -->
+<script type="text/javascript" th:src="@{/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+
+<!-- jQuery Vector Maps -->
+<script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/plugin/jsvectormap/world.js}"></script>
+
+<!-- Sweet Alert -->
+<script type="text/javascript" th:src="@{/admin/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+<!-- Kaiadmin JS -->
+<script type="text/javascript" th:src="@{/admin/js/kaiadmin.min.js}"></script>
+
+
+</body>
+
+</html>

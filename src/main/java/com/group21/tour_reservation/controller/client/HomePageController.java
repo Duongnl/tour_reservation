@@ -3,6 +3,10 @@ package com.group21.tour_reservation.controller.client;
 import com.group21.tour_reservation.dto.response.TourReserveResponse;
 import com.group21.tour_reservation.service.AccountService;
 import com.group21.tour_reservation.service.TourService;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.group21.tour_reservation.entity.Account;
 import com.group21.tour_reservation.entity.Customer;
-
+import com.group21.tour_reservation.entity.Reserve;
+import com.group21.tour_reservation.entity.ReserveDetail;
 import com.group21.tour_reservation.service.CustomerService;
+import com.group21.tour_reservation.service.ReserveService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +36,9 @@ public class HomePageController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private ReserveService reserveService;
 
     @GetMapping("/")
     public String getHomePage(Model model, HttpServletRequest request) {
@@ -65,9 +74,10 @@ public class HomePageController {
 
     @GetMapping("/access-deny")
     public String getDenyPage(Model model) {
-       
-        return "client/auth/deny.html";}
-        
+
+        return "client/auth/deny.html";
+    }
+
     @GetMapping("/tour")
     public String tourView() {
 
@@ -102,13 +112,44 @@ public class HomePageController {
         return "client/reserve-page.html";
     }
 
+    @GetMapping("/reserve-account")
+    public String reserveAccount(Model model, HttpServletRequest request) {
+        // Lấy session hiện tại
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return "redirect:/login";
+        }
+
+        // Lấy id từ session
+        Integer id = (Integer) session.getAttribute("id");
+
+        // Lấy thông tin Customer
+        Customer customer = customerService.getCustomerById(id);
+
+        // Lấy danh sách Reserve từ Customer
+        List<Reserve> listDatChoAccount = new ArrayList<>(customer.getReserves());
+
+        // Truyền danh sách vào model
+        model.addAttribute("listDatChoAccount", listDatChoAccount);
+
+        // Trả về view hiển thị
+        return "client/reserve-account-page.html";
+    }
+
+    @GetMapping("/reserve-account/reserve-detail-account/{slug}")
+    public String reserveDetailAccount(Model model, @PathVariable("slug") String slug, HttpServletRequest request) {
+        // Kiểm tra nếu slug có thể chuyển thành int
+        Reserve reserve = reserveService.getReserve(slug);
+        // Truyền danh sách ReserveDetail vào model
+        model.addAttribute("reserveDetails", reserve.getReserveDetails());
+
+        // Trả về view hiển thị
+        return "client/reserve-detail-account-page.html";
+    }
     @GetMapping("/confirm_info/{slug}")
     public String getHomePage(Model model, @PathVariable("slug") String slug) {
 
 
         return "client/confirm_info.html";
     }
-
-
-
 }

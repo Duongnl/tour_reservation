@@ -32,17 +32,16 @@ public class ReserveService {
     private TourScheduleRepository tourScheduleRepository;
 
     @Autowired
-    private  CustomerMapper customerMapper;
+    private CustomerMapper customerMapper;
 
     @Autowired
-    private  CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
     private ReserveDetailRepository reserveDetailRepository;
 
     @Autowired
     private TourService tourService;
-
 
     public List<Reserve> getAllReserve() {
         return reserveRepository.findAll();
@@ -52,13 +51,16 @@ public class ReserveService {
         return reserveRepository.findAllReserveByYear(year);
     }
 
-    public List<Reserve> getAllReserveByYearAndMonth(int year, int month) {return reserveRepository.findAllReserveByYearAndMonth(year, month);}
+    public List<Reserve> getAllReserveByYearAndMonth(int year, int month) {
+        return reserveRepository.findAllReserveByYearAndMonth(year, month);
+    }
 
-    public List<Integer> getAllYear(){
+    public List<Integer> getAllYear() {
         List<Integer> yearList = reserveRepository.getAllYears();
         Collections.sort(yearList);
-        return  yearList;
+        return yearList;
     }
+
     public Reserve getTour(String slug) {
         Reserve reserve = reserveRepository.findById(
                 com.group21.tour_reservation.utils.StringUtils.getIdFromSlug(slug)).orElse(null);
@@ -93,70 +95,68 @@ public class ReserveService {
         return reserveRepository.save(reserve);
     }
 
-
-    public Integer handleQuantityLeftOfSchedule (TourSchedule tourSchedule) {
+    public Integer handleQuantityLeftOfSchedule(TourSchedule tourSchedule) {
         int quantityReserved = 0;
-        for(Reserve reserve : tourSchedule.getReserves()) {
+        for (Reserve reserve : tourSchedule.getReserves()) {
             quantityReserved += reserve.getReserveDetails().size();
         }
 
-        return tourSchedule.getQuantity() -  quantityReserved;
+        return tourSchedule.getQuantity() - quantityReserved;
     }
 
-    public Integer countAdult (ReserveRequest reserveRequest) {
+    public Integer countAdult(ReserveRequest reserveRequest) {
         int countAdult = 0;
         for (CusInfRequest cusInfRequest : reserveRequest.getCustomers()) {
-            if (cusInfRequest.getCustomerType().equals("adult"))
-            {
+            if (cusInfRequest.getCustomerType().equals("adult")) {
                 countAdult += 1;
             }
         }
         return countAdult;
     }
 
-    public Integer countChild (ReserveRequest reserveRequest) {
+    public Integer countChild(ReserveRequest reserveRequest) {
         int countChild = 0;
         for (CusInfRequest cusInfRequest : reserveRequest.getCustomers()) {
-            if (cusInfRequest.getCustomerType().equals("child"))
-            {
+            if (cusInfRequest.getCustomerType().equals("child")) {
                 countChild += 1;
             }
         }
         return countChild;
     }
 
-    public Integer handlePrice (TourSchedule tourSchedule, ReserveRequest reserveRequest ) {
-        int price = (tourService.handlePriceAdultSale(tourSchedule) * countAdult(reserveRequest) ) +
+    public Integer handlePrice(TourSchedule tourSchedule, ReserveRequest reserveRequest) {
+        int price = (tourService.handlePriceAdultSale(tourSchedule) * countAdult(reserveRequest)) +
                 (tourService.handlePriceChildSale(tourSchedule) * countChild(reserveRequest));
         return price;
     }
 
-    public Integer handlePriceReserveDetail (TourSchedule tourSchedule, Customer customer) {
+    public Integer handlePriceReserveDetail(TourSchedule tourSchedule, Customer customer) {
         if (customer.getCustomerType().equals("adult")) {
             return tourService.handlePriceAdultSale(tourSchedule);
-        } else if  (customer.getCustomerType().equals("child")) {
+        } else if (customer.getCustomerType().equals("child")) {
             return tourService.handlePriceChildSale(tourSchedule);
         }
         return -1;
     }
-
-    public ReserveResponse reserve (ReserveRequest reserveRequest) {
+    public List<ReserveDetail> getAllReserveDetailsByReserveId(int reserveId) {
+        return reserveDetailRepository.findByReserveId(reserveId);
+    }
+    public ReserveResponse reserve(ReserveRequest reserveRequest) {
 
         ReserveResponse reserveResponse = new ReserveResponse();
 
         TourSchedule tourSchedule = tourScheduleRepository.findById(reserveRequest.getTourScheduleId())
                 .orElse(null);
         if (tourSchedule != null && reserveRequest.getCustomers() != null) {
-            if (reserveRequest.getCustomers().size() <=
-                    handleQuantityLeftOfSchedule(tourSchedule)) {
+            if (reserveRequest.getCustomers().size() <= handleQuantityLeftOfSchedule(tourSchedule)) {
 
                 // them thong tin khach hang chinh
-                Customer customerInf  = new Customer();
+                Customer customerInf = new Customer();
                 customerInf = customerMapper.toCustomerFromReserveRequest(reserveRequest);
                 customerInf.setCustomerType("adult");
                 customerInf.setStatus(1);
 
-                //  tao reserve
+                // tao reserve
                 Reserve reserve = new Reserve();
                 reserve.setCustomer(customerInf);
                 reserve.setTourSchedule(tourSchedule);
@@ -166,8 +166,6 @@ public class ReserveService {
                 reserve.setPrice(handlePrice(tourSchedule, reserveRequest));
                 reserve.setTime(LocalDateTime.now());
                 reserve.setStatus(1);
-
-
 
                 Set<Customer> customers = new HashSet<>();
                 Set<ReserveDetail> reserveDetails = new HashSet<>();
@@ -184,7 +182,7 @@ public class ReserveService {
                     ReserveDetail reserveDetail = new ReserveDetail();
                     reserveDetail.setReserve(reserve);
                     reserveDetail.setCustomer(customer);
-                    reserveDetail.setPrice(handlePriceReserveDetail(tourSchedule,customer));
+                    reserveDetail.setPrice(handlePriceReserveDetail(tourSchedule, customer));
                     reserveDetail.setStatus(1);
                     reserveDetails.add(reserveDetail);
 
@@ -197,8 +195,6 @@ public class ReserveService {
                 Integer reserveId = savedReserve.getReserveId();
 
 
-
-
                 reserveResponse.setCode(200);
                 reserveResponse.setMessage("Success");
                 reserveResponse.setReserveId(reserveId);
@@ -208,8 +204,7 @@ public class ReserveService {
             }
 
         }
-        System.out.println("reserveResponse >>> "+reserveResponse);
-
+        System.out.println("reserveResponse >>> " + reserveResponse);
 
         return reserveResponse;
     }
