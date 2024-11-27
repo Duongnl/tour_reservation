@@ -273,14 +273,23 @@ public class TourService {
                 percentage += promotion.getPercentageChild();
             }
         }
-
+    
         Integer priceSale = (Integer) (int)((double) tourSchedule.getPriceChild() * (percentage/100) );
 
 
         return tourSchedule.getPriceChild() - priceSale ;
 
     }
-
+    public Integer minPriceSale(TourSchedule tourSchedule){
+        int giaSaleLon=handlePriceAdultSale(tourSchedule);
+        int giaSaleTreEm=handlePriceChildSale(tourSchedule);
+        if(giaSaleLon>giaSaleTreEm){
+            return giaSaleTreEm;
+        }else{
+            return giaSaleTreEm;
+        }
+         
+    }
     public List<TourCardResponse> getTourCards ()
     {
         List<Tour> tours = tourRepository.findAllByStatus (1);
