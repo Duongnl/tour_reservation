@@ -193,12 +193,15 @@ public class ReserveService {
                 reserve.setReserveDetails(reserveDetails);
 
                 customerRepository.save(customerInf);
-                reserveRepository.save(reserve);
+                Reserve savedReserve = reserveRepository.save(reserve); // Lưu reserve và nhận lại đối tượng đã lưu
+                Integer reserveId = savedReserve.getReserveId();
+
 
 
 
                 reserveResponse.setCode(200);
                 reserveResponse.setMessage("Success");
+                reserveResponse.setReserveId(reserveId);
             } else {
                 reserveResponse.setCode(201);
                 reserveResponse.setMessage("Không đủ chổ");
