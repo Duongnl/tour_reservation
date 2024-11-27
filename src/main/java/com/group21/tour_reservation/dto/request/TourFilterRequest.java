@@ -20,5 +20,6 @@ public class TourFilterRequest {
     private String destinationLocation;
     private String departureDate;
     private String price;
+    private int pageCurrent;
 //    private int currentPage;
 }

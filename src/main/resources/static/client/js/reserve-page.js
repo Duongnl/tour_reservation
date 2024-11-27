@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const priceAdult = document.getElementById("inp-price-adult").value;
     const priceChild = document.getElementById("inp-price-child").value;
 
+    const quantityLeft = document.getElementById("quantity-left")
+
     numberAdult.value = 1
     numberChild.value = 0
 
@@ -178,7 +180,31 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             btnReserve.disabled = true
         }
+
+        if (parseInt(quantityLeft.innerText) === 0) {
+            btnReserve.disabled = true
+        }
+        console.log("quantityLeft >>> ", quantityLeft.innerText)
     }
+
+    const validateAutoFiled = () => {
+        if (nameInf.value !== "") {
+            validation[0] = true
+        }
+        if (phoneNumber.value !== "") {
+            validation[1] = true
+        }
+        if (email.value !== "") {
+            validation[2] = true
+        }
+
+        if (address.value !== "") {
+            validation[3] = true
+        }
+        handleValidateReserve()
+    }
+
+    validateAutoFiled()
 
 
     minusAdult.addEventListener("click", function () {

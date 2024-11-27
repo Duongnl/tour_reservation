@@ -24,7 +24,10 @@ public class PersonalInfoController {
     private CustomerService customerService;
         @GetMapping("/personal-info")
     public String index(Model model) {
+            
         model.addAttribute("customer", customerService.getCustomer("2"));
+
+
         return "client/customer/index.html";
     }
     @GetMapping("/personal-info/edit/{slug}")
