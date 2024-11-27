@@ -1,6 +1,7 @@
 package com.group21.tour_reservation.controller.client;
 
 import com.group21.tour_reservation.dto.response.TourReserveResponse;
+import com.group21.tour_reservation.service.AccountService;
 import com.group21.tour_reservation.service.TourService;
 
 import java.util.ArrayList;
@@ -32,6 +33,9 @@ public class HomePageController {
 
     @Autowired
     private TourService tourService;
+
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private ReserveService reserveService;
@@ -81,8 +85,13 @@ public class HomePageController {
     }
 
     @GetMapping("/reserve/{slug}")
-    public String reserveView(Model model, @PathVariable("slug") String slug, HttpServletRequest request) {
-        TourReserveResponse tourReserveResponse = tourService.getTourReserveClient(slug);
+    public String reserveView(Model model, @PathVariable("slug") String slug, HttpServletRequest request ) {
+        TourReserveResponse tourReserveResponse = new TourReserveResponse();
+        tourReserveResponse=   tourService.getTourReserveClient(slug);
+
+        if (tourReserveResponse == null) {
+            return "admin/404.html";
+        }
 
         HttpSession session = request.getSession(false);
         Integer id = (Integer) session.getAttribute("id");
@@ -90,15 +99,14 @@ public class HomePageController {
         if (id != null) {
 
             int idValue = id;
-            Customer customer = customerService.getCustomerById(idValue);
+            Account account = accountService.getAccount(String.valueOf(idValue));
+             Customer customer = customerService.getCustomerById(account.getCustomer().getCustomerId());
             tourReserveResponse.setName(customer.getCustomerName());
             tourReserveResponse.setAddress(customer.getAddress());
             tourReserveResponse.setEmail(customer.getEmail());
             tourReserveResponse.setPhone(customer.getPhoneNumber());
         }
-        if (tourReserveResponse == null) {
-            return "admin/404.html";
-        }
+
 
         model.addAttribute("tourReserveResponse", tourReserveResponse);
         return "client/reserve-page.html";
@@ -137,5 +145,11 @@ public class HomePageController {
 
         // Trả về view hiển thị
         return "client/reserve-detail-account-page.html";
+    }
+    @GetMapping("/confirm_info/{slug}")
+    public String getHomePage(Model model, @PathVariable("slug") String slug) {
+
+
+        return "client/confirm_info.html";
     }
 }

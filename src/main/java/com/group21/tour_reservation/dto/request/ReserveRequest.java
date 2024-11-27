@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ReserveRequest {
     private int tourScheduleId;
+    private int reserveId;
     private String address;
     private String email;
     private String customerName;
