@@ -1,0 +1,26 @@
+<div style="display: flex">
+  <select id="status_menu" class="form-control">
+    <option value="/admin/statistical-revenue/year/">Thống kê doanh thu</option>
+    <option value="/admin/statistical-customer/year/">Thống kê khách hàng</option>
+  </select>
+  <select id="year_menu" class="form-control">
+    <option th:each="iyear: ${allYear}" th:value="${iyear}" th:text="${iyear}"></option>
+  </select>
+  <button id="bnt_TK">Thống kê</button>
+</div>
+
+
+
+<script>
+
+  const status = document.getElementById('status_menu');
+  const year = document.getElementById('year_menu');
+  const bnt_TK = document.getElementById('bnt_TK');
+  bnt_TK.addEventListener('click', ()=>{
+    var url = status.value + year.value
+    // var url = "/admin/statistical-customer/year/" + selectedYear;
+    window.location.href = url;
+  })
+
+
+</script>

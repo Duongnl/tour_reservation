@@ -1,0 +1,59 @@
+<!-- content-->
+<div class="container">
+    <div class="page-inner">
+        <!--Table-->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header row">
+                    <div th:replace="admin/statistical/component/menu.html"></div>
+                    <div class="card-title" >Thống kê khách hàng năm  <span th:text="${year}"></span>
+<!--                        <div style="display: flex">-->
+<!--                            <select id="status" class="form-control">-->
+<!--                                <option th:each="iyear: ${allYear}" th:value="${iyear}" th:text="${iyear}"></option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+                    </div>
+
+
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <div th:replace="/admin/statistical/component/count_customer/chart.html"></div>
+
+
+                    </div>
+                    <div class="chart-container">
+                        <div th:replace="/admin/statistical/component/count_customer/pie.html"></div>
+
+
+
+                    </div>
+                </div>
+
+
+                <div th:replace="/admin/statistical/component/count_customer/table.html"></div>
+
+                <div th:replace="/admin/statistical/component/count_customer/report.html"></div>
+            </div>
+        </div>
+        <!--End table-->
+    </div>
+</div>
+
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var year = /*[[${year}]]*/[];
+    let status = document.getElementById("status");
+    status.value=year
+    status.addEventListener("change", function() {
+        var selectedYear = this.value;
+        if (selectedYear != year){
+            var url = "/admin/statistical-customer/year/" + selectedYear;
+            window.location.href = url;
+        }
+    });
+    /*]]>*/
+</script>
+
+

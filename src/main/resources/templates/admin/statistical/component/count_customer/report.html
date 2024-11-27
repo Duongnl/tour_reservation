@@ -1,0 +1,79 @@
+<!--Table-->
+<div class="col-md-12">
+  <div class="card">
+
+    <!-- header table -->
+    <div class="card-header">
+      <div class="d-flex align-items-center">
+        <h4 class="card-title">Bảng báo cáo</h4>
+      </div>
+    </div>
+    <!-- end header table -->
+
+    <!-- table -->
+    <div class="card-body">
+      <div class="">
+        <ul>
+          <li><b id="doanhthu-max"></b></li>
+          <li><b id="doanhthu-min"></b></li>
+          <li> <b> Tổng lượng khách : <span id="sum"></span> </b> </li>
+        </ul>
+      </div>
+    </div>
+    <!-- end table -->
+  </div>
+</div>
+<!--End table-->
+
+<div class="col-md-12">
+  <div class="card">
+
+  </div>
+</div>
+
+
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var AllTotalCustomer = /*[[${AllTotalCustomer}]]*/[];
+  console.log(AllTotalCustomer)
+
+
+  function findMax(arr) {
+    let max = arr[0]; // Giả sử phần tử đầu tiên là lớn nhất
+    let index = 0;
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] > max) {
+        index = i;
+        max = arr[i];
+      }
+    }
+    return {index: index, value: max}
+  }
+  function findMin(arr) {
+    let min = arr[0]; // Giả sử phần tử đầu tiên là nhỏ nhất
+    let index = 0;
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] < min) {
+        index = i;
+        min = arr[i];
+      }
+    }
+    return {index: index, value: min}
+  }
+  function sum (data){
+    let sum = 0;
+    for (let i = 1; i < data.length; i++) {
+      sum+=data[i];
+    }
+    return sum;
+  }
+
+  const numbers = [3, 7, 2, 9, 5];
+  let result_max = findMax(AllTotalCustomer);
+  let result_min = findMin(AllTotalCustomer);
+  // console.log("mã", result); // Output: 9
+  document.getElementById("doanhthu-max").innerText = `Tháng có nhiều khách hàng nhất: Tháng ${result_max.index+1} ( ${result_max.value} )`;
+  document.getElementById("doanhthu-min").innerText = `Tháng có ít khách hàng nhất: Tháng ${result_min.index+1} ( ${result_min.value} )`;
+  document.getElementById("sum").innerText = sum(AllTotalCustomer)
+  /*]]>*/
+</script>

@@ -27,4 +27,5 @@ public interface ReserveRepository extends JpaRepository<Reserve, Integer> {
 
     @Query("SELECT YEAR(r.time) FROM Reserve r GROUP BY YEAR(r.time)")
     List<Integer> getAllYears();
+
 }
