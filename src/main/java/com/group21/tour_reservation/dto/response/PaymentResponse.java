@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReserveResponse {
-    private Integer code;
+public class PaymentResponse implements Serializable {
+
+    private String status;
     private String message;
-    private int reserveId;
+    private String URL;
+
 }
